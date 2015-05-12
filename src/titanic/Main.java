@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JPopupMenu;
@@ -29,6 +30,8 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.nio.ByteOrder;
+
 import javax.swing.BoxLayout;
 
 public class Main extends JFrame {
@@ -38,7 +41,10 @@ public class Main extends JFrame {
 		setSize(1400,800);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
 		
+		
+		//Menus
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -61,15 +67,28 @@ public class Main extends JFrame {
 		menuBar.add(mnHelp);
 		
 		
-		System.out.println(Main.class.getResource("").getPath());
-		
+		//ToolBar
 		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		
 		ImageIcon opendsmIcon = new ImageIcon(Main.class.getResource("").getPath()+"../../util/open-dsm.png");
 		JButton opendsmButton = new JButton(opendsmIcon);
 		toolBar.add(opendsmButton);
 
-		add(toolBar, BorderLayout.NORTH);
+		getContentPane().add(toolBar, BorderLayout.NORTH);
+		
+		
+		//leftLayout
+		JPanel panelLeft = new JPanel();
+		panelLeft.add(new JTextField("Left"));
+		getContentPane().add(panelLeft, BorderLayout.WEST);
+		
+
+		//RightLayout
+		JPanel panelRight = new JPanel();
+		panelRight.add(new JTextField("Right"));
+		getContentPane().add(panelRight, BorderLayout.EAST);
+
 	}
 	public static void main(String[] args) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,21 +97,5 @@ public class Main extends JFrame {
 				}
 			});
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
-	}
+
 }
