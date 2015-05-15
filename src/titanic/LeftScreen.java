@@ -4,13 +4,12 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
-public class LeftScreen {
+public class LeftScreen extends JPanel {
 	
-	JPanel leftScreen;
 	
 	public LeftScreen(){
 		
-		leftScreen = new JPanel(new BorderLayout(0,0));
+		setLayout(new BorderLayout(0,0));
 		makeToolbar();
 	}
 	protected boolean makeToolbar()
@@ -49,14 +48,9 @@ public class LeftScreen {
 		JButton deleteButton = new JButton(deleteIcon);
 		toolBar2.add(deleteButton);
 		
-		leftScreen.add(toolBar2, BorderLayout.NORTH);
+		this.add(toolBar2, BorderLayout.NORTH);
 		return true;
 		
 	}
 
-	protected JPanel getLeftScreen()
-	{
-		return leftScreen;
-		
-	}
 }
