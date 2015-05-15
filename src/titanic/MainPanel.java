@@ -5,11 +5,11 @@ import javax.swing.JSplitPane;
 public class MainPanel extends JSplitPane {
 	public MainPanel()
 	{
-		LeftScreen leftScreen = new LeftScreen();
-		setLeftComponent(leftScreen);
+		LeftPanel leftPanel = new LeftPanel();
+		setLeftComponent(leftPanel);
 		
-		RightScreen rightScreen = new RightScreen();
-		setRightComponent(rightScreen);
+		RightPanel rightPanel = new RightPanel();
+		setRightComponent(rightPanel);
 		
 	}
 }
