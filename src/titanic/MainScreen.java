@@ -62,27 +62,27 @@ import javax.swing.*;
 		//overall ToolBar(in North)
 		toolBar = new JToolBar();
 		
-		ImageIcon opendsmIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/open-dsm.png");
+		ImageIcon opendsmIcon = new ImageIcon("util/open-dsm.png");
 		JButton opendsmButton = new JButton(opendsmIcon);
 		toolBar.add(opendsmButton);
 
-		ImageIcon redrawIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/redraw.png");
+		ImageIcon redrawIcon = new ImageIcon("util/redraw.png");
 		JButton redrawButton = new JButton(redrawIcon);
 		toolBar.add(redrawButton);
 		
-		ImageIcon newClusteringIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/new-clsx.png");
+		ImageIcon newClusteringIcon = new ImageIcon("util/new-clsx.png");
 		JButton newClusteringButton = new JButton(newClusteringIcon);
 		toolBar.add(newClusteringButton);
 		
-		ImageIcon loadClusteringIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/open-clsx.png");
+		ImageIcon loadClusteringIcon = new ImageIcon("util/open-clsx.png");
 		JButton loadClusteringButton = new JButton(loadClusteringIcon);
 		toolBar.add(loadClusteringButton);
 		
-		ImageIcon saveClusteringIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/save-clsx.png");
+		ImageIcon saveClusteringIcon = new ImageIcon("util/save-clsx.png");
 		JButton saveClusteringButton = new JButton(saveClusteringIcon);
 		toolBar.add(saveClusteringButton);
 		
-		ImageIcon saveClusteringAsIcon = new ImageIcon(MainScreen.class.getResource("").getPath()+"../../util/save-clsx-as.png");
+		ImageIcon saveClusteringAsIcon = new ImageIcon("util/save-clsx-as.png");
 		JButton saveClusteringAsButton = new JButton(saveClusteringAsIcon);
 		toolBar.add(saveClusteringAsButton);
 		
@@ -97,7 +97,7 @@ import javax.swing.*;
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		LeftScreen leftScreen = new LeftScreen();
-		splitPane.setLeftComponent(leftScreen.getLeftScreen());
+		splitPane.setLeftComponent(leftScreen);
 		
 		RightScreen rightScreen = new RightScreen();
 		splitPane.setRightComponent(rightScreen.getRightScreen());
