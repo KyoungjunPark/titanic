@@ -5,6 +5,7 @@ public class FileManager {
 	private FileManager(){}
 	private int nextID = 1;
 	private int currentID = 0;
+	
 	public static FileManager sharedFileManager(){
 		if(fileManager == null){
 			synchronized (FileManager.class) {
@@ -23,7 +24,7 @@ public class FileManager {
 		}
 		return false;
 	}
-
+/*
 	public int createCLSXModel() throws CreateException{
 		return getNextID();
 	}
@@ -37,6 +38,7 @@ public class FileManager {
 		// copy logic
 		return createCLSXModel();
 	}
+	*/
 	public boolean existModel(int id){
 		return true;
 	}

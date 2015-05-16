@@ -22,7 +22,8 @@ class DSMModel implements FileReadWrite{
 	}
 	
 	@Override
-	public void readFile(String fileURL) {
+	public void readFile(String fileURL)
+	{
 	
 		this.fileURL = fileURL;
 		try {
@@ -70,6 +71,11 @@ class DSMModel implements FileReadWrite{
 		}
 		
 	}
+	
+	@Override
+	public void writeFile(String fileURL) {
+	}	
+
 	public int getDependencyNumber() {
 		return dependencyNumber;
 	}
@@ -82,6 +88,7 @@ class DSMModel implements FileReadWrite{
 	public String getFileURL() {
 		return fileURL;
 	}
+
 	
 	
 }
