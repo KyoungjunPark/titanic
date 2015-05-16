@@ -13,4 +13,9 @@ public class FileManager {
 		}
 		return fileManager;
 	}
+	
+	public boolean setCLSXModel(int id){
+		
+		return true;
+	}
 }
