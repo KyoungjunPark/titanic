@@ -52,4 +52,7 @@ public class LeftPanel extends JPanel {
 		return true;
 		
 	}
+
+	
+
 }
