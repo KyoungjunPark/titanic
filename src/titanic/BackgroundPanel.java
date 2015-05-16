@@ -33,6 +33,7 @@ public class BackgroundPanel extends JFrame {
 		makeMainPanel();
 	
 	}
+	
 	protected void makeMenus()
 	{
 		//Menus
