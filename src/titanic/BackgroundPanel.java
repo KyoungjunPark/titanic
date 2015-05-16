@@ -1,6 +1,13 @@
 package titanic;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Event;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -12,14 +19,10 @@ public class BackgroundPanel extends JFrame {
 	protected JMenu mnView;
 	protected JMenu mnHelp;
 	
-	protected JMenuItem mnFileMenu;
-	protected JMenuItem mnMetricsMenu;
-	protected JMenuItem mnViewMenu;
-	protected JMenuItem mnHelpMenu;
-	
 	protected JToolBar toolBar;
 
-	
+	JTextArea text;  
+	Container pane;
 	
 	public BackgroundPanel() {
 		setTitle("Titanic");
@@ -42,62 +45,105 @@ public class BackgroundPanel extends JFrame {
 		
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
+		mnFile.setMnemonic('F');
 		
 		mnMetrics = new JMenu("Metrics");
 		menuBar.add(mnMetrics);
+		mnMetrics.setMnemonic('M');
 		
 		mnView = new JMenu("View");
 		menuBar.add(mnView);
+		mnView.setMnemonic('V');
 		
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		mnHelp.setMnemonic('H');
+
 		
-		
-		
-		mnFileMenu = new JMenuItem("Open DSM...");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenuItem("New Clustering");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenuItem("Load Clustering...");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenuItem("Save Clustering");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenuItem("Save Clustering...");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenu("Export As");
-		mnFile.add(mnFileMenu);
-		
-		mnFileMenu = new JMenuItem("Exit");
-		mnFile.add(mnFileMenu);
-		
-		
-		
-		mnMetricsMenu = new JMenuItem("Propagation Cost");
-		mnMetrics.add(mnMetricsMenu);
-		
-		
-		
-		mnViewMenu = new JMenuItem("Redraw");
-		mnView.add(mnViewMenu);
-		
-		mnViewMenu = new JMenuItem("Find...");
-		mnView.add(mnViewMenu);
-		
-		mnViewMenu = new JMenuItem("Show Row Labels");
-		mnView.add(mnViewMenu);
-		
-		mnViewMenu = new JMenuItem("Show Dependency Strength");
-		mnView.add(mnViewMenu);
-		
-		
-		
-		mnHelpMenu = new JMenuItem("About...");
-		mnHelp.add(mnHelpMenu);
+		JMenuItem openDSM = new JMenuItem("Open DSM...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-dsm.png"));
+        JMenuItem newClustering = new JMenuItem("New Clustering", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/new-clsx.png"));
+        JMenuItem loadClustering = new JMenuItem("Load Clustering...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-clsx.png"));
+        JMenuItem saveClustering = new JMenuItem("Save Clustering", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx.png"));
+        JMenuItem saveClustering_2 = new JMenuItem("Save Clustering...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx-as.png"));
+        JMenuItem exportAs = new JMenu("Export As");
+        JMenuItem exitAction = new JMenuItem("Exit");
+        
+        JMenuItem propagationCost= new JMenuItem("Propagation Cost");
+        
+        JMenuItem redraw = new JMenuItem("Redraw", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/redraw.png"));
+        JMenuItem find = new JMenuItem("Find...");
+        JCheckBoxMenuItem showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
+        JCheckBoxMenuItem showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
+        
+        JMenuItem about = new JMenuItem("About...");
+        
+        JMenuItem DSM = new JMenuItem("DSM...");
+        JMenuItem excel = new JMenuItem("Excel...");
+        
+        
+        
+        
+        mnFile.add(openDSM);
+        mnFile.addSeparator();
+        mnFile.add(newClustering);
+        mnFile.add(loadClustering);
+        mnFile.addSeparator();
+        mnFile.add(saveClustering);
+        mnFile.add(saveClustering_2);
+        mnFile.addSeparator();
+        mnFile.add(exportAs);
+        mnFile.addSeparator();
+        mnFile.add(exitAction);
+        openDSM.setMnemonic('O');
+        newClustering.setMnemonic('N');
+        loadClustering.setMnemonic('L');
+        saveClustering.setMnemonic('S');
+        saveClustering_2.setMnemonic('a');
+        exportAs.setMnemonic('E');
+        exitAction.setMnemonic('x');
+        openDSM.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK, false));
+        loadClustering.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK + Event.SHIFT_MASK, false));
+        saveClustering.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK, false));
+        
+        exportAs.add(DSM);
+        exportAs.add(excel);
+        DSM.setMnemonic('D');
+        excel.setMnemonic('E');
+        
+        mnMetrics.add(propagationCost);
+        propagationCost.setMnemonic('P');
+        
+        mnView.add(redraw);
+        mnView.addSeparator();
+        mnView.add(find);
+        mnView.addSeparator();
+        mnView.add(showRowLabels);
+        mnView.add(showDependencyStrength);
+        redraw.setMnemonic('R');
+        find.setMnemonic('F');
+        showRowLabels.setMnemonic('L');
+        showDependencyStrength.setMnemonic('D');
+        redraw.setAccelerator(KeyStroke.getKeyStroke(0, Event.F5, false));			//F5 단축키 설정 모르겠음
+        find.setAccelerator(KeyStroke.getKeyStroke('F', Event.CTRL_MASK, false));
+        
+        mnHelp.add(about);
+        about.setMnemonic('A');
+        //frame.getContentPane(  ).add(menuBar, BorderLayout.SOUTH);
+        
+        
+        about.addActionListener(new ActionListener()  								//불완전
+        {  
+         public void actionPerformed(ActionEvent e)  
+         {  
+        	 JPanel p1 = new JPanel();
+    		 p1.setLayout(new GridLayout(3, 1));
+    		 p1.add(new JLabel("Titan"));
+    		 p1.add(new JLabel("version 1.0"));
+    		 p1.add(new JLabel("Copyright(c) 2009-2015, Drexel University"));
+         JOptionPane.showMessageDialog(pane, p1);
+         }  
+        });   
+       
 	}
 	protected void makeOverallToolbar()
 	{
