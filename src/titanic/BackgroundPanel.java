@@ -8,11 +8,14 @@ public class BackgroundPanel extends JFrame {
 	
 	protected JMenuBar menuBar;
 	protected JMenu mnFile;
-	protected JMenu mnNewMenu;
 	protected JMenu mnMetrics;
-	protected JMenu mnNewMenu_1;
 	protected JMenu mnView;
 	protected JMenu mnHelp;
+	
+	protected JMenuItem mnFileMenu;
+	protected JMenuItem mnMetricsMenu;
+	protected JMenuItem mnViewMenu;
+	protected JMenuItem mnHelpMenu;
 	
 	protected JToolBar toolBar;
 
@@ -39,14 +42,8 @@ public class BackgroundPanel extends JFrame {
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
-		mnNewMenu = new JMenu("Open DSM...");
-		mnFile.add(mnNewMenu);
-		
 		mnMetrics = new JMenu("Metrics");
 		menuBar.add(mnMetrics);
-		
-		mnNewMenu_1 = new JMenu("Propagation Cost");
-		mnMetrics.add(mnNewMenu_1);
 		
 		mnView = new JMenu("View");
 		menuBar.add(mnView);
@@ -54,6 +51,52 @@ public class BackgroundPanel extends JFrame {
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
+		
+		
+		mnFileMenu = new JMenuItem("Open DSM...");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenuItem("New Clustering");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenuItem("Load Clustering...");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenuItem("Save Clustering");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenuItem("Save Clustering...");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenu("Export As");
+		mnFile.add(mnFileMenu);
+		
+		mnFileMenu = new JMenuItem("Exit");
+		mnFile.add(mnFileMenu);
+		
+		
+		
+		mnMetricsMenu = new JMenuItem("Propagation Cost");
+		mnMetrics.add(mnMetricsMenu);
+		
+		
+		
+		mnViewMenu = new JMenuItem("Redraw");
+		mnView.add(mnViewMenu);
+		
+		mnViewMenu = new JMenuItem("Find...");
+		mnView.add(mnViewMenu);
+		
+		mnViewMenu = new JMenuItem("Show Row Labels");
+		mnView.add(mnViewMenu);
+		
+		mnViewMenu = new JMenuItem("Show Dependency Strength");
+		mnView.add(mnViewMenu);
+		
+		
+		
+		mnHelpMenu = new JMenuItem("About...");
+		mnHelp.add(mnHelpMenu);
 	}
 	protected void makeOverallToolbar()
 	{
