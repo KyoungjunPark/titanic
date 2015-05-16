@@ -24,13 +24,17 @@ public class FileManager {
 		return false;
 	}
 
-	public int createCLSXModel(){
+	public int createCLSXModel() throws CreateException{
 		return getNextID();
 	}
-	public int createCLSXModel(String fileName){
+	public int createCLSXModel(String fileName) throws CreateException{
+		// file open logic
 		return createCLSXModel();
 	}
-	public int createCLSXModel(int id){
+	public int createCLSXModel(int id) throws CreateException{
+		if(!this.existModel(id))
+			throw new CreateException("The ID does not exist.");
+		// copy logic
 		return createCLSXModel();
 	}
 	public boolean existModel(int id){
