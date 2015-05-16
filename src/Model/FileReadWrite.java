@@ -1,7 +1,6 @@
-package titanic;
+package Model;
 
-
-public interface FileReadWrite {
+interface FileReadWrite {
 	
 	public abstract void readFile(String fileURL);
 	

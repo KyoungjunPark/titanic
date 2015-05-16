@@ -1,4 +1,4 @@
-package titanic;
+package Model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-public class DSMModel implements FileReadWrite{
+class DSMModel implements FileReadWrite{
 
 	private int dependencyNumber;
 	private int[][] dependencyRelation;
