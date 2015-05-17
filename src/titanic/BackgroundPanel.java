@@ -1,11 +1,9 @@
 package titanic;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Event;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -60,17 +58,17 @@ public class BackgroundPanel extends JFrame {
 		mnHelp.setMnemonic('H');
 
 		
-		JMenuItem openDSM = new JMenuItem("Open DSM...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-dsm.png"));
-        JMenuItem newClustering = new JMenuItem("New Clustering", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/new-clsx.png"));
-        JMenuItem loadClustering = new JMenuItem("Load Clustering...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-clsx.png"));
-        JMenuItem saveClustering = new JMenuItem("Save Clustering", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx.png"));
-        JMenuItem saveClustering_2 = new JMenuItem("Save Clustering...", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx-as.png"));
+		JMenuItem openDSM = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
+        JMenuItem newClustering = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
+        JMenuItem loadClustering = new JMenuItem("Load Clustering...", new ImageIcon("util/open-clsx.png"));
+        JMenuItem saveClustering = new JMenuItem("Save Clustering", new ImageIcon("util/save-clsx.png"));
+        JMenuItem saveClustering_2 = new JMenuItem("Save Clustering...", new ImageIcon("util/save-clsx-as.png"));
         JMenuItem exportAs = new JMenu("Export As");
         JMenuItem exitAction = new JMenuItem("Exit");
         
         JMenuItem propagationCost= new JMenuItem("Propagation Cost");
         
-        JMenuItem redraw = new JMenuItem("Redraw", new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/redraw.png"));
+        JMenuItem redraw = new JMenuItem("Redraw", new ImageIcon("util/redraw.png"));
         JMenuItem find = new JMenuItem("Find...");
         JCheckBoxMenuItem showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
         JCheckBoxMenuItem showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
@@ -79,8 +77,6 @@ public class BackgroundPanel extends JFrame {
         
         JMenuItem DSM = new JMenuItem("DSM...");
         JMenuItem excel = new JMenuItem("Excel...");
-        
-        
         
         
         mnFile.add(openDSM);
