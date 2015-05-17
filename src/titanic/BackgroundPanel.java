@@ -78,6 +78,7 @@ public class BackgroundPanel extends JFrame {
         JMenuItem DSM = new JMenuItem("DSM...");
         JMenuItem excel = new JMenuItem("Excel...");
         
+        
         mnFile.add(openDSM);
         mnFile.addSeparator();
         mnFile.add(newClustering);
