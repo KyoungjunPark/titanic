@@ -78,6 +78,7 @@ public class BackgroundPanel extends JFrame {
         JMenuItem DSM = new JMenuItem("DSM...");
         JMenuItem excel = new JMenuItem("Excel...");
         
+        
         mnFile.add(openDSM);
         mnFile.addSeparator();
         mnFile.add(newClustering);
@@ -89,6 +90,7 @@ public class BackgroundPanel extends JFrame {
         mnFile.add(exportAs);
         mnFile.addSeparator();
         mnFile.add(exitAction);
+        
         openDSM.setMnemonic('O');
         newClustering.setMnemonic('N');
         loadClustering.setMnemonic('L');
@@ -99,7 +101,7 @@ public class BackgroundPanel extends JFrame {
         openDSM.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK, false));
         loadClustering.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK + Event.SHIFT_MASK, false));
         saveClustering.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK, false));
-        
+ 
         exportAs.add(DSM);
         exportAs.add(excel);
         DSM.setMnemonic('D');
@@ -115,6 +117,7 @@ public class BackgroundPanel extends JFrame {
         
         mnView.add(showRowLabels);
         mnView.add(showDependencyStrength);
+        
         redraw.setMnemonic('R');
         find.setMnemonic('F');
         showRowLabels.setMnemonic('L');
@@ -147,27 +150,27 @@ public class BackgroundPanel extends JFrame {
 		//overall ToolBar(in North)
 		toolBar = new JToolBar();
 		
-		ImageIcon opendsmIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-dsm.png");
+		ImageIcon opendsmIcon = new ImageIcon("util/open-dsm.png");
 		JButton opendsmButton = new JButton(opendsmIcon);
 		toolBar.add(opendsmButton);
 
-		ImageIcon redrawIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/redraw.png");
+		ImageIcon redrawIcon = new ImageIcon("util/redraw.png");
 		JButton redrawButton = new JButton(redrawIcon);
 		toolBar.add(redrawButton);
 		
-		ImageIcon newClusteringIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/new-clsx.png");
+		ImageIcon newClusteringIcon = new ImageIcon("util/new-clsx.png");
 		JButton newClusteringButton = new JButton(newClusteringIcon);
 		toolBar.add(newClusteringButton);
 		
-		ImageIcon loadClusteringIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/open-clsx.png");
+		ImageIcon loadClusteringIcon = new ImageIcon("util/open-clsx.png");
 		JButton loadClusteringButton = new JButton(loadClusteringIcon);
 		toolBar.add(loadClusteringButton);
 		
-		ImageIcon saveClusteringIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx.png");
+		ImageIcon saveClusteringIcon = new ImageIcon("util/save-clsx.png");
 		JButton saveClusteringButton = new JButton(saveClusteringIcon);
 		toolBar.add(saveClusteringButton);
 		
-		ImageIcon saveClusteringAsIcon = new ImageIcon(BackgroundPanel.class.getResource("").getPath()+"../../util/save-clsx-as.png");
+		ImageIcon saveClusteringAsIcon = new ImageIcon("util/save-clsx-as.png");
 		JButton saveClusteringAsButton = new JButton(saveClusteringAsIcon);
 		toolBar.add(saveClusteringAsButton);
 		
