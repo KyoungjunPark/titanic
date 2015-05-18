@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 class MetaModel {
 	private String fileType; //dsm or clsx

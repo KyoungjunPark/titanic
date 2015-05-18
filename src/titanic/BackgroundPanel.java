@@ -60,23 +60,32 @@ public class BackgroundPanel extends JFrame {
 		
 		JMenuItem openDSM = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
         JMenuItem newClustering = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
+        newClustering.setEnabled(false);
         JMenuItem loadClustering = new JMenuItem("Load Clustering...", new ImageIcon("util/open-clsx.png"));
+        loadClustering.setEnabled(false);
         JMenuItem saveClustering = new JMenuItem("Save Clustering", new ImageIcon("util/save-clsx.png"));
+        saveClustering.setEnabled(false);
         JMenuItem saveClustering_2 = new JMenuItem("Save Clustering...", new ImageIcon("util/save-clsx-as.png"));
+        saveClustering_2.setEnabled(false);
         JMenuItem exportAs = new JMenu("Export As");
         JMenuItem exitAction = new JMenuItem("Exit");
         
         JMenuItem propagationCost= new JMenuItem("Propagation Cost");
+        propagationCost.setEnabled(false);
         
         JMenuItem redraw = new JMenuItem("Redraw", new ImageIcon("util/redraw.png"));
+        redraw.setEnabled(false);
         JMenuItem find = new JMenuItem("Find...");
+        find.setEnabled(false);
         JCheckBoxMenuItem showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
         JCheckBoxMenuItem showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
         
         JMenuItem about = new JMenuItem("About...");
         
         JMenuItem DSM = new JMenuItem("DSM...");
+        DSM.setEnabled(false);
         JMenuItem excel = new JMenuItem("Excel...");
+        excel.setEnabled(false);
         
         
         mnFile.add(openDSM);
@@ -109,11 +118,12 @@ public class BackgroundPanel extends JFrame {
         
         mnMetrics.add(propagationCost);
         propagationCost.setMnemonic('P');
-        
+            
         mnView.add(redraw);
         mnView.addSeparator();
         mnView.add(find);
         mnView.addSeparator();
+        
         mnView.add(showRowLabels);
         mnView.add(showDependencyStrength);
         
@@ -134,10 +144,11 @@ public class BackgroundPanel extends JFrame {
          public void actionPerformed(ActionEvent e)  
          {  
         	 JPanel p1 = new JPanel();
-    		 p1.setLayout(new GridLayout(3, 1));
-    		 p1.add(new JLabel("Titan"));
-    		 p1.add(new JLabel("version 1.0"));
-    		 p1.add(new JLabel("Copyright(c) 2009-2015, Drexel University"));
+    		 p1.setLayout(new GridLayout(4, 1));
+    		 p1.add(new JLabel("Titanic"));
+    		 p1.add(new JLabel("version 1.0.0"));
+    		 p1.add(new JLabel("Chung-Ang University"));
+    		 p1.add(new JLabel("Ji-Soo Kim, Kyung-Jun Park, Se-Hyeon Yang, Won-Se Lee, Ye-Lim Han"));
          JOptionPane.showMessageDialog(pane, p1);
          }  
         });   
@@ -154,22 +165,27 @@ public class BackgroundPanel extends JFrame {
 
 		ImageIcon redrawIcon = new ImageIcon("util/redraw.png");
 		JButton redrawButton = new JButton(redrawIcon);
+		redrawButton.setEnabled(false);
 		toolBar.add(redrawButton);
 		
 		ImageIcon newClusteringIcon = new ImageIcon("util/new-clsx.png");
 		JButton newClusteringButton = new JButton(newClusteringIcon);
+		newClusteringButton.setEnabled(false);
 		toolBar.add(newClusteringButton);
 		
 		ImageIcon loadClusteringIcon = new ImageIcon("util/open-clsx.png");
 		JButton loadClusteringButton = new JButton(loadClusteringIcon);
+		loadClusteringButton.setEnabled(false);
 		toolBar.add(loadClusteringButton);
 		
 		ImageIcon saveClusteringIcon = new ImageIcon("util/save-clsx.png");
 		JButton saveClusteringButton = new JButton(saveClusteringIcon);
+		saveClusteringButton.setEnabled(false);
 		toolBar.add(saveClusteringButton);
 		
 		ImageIcon saveClusteringAsIcon = new ImageIcon("util/save-clsx-as.png");
 		JButton saveClusteringAsButton = new JButton(saveClusteringAsIcon);
+		saveClusteringAsButton.setEnabled(false);
 		toolBar.add(saveClusteringAsButton);
 		
 		getContentPane().add(toolBar, BorderLayout.NORTH);
