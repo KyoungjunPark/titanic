@@ -10,7 +10,10 @@ public class DSMModelTest {
 	@Test
 	public void test() {
 		try {
-			DSMModel model = new DSMModel("2\n1 2\n3 4\nAA\nBB");
+			String string = "2\n1 2\n3 4\nAA\nBB";
+			DSMModel model = new DSMModel(string);
+			
+			assertEquals(string, model);
 		} catch (CreateException e) {
 			fail("Not yet implemented");
 		}
