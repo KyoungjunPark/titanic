@@ -23,7 +23,7 @@ public class DSMModel{
 		String[] lines = string.split("\n");
 		this.dependencyNumber = Integer.parseInt(lines[0]);
 		if(lines.length < this.dependencyNumber * 2 + 1){
-			throw new CreateException("DSM 데이터 형식이 옳바르지 않습니다.");
+			throw new CreateException("DSM Eroerorororo");
 		}
 		for(int i = 0 ; i < this.dependencyNumber ; i++){
 			for(String e : lines[i+1].split(" "))
