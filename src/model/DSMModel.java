@@ -37,5 +37,4 @@ class DSMModel{
 		}
 		return result;
 	}
-	
 }
