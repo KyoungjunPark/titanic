@@ -48,9 +48,7 @@ public class DSMModel{
 			result += this.dependencyRelationArray.get(i);
 		}
 		result += '\n';
-		for( String e : this.elementsNameArray ){
-			result += e+"\n";
-		}
+        result += String.join("\n", this.elementsNameArray);
 		return result;
 	}
 }
