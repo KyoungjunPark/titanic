@@ -9,7 +9,7 @@ public class ModelManager {
 	private ArrayList<TitanicModel> titanicModelArray;
 	private int currentID = -1;
 	
-	public static ModelManager sharedFileManager(){
+	public static ModelManager sharedModelManager(){
 		if(modelManager == null){
 			synchronized (ModelManager.class) {
 				if(modelManager == null){
@@ -19,7 +19,7 @@ public class ModelManager {
 		}
 		return modelManager;
 	}
-	public boolean setTitanicModeID(int id){
+	public boolean setTitanicModelID(int id){
 		if(this.isExistModel(id)){
 			this.currentID = id;
 			return true;
