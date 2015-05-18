@@ -2,8 +2,11 @@ package Model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 class DSMModel implements FileReadWrite{
@@ -27,13 +30,14 @@ class DSMModel implements FileReadWrite{
 	
 		this.fileURL = fileURL;
 		try {
-			BufferedReader input = connectFile(fileURL);
+			BufferedReader input = connectReadFile(fileURL);
 			dependencyNumber = Integer.parseInt(input.readLine());
 			
 			readArrayInformation(input);
 			
 			readElementsName(input);
 			
+			input.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -44,7 +48,7 @@ class DSMModel implements FileReadWrite{
 		}
 		
 	}
-	private BufferedReader connectFile(String fileURL) throws FileNotFoundException
+	private BufferedReader connectReadFile(String fileURL) throws FileNotFoundException
 	{
 		return new BufferedReader(new FileReader(fileURL));
 		
@@ -73,9 +77,44 @@ class DSMModel implements FileReadWrite{
 	}
 	@Override
 	public void writeFile(String fileURL) {
-		
+		try {
+			PrintWriter output = connetWriteFile(fileURL);
+			
+			output.println(dependencyNumber);
+			
+			writeArrayInformation(output);
+			
+			writeElementsName(output);
+			
+			output.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
-
+	private PrintWriter connetWriteFile(String fileURL) throws IOException
+	{
+		return new PrintWriter(fileURL);
+	}
+	private void writeArrayInformation(PrintWriter output)
+	{
+		for(int i = 0 ; i< dependencyNumber ; i++){
+			for(int j = 0 ; i< dependencyNumber ; j++){
+				output.write(dependencyRelation[i][j]);
+				output.write(" ");
+			}
+			output.write("\n");
+		}
+		
+	}
+	private void writeElementsName(PrintWriter output)
+	{
+		for(int i = 0 ; i<dependencyNumber ; i++){
+			output.println(elementsName[i]);
+		}
+		
+	}
+	
 	public int getDependencyNumber() {
 		return dependencyNumber;
 	}
