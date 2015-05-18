@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public class FileManager {
 	private static FileManager fileManager;
 	private FileManager(){}
-	private int nextID = 1;
-	private int currentID = 0;
+
+	private ArrayList<TitanicModel> titanicModelArray;
+	private int currentID = -1;
 	
 	public static FileManager sharedFileManager(){
 		if(fileManager == null){
@@ -17,8 +20,8 @@ public class FileManager {
 		return fileManager;
 	}
 	
-	public boolean setCLSXModel(int id){
-		if(this.existModel(id)){
+	public boolean setTitanicModeID(int id){
+		if(this.isExistModel(id)){
 			this.currentID = id;
 			return true;
 		}
@@ -39,11 +42,11 @@ public class FileManager {
 		return createCLSXModel();
 	}
 	*/
-	public boolean existModel(int id){
-		return true;
-	}
-	/* setter, getter */
-	private int getNextID(){
-		return this.nextID++;
+	public boolean isExistModel(int id){
+		for(int i = 0 ; i < this.titanicModelArray.size() ; i++){
+			if(this.titanicModelArray.get(i).getID() == i)
+				return true;
+		}
+		return false;
 	}
 }
