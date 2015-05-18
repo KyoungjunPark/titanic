@@ -2,22 +2,22 @@ package model;
 
 import java.util.ArrayList;
 
-public class FileManager {
-	private static FileManager fileManager;
-	private FileManager(){}
+public class ModelManager {
+	private static ModelManager modelManager;
+	private ModelManager(){}
 
 	private ArrayList<TitanicModel> titanicModelArray;
 	private int currentID = -1;
 	
-	public static FileManager sharedFileManager(){
-		if(fileManager == null){
-			synchronized (FileManager.class) {
-				if(fileManager == null){
-					fileManager = new FileManager();
+	public static ModelManager sharedFileManager(){
+		if(modelManager == null){
+			synchronized (ModelManager.class) {
+				if(modelManager == null){
+					modelManager = new ModelManager();
 				}
 			}
 		}
-		return fileManager;
+		return modelManager;
 	}
 	public boolean setTitanicModeID(int id){
 		if(this.isExistModel(id)){
