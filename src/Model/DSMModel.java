@@ -1,94 +1,41 @@
 package Model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 
 
-class DSMModel implements FileReadWrite{
+class DSMModel{
 
 	private int dependencyNumber;
-	private int[][] dependencyRelation;
-	private String[] elementsName;
+	private ArrayList<Integer> dependencyRelationArray;
+	private ArrayList<String> elementsNameArray;
 	private String fileURL;
 	
 	public DSMModel(){}
-	public DSMModel(int dependencyNumber, int[][] dependencyRelation, String[] elementsName, String fileURL){
+	public DSMModel(int dependencyNumber, 
+			ArrayList<Integer> dependencyRelationArray, 
+			ArrayList<String> elementsNameArray,
+			String fileURL){
 		this.dependencyNumber = dependencyNumber;
-		this.dependencyRelation = dependencyRelation;
-		this.elementsName = elementsName;
+		this.dependencyRelationArray = dependencyRelationArray;
+		this.elementsNameArray = elementsNameArray;
 		this.fileURL = fileURL;
 	}
 	
-	@Override
-	public void readFile(String fileURL)
-	{
-	
-		this.fileURL = fileURL;
-		try {
-			BufferedReader input = connectFile(fileURL);
-			dependencyNumber = Integer.parseInt(input.readLine());
-			
-			readArrayInformation(input);
-			
-			readElementsName(input);
-			
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public String toString(){
+		String result = "";
+		result += this.dependencyNumber+"\n";
+		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
+			result += this.dependencyRelationArray.get(i);
+			if( i + 1 % this.dependencyNumber == 0)
+				result += '\n';
+			else
+				result += ' ';
 		}
-		
-	}
-	private BufferedReader connectFile(String fileURL) throws FileNotFoundException
-	{
-		return new BufferedReader(new FileReader(fileURL));
-		
-	}
-	private void readArrayInformation(BufferedReader input) throws IOException
-	{
-		dependencyRelation = new int[dependencyNumber][dependencyNumber];
-		
-		//read array of dependency
-		for(int i = 0 ; i<dependencyNumber ; i++){
-			for(int j = 0 ; j<dependencyNumber ; j++){
-				dependencyRelation[i][j] = input.read()-'0';
-				input.read();	
-			}
-			input.readLine();
+		result += '\n';
+		for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
+			result += this.elementsNameArray.get(i) + '\n';
 		}
+		return result;
 	}
-	private void readElementsName(BufferedReader input) throws IOException
-	{
-		elementsName = new String[dependencyNumber];
-		//read array's elements name
-		for(int i = 0 ; i<dependencyNumber ; i++){
-			elementsName[i] = input.readLine();
-		}
-		
-	}
-	@Override
-	public void writeFile(String fileURL) {
-		
-	}	
-
-	public int getDependencyNumber() {
-		return dependencyNumber;
-	}
-	public int[][] getDependencyRelation() {
-		return dependencyRelation;
-	}
-	public String[] getElementsName() {
-		return elementsName;
-	}
-	public String getFileURL() {
-		return fileURL;
-	}
-
-	
 	
 }

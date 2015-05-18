@@ -9,7 +9,7 @@ public class DSMModelTest extends TestCase{
 	
 	protected void setUp() throws Exception {
 		dsm = new DSMModel();
-		dsm.readFile(DSMModelTest.class.getResource("").getPath()+"../../model_data/smalltest/smalltest.dsm");
+//		dsm.readFile(DSMModelTest.class.getResource("").getPath()+"../../model_data/smalltest/smalltest.dsm");
 		
 	};
 	@Test
