@@ -39,19 +39,16 @@ public class DSMModel{
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
 	public String toString(){
-		String result = "";
-		result += this.dependencyNumber+"\n";
+		String result = ""+this.dependencyNumber;
 		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
-			result += this.dependencyRelationArray.get(i);
-			if( i + 1 % this.dependencyNumber == 0)
+			if( i % this.dependencyNumber == 0)
 				result += '\n';
 			else
 				result += ' ';
+			result += this.dependencyRelationArray.get(i);
 		}
 		result += '\n';
-		for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
-			result += this.elementsNameArray.get(i) + '\n';
-		}
+        result += String.join("\n", this.elementsNameArray);
 		return result;
 	}
 }
