@@ -9,9 +9,9 @@ class PackageModel{
 	
 	public PackageModel(int id){
 		this.id = id;
-		dsm = new DSMModel();
-		clsx = new CLSXModel();
-		metaData =  new MetaModel();
+//		dsm = new DSMModel("Test");
+//		clsx = new CLSXModel();
+//		metaData =  new MetaModel();
 	}
 	
 
