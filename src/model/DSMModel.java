@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 
-class DSMModel{
+public class DSMModel{
 
 	private int dependencyNumber;
 	private ArrayList<Integer> dependencyRelationArray;
