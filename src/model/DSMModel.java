@@ -10,16 +10,22 @@ public class DSMModel{
 	private ArrayList<String> elementsNameArray;
 	private String fileURL;
 	
+	public DSMModel(){
+		this.dependencyRelationArray = new ArrayList<Integer>();
+		this.elementsNameArray = new ArrayList<String>();
+	}
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
 			ArrayList<String> elementsNameArray,
 			String fileURL){
+		this();
 		this.dependencyNumber = dependencyNumber;
 		this.dependencyRelationArray = dependencyRelationArray;
 		this.elementsNameArray = elementsNameArray;
 		this.fileURL = fileURL;
 	}
 	public DSMModel(String string) throws CreateException{
+		this();
 		String[] lines = string.split("\n");
 		this.dependencyNumber = Integer.parseInt(lines[0]);
 		if(lines.length < this.dependencyNumber * 2 + 1){
