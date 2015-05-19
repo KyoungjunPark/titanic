@@ -3,12 +3,16 @@ package model;
 class TitanicModel {
 	private static int nextID = 0;
 	private int id;
-	private DSMModel dsmModel;
-	private CLSXModel clsxModel;
+	private DSMModel dsmModel = null;
+	private CLSXModel clsxModel = null;
 	
 	public TitanicModel(){
 		this.id = TitanicModel.nextID();
 	}
+
+    public void save()throws SaveException{
+
+    }
 
     public void setDsmModel(DSMModel dsmModel){
         /**

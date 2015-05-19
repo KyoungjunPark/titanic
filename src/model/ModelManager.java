@@ -70,4 +70,10 @@ public class ModelManager {
     private void setCurrentID(int id){
         this.currentID = id;
     }
+
+    public void save()throws SaveException{
+        /**
+         * Titanic model 을 저장합니다.
+         */
+    }
 }
