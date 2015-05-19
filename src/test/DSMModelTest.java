@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 import model.CreateException;
 import model.DSMModel;
+import util.GroupNode;
 import util.XMLParser;
 
 import org.junit.Test;
@@ -48,7 +49,8 @@ public class DSMModelTest {
         XMLParser parser = new XMLParser();
         try{
             System.out.println("Test");
-            parser.parseXML(new File("test/moka_ArchDRH.clsx"));
+            GroupNode groupNode = parser.parseXML(new File("test/moka_ArchDRH.clsx"));
+            groupNode.print();
         }catch (IOException e){
             fail(e+" ");
         }catch (SAXException e){
