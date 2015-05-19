@@ -1,13 +1,16 @@
 package titanic;
 
 import java.awt.Event;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
 
 public class MenuBar extends JMenuBar {
 	
@@ -16,6 +19,7 @@ public class MenuBar extends JMenuBar {
 	private JMenu mnView;
 	private JMenu mnHelp;
 	private JMenuItem openDSMItem;
+	private JMenuItem newClusteringItem;
 	private JMenuItem loadClusteringItem;
 	private JMenuItem saveClusteringItem;
 	private JMenuItem saveClusteringAsItem;
@@ -45,7 +49,7 @@ public class MenuBar extends JMenuBar {
 
 		
 		openDSMItem = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
-        JMenuItem newClusteringItem = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
+		newClusteringItem = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
         newClusteringItem.setEnabled(false);
         loadClusteringItem = new JMenuItem("Load Clustering...", new ImageIcon("util/open-clsx.png"));
         loadClusteringItem.setEnabled(false);
@@ -122,50 +126,40 @@ public class MenuBar extends JMenuBar {
         about.setMnemonic('A');
 		
 	}
+	public void setAction(String title, ActionListener action)
+	{
 
-	public JMenu getMnFile() {
-		return mnFile;
-	}
+		for(int i = 0 ; i< mnFile.getMenuComponentCount() ; i++){
+			if(mnFile.getMenuComponent(i) instanceof JMenuItem
+					&& ((JMenuItem)mnFile.getMenuComponent(i)).getText().compareTo(title) == 0){
+				((JMenuItem)mnFile.getMenuComponent(i)).addActionListener(action);
+				return;
+			}
+		}
+		for(int i = 0 ; i< mnMetrics.getMenuComponentCount() ; i++){
+			if(mnMetrics.getMenuComponent(i) instanceof JMenuItem
+					&& ((JMenuItem)mnMetrics.getMenuComponent(i)).getText().compareTo(title) == 0){
+				((JMenuItem)mnMetrics.getMenuComponent(i)).addActionListener(action);
+				return;
+			}
+		}
+		for(int i = 0 ; i< mnView.getMenuComponentCount() ; i++){
+			if(mnView.getMenuComponent(i) instanceof JMenuItem
+					&& ((JMenuItem)mnView.getMenuComponent(i)).getText().compareTo(title) == 0){
+				((JMenuItem)mnView.getMenuComponent(i)).addActionListener(action);
+				return;
+			}
+		}
+		for(int i = 0 ; i< mnHelp.getMenuComponentCount() ; i++){
+			if(mnHelp.getMenuComponent(i) instanceof JMenuItem
+					&& ((JMenuItem)mnHelp.getMenuComponent(i)).getText().compareTo(title) == 0){
+				((JMenuItem)mnHelp.getMenuComponent(i)).addActionListener(action);
+				return;
+			}
+		}
+		
 
-	public JMenu getMnMetrics() {
-		return mnMetrics;
+		
 	}
-
-	public JMenu getMnView() {
-		return mnView;
-	}
-
-	public JMenu getMnHelp() {
-		return mnHelp;
-	}
-
-	public JMenuItem getOpenDSMItem() {
-		return openDSMItem;
-	}
-
-	public JMenuItem getLoadClusteringItem() {
-		return loadClusteringItem;
-	}
-
-	public JMenuItem getSaveClusteringItem() {
-		return saveClusteringItem;
-	}
-
-	public JMenuItem getSaveClusteringAsItem() {
-		return saveClusteringAsItem;
-	}
-
-	public JMenuItem getExportAsItem() {
-		return exportAsItem;
-	}
-
-	public JMenuItem getExitActionItem() {
-		return exitActionItem;
-	}
-
-	public JMenuItem getPropagationCostItem() {
-		return propagationCostItem;
-	}
-	
 	
 }

@@ -41,3 +41,6 @@ local.properties
 .DS_STORE
 .idea
 *.iml
+
+#test file
+data dir
