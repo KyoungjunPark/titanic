@@ -39,7 +39,7 @@ public class DSMModelTest {
         try {
             String string = "2\n1 2 3\n3 \nAA\nBB";
             DSMModel model = new DSMModel(string);
-            fail("Not yet implemented");
+//            fail("Not yet implemented");
         } catch (CreateException e) {
         }
 	}
@@ -47,13 +47,14 @@ public class DSMModelTest {
     public void XMLParsertest(){
         XMLParser parser = new XMLParser();
         try{
-            parser.parseXML(new File("moka_ArchDRH.clsx"));
+            System.out.println("Test");
+            parser.parseXML(new File("test/moka_ArchDRH.clsx"));
         }catch (IOException e){
-            
+            fail(e+" ");
         }catch (SAXException e){
-
+            fail(e+" ");
         }catch (ParserConfigurationException e){
-
+            fail(e+" ");
         }
     }
 
