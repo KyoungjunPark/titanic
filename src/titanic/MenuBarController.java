@@ -47,7 +47,7 @@ public class MenuBarController{
 				
 				openFile = fc.getSelectedFile();
 				
-
+				//when file open success, then available icon must be changed!
 			}
 		});
 	}

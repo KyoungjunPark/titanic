@@ -123,8 +123,10 @@ public class MenuBar extends JMenuBar {
 	public void setAction(String title, ActionListener action)
 	{
         for(Component component : this.getComponents()){
-            if( component instanceof JMenu && ((JMenu) component).getText().compareTo(title) == 0)
-                ((JMenu) component).addActionListener(action);
+        	for(Component item : ((JMenu)component).getMenuComponents()){
+	            if( item instanceof JMenuItem && ((JMenuItem) item).getText().compareTo(title) == 0)
+	                ((JMenuItem) item).addActionListener(action);
+        	}
         }
 	}
 	

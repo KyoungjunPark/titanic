@@ -5,8 +5,6 @@ import java.awt.print.Book;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
@@ -21,7 +19,7 @@ public class RightPanel extends JPanel {
 		tabbedPane = new JTabbedPane();
 		add(tabbedPane);
 		
-		mainLabel = new JLabel("첫번째", SwingConstants.CENTER);
+		mainLabel = new JLabel("first째", SwingConstants.CENTER);
 		mainPanel = new JPanel();
 		mainPanel.add(mainLabel);
 		tabbedPane.addTab("1",mainPanel);
