@@ -2,12 +2,13 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import util.CommonUtils;
 
 public class ModelManager {
 	private static ModelManager modelManager;
 	private ModelManager(){}
 
-	private ArrayList<TitanicModel> titanicModelArray;
+	private ArrayList<TitanicModel> titanicModelArray = new ArrayList<TitanicModel>();
 	private int currentID = -1;
 	
 	public static ModelManager sharedModelManager(){
@@ -28,7 +29,7 @@ public class ModelManager {
 	}
 	public boolean setTitanicModelID(int id){
 		if(this.isExistModel(id)){
-			this.currentID = id;
+			this.setCurrentID(id);
 			return true;
 		}
 		return false;
@@ -43,7 +44,17 @@ public class ModelManager {
 		 * @return 생성된 titanic의 id 를 리턴합니다.
 		 * @exception CreateException 파일의 확장자, 형식등이 맞지 않을경우 발생합니다. 자세한 사항은 메시지를 통해 전달합니다.
 		 */
-		return -1;
+        String extension = new CommonUtils().getFileExtension(file).toLowerCase();
+        if( extension.equals("dsm")){
+            DSMModel dsm = new DSMModel(file);
+        }else if(extension.equals("clsx")){
+            CLSXModel clsx = new CLSXModel(file);
+        }else{
+            throw new CreateException("지원하지 않는 확장자입니다.");
+        }
+        TitanicModel model = new TitanicModel();
+        this.addTitanicModel(model);
+		return model.getID();
 	}
 
 	public boolean isExistModel(int id){
@@ -53,4 +64,10 @@ public class ModelManager {
 		}
 		return false;
 	}
+    private void addTitanicModel(TitanicModel model){
+        this.titanicModelArray.add(model);
+    }
+    private void setCurrentID(int id){
+        this.currentID = id;
+    }
 }

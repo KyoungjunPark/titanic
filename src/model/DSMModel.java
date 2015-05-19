@@ -1,24 +1,25 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
 public class DSMModel{
 
 	private int dependencyNumber;
-	private ArrayList<Integer> dependencyRelationArray;
-	private ArrayList<String> elementsNameArray;
+	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
+	private ArrayList<String> elementsNameArray = new ArrayList<String>();
 	private String fileURL;
 	
 	public DSMModel(){
-		this.dependencyRelationArray = new ArrayList<Integer>();
-		this.elementsNameArray = new ArrayList<String>();
 	}
+    public DSMModel(File file)throws CreateException{
+        throw new CreateException("구현 안했지렁");
+    }
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
 			ArrayList<String> elementsNameArray,
 			String fileURL){
-		this();
 		this.dependencyNumber = dependencyNumber;
 		this.dependencyRelationArray = dependencyRelationArray;
 		this.elementsNameArray = elementsNameArray;
