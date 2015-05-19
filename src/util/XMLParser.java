@@ -56,7 +56,6 @@ public class XMLParser {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         Document document = builder.parse(file);
-        ArrayList<util.Node> nodeArray = new ArrayList<util.Node>();
         NodeList nodeList = document.getDocumentElement().getChildNodes();
 
         GroupNode groupNode = new GroupNode();
