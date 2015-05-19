@@ -37,11 +37,11 @@ public class BackgroundPanel extends JFrame {
 		mainPanel = new MainPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	
+		setAction();
 	}
 	public void setAction()
 	{
-		MenuBarController menubarController = new MenuBarController(menubar);
-
+		menubar.getOpenDSMItem().addActionListener(MenuBarController.OpenDSMItemListener());
 	
 	}
 	

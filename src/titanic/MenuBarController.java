@@ -1,11 +1,34 @@
 package titanic;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MenuBarController {
+import javax.swing.JOptionPane;
+
+
+public class MenuBarController{
 	
-
 	public MenuBarController(MenuBar menubar) {
-		// TODO Auto-generated constructor stub
+		/*
+		menubar.getOpenDSMItem().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "button check");
+				
+			}
+		});
+*/
 	}
-
+	public static ActionListener OpenDSMItemListener(){
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "button check");
+				
+			}
+		};
+		
+	}
 }
