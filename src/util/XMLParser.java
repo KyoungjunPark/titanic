@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 public class XMLParser {
-    public int parseXML(File file) throws ParserConfigurationException,SAXException, IOException{
+    public GroupNode parseXML(File file) throws ParserConfigurationException,SAXException, IOException{
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -25,10 +25,27 @@ public class XMLParser {
         ArrayList<util.Node> nodeArray = new ArrayList<util.Node>();
         NodeList nodeList = document.getDocumentElement().getChildNodes();
 
+        GroupNode groupNode = new GroupNode();
+        childNodes(nodeList, groupNode);
+        return groupNode;
+    }
+    private void childNodes(NodeList nodeList, GroupNode parentNode){
         for (int i = 0; i < nodeList.getLength(); i++) {
             org.w3c.dom.Node node = nodeList.item(i);
-            System.out.println(node);
+            if(node.getNodeType() == Node.ELEMENT_NODE){
+                Element elem = (Element)node;
+                String name = node.getAttributes().getNamedItem("name").getNodeValue();
+                String tag = elem.getTagName().toLowerCase();
+                if( tag == "group" ){
+                    NodeList childNodeList = node.getChildNodes();
+                    GroupNode groupNode = new GroupNode(name);
+                    parentNode.addItem(groupNode);
+                    childNodes(childNodeList, groupNode);
+                }else if( tag == "item" ){
+                    ItemNode itemNode = new ItemNode(name);
+                    parentNode.addItem(itemNode);
+                }
+            }
         }
-        return 0;
     }
 }
