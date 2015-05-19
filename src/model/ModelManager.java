@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ModelManager {
@@ -10,6 +11,12 @@ public class ModelManager {
 	private int currentID = -1;
 	
 	public static ModelManager sharedModelManager(){
+		/**
+		 * ModelManager 의 Singletone 함수 입니다.
+		 * ModelManger 가 1개만 생성됨을 보장합니다.
+		 *
+		 * @return {@link ModelManager}
+		 */
 		if(modelManager == null){
 			synchronized (ModelManager.class) {
 				if(modelManager == null){
