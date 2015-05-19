@@ -10,8 +10,15 @@ public class GroupNode extends Node{
     public GroupNode(){
 
     }
-    public GroupNode(String name){
+    public GroupNode(Node node, String name){
+        this.setParentNode(node);
         this.setName(name);
+    }
+    public GroupNode(Node node){
+        this(node, "");
+    }
+    public GroupNode(String name){
+        this(null, name);
     }
     public void addItem(Node node){
         this.childNodeArray.add(node);

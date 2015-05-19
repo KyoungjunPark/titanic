@@ -38,11 +38,11 @@ public class XMLParser {
                 String tag = elem.getTagName().toLowerCase();
                 if( tag == "group" ){
                     NodeList childNodeList = node.getChildNodes();
-                    GroupNode groupNode = new GroupNode(name);
+                    GroupNode groupNode = new GroupNode(parentNode, name);
                     parentNode.addItem(groupNode);
                     childNodes(childNodeList, groupNode);
                 }else if( tag == "item" ){
-                    ItemNode itemNode = new ItemNode(name);
+                    ItemNode itemNode = new ItemNode(parentNode, name);
                     parentNode.addItem(itemNode);
                 }
             }
