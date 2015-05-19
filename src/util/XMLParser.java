@@ -17,15 +17,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 public class XMLParser {
-    XMLParser(String string){
-
-    }
     public int parseXML(File file) throws ParserConfigurationException,SAXException, IOException{
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         Document document = builder.parse(file);
-        ArrayList<util.Node> nodeArray = new ArrayList<>();
+        ArrayList<util.Node> nodeArray = new ArrayList<util.Node>();
         NodeList nodeList = document.getDocumentElement().getChildNodes();
 
         for (int i = 0; i < nodeList.getLength(); i++) {
