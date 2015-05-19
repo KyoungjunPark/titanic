@@ -4,7 +4,7 @@ import java.io.File;
 import util.GroupNode;
 import util.XMLParser;
 
-class CLSXModel{
+class CLSXModel extends Model{
     GroupNode node;
     public CLSXModel(File file)throws CreateException{
         try{

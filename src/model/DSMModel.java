@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class DSMModel{
+public class DSMModel extends Model{
 
 	private int dependencyNumber;
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
