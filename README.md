@@ -18,17 +18,22 @@ Titanic project
 > 타이탄과 같은 현존하는 유사한 제품을 참조하며, 타이타닉 DSM은 타이탄과 호환이 가능해야 한다.
 
 ### Markdown Version
-1.0.0
+1.0.1
 
 ### Installation
 
-추가적인 실행 방법이 필요하면 추가
+>JDK 8 이상
+
+### Test
+
+>JUnit
 
 ### Plugins
 
 Titanic project 에서 사용하는 Plugins
 
 * Github
+* Junit
 
 ### Todo's
 

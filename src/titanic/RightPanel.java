@@ -11,16 +11,32 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 public class RightPanel extends JPanel {
+	private JTabbedPane tabbedPane;
+	private JLabel mainLabel;
+	private JPanel mainPanel;
 	
 	public RightPanel(){
 		setLayout(new BorderLayout(0,0));
 		
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		add(tabbedPane);
 		
-		JLabel mainLabel = new JLabel("첫번째", SwingConstants.CENTER);
-		JPanel mainPanel = new JPanel();
+		mainLabel = new JLabel("첫번째", SwingConstants.CENTER);
+		mainPanel = new JPanel();
 		mainPanel.add(mainLabel);
 		tabbedPane.addTab("1",mainPanel);
 	}
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+	public JLabel getMainLabel() {
+		return mainLabel;
+	}
+
+	public JPanel getMainPanel() {
+		return mainPanel;
+	}
+	
 }

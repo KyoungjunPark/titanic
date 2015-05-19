@@ -39,3 +39,8 @@ local.properties
 .texlipse
 
 .DS_STORE
+.idea
+*.iml
+
+#test file
+data dir

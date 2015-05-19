@@ -3,8 +3,15 @@ package test;
 import static org.junit.Assert.*;
 import model.CreateException;
 import model.DSMModel;
+import util.XMLParser;
 
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+
 public class DSMModelTest {
 
 	@Test
@@ -36,5 +43,18 @@ public class DSMModelTest {
         } catch (CreateException e) {
         }
 	}
+    @Test
+    public void XMLParsertest(){
+        XMLParser parser = new XMLParser();
+        try{
+            parser.parseXML(new File("moka_ArchDRH.clsx"));
+        }catch (IOException e){
+            
+        }catch (SAXException e){
+
+        }catch (ParserConfigurationException e){
+
+        }
+    }
 
 }
