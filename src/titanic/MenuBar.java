@@ -1,15 +1,9 @@
 package titanic;
 
-import java.awt.Event;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 
 public class MenuBar extends JMenuBar {
@@ -119,7 +113,7 @@ public class MenuBar extends JMenuBar {
         find.setMnemonic('F');
         showRowLabels.setMnemonic('L');
         showDependencyStrength.setMnemonic('D');
-        redraw.setAccelerator(KeyStroke.getKeyStroke(0, Event.F5, false));			//F5 단축키 설정 모르겠음
+        redraw.setAccelerator(KeyStroke.getKeyStroke(0, Event.F5, false));			//F5 ????? ???? ?????
         find.setAccelerator(KeyStroke.getKeyStroke('F', Event.CTRL_MASK, false));
         
         mnHelp.add(about);
@@ -128,38 +122,10 @@ public class MenuBar extends JMenuBar {
 	}
 	public void setAction(String title, ActionListener action)
 	{
-
-		for(int i = 0 ; i< mnFile.getMenuComponentCount() ; i++){
-			if(mnFile.getMenuComponent(i) instanceof JMenuItem
-					&& ((JMenuItem)mnFile.getMenuComponent(i)).getText().compareTo(title) == 0){
-				((JMenuItem)mnFile.getMenuComponent(i)).addActionListener(action);
-				return;
-			}
-		}
-		for(int i = 0 ; i< mnMetrics.getMenuComponentCount() ; i++){
-			if(mnMetrics.getMenuComponent(i) instanceof JMenuItem
-					&& ((JMenuItem)mnMetrics.getMenuComponent(i)).getText().compareTo(title) == 0){
-				((JMenuItem)mnMetrics.getMenuComponent(i)).addActionListener(action);
-				return;
-			}
-		}
-		for(int i = 0 ; i< mnView.getMenuComponentCount() ; i++){
-			if(mnView.getMenuComponent(i) instanceof JMenuItem
-					&& ((JMenuItem)mnView.getMenuComponent(i)).getText().compareTo(title) == 0){
-				((JMenuItem)mnView.getMenuComponent(i)).addActionListener(action);
-				return;
-			}
-		}
-		for(int i = 0 ; i< mnHelp.getMenuComponentCount() ; i++){
-			if(mnHelp.getMenuComponent(i) instanceof JMenuItem
-					&& ((JMenuItem)mnHelp.getMenuComponent(i)).getText().compareTo(title) == 0){
-				((JMenuItem)mnHelp.getMenuComponent(i)).addActionListener(action);
-				return;
-			}
-		}
-		
-
-		
+        for(Component component : this.getComponents()){
+            if( component instanceof JMenu && ((JMenu) component).getText().compareTo(title) == 0)
+                ((JMenu) component).addActionListener(action);
+        }
 	}
 	
 }
