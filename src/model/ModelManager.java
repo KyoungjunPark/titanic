@@ -48,7 +48,7 @@ public class ModelManager {
 
 	public boolean isExistModel(int id){
 		for(int i = 0 ; i < this.titanicModelArray.size() ; i++){
-			if(this.titanicModelArray.get(i).getID() == i)
+			if(this.titanicModelArray.get(i).getID() == id)
 				return true;
 		}
 		return false;
