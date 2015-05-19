@@ -8,8 +8,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-
-
+import model.CreateException;
+import model.ModelManager;
 
 public class MenuBarController{
 	
@@ -46,8 +46,14 @@ public class MenuBarController{
 				if(yn != JFileChooser.APPROVE_OPTION) return;
 				
 				openFile = fc.getSelectedFile();
-				
+				try {
+					ModelManager.sharedModelManager().createTitanicModel(openFile);
+				} catch (CreateException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				//when file open success, then available icon must be changed!
+				//Then Manager must give a message like "It's ok".
 			}
 		});
 	}

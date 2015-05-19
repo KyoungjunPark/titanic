@@ -14,6 +14,7 @@ public class DSMModel{
 	public DSMModel(){
 	}
     public DSMModel(File file)throws CreateException{
+    	//이부분 구현 할 필요 없지 않음?
         throw new CreateException("구현 안했지렁");
     }
 	public DSMModel(int dependencyNumber, 
