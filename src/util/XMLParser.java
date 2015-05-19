@@ -18,6 +18,40 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 public class XMLParser {
     public GroupNode parseXML(File file) throws ParserConfigurationException,SAXException, IOException{
+        /*
+        file 을 받아 XML 을 parsing 합니다.
+        XML 은 다음과 같은 데이터를 가지고 있어야 합니다.
+        TAG = GROUP or ITEM
+        Attributes = name
+        Parsing 된 데이터는 GroupNode 에 담아지게 됩니다.
+        EX )
+        foo.xml
+        <GROUP name="ROOT">
+            <ITEM name="A"/>
+            <GROUP name="SUB">
+                <ITEM name="B"/>
+                <ITEM name="C"/>
+            </GROUP>
+        </GROUP>
+
+        return node =>
+        Node(
+          type GroupNode
+          name null
+          values [ Node(
+                     type GroupNode
+                     name ROOT
+                     values [ Node(type ItemNode, name A),
+                              Node(
+                                  type GroupNode
+                                  name SUB
+                                  values[Node(type ItemNode, name B), Node(type ItemNode, name C)]
+                                  )
+                            ]
+                     )
+                ]
+         )
+         */
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
