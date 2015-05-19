@@ -4,8 +4,6 @@ package util;
  */
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,11 +48,11 @@ public class XMLParser {
      *       ]
      * )
      *
-     * @param File file XML 의 파일을 받습니다.
+     * @param file XML 의 파일을 받습니다.
      * @return GroupNode 해당 객체의 자세한 사항은 {@link GroupNode} 를 참고하세요.
-     * @throws ParserConfigurationException
-     * @throws SAXException
-     * @throws IOException
+     * @throws ParserConfigurationException .
+     * @throws SAXException .
+     * @throws IOException .
      */
     public GroupNode parseXML(File file) throws ParserConfigurationException,SAXException, IOException{
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

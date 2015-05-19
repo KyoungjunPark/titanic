@@ -39,9 +39,9 @@ public class ModelManager {
      * file object 파일을 받아 TitanicModel 을 만듭니다.
      * file 의 확장자 에 따라 DSM, CLSX 를 구분합니다.
      *
-     * @param java.io.File file 생성된 파일 오브젝트를 받습니다.
+     * @param file 생성된 파일 오브젝트를 받습니다.
      * @return 생성된 titanic의 id 를 리턴합니다.
-     * @exception CreateException 파일의 확장자, 형식등이 맞지 않을경우 발생합니다. 자세한 사항은 메시지를 통해 전달합니다.
+     * @throws CreateException 파일의 확장자, 형식등이 맞지 않을경우 발생합니다. 자세한 사항은 메시지를 통해 전달합니다.
      */
 	public int createTitanicModel(File file)throws CreateException{
         String extension = new CommonUtils().getFileExtension(file).toLowerCase();
@@ -73,7 +73,7 @@ public class ModelManager {
 
     /**
      * Titanic model 을 저장합니다.
-     * @throws SaveException
+     * @throws SaveException 저장에 실패할 경우에 Exception 을 발생합니다. filePath 설정 권한등의 이유가 있습니다. {@link model.SaveException}
      */
     public void save()throws SaveException{
 

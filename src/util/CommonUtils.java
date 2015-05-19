@@ -11,7 +11,7 @@ public class CommonUtils {
      * path/to/foo/bar.txt
      * return txt
      *
-     * @param file
+     * @param file file 오브젝트를 받습니다.
      * @return file's extension
      */
     public String getFileExtension(File file){
