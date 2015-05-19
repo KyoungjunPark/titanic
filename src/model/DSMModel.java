@@ -4,30 +4,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class DSMModel{
+public class DSMModel extends Model{
 
 	private int dependencyNumber;
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
 	private ArrayList<String> elementsNameArray = new ArrayList<String>();
-	private String fileURL;
-	
-	public DSMModel(){
-	}
+
     public DSMModel(File file)throws CreateException{
     	//이부분 구현 할 필요 없지 않음?
         throw new CreateException("구현 안했지렁");
     }
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
-			ArrayList<String> elementsNameArray,
-			String fileURL){
+			ArrayList<String> elementsNameArray){
 		this.dependencyNumber = dependencyNumber;
 		this.dependencyRelationArray = dependencyRelationArray;
 		this.elementsNameArray = elementsNameArray;
-		this.fileURL = fileURL;
 	}
 	public DSMModel(String string) throws CreateException{
-		this();
 		String[] lines = string.split("\n");
 		this.dependencyNumber = Integer.parseInt(lines[0]);
 		if(lines.length != this.dependencyNumber * 2 + 1){
