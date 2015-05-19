@@ -28,8 +28,9 @@ public class GroupNode extends Node{
         for(Node node : this.childNodeArray){
             node.print();
         }
+
     }
     public String toString(){
-        return "group"+this.getName();
+        return "<group name=\""+this.getName()+"\">"; // </group> 가 없음
     }
 }

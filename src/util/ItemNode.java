@@ -21,6 +21,6 @@ public class ItemNode extends Node{
         System.out.println(this);
     }
     public String toString(){
-        return "item "+this.getName();
+        return "<item name=\""+this.getName()+"\" />";
     }
 }
