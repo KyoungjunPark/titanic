@@ -1,7 +1,13 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 
 public class DSMModel extends Model{
@@ -10,9 +16,8 @@ public class DSMModel extends Model{
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
 	private ArrayList<String> elementsNameArray = new ArrayList<String>();
 
-    public DSMModel(File file)throws CreateException{
-    	//이부분 구현 할 필요 없지 않음?
-        throw new CreateException("구현 안했지렁");
+    public DSMModel(File file)throws CreateException, FileNotFoundException, IOException{
+		this(readContents(new BufferedReader(new FileReader(file))));
     }
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
@@ -22,9 +27,10 @@ public class DSMModel extends Model{
 		this.elementsNameArray = elementsNameArray;
 	}
 	public DSMModel(String string) throws CreateException{
-		String[] lines = string.split("\n");
+		String[] lines = string.split("\r\n");
 		this.dependencyNumber = Integer.parseInt(lines[0]);
-		if(lines.length != this.dependencyNumber * 2 + 1){
+		//design issue(> or =)
+		if(lines.length < this.dependencyNumber * 2 + 1){
 			throw new CreateException("DSM Eroerorororo");
 		}
 		for(int i = 0 ; i < this.dependencyNumber ; i++){
@@ -33,6 +39,19 @@ public class DSMModel extends Model{
 		}
 		for(int i = 0 ; i < this.dependencyNumber ; i++)
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
+	}
+
+	
+	private static String readContents(BufferedReader reader) throws IOException
+	{
+		StringBuilder content = new StringBuilder();
+		char[] buffer = new char[1024];
+		
+		while(reader.read(buffer) >0){
+			content.append(buffer);
+		}
+		return content.toString();
+		
 	}
 	public String toString(){
 		String result = ""+this.dependencyNumber;

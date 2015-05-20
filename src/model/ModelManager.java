@@ -1,11 +1,16 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import util.CommonUtils;
 
 public class ModelManager {
-	private static ModelManager modelManager;
+	private volatile static ModelManager modelManager;
 	private ModelManager(){}
 
 	private ArrayList<TitanicModel> titanicModelArray = new ArrayList<TitanicModel>();
@@ -42,17 +47,31 @@ public class ModelManager {
      * @param file 생성된 파일 오브젝트를 받습니다.
      * @return 생성된 titanic의 id 를 리턴합니다.
      * @throws CreateException 파일의 확장자, 형식등이 맞지 않을경우 발생합니다. 자세한 사항은 메시지를 통해 전달합니다.
+     * @throws IOException 
+     * @throws FileNotFoundException 
      */
 	public int createTitanicModel(File file)throws CreateException{
         String extension = new CommonUtils().getFileExtension(file).toLowerCase();
-        if( extension.equals("dsm")){
-            DSMModel dsm = new DSMModel(file);
-        }else if(extension.equals("clsx")){
+        
+        TitanicModel model = new TitanicModel();
+        
+        if(extension.equals(".dsm")){
+            DSMModel dsm = null;
+			try {
+				dsm = new DSMModel(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			model.setDsmModel(dsm);
+            
+        }else if(extension.equals(".clsx")){
             CLSXModel clsx = new CLSXModel(file);
+            model.setClsxModel(clsx);
         }else{
+        	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-        TitanicModel model = new TitanicModel();
         this.addTitanicModel(model);
 		return model.getID();
 	}

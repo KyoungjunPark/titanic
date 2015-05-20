@@ -19,7 +19,7 @@ public class RightPanel extends JPanel {
 		tabbedPane = new JTabbedPane();
 		add(tabbedPane);
 		
-		mainLabel = new JLabel("first°", SwingConstants.CENTER);
+		mainLabel = new JLabel("first page", SwingConstants.CENTER);
 		mainPanel = new JPanel();
 		mainPanel.add(mainLabel);
 		tabbedPane.addTab("1",mainPanel);

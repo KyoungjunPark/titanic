@@ -1,6 +1,7 @@
 package titanic;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Event;
 import java.awt.GridLayout;
@@ -11,11 +12,16 @@ import javax.swing.*;
 
 import com.sun.glass.ui.Menu;
 
-public class BackgroundPanel extends JFrame {
+import controller.LeftPanelController;
+import controller.MainController;
+import controller.MainToolbarController;
+import controller.MenuBarController;
+
+public class BackgroundPanel extends JFrame implements Controllerable{
 	
 	private MainToolbar toolbar;
 	private MenuBar menubar;
-	private MainPanel mainPanel;
+	private CenterPanel mainPanel;
 	
 	public BackgroundPanel()
 	{
@@ -34,18 +40,25 @@ public class BackgroundPanel extends JFrame {
 		setJMenuBar(menubar);
 		
 		//add MainPanel
-		mainPanel = new MainPanel();
+		mainPanel = new CenterPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	
-		setAction();
+		setControllers();
 	}
-	public void setAction()
+	public void setControllers()
 	{
-		MenuBarController menuBarController = new MenuBarController(menubar);
+		@SuppressWarnings("unused")
+		MainController mainController = new MainController(toolbar, menubar, mainPanel);
+		
 	
 	}
+	@Override
+	public void setAction(String title, ActionListener action) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	public class MainToolbar extends JToolBar{
+	public class MainToolbar extends JToolBar implements Controllerable{
 		
 		private JButton opendsmButton;
 		private JButton redrawButton;
@@ -58,57 +71,55 @@ public class BackgroundPanel extends JFrame {
 			
 			ImageIcon opendsmIcon = new ImageIcon("util/open-dsm.png");
 			opendsmButton = new JButton(opendsmIcon);
+			opendsmButton.setName("Open DSM");
+			opendsmButton.setToolTipText("Open DSM");
 			add(opendsmButton);
 		
 			ImageIcon redrawIcon = new ImageIcon("util/redraw.png");
 			redrawButton = new JButton(redrawIcon);
 			redrawButton.setEnabled(false);
+			redrawButton.setName("Redraw");
+			redrawButton.setToolTipText("Redraw");
 			add(redrawButton);
 			
 			ImageIcon newClusteringIcon = new ImageIcon("util/new-clsx.png");
 			newClusteringButton = new JButton(newClusteringIcon);
 			newClusteringButton.setEnabled(false);
+			newClusteringButton.setName("New Clustering");
+			newClusteringButton.setToolTipText("New Clustering");
 			add(newClusteringButton);
 			
 			ImageIcon loadClusteringIcon = new ImageIcon("util/open-clsx.png");
 			loadClusteringButton = new JButton(loadClusteringIcon);
 			loadClusteringButton.setEnabled(false);
+			loadClusteringButton.setName("Load Clustering");
+			loadClusteringButton.setToolTipText("Load Clustering");
 			add(loadClusteringButton);
 			
 			ImageIcon saveClusteringIcon = new ImageIcon("util/save-clsx.png");
 			saveClusteringButton = new JButton(saveClusteringIcon);
 			saveClusteringButton.setEnabled(false);
+			saveClusteringButton.setName("Save Clustering");
+			saveClusteringButton.setToolTipText("Save Clustering");
 			add(saveClusteringButton);
 			
 			ImageIcon saveClusteringAsIcon = new ImageIcon("util/save-clsx-as.png");
 			saveClusteringAsButton = new JButton(saveClusteringAsIcon);
 			saveClusteringAsButton.setEnabled(false);
+			saveClusteringAsButton.setName("Save Clustering As");
+			saveClusteringAsButton.setToolTipText("Save Clustering As");
 			add(saveClusteringAsButton);
 			
-		}
-		
-		public JButton getOpendsmButton() {
-			return opendsmButton;
+			
 		}
 
-		public JButton getRedrawButton() {
-			return redrawButton;
-		}
-
-		public JButton getNewClusteringButton() {
-			return newClusteringButton;
-		}
-
-		public JButton getLoadClusteringButton() {
-			return loadClusteringButton;
-		}
-
-		public JButton getSaveClusteringButton() {
-			return saveClusteringButton;
-		}
-
-		public JButton getSaveClusteringAsButton() {
-			return saveClusteringAsButton;
+		@Override
+		public void setAction(String title, ActionListener action) {
+	        for(Component component : this.getComponents()){
+	        	if(component instanceof JButton && ((JButton) component).getName().compareTo(title) == 0)
+	        		((JButton) component).addActionListener(action);  	
+	        }
+			
 		}
 	}
 	public static void main(String[] args) {
@@ -118,5 +129,6 @@ public class BackgroundPanel extends JFrame {
 				}
 			});
 	}
+
 
 }

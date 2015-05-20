@@ -1,12 +1,14 @@
 package titanic;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 import javax.swing.*;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
-public class LeftPanel extends JPanel {
+public class LeftPanel extends JPanel implements Controllerable{
 	
 	private LeftToolBar toolbar;
 	
@@ -77,33 +79,17 @@ public class LeftPanel extends JPanel {
 			
 		}
 		
-		public JButton getExpandAllButton() {
-			return expandAllButton;
-		}
+	}
 
-		public JButton getCollapseAllButton() {
-			return collapseAllButton;
-		}
-
-		public JButton getGroupButton() {
-			return groupButton;
-		}
-
-		public JButton getUngroupButton() {
-			return ungroupButton;
-		}
-
-		public JButton getMoveUpButton() {
-			return moveUpButton;
-		}
-
-		public JButton getMoveDownButton() {
-			return moveDownButton;
-		}
-
-		public JButton getDeleteButton() {
-			return deleteButton;
-		}
+	@Override
+	public void setAction(String title, ActionListener action) {
+		JOptionPane.showMessageDialog(null, this.getComponentCount());
+        for(Component component : this.getComponents()){
+        	for(Component item : ((JMenu)component).getMenuComponents()){
+	            if( item instanceof JMenuItem && ((JMenuItem) item).getText().compareTo(title) == 0)
+	                ((JMenuItem) item).addActionListener(action);
+        	}
+        }
 		
 	}
 

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements Controllerable{
 	
 	private JMenu mnFile;
 	private JMenu mnMetrics;
@@ -120,14 +120,28 @@ public class MenuBar extends JMenuBar {
         about.setMnemonic('A');
 		
 	}
-	public void setAction(String title, ActionListener action)
+	public void settingOpenDSM()
 	{
+
+		JOptionPane.showMessageDialog(null, "ok");
+        for(Component component : this.getComponents()){
+        	for(Component item : ((JMenu)component).getMenuComponents()){
+	            if( item instanceof JMenuItem)
+	                ((JMenuItem) item).setEnabled(true);;
+        	}
+        }
+		
+	}
+	@Override
+	public void setAction(String title, ActionListener action) {
         for(Component component : this.getComponents()){
         	for(Component item : ((JMenu)component).getMenuComponents()){
 	            if( item instanceof JMenuItem && ((JMenuItem) item).getText().compareTo(title) == 0)
 	                ((JMenuItem) item).addActionListener(action);
         	}
         }
+		
 	}
+
 	
 }
