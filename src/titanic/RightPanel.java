@@ -1,14 +1,15 @@
 package titanic;
 
 import java.awt.BorderLayout;
-import java.awt.print.Book;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
-public class RightPanel extends JPanel {
+public class RightPanel extends JPanel implements Controllerable{
+	
 	private JTabbedPane tabbedPane;
 	private JLabel mainLabel;
 	private JPanel mainPanel;
@@ -35,6 +36,12 @@ public class RightPanel extends JPanel {
 
 	public JPanel getMainPanel() {
 		return mainPanel;
+	}
+
+	@Override
+	public void setAction(String title, ActionListener action) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

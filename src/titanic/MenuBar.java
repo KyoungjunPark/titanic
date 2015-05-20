@@ -21,6 +21,17 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	private JMenuItem exitActionItem;
 	private JMenuItem propagationCostItem;
 	
+	private JMenuItem redraw;
+	private JMenuItem find;
+	
+	private JCheckBoxMenuItem showRowLabels;
+	private JCheckBoxMenuItem showDependencyStrength;
+	
+	private JMenuItem about;
+
+	private JMenuItem DSM;
+	private JMenuItem excel;
+	
 	public MenuBar()
 	{
 		//Menus
@@ -43,31 +54,44 @@ public class MenuBar extends JMenuBar implements Controllerable{
 
 		
 		openDSMItem = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
+		openDSMItem.setToolTipText("Open DSM");
 		newClusteringItem = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
+		newClusteringItem.setToolTipText("New Clustering");
         newClusteringItem.setEnabled(false);
         loadClusteringItem = new JMenuItem("Load Clustering...", new ImageIcon("util/open-clsx.png"));
+        loadClusteringItem.setToolTipText("Load Clustering");
         loadClusteringItem.setEnabled(false);
         saveClusteringItem = new JMenuItem("Save Clustering", new ImageIcon("util/save-clsx.png"));
+        saveClusteringItem.setToolTipText("Save Clustering");
         saveClusteringItem.setEnabled(false);
         saveClusteringAsItem = new JMenuItem("Save Clustering...", new ImageIcon("util/save-clsx-as.png"));
+        saveClusteringAsItem.setToolTipText("Save Clustering As");
         saveClusteringAsItem.setEnabled(false);
         exportAsItem = new JMenu("Export As");
+        exportAsItem.setToolTipText("Export As");
         exitActionItem = new JMenuItem("Exit");
+        exitActionItem.setToolTipText("Exit");
         propagationCostItem = new JMenuItem("Propagation Cost");
+        propagationCostItem.setToolTipText("Propagation Cost");
         propagationCostItem.setEnabled(false);
         
-        JMenuItem redraw = new JMenuItem("Redraw", new ImageIcon("util/redraw.png"));
+        redraw = new JMenuItem("Redraw", new ImageIcon("util/redraw.png"));
+        redraw.setToolTipText("Redraw");
         redraw.setEnabled(false);
-        JMenuItem find = new JMenuItem("Find...");
+        find = new JMenuItem("Find...");
+        find.setToolTipText("Find");
         find.setEnabled(false);
-        JCheckBoxMenuItem showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
-        JCheckBoxMenuItem showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
+        showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
+        showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
         
-        JMenuItem about = new JMenuItem("About...");
+        about = new JMenuItem("About...");
+        about.setToolTipText("About");
         
-        JMenuItem DSM = new JMenuItem("DSM...");
+        DSM = new JMenuItem("DSM...");
+        DSM.setToolTipText("DSM");
         DSM.setEnabled(false);
-        JMenuItem excel = new JMenuItem("Excel...");
+        excel = new JMenuItem("Excel...");
+        excel.setToolTipText("Excel");
         excel.setEnabled(false);
         
         
@@ -120,10 +144,8 @@ public class MenuBar extends JMenuBar implements Controllerable{
         about.setMnemonic('A');
 		
 	}
-	public void settingOpenDSM()
+	public void OpenDSMStatus()
 	{
-
-		JOptionPane.showMessageDialog(null, "ok");
         for(Component component : this.getComponents()){
         	for(Component item : ((JMenu)component).getMenuComponents()){
 	            if( item instanceof JMenuItem)

@@ -1,10 +1,15 @@
 package controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import model.CreateException;
 import titanic.CenterPanel;
 import titanic.MenuBar;
 import titanic.BackgroundPanel.MainToolbar;
 
 public class MainController {
+	
 	private static MainToolbar toolbar;
 	private static MenuBar menubar;
 	private static CenterPanel mainPanel;
@@ -26,11 +31,20 @@ public class MainController {
 		MainToolbarController mainToolbarController = new MainToolbarController(toolbar);
 		@SuppressWarnings("unused")
 		LeftPanelController mainController = new LeftPanelController(mainPanel.getLeftPanel());
-		
+		@SuppressWarnings("unused")
+		LeftToolbarController leftToolbarController = new LeftToolbarController(mainPanel.getLeftPanel().getToolbar());
 	}
-	protected void settingOpenDSM()
+
+    /**
+     * OpenDSM이 실행되면 disable되어 있던 기능(아이콘)들이 활성화 된다.
+     *
+     */
+	protected void OpenDSMStatus()
 	{
-		menubar.settingOpenDSM();
+		menubar.OpenDSMStatus();
+		toolbar.OpenDSMStatus();
+		mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
 		
 	}
+
 }

@@ -3,14 +3,16 @@ package controller;
 import javax.swing.JPanel;
 
 public class LeftPanelController extends CenterPanelController{
+	
+	private JPanel leftPanel;
+	
 	public LeftPanelController(){}
 	public LeftPanelController(JPanel leftPanel){
-		init(leftPanel);
+		this.leftPanel = leftPanel;
+		init();
 		
 	}
-	private void init(JPanel leftPanel)
+	private void init()
 	{
-		
-		
 	}
 }

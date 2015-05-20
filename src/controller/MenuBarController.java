@@ -13,13 +13,14 @@ import javax.swing.filechooser.FileFilter;
 
 import titanic.MenuBar;
 
-import com.sun.xml.internal.ws.api.server.Container;
 
 import model.CreateException;
 import model.ModelManager;
 
 public class MenuBarController extends BackgroundPanelController{
-	MenuBar menu;
+	
+	private MenuBar menu;
+	
 	public MenuBarController(MenuBar menu)
 	{
 		this.menu = menu;
@@ -29,7 +30,7 @@ public class MenuBarController extends BackgroundPanelController{
 	
 	private void init()
 	{
-		//File->Open DSM action
+		//File Menus
 		menu.setAction("Open DSM...", new ActionListener() {
 			
 			@Override
@@ -65,10 +66,141 @@ public class MenuBarController extends BackgroundPanelController{
 				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when dsm file is open
-				settingOpenDSM();
+				OpenDSMStatus();
 				
 			}
 		});
+		menu.setAction("New Clustering", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "New Clustering is clicked");
+				
+			}
+		});
+		menu.setAction("Load Clustering...", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File openFile;
+				
+				String dir = System.getProperty("user.dir");//this project's absolute path name
+				JFileChooser fc = new JFileChooser(dir);
+				fc.setFileFilter(new FileFilter() {
+					
+					@Override
+					public String getDescription() {
+						return "CLSX Files";
+					}
+					
+					@Override
+					public boolean accept(File f) {
+						// TODO Auto-generated method stub
+						return f.getName().endsWith(".clsx") || f.isDirectory();
+					}
+				});
+				int yn = fc.showOpenDialog(null);
+				if(yn != JFileChooser.APPROVE_OPTION) return;
+				
+				openFile = fc.getSelectedFile();
+				try {
+					ModelManager.sharedModelManager().createTitanicModel(openFile);
+				} catch (CreateException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//when file open success, then available icon must be changed!
+				//Then Manager must give a message like "It's ok".
+				
+				//setting chaned when clsx file is 
+			}
+		});	
+		menu.setAction("Save Clustering", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "Save Clustering is clicked");
+				
+			}
+		});		
+		menu.setAction("Save Clustering...", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "Save Clustering... is clicked");
+				
+			}
+		});
+		menu.setAction("DSM...", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "DSM... is clicked");
+				
+			}
+		});		
+		menu.setAction("Excel...", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "Excel... is clicked");
+				
+			}
+		});		
+		menu.setAction("Exit", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null, "Exit is clicked");
+				
+			}
+		});		
+
+		//Metrics Menu
+		menu.setAction("Propagation Cost", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Propagation Cost is clicked");
+				
+			}
+		});
+	
+		//View Menus
+		menu.setAction("Redraw", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Redraw is clicked");
+				
+			}
+		});
+		menu.setAction("Find...", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Find... is clicked");
+				
+			}
+		});
+		menu.setAction("Show Row Labels", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Show Row Labels is clicked");
+				
+			}
+		});
+		menu.setAction("Show Dependency Strength", new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Show Dependency Strength is clicked");
+				
+			}
+		});
+	
+		//Help Menu
 		menu.setAction("About...", new ActionListener() {
 			
 			@Override

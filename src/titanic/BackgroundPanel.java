@@ -2,20 +2,9 @@ package titanic;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Event;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
-import com.sun.glass.ui.Menu;
-
-import controller.LeftPanelController;
 import controller.MainController;
-import controller.MainToolbarController;
-import controller.MenuBarController;
 
 public class BackgroundPanel extends JFrame implements Controllerable{
 	
@@ -26,7 +15,7 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 	public BackgroundPanel()
 	{
 		setTitle("Titanic");
-		setSize(1400,800);
+		setSize(1000,700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
@@ -112,7 +101,14 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 			
 			
 		}
+		public void OpenDSMStatus()
+		{
 
+	        for(Component component : this.getComponents()){
+		            if(component instanceof JButton)
+		                ((JButton) component).setEnabled(true);
+		    }
+	    }
 		@Override
 		public void setAction(String title, ActionListener action) {
 	        for(Component component : this.getComponents()){
