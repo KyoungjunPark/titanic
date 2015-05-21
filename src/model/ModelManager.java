@@ -89,6 +89,9 @@ public class ModelManager {
     private void setCurrentID(int id){
         this.currentID = id;
     }
+    public int getCurrentID(){
+    	return currentID;
+    }
 
     /**
      * Titanic model 을 저장합니다.

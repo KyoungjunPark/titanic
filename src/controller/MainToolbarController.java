@@ -49,21 +49,16 @@ public class MainToolbarController extends BackgroundPanelController{
 				if(yn != JFileChooser.APPROVE_OPTION) return;
 				
 				openFile = fc.getSelectedFile();
-				try {
-					ModelManager.sharedModelManager().createTitanicModel(openFile);
-				} catch (CreateException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				//when file open success, then available icon must be changed!
 				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when dsm file is open
 				//issue! setting값을 좀 더 구조적으로 배치할 수 없을까? 
+				OpenDSMStatus(openFile);
 				
-				OpenDSMStatus();
 			}
 		});
+		
 		toolbar.setAction("Redraw", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

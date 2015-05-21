@@ -11,19 +11,32 @@ import java.awt.event.ActionListener;
 public class LeftPanel extends JPanel implements Controllerable{
 	
 	private LeftToolBar toolbar;
+	private FileTree fileTree;
+	
 	
 	public LeftPanel(){
 		setBackground(Color.WHITE);
-		
 		setLayout(new BorderLayout(0,0));
 		
 		
 		//leftToolbar
 		toolbar = new LeftToolBar();
 		this.add(toolbar, BorderLayout.NORTH);
+		
+		//Jtree
+		fileTree = new FileTree();
+		this.add(fileTree, BorderLayout.CENTER);
+		
+		
+	}
+	
+	public FileTree getfileTree()
+	{
+		return fileTree;
 	}
 
-	public LeftToolBar getToolbar() {
+	public LeftToolBar getToolbar() 
+	{
 		return toolbar;
 	}
 

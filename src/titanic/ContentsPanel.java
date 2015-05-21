@@ -2,14 +2,31 @@ package titanic;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
-public class ContentsPanel {
+public class ContentsPanel extends JTabbedPane{
 	
-	ArrayList<JPanel> contents;
+	private ArrayList<RightPanel> contents;
 	
 	public ContentsPanel(){
-		contents = new ArrayList<JPanel>();
+		contents = new ArrayList<RightPanel>();
+		
+		/* tab feature test 
+		JLabel mainLabel;
+		JPanel mainPanel;
+		
+		mainLabel = new JLabel("first page", SwingConstants.CENTER);
+		mainPanel = new JPanel();
+		mainPanel.add(mainLabel);
+		addTab("1",mainPanel);
+		*/
+	}
+	public void addRightPanel(RightPanel rightPanel)
+	{
+		contents.add(rightPanel);
 	}
 	
 }
