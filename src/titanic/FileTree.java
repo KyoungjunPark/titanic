@@ -12,6 +12,7 @@ public class FileTree extends JTree implements Controllerable{
 	
 	
 	public FileTree(){
+		/* test version
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("$root");
 		
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode("test1");
@@ -27,7 +28,7 @@ public class FileTree extends JTree implements Controllerable{
 		
 		setModel(new DefaultTreeModel(root));
 		new JScrollPane(this);
-		
+		*/
 		
 		
 	}
