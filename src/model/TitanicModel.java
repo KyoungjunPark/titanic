@@ -1,6 +1,9 @@
 package model;
 
 import util.GroupNode;
+import util.JSFiles;
+
+import java.io.File;
 
 public class TitanicModel {
 
@@ -17,7 +20,7 @@ public class TitanicModel {
 
     }
 
-    public void setDsmModel(DSMModel dsmModel){
+	protected void setDsmModel(DSMModel dsmModel){
         /**
          * Titanic의 dsmmodel 을 set 합니다.
          * overwrite 하기 때문에 기존의 dsm 포인터는 사라집니다.
@@ -26,7 +29,7 @@ public class TitanicModel {
          */
         this.dsmModel = dsmModel;
     }
-    public void setClsxModel(CLSXModel clsxModel){
+    protected void setClsxModel(CLSXModel clsxModel){
         /**
          * Titanic의 clsxmodel 을 set 합니다.
          * overwrite 하기 때문에 기존의 clsx 포인터는 사라집니다.
@@ -35,6 +38,12 @@ public class TitanicModel {
          */
         this.clsxModel = clsxModel;
     }
+	public void setClsxModel(File file)throws CreateException{
+		if(JSFiles.getFileExtension(file).toLowerCase().equals(".clsx")) {
+			CLSXModel clsx = new CLSXModel(file);
+			this.setClsxModel(clsx);
+		}
+	}
 	public GroupNode getGroupNode(){
 		if(this.clsxModel != null)
 			return this.getGroupNode();
