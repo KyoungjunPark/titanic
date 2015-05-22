@@ -109,7 +109,7 @@ public class MainToolbarController extends BackgroundPanelController{
 				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when clsx file is 
-				
+				OpenClsxStatus(openFile);
 			}
 		});
 		toolbar.setAction("Save Clustering", new ActionListener() {

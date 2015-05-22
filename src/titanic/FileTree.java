@@ -45,10 +45,6 @@ public class FileTree extends JTree implements Controllerable{
 	}
 	@Override
 	public void setAction(String title, ActionListener action) {
-		if(title == "make tree"){
-			
-			
-		}
 		
 	}
 }

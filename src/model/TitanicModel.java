@@ -37,7 +37,7 @@ public class TitanicModel {
     }
 	public GroupNode getGroupNode(){
 		if(this.clsxModel != null)
-			return this.getGroupNode();
+			return this.clsxModel.getGroupNode();
 		return this.dsmModel.getGroupNode();
 	}
 	public int getID(){

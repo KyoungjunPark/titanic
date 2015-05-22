@@ -47,9 +47,12 @@ public class MainController {
 			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
 			mainPanel.getLeftPanel().getfileTree().makeTree();
 		}});
+
+		
 		
 		
 	}
+	
 	private void setControllers()
 	{
 		
@@ -74,6 +77,15 @@ public class MainController {
 		}
 		
 		
+	}
+	protected void OpenClsxStatus(File openFile)
+	{
+		try {
+			ModelManager.sharedModelManager().createTitanicModel(openFile);
+		} catch (CreateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

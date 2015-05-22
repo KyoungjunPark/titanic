@@ -112,6 +112,8 @@ public class MenuBarController extends BackgroundPanelController{
 				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when clsx file is 
+				OpenClsxStatus(openFile);
+
 			}
 		});	
 		menu.setAction("Save Clustering", new ActionListener() {
