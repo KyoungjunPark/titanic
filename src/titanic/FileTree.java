@@ -37,9 +37,10 @@ public class FileTree extends JTree implements Controllerable{
 	}
 	public void makeTree()
 	{
+		ModelManager.sharedModelManager().setTitanicModelID(0);
 		DefaultMutableTreeNode root = ModelManager.sharedModelManager().getCurrentTitanicModel().getGroupNode().getTreeNode();
 		setModel(new DefaultTreeModel(root));
-		new JScrollPane(this);
+		
 		
 	}
 	@Override
