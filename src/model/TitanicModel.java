@@ -3,6 +3,7 @@ package model;
 import util.GroupNode;
 
 public class TitanicModel {
+
 	private static int nextID = 0;
 	private int id;
 	private DSMModel dsmModel = null;
@@ -35,7 +36,11 @@ public class TitanicModel {
         this.clsxModel = clsxModel;
     }
 	public GroupNode getGroupNode(){
-		return this.clsxModel.getNode();
+		GroupNode node =  this.clsxModel.getGroupNode();
+		if(node != null)
+			return node;
+		node = this.dsmModel.getGroupNode();
+		return node;
 	}
 	public int getID(){
 		return this.id;

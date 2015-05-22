@@ -1,5 +1,7 @@
 package model;
 
+import util.GroupNode;
+import util.ItemNode;
 import util.JSFiles;
 
 import java.io.File;
@@ -37,7 +39,14 @@ public class DSMModel extends Model{
 		for(int i = 0 ; i < this.dependencyNumber ; i++)
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
-
+	public GroupNode getGroupNode(){
+		this.node = new GroupNode();
+		GroupNode root = new GroupNode("root$");
+		for(String name : this.elementsNameArray)
+			root.addItem(new ItemNode(name));
+		node.addItem(root);
+		return this.node;
+	};
 	public String toString(){
 		String result = ""+this.dependencyNumber;
 		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
