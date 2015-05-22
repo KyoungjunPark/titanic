@@ -1,9 +1,8 @@
 package model;
 
-import java.io.BufferedReader;
+import util.JSFiles;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,8 +13,8 @@ public class DSMModel extends Model{
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
 	private ArrayList<String> elementsNameArray = new ArrayList<String>();
 
-    public DSMModel(File file)throws CreateException, FileNotFoundException, IOException{
-		this(readContents(new BufferedReader(new FileReader(file))));
+    public DSMModel(File file)throws CreateException, IOException{
+		this(JSFiles.getAllString(file));
     }
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
@@ -39,18 +38,6 @@ public class DSMModel extends Model{
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
 
-	
-	private static String readContents(BufferedReader reader) throws IOException
-	{
-		StringBuilder content = new StringBuilder();
-		char[] buffer = new char[1024];
-		
-		while(reader.read(buffer) >0){
-			content.append(buffer);
-		}
-		return content.toString();
-		
-	}
 	public String toString(){
 		String result = ""+this.dependencyNumber;
 		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
