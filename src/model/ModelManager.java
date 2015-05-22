@@ -54,30 +54,28 @@ public class ModelManager {
 	public int createTitanicModel(File file)throws CreateException{
 		this.callEvent("before-open");
         String extension = JSFiles.getFileExtension(file).toLowerCase();
-        
-        TitanicModel model = new TitanicModel();
-        
+		TitanicModel model = null;
         if(extension.equals(".dsm")){
-            DSMModel dsm = null;
+			model = new TitanicModel();
+			DSMModel dsm = null;
 			try {
 				dsm = new DSMModel(file);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			model.setDsmModel(dsm);
-            
+			this.addTitanicModel(model);
         }else if(extension.equals(".clsx")){
+			model = this.getCurrentTitanicModel();
             CLSXModel clsx = new CLSXModel(file);
             model.setClsxModel(clsx);
         }else{
         	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-        this.addTitanicModel(model);
 		this.callEvent("after-open");
 		return model.getID();
 	}
-
 	/**
 	 * id 값을 기준으로 현재 있는지 체크합니다.
 	 * @param id integer 의 id 로 비교합니다.
