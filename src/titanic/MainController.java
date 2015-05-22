@@ -23,7 +23,6 @@ public class MainController {
 		
 		setControllers();
 		currentID = ModelManager.sharedModelManager().getCurrentID();
-		
 	}
 	private void setControllers()
 	{

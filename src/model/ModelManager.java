@@ -60,7 +60,6 @@ public class ModelManager {
 			try {
 				dsm = new DSMModel(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			model.setDsmModel(dsm);
