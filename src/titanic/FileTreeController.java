@@ -1,4 +1,4 @@
-package controller;
+package titanic;
 
 import javax.swing.JTree;
 

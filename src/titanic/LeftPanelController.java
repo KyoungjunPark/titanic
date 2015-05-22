@@ -1,4 +1,4 @@
-package controller;
+package titanic;
 
 import javax.swing.JPanel;
 
@@ -14,5 +14,10 @@ public class LeftPanelController extends CenterPanelController{
 	}
 	private void init()
 	{
+	}
+	public void OpenDSMStatus()
+	{
+		
+		
 	}
 }
