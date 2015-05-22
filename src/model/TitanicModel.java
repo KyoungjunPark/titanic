@@ -38,7 +38,7 @@ public class TitanicModel {
          */
         this.clsxModel = clsxModel;
     }
-	public void setClsxModel(File file)throws CreateException{
+	protected void setClsxModel(File file)throws CreateException{
 		if(JSFiles.getFileExtension(file).toLowerCase().equals(".clsx")) {
 			CLSXModel clsx = new CLSXModel(file);
 			this.setClsxModel(clsx);
