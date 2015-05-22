@@ -1,5 +1,7 @@
 package model;
 
+import util.GroupNode;
+
 class TitanicModel {
 	private static int nextID = 0;
 	private int id;
@@ -32,6 +34,9 @@ class TitanicModel {
          */
         this.clsxModel = clsxModel;
     }
+	public GroupNode getGroupNode(){
+		return this.clsxModel.getNode();
+	}
 	public int getID(){
 		return this.id;
 	}
