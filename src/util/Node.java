@@ -20,6 +20,12 @@ public abstract class Node {
     public Node getParentNode(){
         return this.parentNode;
     }
+
+    /**
+     * 자신을 트리형태로 바꾸어 돌려줍니다.
+     * GroupNode 의 경우에는 하위 컨텐츠까지 트리로 바꾸어줍니다.
+     *
+     * @return {@link DefaultMutableTreeNode} TreeNode 를 돌려줍니다.
+     */
     abstract public DefaultMutableTreeNode getTreeNode();
-    abstract public void print();
 }

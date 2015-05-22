@@ -31,14 +31,4 @@ public class GroupNode extends Node{
         }
         return root;
     }
-    public void print(){
-        System.out.println(this);
-        for(Node node : this.childNodeArray){
-            node.print();
-        }
-
-    }
-    public String toString(){
-        return "<group name=\""+this.getName()+"\">"; // </group> 가 없음
-    }
 }
