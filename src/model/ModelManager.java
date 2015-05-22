@@ -14,6 +14,7 @@ public class ModelManager {
 	private ModelManager(){}
 
 	private ArrayList<TitanicModel> titanicModelArray = new ArrayList<TitanicModel>();
+	private ArrayList<Event> eventArrayList = new ArrayList<>();
 	private int currentID = -1;
 
     /**
@@ -73,6 +74,9 @@ public class ModelManager {
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
         this.addTitanicModel(model);
+		/* test code */
+		this.callEvent("open");
+		/* end code */
 		return model.getID();
 	}
 
@@ -100,4 +104,15 @@ public class ModelManager {
     public void save()throws SaveException{
 
     }
+
+	public void addEvent(Event e){
+		this.eventArrayList.add(e);
+	}
+	private void callEvent(String tag){
+		for(Event e : this.eventArrayList){
+			if(e.getTag().compareTo(tag) == 0){
+				e.action();
+			}
+		}
+	}
 }

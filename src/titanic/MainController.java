@@ -5,6 +5,9 @@ import java.io.File;
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.ModelManager;
+import model.Event;
+
+import javax.swing.*;
 
 public class MainController {
 	
@@ -59,10 +62,16 @@ public class MainController {
 		int currentID;
 		
 		//status change
-		menubar.OpenDSMStatus();
-		toolbar.OpenDSMStatus();
-		mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-		
+//		menubar.OpenDSMStatus();
+//		toolbar.OpenDSMStatus();
+//		mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
+		ModelManager.sharedModelManager().addEvent(new Event("open"){ public void action(){
+			menubar.OpenDSMStatus();
+			toolbar.OpenDSMStatus();
+			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
+			JOptionPane.showMessageDialog(null, "SS");
+			}
+		});
 		
 		//right panel change
 		try {
