@@ -3,8 +3,8 @@ package titanic;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
-import controller.MainController;
 
 public class BackgroundPanel extends JFrame implements Controllerable{
 	
