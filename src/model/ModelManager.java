@@ -54,30 +54,39 @@ public class ModelManager {
 	public int createTitanicModel(File file)throws CreateException{
 		this.callEvent("before-open");
         String extension = JSFiles.getFileExtension(file).toLowerCase();
-        
-        TitanicModel model = new TitanicModel();
-        
+		TitanicModel model =  new TitanicModel();
         if(extension.equals(".dsm")){
-            DSMModel dsm = null;
+			DSMModel dsm = null;
 			try {
 				dsm = new DSMModel(file);
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new CreateException("IO Error");
 			}
 			model.setDsmModel(dsm);
-            
-        }else if(extension.equals(".clsx")){
-            CLSXModel clsx = new CLSXModel(file);
-            model.setClsxModel(clsx);
+			this.addTitanicModel(model);
         }else{
         	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-        this.addTitanicModel(model);
 		this.callEvent("after-open");
 		return model.getID();
 	}
+	public void setFile(File file)throws CreateException{
+		this.callEvent("before-open");
+		String extension = JSFiles.getFileExtension(file).toLowerCase();
+		TitanicModel model = this.getCurrentTitanicModel();
+		if(model == null)
+			throw new CreateException("You have to set id");
+		if(extension.equals(".dsm")){
 
+		}else if(extension.equals(".clsx")){
+			model.setClsxModel(file);
+		}else{
+			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
+			throw new CreateException("지원하지 않는 확장자입니다.");
+		}
+		this.callEvent("after-open");
+	}
 	/**
 	 * id 값을 기준으로 현재 있는지 체크합니다.
 	 * @param id integer 의 id 로 비교합니다.
