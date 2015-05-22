@@ -1,12 +1,12 @@
 package util;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * Created by kimjisoo on 5/19/15.
  */
 public class ItemNode extends Node{
-    public ItemNode(){
-
-    }
+    public ItemNode(){}
     public ItemNode(Node node, String name){
         this.setParentNode(node);
         this.setName(name);
@@ -19,6 +19,9 @@ public class ItemNode extends Node{
     }
     public void print(){
         System.out.println(this);
+    }
+    public DefaultMutableTreeNode getTreeNode(){
+        return new DefaultMutableTreeNode(this.getName());
     }
     public String toString(){
         return "<item name=\""+this.getName()+"\" />";
