@@ -20,7 +20,7 @@ public class LeftPanel extends JPanel implements Controllerable{
 		
 		
 		//leftToolbar
-		toolbar = new LeftToolBar();
+		toolbar =  new LeftToolBar();
 		this.add(toolbar, BorderLayout.NORTH);
 		
 		//Jtree
