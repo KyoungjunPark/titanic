@@ -137,4 +137,20 @@ public class ModelManager {
 			}
 		}
 	}
+
+	/**
+	 * 현제 set 되어있는 {@link TitanicModel} 을 돌려줍니다.
+	 * 다음과 같은 경우에는 null 이반환됩니다.
+	 * >> CLSX 파일이 설정되어 있지 않을경우
+	 * >> 현재 set되어 있는 id의 object 가 없을경우 ( 비정상적 )
+	 * >> 그외는 제보바랍니다.
+	 * @return {@link TitanicModel}
+	 */
+	public TitanicModel getCurrentTitanicModel(){
+		for(TitanicModel model : this.titanicModelArray){
+			if(model.getID() == this.getCurrentID())
+				return model;
+		}
+		return null;
+	}
 }
