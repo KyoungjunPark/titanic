@@ -2,7 +2,7 @@ package model;
 
 import util.GroupNode;
 
-class TitanicModel {
+public class TitanicModel {
 	private static int nextID = 0;
 	private int id;
 	private DSMModel dsmModel = null;

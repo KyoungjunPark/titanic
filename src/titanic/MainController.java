@@ -45,6 +45,7 @@ public class MainController {
 			menubar.OpenDSMStatus();
 			toolbar.OpenDSMStatus();
 			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
+			mainPanel.getLeftPanel().getfileTree().makeTree();
 		}});
 		
 		
