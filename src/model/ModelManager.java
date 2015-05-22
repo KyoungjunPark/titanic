@@ -1,13 +1,13 @@
 package model;
 
+import util.JSFiles;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
-import util.CommonUtils;
 
 public class ModelManager {
 	private volatile static ModelManager modelManager;
@@ -51,7 +51,7 @@ public class ModelManager {
      * @throws FileNotFoundException 
      */
 	public int createTitanicModel(File file)throws CreateException{
-        String extension = new CommonUtils().getFileExtension(file).toLowerCase();
+        String extension = JSFiles.getFileExtension(file).toLowerCase();
         
         TitanicModel model = new TitanicModel();
         
