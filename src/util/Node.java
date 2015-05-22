@@ -1,5 +1,7 @@
 package util;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * Created by KimJiSoo on 15. 5. 19..
  */
@@ -18,5 +20,6 @@ public abstract class Node {
     public Node getParentNode(){
         return this.parentNode;
     }
+    abstract public DefaultMutableTreeNode getTreeNode();
     abstract public void print();
 }
