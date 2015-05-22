@@ -17,13 +17,7 @@ public class ItemNode extends Node{
     public ItemNode(String name){
         this(null, name);
     }
-    public void print(){
-        System.out.println(this);
-    }
     public DefaultMutableTreeNode getTreeNode(){
         return new DefaultMutableTreeNode(this.getName());
-    }
-    public String toString(){
-        return "<item name=\""+this.getName()+"\" />";
     }
 }
