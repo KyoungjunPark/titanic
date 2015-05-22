@@ -7,7 +7,6 @@ import util.GroupNode;
 import util.XMLParser;
 
 class CLSXModel extends Model{
-    private GroupNode node = null;
     public CLSXModel(File file)throws CreateException{
         try{
             node = new XMLParser().parseXML(file);
@@ -15,7 +14,5 @@ class CLSXModel extends Model{
             throw new CreateException("CLSX 만드는데 실패했음. 세세한 이유는 아직 안알랴줌");
         }
     }
-    public GroupNode getNode(){
-        return this.node;
-    }
+    public GroupNode getGroupNode(){return this.node;};
 }

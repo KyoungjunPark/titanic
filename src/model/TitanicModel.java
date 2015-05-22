@@ -2,6 +2,8 @@ package model;
 
 import util.GroupNode;
 
+import java.security.acl.Group;
+
 class TitanicModel {
 	private static int nextID = 0;
 	private int id;
@@ -35,7 +37,11 @@ class TitanicModel {
         this.clsxModel = clsxModel;
     }
 	public GroupNode getGroupNode(){
-		return this.clsxModel.getNode();
+		GroupNode node =  this.clsxModel.getGroupNode();
+		if(node != null)
+			return node;
+		node = this.dsmModel.getGroupNode();
+		return node;
 	}
 	public int getID(){
 		return this.id;

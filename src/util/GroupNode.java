@@ -1,6 +1,7 @@
 package util;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -30,5 +31,16 @@ public class GroupNode extends Node{
             root.add(node.getTreeNode());
         }
         return root;
+    }
+    public ArrayList<ItemNode> getItemList(){
+        ArrayList<ItemNode> temp = new ArrayList<ItemNode>();
+        for(Node node : this.childNodeArray){
+            if(node instanceof GroupNode){
+
+            }else if(node instanceof ItemNode){
+
+            }
+        }
+        return null;
     }
 }
