@@ -12,21 +12,25 @@ import javax.swing.*;
 public class MainController {
 	
 	private int currentID;
-	
-	private static MainToolbar toolbar;
-	private static MenuBar menubar;
-	private static CenterPanel mainPanel;
-	
+
+	private  MainToolbar toolbar;
+	private  MenuBar menubar;
+	private  CenterPanel mainPanel;
+
 	public MainController(){}
 	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel mainPanel){
-		
-		MainController.toolbar = toolbar;
-		MainController.menubar = menubar;
-		MainController.mainPanel = mainPanel;
-		
+		this.toolbar = toolbar;
+		this.menubar = menubar;
+		this.mainPanel = mainPanel;
+
 		setControllers();
 		currentID = ModelManager.sharedModelManager().getCurrentID();
-		
+
+		ModelManager.sharedModelManager().addEvent(new Event("after-open"){ public void action(){
+			menubar.OpenDSMStatus();
+			toolbar.OpenDSMStatus();
+			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
+		}});
 	}
 	private void setControllers()
 	{
@@ -60,19 +64,6 @@ public class MainController {
 	protected void OpenDSMStatus(File openFile)
 	{
 		int currentID;
-		
-		//status change
-//		menubar.OpenDSMStatus();
-//		toolbar.OpenDSMStatus();
-//		mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-		ModelManager.sharedModelManager().addEvent(new Event("open"){ public void action(){
-			menubar.OpenDSMStatus();
-			toolbar.OpenDSMStatus();
-			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-			JOptionPane.showMessageDialog(null, "SS");
-			}
-		});
-		
 		//right panel change
 		try {
 			currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);

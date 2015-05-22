@@ -120,6 +120,13 @@ public class ModelManager {
 	}
 
 	/**
+	 * 이벤트 리스트에서 특정 이벤트를 삭제합니다.
+	 * @param e event 객체를 받습니다. 해당 객체를 이벤트 리스트에서 삭제합니다.
+	 */
+	public void removeEvent(Event e){
+		this.eventArrayList.remove(e);
+	}
+	/**
 	 * 특정 태그인 이벤트를 모두 실행합니다.
 	 * @param tag 해당 값으로 생성된 이벤트를 실행합니다.
 	 */
