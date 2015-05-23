@@ -33,7 +33,12 @@ public class MainController {
 
 		currentID = ModelManager.sharedModelManager().getCurrentID();
 	}
-	
+	private void setControllers()
+	{
+		menuBarController = new MenuBarController(menubar);
+		mainToolbarController = new MainToolbarController(toolbar);
+		mainController = new LeftPanelController(mainPanel.getLeftPanel());
+	}
 	private void setEvent()
 	{
 	
@@ -54,7 +59,11 @@ public class MainController {
 
 		
 		
+		ModelManager.sharedModelManager().addEvent(new Event("expandAll"){ public void action(){
+			
+		}});
 		
+<<<<<<< HEAD
 	}
 	
 	private void setControllers()
@@ -63,6 +72,9 @@ public class MainController {
 		menuBarController = new MenuBarController(menubar);
 		mainToolbarController = new MainToolbarController(toolbar);
 		centerPanelController = new CenterPanelController(centerPanel);
+=======
+		
+>>>>>>> 2777978fc303ca0358195d557677c76c84b88344
 	}
 	protected void openDSMFile(File openFile)
 	{
