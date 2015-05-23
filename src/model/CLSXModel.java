@@ -7,7 +7,7 @@ import util.GroupNode;
 import util.XMLParser;
 
 class CLSXModel extends Model{
-    public CLSXModel(File file)throws CreateException{
+    public CLSXModel(File file) throws CreateException{
         try{
             node = new XMLParser().parseXML(file);
         }catch (Exception e){

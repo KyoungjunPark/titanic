@@ -54,7 +54,7 @@ public class ModelManager {
 		EventManager.callEvent("before-open");
         String extension = JSFiles.getFileExtension(file).toLowerCase();
 		TitanicModel model =  new TitanicModel();
-        if(extension.equals(".dsm")){
+        if(extension.compareTo(".dsm") == 0){
 			DSMModel dsm = null;
 			try {
 				dsm = new DSMModel(file);
@@ -73,12 +73,13 @@ public class ModelManager {
 	public void setFile(File file)throws CreateException{
         EventManager.callEvent("before-open");
 		String extension = JSFiles.getFileExtension(file).toLowerCase();
+		System.out.println(extension);
 		TitanicModel model = this.getCurrentTitanicModel();
 		if(model == null)
 			throw new CreateException("You have to set id");
-		if(extension.equals(".dsm")){
+		if(extension.compareTo(".dsm") ==0){
 
-		}else if(extension.equals(".clsx")){
+		}else if(extension.compareTo(".clsx") == 0){
 			model.setClsxModel(file);
 		}else{
 			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
