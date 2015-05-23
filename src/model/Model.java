@@ -15,5 +15,5 @@ abstract class Model {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
-    public GroupNode getGroupNode(){return null;};
+    public GroupNode getGroupNode(){return null;}
 }

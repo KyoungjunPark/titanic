@@ -32,8 +32,8 @@ public class GroupNode extends Node{
         }
         return root;
     }
-    public ArrayList<ItemNode> getItemList(){
-        ArrayList<ItemNode> temp = new ArrayList<ItemNode>();
+    public ArrayList<Node> getItemList(){
+        ArrayList<Node> temp = new ArrayList<Node>();
         for(Node node : this.childNodeArray){
             if(node instanceof GroupNode){
 
