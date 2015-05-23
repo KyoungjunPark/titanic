@@ -109,6 +109,7 @@ public class LeftPanel extends JPanel implements Controllerable{
 		{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
+			deleteButton.setEnabled(true);			// 삭제요망. test용.
 	    }
 		protected void changeRootStatus()
 		{
