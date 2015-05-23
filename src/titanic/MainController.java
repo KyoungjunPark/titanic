@@ -57,7 +57,6 @@ public class MainController {
                 mainToolbarController.changeDSMStatus();
                 centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-
             }
         });
 

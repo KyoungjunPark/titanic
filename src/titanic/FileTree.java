@@ -12,10 +12,11 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import util.GroupNode;
+import util.TreeNode;
 import model.ModelManager;
 
 public class FileTree extends JTree implements Controllerable {
-	private DefaultMutableTreeNode root;
+	private TreeNode root;
 
 	public FileTree() {
 		setModel(null);
@@ -30,6 +31,7 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	protected void moveUp(TreePath[] selectedPath)
 	{
+		JOptionPane.showMessageDialog(null, "ok");
 		for(TreePath path : selectedPath){
 			System.out.println(path.getLastPathComponent());			
 		}
