@@ -11,6 +11,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
+
 import util.GroupNode;
 import util.TreeNode;
 import model.ModelManager;
@@ -55,7 +57,17 @@ public class FileTree extends JTree implements Controllerable {
 
 	}
 	protected void delete() {
-		removeSelectionRows(getSelectionRows());
+		removeSelectedNodes();
+		
+	}
+	private void removeSelectedNodes() {
+		TreePath selectionPath = this.getSelectionPath();
+		
+		while(selectionPath != null) {
+			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
+			((DefaultTreeModel)this.getModel()).removeNodeFromParent(selectedNode);
+			selectionPath = this.getSelectionPath();
+		}
 		
 	}
 	public DefaultMutableTreeNode findNode(String search) {
