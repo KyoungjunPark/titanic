@@ -6,15 +6,14 @@ public class LeftPanelController extends CenterPanelController{
 	
 	private LeftPanel leftPanel;
 	private LeftToolbarController leftToolbarController;
-	
 	private FileTreeController fileTreeController;
+	
 	public LeftToolbarController getLeftToolbarController() {
 		return leftToolbarController;
 	}
 	public FileTreeController getFileTreeController() {
 		return fileTreeController;
 	}
-
 	
 	public LeftPanelController(){}
 	public LeftPanelController(LeftPanel leftPanel){
@@ -38,10 +37,9 @@ public class LeftPanelController extends CenterPanelController{
 		
 	}
 	protected void expandTree() {
-
-		fileTreeController.expandAll(leftPanel.getfileTree(), 1, leftPanel.getfileTree().getRowCount());;
+		fileTreeController.expandAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());;
 	}
 	protected void collapseTree() {
-		fileTreeController.collapseAll(leftPanel.getfileTree(), 1, leftPanel.getfileTree().getRowCount());
+		fileTreeController.collapseAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
 	}
 }

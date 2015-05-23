@@ -61,11 +61,15 @@ public class MainController {
             }
         });
 
-
-
         EventManager.addEvent(new Event("expandAll") {
             public void action() {
-
+            	centerPanelController.getLeftPanelController().expandTree();
+            }
+        });
+        
+        EventManager.addEvent(new Event("collapseAll") {
+            public void action() {
+            	centerPanelController.getLeftPanelController().collapseTree();
             }
         });
 		

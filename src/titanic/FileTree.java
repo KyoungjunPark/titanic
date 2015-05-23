@@ -29,6 +29,22 @@ public class FileTree extends JTree implements Controllerable {
 		setTreeTag();
 		setModel(new DefaultTreeModel(root));
 	}
+	
+	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
+		for(int i=startingIndex; i<rowCount; i++){
+	        tree.expandRow(i);
+	    }
+
+	    if(tree.getRowCount()!= rowCount){
+	        expandAll(tree, rowCount, tree.getRowCount());
+	    }
+	}
+	protected void collapseAll(FileTree tree, int startingIndex, int rowCount) {
+		for(int i=rowCount-1; i>=startingIndex; i--) {
+			tree.collapseRow(i);
+		}
+
+	}
 
 	/*
 	 * This function's purpose is to assign tags witch are differentiate a root
