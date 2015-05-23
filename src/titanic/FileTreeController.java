@@ -31,13 +31,23 @@ public class FileTreeController extends LeftPanelController {
 		
 	}
 	protected void expandAll(JTree tree, int startingIndex, int rowCount) {
-		for(int i=startingIndex;i<rowCount;++i){
+		for(int i=startingIndex; i<rowCount; i++){
 	        tree.expandRow(i);
 	    }
 
-	    if(tree.getRowCount()!=rowCount){
+	    if(tree.getRowCount()!= rowCount){
 	        expandAll(tree, rowCount, tree.getRowCount());
 	    }
+	}
+	protected void collapseAll(JTree tree, int startingIndex, int rowCount) {
+		for(int i=rowCount-1; i>=startingIndex; i--) {
+			tree.collapseRow(i);
+		}
+		/*
+		if(tree.getRowCount() != tree.ro) {
+			collapseAll(tree, rowCount, tree.getRowCount());
+		}
+		*/
 	}
 	
 }

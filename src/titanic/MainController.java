@@ -16,6 +16,9 @@ public class MainController {
 	private MainToolbar toolbar;
 	private MenuBar menubar;
 	private CenterPanel mainPanel;
+	private MenuBarController menuBarController;
+	private MainToolbarController mainToolbarController;
+	private LeftPanelController mainController;
 
 	public MainController(){}
 	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel mainPanel){
@@ -30,7 +33,12 @@ public class MainController {
 
 	
 	}
-	
+	private void setControllers()
+	{
+		menuBarController = new MenuBarController(menubar);
+		mainToolbarController = new MainToolbarController(toolbar);
+		mainController = new LeftPanelController(mainPanel.getLeftPanel());
+	}
 	private void setEvent()
 	{
 	
@@ -48,17 +56,11 @@ public class MainController {
 			mainPanel.getLeftPanel().getfileTree().makeTree();
 		}});
 		
+		ModelManager.sharedModelManager().addEvent(new Event("expandAll"){ public void action(){
+			
+		}});
 		
-	}
-	private void setControllers()
-	{
 		
-		@SuppressWarnings("unused")
-		MenuBarController menuBarController = new MenuBarController(menubar);
-		@SuppressWarnings("unused")
-		MainToolbarController mainToolbarController = new MainToolbarController(toolbar);
-		@SuppressWarnings("unused")
-		LeftPanelController mainController = new LeftPanelController(mainPanel.getLeftPanel());
 	}
 	protected void OpenDSMStatus(File openFile)
 	{
