@@ -26,7 +26,7 @@ public class FileTreeController extends LeftPanelController {
 
 	private void init() {
 		
-		
+		/*
 		//listener of item selection
 		treeFile.getSelectionModel().setSelectionMode(
 		TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
@@ -34,7 +34,7 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				/*
+
 				JTree treeSource = (JTree) e.getSource();
 			//	System.out.println("Min: " + treeSource.getMinSelectionRow());
 			//	System.out.println("Max: " + treeSource.getMaxSelectionRow());
@@ -44,7 +44,7 @@ public class FileTreeController extends LeftPanelController {
 				if (node == null)
 					// Nothing is selected.
 					return;
-				*/
+				
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
 				
 				if(node.isRoot()){
@@ -60,12 +60,12 @@ public class FileTreeController extends LeftPanelController {
 				
 				TreePath[] paths = treeFile.getSelectionPaths();
 				selectedPaths = paths;
-				/* test version
+				// test version
 				for(TreePath path : paths){
 					System.out.println(path.getLastPathComponent());
 					
 				}
-				*/
+				
 			}
 		});
 		*/
