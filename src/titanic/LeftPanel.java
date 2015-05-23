@@ -109,7 +109,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveDownButton.setEnabled(false);
 			deleteButton.setEnabled(false);
 		}
-
 		protected void changeRootStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -120,7 +119,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			deleteButton.setEnabled(false);
 
 		}
-
 		protected void changeItemStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -131,7 +129,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			deleteButton.setEnabled(true);
 
 		}
-
 		protected void changeItemStatusTop() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -142,7 +139,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			deleteButton.setEnabled(true);
 
 		}
-
 		protected void changeItemStatusBottom() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -152,7 +148,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveDownButton.setEnabled(false);
 			deleteButton.setEnabled(true);
 		}
-
 		protected void changeSubRootStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -162,7 +157,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveDownButton.setEnabled(true);
 			deleteButton.setEnabled(true);
 		}
-
 		protected void changeSubRootStatusTop() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -172,7 +166,6 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveDownButton.setEnabled(true);
 			deleteButton.setEnabled(true);
 		}
-
 		protected void changeSubRootStatusBottom() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);

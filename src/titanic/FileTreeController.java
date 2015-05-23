@@ -36,11 +36,15 @@ public class FileTreeController extends LeftPanelController {
 					EventManager.callEvent("changeRootStatus");
 					
 				}else if(node.isLeaf()){
-					if(node.getPreviousLeaf() == null){ 
+					System.out.println("leaf & top leaf : " + node.getPreviousLeaf());
+					System.out.println("leaf & Bottom leaf : "+node.getNextLeaf());
+					System.out.println("getFirstLeaf : " + ((DefaultMutableTreeNode)node.getParent()).getFirstChild());
+					System.out.println("getLastLeaf : " + ((DefaultMutableTreeNode)node.getParent()).getLastChild());
+					if(node.getPreviousLeaf() == null || ((DefaultMutableTreeNode)node.getParent()).getFirstChild() == node){ 
 						//if this node is first leaf of parent's(disable move up icon)
 						EventManager.callEvent("changeItemStatusTop");
 					}
-					else if(node.getNextLeaf() == null){
+					else if(node.getNextLeaf() == null || ((DefaultMutableTreeNode)node.getParent()).getLastChild() == node){
 						//if this node is last leaf of parent's(disable move down icon)
 						EventManager.callEvent("changeItemStatusBottom");
 					}
@@ -49,6 +53,8 @@ public class FileTreeController extends LeftPanelController {
 					}
 					
 				}else{
+					System.out.println("Node & top Node : " + node.getPreviousSibling());
+					System.out.println("Node & Bottom Node : "+node.getNextSibling());
 					if(node.getPreviousSibling() == null){
 						//if this node is first node of parent's(disable move up icon)
 						EventManager.callEvent("changeSubRootStatusTop");
@@ -59,7 +65,7 @@ public class FileTreeController extends LeftPanelController {
 						EventManager.callEvent("changeSubRootStatusBottom");
 						
 					}else{
-					EventManager.callEvent("changeSubRootStatus");
+						EventManager.callEvent("changeSubRootStatus");
 					}
 				}
 			}

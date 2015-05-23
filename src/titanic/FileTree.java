@@ -27,7 +27,8 @@ public class FileTree extends JTree implements Controllerable {
 	}
 
 	public void makeTree() {
-		ModelManager.sharedModelManager().setTitanicModelID(0);
+		ModelManager.sharedModelManager().setTitanicModelID(0); //must be deleted!!!!
+		
 		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getGroupNode().getTreeNode();
 		setModel(new DefaultTreeModel(root));
