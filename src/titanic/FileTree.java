@@ -9,12 +9,12 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import util.GroupNode;
 import model.ModelManager;
 
 public class FileTree extends JTree implements Controllerable {
-
 	private DefaultMutableTreeNode root;
 
 	public FileTree() {
@@ -26,10 +26,14 @@ public class FileTree extends JTree implements Controllerable {
 		ModelManager.sharedModelManager().setTitanicModelID(0);
 		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getGroupNode().getTreeNode();
-		setTreeTag();
 		setModel(new DefaultTreeModel(root));
 	}
-	
+	protected void moveUp(TreePath[] selectedPath)
+	{
+		for(TreePath path : selectedPath){
+			System.out.println(path.getLastPathComponent());			
+		}
+	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
 		for(int i=startingIndex; i<rowCount; i++){
 	        tree.expandRow(i);
@@ -44,6 +48,17 @@ public class FileTree extends JTree implements Controllerable {
 			tree.collapseRow(i);
 		}
 
+	}
+	protected void delete(FileTree tree) {
+		/*Integer selectedRowIndex[] = new Integer[tree.getSelectionRows().length];
+		for(int i=0; i<selectedRowIndex.length; i++) {
+			selectedRowIndex[i] = new Integer(tree.getSelectionRows()[i]);
+		}*/
+		
+		for(int i=0; i<tree.getSelectionRows().length; i++) {
+			tree.remove(tree.getSelectionRows()[i]);
+		}
+		
 	}
 
 	/*
