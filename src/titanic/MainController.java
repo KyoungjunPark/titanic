@@ -61,22 +61,6 @@ public class MainController {
             }
         });
 
-
-        
-<<<<<<< HEAD
-=======
-        EventManager.addEvent(new Event("collapseAll") {
-            public void action() {
-            	centerPanelController.getLeftPanelController().collapseTree();
-            }
-        });
-        
-        EventManager.addEvent(new Event("delete") {
-            public void action() {
-            	centerPanelController.getLeftPanelController().deleteTree();
-            }
-        });
->>>>>>> aa9ccd050c2f52488b6e24a03758dd53fd4d6bb9
 		
 	}
 	
