@@ -23,6 +23,7 @@ public class CenterPanel extends JSplitPane{
 		contentsPanel = new ContentsPanel();
 		setRightComponent(contentsPanel);
 		contentsPanel.setBackground(Color.LIGHT_GRAY);
+		
 	}
 	public LeftPanel getLeftPanel() {
 		return leftPanel;

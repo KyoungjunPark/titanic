@@ -12,68 +12,60 @@ import javax.swing.*;
 public class MainController {
 	
 	private int currentID;
-	
-	private static MainToolbar toolbar;
-	private static MenuBar menubar;
-	private static CenterPanel mainPanel;
-	
+
+	private MainToolbar toolbar;
+	private MenuBar menubar;
+	private CenterPanel mainPanel;
+	private MenuBarController menuBarController;
+	private MainToolbarController mainToolbarController;
+	private LeftPanelController mainController;
+
 	public MainController(){}
 	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel mainPanel){
-		
-		MainController.toolbar = toolbar;
-		MainController.menubar = menubar;
-		MainController.mainPanel = mainPanel;
-		
+		this.toolbar = toolbar;
+		this.menubar = menubar;
+		this.mainPanel = mainPanel;
+
+		setEvent();
 		setControllers();
+
 		currentID = ModelManager.sharedModelManager().getCurrentID();
-		
+
+	
 	}
 	private void setControllers()
 	{
-		@SuppressWarnings("unused")
-		MenuBarController menuBarController = new MenuBarController(menubar);
-		@SuppressWarnings("unused")
-		MainToolbarController mainToolbarController = new MainToolbarController(toolbar);
-		@SuppressWarnings("unused")
-		LeftPanelController mainController = new LeftPanelController(mainPanel.getLeftPanel());
-		@SuppressWarnings("unused")
-		LeftToolbarController leftToolbarController = new LeftToolbarController(mainPanel.getLeftPanel().getToolbar());
+		menuBarController = new MenuBarController(menubar);
+		mainToolbarController = new MainToolbarController(toolbar);
+		mainController = new LeftPanelController(mainPanel.getLeftPanel());
 	}
-
-    /**
-     * DSM파일이 실행되면
-     * 1. disable되어 있던 기능(아이콘)들이 활성화 된다.
-     * 2. 좌측 패널에 file tree를 보여준다.
-     *
-     */
-	protected int sendDataToManager(File openFile)
+	private void setEvent()
 	{
-		try {
-			return ModelManager.sharedModelManager().createTitanicModel(openFile);
-		} catch (CreateException e) {
+	
+	
+	    /**
+	     * DSM파일이 실행되면
+	     * 1. disable되어 있던 기능(아이콘)들이 활성화 된다.
+	     * 2. 좌측 패널에 file tree를 보여준다.
+	     *
+	     */
+		ModelManager.sharedModelManager().addEvent(new Event("after-open"){ public void action(){
+			menubar.OpenDSMStatus();
+			toolbar.OpenDSMStatus();
+			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
+			mainPanel.getLeftPanel().getfileTree().makeTree();
+		}});
+		
+		ModelManager.sharedModelManager().addEvent(new Event("expandAll"){ public void action(){
 			
-			e.printStackTrace();
-		}
-		//must changed!
-		return -999;
+		}});
+		
+		
 	}
 	protected void OpenDSMStatus(File openFile)
 	{
 		int currentID;
 		
-		//status change
-//		menubar.OpenDSMStatus();
-//		toolbar.OpenDSMStatus();
-//		mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-		ModelManager.sharedModelManager().addEvent(new Event("open"){ public void action(){
-			menubar.OpenDSMStatus();
-			toolbar.OpenDSMStatus();
-			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-			JOptionPane.showMessageDialog(null, "SS");
-			}
-		});
-		
-		//right panel change
 		try {
 			currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 		} catch (CreateException e) {
@@ -81,8 +73,6 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		//ModelManager.sharedModelManager().getGroupNode(id);
-		//mainPanel.getLeftPanel().setFileTree();
 		
 	}
 

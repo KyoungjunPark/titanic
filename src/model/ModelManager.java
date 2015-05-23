@@ -52,34 +52,46 @@ public class ModelManager {
      * @throws FileNotFoundException 
      */
 	public int createTitanicModel(File file)throws CreateException{
+		this.callEvent("before-open");
         String extension = JSFiles.getFileExtension(file).toLowerCase();
-        
-        TitanicModel model = new TitanicModel();
-        
+		TitanicModel model =  new TitanicModel();
         if(extension.equals(".dsm")){
-            DSMModel dsm = null;
+			DSMModel dsm = null;
 			try {
 				dsm = new DSMModel(file);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new CreateException("IO Error");
 			}
 			model.setDsmModel(dsm);
-            
-        }else if(extension.equals(".clsx")){
-            CLSXModel clsx = new CLSXModel(file);
-            model.setClsxModel(clsx);
+			this.addTitanicModel(model);
         }else{
         	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-        this.addTitanicModel(model);
-		/* test code */
-		this.callEvent("open");
-		/* end code */
+		this.callEvent("after-open");
 		return model.getID();
 	}
+	public void setFile(File file)throws CreateException{
+		this.callEvent("before-open");
+		String extension = JSFiles.getFileExtension(file).toLowerCase();
+		TitanicModel model = this.getCurrentTitanicModel();
+		if(model == null)
+			throw new CreateException("You have to set id");
+		if(extension.equals(".dsm")){
 
+		}else if(extension.equals(".clsx")){
+			model.setClsxModel(file);
+		}else{
+			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
+			throw new CreateException("지원하지 않는 확장자입니다.");
+		}
+		this.callEvent("after-open");
+	}
+	/**
+	 * id 값을 기준으로 현재 있는지 체크합니다.
+	 * @param id integer 의 id 로 비교합니다.
+	 * @return 존재할경우 true 없을경우 false 입니다.
+	 */
 	public boolean isExistModel(int id){
 		for(int i = 0 ; i < this.titanicModelArray.size() ; i++){
 			if(this.titanicModelArray.get(i).getID() == id)
@@ -102,17 +114,51 @@ public class ModelManager {
      * @throws SaveException 저장에 실패할 경우에 Exception 을 발생합니다. filePath 설정 권한등의 이유가 있습니다. {@link model.SaveException}
      */
     public void save()throws SaveException{
-
+		this.callEvent("before-save");
+		this.callEvent("after-save");
     }
 
+	/**
+	 * event 를 받습니다.
+	 * @param e event 객체를 받습니다. event 객체는 action 메서드를 오버라이드 해야합니다.
+	 *          event 객체에 자세한 사항은 {@link Event} 를 참고하세요.
+	 */
 	public void addEvent(Event e){
 		this.eventArrayList.add(e);
 	}
+
+	/**
+	 * 이벤트 리스트에서 특정 이벤트를 삭제합니다.
+	 * @param e event 객체를 받습니다. 해당 객체를 이벤트 리스트에서 삭제합니다.
+	 */
+	public void removeEvent(Event e){
+		this.eventArrayList.remove(e);
+	}
+	/**
+	 * 특정 태그인 이벤트를 모두 실행합니다.
+	 * @param tag 해당 값으로 생성된 이벤트를 실행합니다.
+	 */
 	private void callEvent(String tag){
 		for(Event e : this.eventArrayList){
 			if(e.getTag().compareTo(tag) == 0){
 				e.action();
 			}
 		}
+	}
+
+	/**
+	 * 현제 set 되어있는 {@link TitanicModel} 을 돌려줍니다.
+	 * 다음과 같은 경우에는 null 이반환됩니다.
+	 * >> CLSX 파일이 설정되어 있지 않을경우
+	 * >> 현재 set되어 있는 id의 object 가 없을경우 ( 비정상적 )
+	 * >> 그외는 제보바랍니다.
+	 * @return {@link TitanicModel}
+	 */
+	public TitanicModel getCurrentTitanicModel(){
+		for(TitanicModel model : this.titanicModelArray){
+			if(model.getID() == this.getCurrentID())
+				return model;
+		}
+		return null;
 	}
 }

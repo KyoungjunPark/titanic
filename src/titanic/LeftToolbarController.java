@@ -2,8 +2,10 @@ package titanic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 import javax.swing.JOptionPane;
+
 
 import titanic.LeftPanel.LeftToolBar;
 
@@ -25,7 +27,8 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Expand All is clicked");
-				
+				expandTree();
+				//callEvent("expand all");
 			}
 		});
 		leftToolbar.setAction("Collapse All", new ActionListener() {
@@ -79,4 +82,5 @@ public class LeftToolbarController extends LeftPanelController{
 		
 		
 	}
+	
 }

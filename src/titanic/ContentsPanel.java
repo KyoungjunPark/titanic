@@ -2,10 +2,7 @@ package titanic;
 
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 
 public class ContentsPanel extends JTabbedPane{
 	
