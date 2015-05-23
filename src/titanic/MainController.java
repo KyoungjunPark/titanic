@@ -2,6 +2,7 @@ package titanic;
 
 import java.io.File;
 
+import model.EventManager;
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.ModelManager;
@@ -50,19 +51,23 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		ModelManager.sharedModelManager().addEvent(new Event("after-open"){ public void action(){
-			menuBarController.changeDSMStatus();
-			mainToolbarController.changeDSMStatus();
-			centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
-			centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+		EventManager.addEvent(new Event("after-open") {
+            public void action() {
+                menuBarController.changeDSMStatus();
+                mainToolbarController.changeDSMStatus();
+                centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
+                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 
-		}});
+            }
+        });
 
-		
-		
-		ModelManager.sharedModelManager().addEvent(new Event("expandAll"){ public void action(){
-			
-		}});
+
+
+        EventManager.addEvent(new Event("expandAll") {
+            public void action() {
+
+            }
+        });
 		
 	}
 	
