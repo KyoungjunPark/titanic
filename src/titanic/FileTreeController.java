@@ -30,5 +30,14 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.makeTree();
 		
 	}
+	protected void expandAll(JTree tree, int startingIndex, int rowCount) {
+		for(int i=startingIndex;i<rowCount;++i){
+	        tree.expandRow(i);
+	    }
+
+	    if(tree.getRowCount()!=rowCount){
+	        expandAll(tree, rowCount, tree.getRowCount());
+	    }
+	}
 	
 }

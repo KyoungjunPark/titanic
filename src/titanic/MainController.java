@@ -62,8 +62,6 @@ public class MainController {
 		MainToolbarController mainToolbarController = new MainToolbarController(toolbar);
 		@SuppressWarnings("unused")
 		LeftPanelController mainController = new LeftPanelController(mainPanel.getLeftPanel());
-		@SuppressWarnings("unused")
-		LeftToolbarController leftToolbarController = new LeftToolbarController(mainPanel.getLeftPanel().getToolbar());
 	}
 	protected void OpenDSMStatus(File openFile)
 	{
