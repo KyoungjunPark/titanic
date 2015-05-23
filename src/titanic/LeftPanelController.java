@@ -56,6 +56,15 @@ public class LeftPanelController extends CenterPanelController{
         		changeSubRootStatus();
         	}
         });
+        
+        EventManager.addEvent(new Event("delete"){
+        	public void action(){
+        		deleteTree();
+        		
+        	}
+        	
+        });
+
         EventManager.addEvent(new Event("changeItemStatus"){
         	public void action(){
         		changeSubRootStatus();
@@ -89,7 +98,7 @@ public class LeftPanelController extends CenterPanelController{
 		fileTreeController.collapseAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
 	}
 	protected void deleteTree() {
-		fileTreeController.delete(leftPanel.getfileTree());;
+		fileTreeController.delete();
 	}
 
 	protected void changeSubRootStatus()

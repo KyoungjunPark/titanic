@@ -34,15 +34,18 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
+				/*
 				JTree treeSource = (JTree) e.getSource();
 			//	System.out.println("Min: " + treeSource.getMinSelectionRow());
 			//	System.out.println("Max: " + treeSource.getMaxSelectionRow());
-				TreeNode node = (TreeNode) treeFile
+				TreeNode node = (TreeNode) treeSource
 						.getLastSelectedPathComponent();
 
 				if (node == null)
 					// Nothing is selected.
 					return;
+				*/
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
 				
 				if(node.isRoot()){
 					EventManager.callEvent("changeRootStatus");
@@ -65,6 +68,7 @@ public class FileTreeController extends LeftPanelController {
 				*/
 			}
 		});
+		*/
 
 	}
 
@@ -81,13 +85,10 @@ public class FileTreeController extends LeftPanelController {
 	}
 	protected void collapseAll(FileTree tree, int startingIndex, int rowCount) {
 		treeFile.collapseAll(tree, startingIndex, rowCount);
-		/*
-		 * if(tree.getRowCount() != tree.ro) { collapseAll(tree, rowCount,
-		 * tree.getRowCount()); }
-		 */
+
 	}
-	protected void delete(FileTree tree) {
-		treeFile.delete(tree);
+	protected void delete() {
+		treeFile.delete();
 	}
 
 
