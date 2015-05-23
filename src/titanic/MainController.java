@@ -72,6 +72,12 @@ public class MainController {
             	centerPanelController.getLeftPanelController().collapseTree();
             }
         });
+        
+        EventManager.addEvent(new Event("delete") {
+            public void action() {
+            	centerPanelController.getLeftPanelController().deleteTree();
+            }
+        });
 		
 	}
 	
