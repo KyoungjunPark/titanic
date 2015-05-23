@@ -91,4 +91,15 @@ public class LeftToolbarController extends LeftPanelController{
 		leftToolbar.changeDSMStatus();
 		
 	}
+	
+	protected void changeSubRootStatus()
+	{
+		leftToolbar.changeSubRootStatus();
+		
+	}
+	protected void changeItemStatus()
+	{
+		leftToolbar.changeItemStatus();
+		
+	}
 }
