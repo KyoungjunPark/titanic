@@ -3,6 +3,7 @@ package model;
 import util.GroupNode;
 import util.ItemNode;
 import util.JSFiles;
+import util.Node;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +63,8 @@ public class DSMModel extends Model{
     protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
         ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
         if(clsx != null){
-
+            ArrayList<Node> nodeList = clsx.getGroupNode().getItemList();
+            
         }else{
             ArrayList<String> data = new ArrayList<String>();
             for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
