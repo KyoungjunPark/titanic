@@ -102,4 +102,9 @@ public class LeftToolbarController extends LeftPanelController{
 		leftToolbar.changeItemStatus();
 		
 	}
+	protected void changeRootStatus()
+	{
+		leftToolbar.changeRootStatus();
+		
+	}
 }

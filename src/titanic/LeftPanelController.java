@@ -61,6 +61,14 @@ public class LeftPanelController extends CenterPanelController{
         		changeSubRootStatus();
         	}
         });
+        
+        EventManager.addEvent(new Event("changeRootStatus"){
+        	public void action(){
+        		changeRootStatus();
+        		
+        	}
+        	
+        });
        
 		
 	}
@@ -92,5 +100,10 @@ public class LeftPanelController extends CenterPanelController{
 	protected void changeItemStatus()
 	{
 		leftToolbarController.changeItemStatus();
+	}
+	protected void changeRootStatus()
+	{
+		leftToolbarController.changeRootStatus();
+		
 	}
 }
