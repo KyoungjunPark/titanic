@@ -59,7 +59,7 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Move Up is clicked");
+				moveUp();
 				
 			}
 		});

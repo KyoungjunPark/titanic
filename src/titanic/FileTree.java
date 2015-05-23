@@ -57,6 +57,7 @@ public class FileTree extends JTree implements Controllerable {
 		return null;
 	}
 
+	
 	@Override
 	public void setAction(String title, ActionListener action) {
 
