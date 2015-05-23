@@ -1,23 +1,19 @@
 package titanic;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import model.ModelManager;
 
 public class FileTreeController extends LeftPanelController {
 
-	FileTree treeFile;
-
+	private FileTree treeFile;
+	private TreePath[] selectedPaths;
+	
 	public FileTreeController(FileTree treeFile) {
 		this.treeFile = treeFile;
 
@@ -25,26 +21,35 @@ public class FileTreeController extends LeftPanelController {
 	}
 
 	private void init() {
+		
+		
+		//listener of item selection
 		treeFile.getSelectionModel().setSelectionMode(
-				TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+		TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
 
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				JTree treeSource = (JTree) e.getSource();
-				System.out.println("Min: " + treeSource.getMinSelectionRow());
-				System.out.println("Max: " + treeSource.getMaxSelectionRow());
-				System.out.println("Lead: " + treeSource.getLeadSelectionRow());
-				System.out.println("Row: " + treeSource.getSelectionRows()[0]);
+			//	System.out.println("Min: " + treeSource.getMinSelectionRow());
+			//	System.out.println("Max: " + treeSource.getMaxSelectionRow());
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) treeFile
 						.getLastSelectedPathComponent();
 
 				if (node == null)
 					// Nothing is selected.
 					return;
-
-				// JOptionPane.showMessageDialog(null, node);
-
+				
+		
+				
+				TreePath[] paths = treeFile.getSelectionPaths();
+				selectedPaths = paths;
+				/*test version
+				for(TreePath path : paths){
+					System.out.println(path.getLastPathComponent());
+					
+				}
+				*/
 			}
 		});
 
@@ -52,7 +57,10 @@ public class FileTreeController extends LeftPanelController {
 
 	protected void makeTree() {
 		treeFile.makeTree();
-
+	}
+	protected void moveUp()
+	{
+		treeFile.moveUp(selectedPaths);
 	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
 		treeFile.expandAll(tree, startingIndex, rowCount);

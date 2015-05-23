@@ -2,6 +2,9 @@ package titanic;
 
 import javax.swing.JPanel;
 
+import model.Event;
+import model.EventManager;
+
 public class LeftPanelController extends CenterPanelController{
 	
 	private LeftPanel leftPanel;
@@ -18,7 +21,31 @@ public class LeftPanelController extends CenterPanelController{
 	public LeftPanelController(){}
 	public LeftPanelController(LeftPanel leftPanel){
 		this.leftPanel = leftPanel;
+		setEvent();
 		setControllers();
+		
+	}
+	private void setEvent()
+	{
+        EventManager.addEvent(new Event("expandAll") {
+            public void action() {
+            	expandTree();
+            }
+        });
+        
+        EventManager.addEvent(new Event("collapseAll") {
+            public void action() {
+            	collapseTree();
+            }
+        });
+        
+        EventManager.addEvent(new Event("moveUp"){
+        	public void action(){
+        		moveUp();
+        		
+        	}
+        	
+        });
 		
 	}
 	private void setControllers()
@@ -37,7 +64,7 @@ public class LeftPanelController extends CenterPanelController{
 		
 	}
 	protected void expandTree() {
-		fileTreeController.expandAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());;
+		fileTreeController.expandAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
 	}
 	protected void collapseTree() {
 		fileTreeController.collapseAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
