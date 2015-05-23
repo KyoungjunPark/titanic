@@ -30,19 +30,12 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.makeTree();
 		
 	}
-	protected void expandAll(JTree tree, int startingIndex, int rowCount) {
-		for(int i=startingIndex; i<rowCount; i++){
-	        tree.expandRow(i);
-	    }
-
-	    if(tree.getRowCount()!= rowCount){
-	        expandAll(tree, rowCount, tree.getRowCount());
-	    }
+	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
+		treeFile.expandAll(tree, startingIndex, rowCount);
+	    
 	}
-	protected void collapseAll(JTree tree, int startingIndex, int rowCount) {
-		for(int i=rowCount-1; i>=startingIndex; i--) {
-			tree.collapseRow(i);
-		}
+	protected void collapseAll(FileTree tree, int startingIndex, int rowCount) {
+		treeFile.collapseAll(tree, startingIndex, rowCount);
 		/*
 		if(tree.getRowCount() != tree.ro) {
 			collapseAll(tree, rowCount, tree.getRowCount());
