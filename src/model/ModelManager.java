@@ -14,7 +14,6 @@ public class ModelManager {
 	private ModelManager(){}
 
 	private ArrayList<TitanicModel> titanicModelArray = new ArrayList<TitanicModel>();
-	private ArrayList<Event> eventArrayList = new ArrayList<>();
 	private int currentID = -1;
 
     /**
@@ -52,7 +51,7 @@ public class ModelManager {
      * @throws FileNotFoundException 
      */
 	public int createTitanicModel(File file)throws CreateException{
-		this.callEvent("before-open");
+		EventManager.callEvent("before-open");
         String extension = JSFiles.getFileExtension(file).toLowerCase();
 		TitanicModel model =  new TitanicModel();
         if(extension.equals(".dsm")){
@@ -68,11 +67,11 @@ public class ModelManager {
         	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-		this.callEvent("after-open");
+        EventManager.callEvent("after-open");
 		return model.getID();
 	}
 	public void setFile(File file)throws CreateException{
-		this.callEvent("before-open");
+        EventManager.callEvent("before-open");
 		String extension = JSFiles.getFileExtension(file).toLowerCase();
 		TitanicModel model = this.getCurrentTitanicModel();
 		if(model == null)
@@ -85,7 +84,7 @@ public class ModelManager {
 			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
 			throw new CreateException("지원하지 않는 확장자입니다.");
 		}
-		this.callEvent("after-open");
+        EventManager.callEvent("after-open");
 	}
 	/**
 	 * id 값을 기준으로 현재 있는지 체크합니다.
@@ -114,37 +113,9 @@ public class ModelManager {
      * @throws SaveException 저장에 실패할 경우에 Exception 을 발생합니다. filePath 설정 권한등의 이유가 있습니다. {@link model.SaveException}
      */
     public void save()throws SaveException{
-		this.callEvent("before-save");
-		this.callEvent("after-save");
+        EventManager.callEvent("before-save");
+        EventManager.callEvent("after-save");
     }
-
-	/**
-	 * event 를 받습니다.
-	 * @param e event 객체를 받습니다. event 객체는 action 메서드를 오버라이드 해야합니다.
-	 *          event 객체에 자세한 사항은 {@link Event} 를 참고하세요.
-	 */
-	public void addEvent(Event e){
-		this.eventArrayList.add(e);
-	}
-
-	/**
-	 * 이벤트 리스트에서 특정 이벤트를 삭제합니다.
-	 * @param e event 객체를 받습니다. 해당 객체를 이벤트 리스트에서 삭제합니다.
-	 */
-	public void removeEvent(Event e){
-		this.eventArrayList.remove(e);
-	}
-	/**
-	 * 특정 태그인 이벤트를 모두 실행합니다.
-	 * @param tag 해당 값으로 생성된 이벤트를 실행합니다.
-	 */
-	private void callEvent(String tag){
-		for(Event e : this.eventArrayList){
-			if(e.getTag().compareTo(tag) == 0){
-				e.action();
-			}
-		}
-	}
 
 	/**
 	 * 현제 set 되어있는 {@link TitanicModel} 을 돌려줍니다.
