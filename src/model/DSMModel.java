@@ -96,5 +96,10 @@ public class DSMModel extends Model{
             arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
             arrayList.set(this.dependencyNumber * bar + i, temp.get(this.dependencyNumber * foo + i));
         }
+        temp = new ArrayList<>(arrayList);
+        for( int i = 0 ; i < this.dependencyNumber ; i++){
+            arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
+            arrayList.set(bar + this.dependencyNumber * i, temp.get(foo + this.dependencyNumber * i));
+        }
     }
 }
