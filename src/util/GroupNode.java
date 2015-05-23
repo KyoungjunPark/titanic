@@ -25,8 +25,8 @@ public class GroupNode extends Node{
     public void addItem(Node node){
         this.childNodeArray.add(node);
     }
-    public DefaultMutableTreeNode getTreeNode(){
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.getName());
+    public TreeNode getTreeNode(){
+        TreeNode root = new TreeNode(this.getName(), this);
         for(Node node : this.childNodeArray){
             root.add(node.getTreeNode());
         }
@@ -42,5 +42,17 @@ public class GroupNode extends Node{
             }
         }
         return null;
+    }
+    public GroupNode getChildGroupNode(){
+        ArrayList<Node> temp = new ArrayList<Node>();
+        for(Node node : this.childNodeArray){
+            if(node instanceof GroupNode){
+                return (GroupNode)node;
+            }
+        }
+        return null;
+    }
+    public String getType(){
+        return "G";
     }
 }

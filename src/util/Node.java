@@ -28,4 +28,5 @@ public abstract class Node {
      * @return {@link DefaultMutableTreeNode} TreeNode 를 돌려줍니다.
      */
     abstract public DefaultMutableTreeNode getTreeNode();
+    abstract public String getType();
 }
