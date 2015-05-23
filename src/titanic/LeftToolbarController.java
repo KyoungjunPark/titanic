@@ -83,4 +83,9 @@ public class LeftToolbarController extends LeftPanelController{
 		
 	}
 	
+	protected void changeDSMStatus()
+	{
+		leftToolbar.changeDSMStatus();
+		
+	}
 }

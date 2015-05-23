@@ -54,7 +54,7 @@ public class MainToolbarController extends BackgroundPanelController{
 				
 				//setting chaned when dsm file is open
 				//issue! setting값을 좀 더 구조적으로 배치할 수 없을까? 
-				OpenDSMStatus(openFile);
+				openDSMFile(openFile);
 				
 			}
 		});
@@ -119,5 +119,11 @@ public class MainToolbarController extends BackgroundPanelController{
 				JOptionPane.showMessageDialog(null, "Save Clustering is clicked");
 			}
 		});
+	}
+	
+	protected void changeDSMStatus()
+	{
+		toolbar.changeDSMStatus();
+		
 	}
 }

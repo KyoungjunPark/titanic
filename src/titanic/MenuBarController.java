@@ -65,7 +65,7 @@ public class MenuBarController extends BackgroundPanelController{
 				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when dsm file is open
-				OpenDSMStatus(openFile);
+				openDSMFile(openFile);
 				
 			}
 		});
@@ -211,5 +211,9 @@ public class MenuBarController extends BackgroundPanelController{
 		});
 	}
 
-	
+	protected void changeDSMStatus()
+	{
+		menu.changeDSMStatus();
+		
+	}
 }

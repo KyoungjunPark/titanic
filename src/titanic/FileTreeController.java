@@ -25,7 +25,7 @@ public class FileTreeController extends LeftPanelController {
 
 		
 	}
-	private void makeTree()
+	protected void makeTree()
 	{
 		treeFile.makeTree();
 		

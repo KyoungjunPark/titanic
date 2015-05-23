@@ -144,7 +144,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
         about.setMnemonic('A');
 		
 	}
-	public void OpenDSMStatus()
+	public void changeDSMStatus()
 	{
         for(Component component : this.getComponents()){
         	for(Component item : ((JMenu)component).getMenuComponents()){

@@ -15,20 +15,23 @@ public class MainController {
 
 	private MainToolbar toolbar;
 	private MenuBar menubar;
-	private CenterPanel mainPanel;
+	private CenterPanel centerPanel;
+	
+	private MenuBarController menuBarController;
+	private MainToolbarController mainToolbarController;
+	private CenterPanelController centerPanelController ;
+	
 
 	public MainController(){}
-	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel mainPanel){
+	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel centerPanel){
 		this.toolbar = toolbar;
 		this.menubar = menubar;
-		this.mainPanel = mainPanel;
+		this.centerPanel = centerPanel;
 
-		setEvent();
 		setControllers();
+		setEvent();
 
 		currentID = ModelManager.sharedModelManager().getCurrentID();
-
-	
 	}
 	
 	private void setEvent()
@@ -42,10 +45,11 @@ public class MainController {
 	     *
 	     */
 		ModelManager.sharedModelManager().addEvent(new Event("after-open"){ public void action(){
-			menubar.OpenDSMStatus();
-			toolbar.OpenDSMStatus();
-			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-			mainPanel.getLeftPanel().getfileTree().makeTree();
+			menuBarController.changeDSMStatus();
+			mainToolbarController.changeDSMStatus();
+			centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
+			centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+
 		}});
 
 		
@@ -56,14 +60,11 @@ public class MainController {
 	private void setControllers()
 	{
 		
-		@SuppressWarnings("unused")
-		MenuBarController menuBarController = new MenuBarController(menubar);
-		@SuppressWarnings("unused")
-		MainToolbarController mainToolbarController = new MainToolbarController(toolbar);
-		@SuppressWarnings("unused")
-		LeftPanelController mainController = new LeftPanelController(mainPanel.getLeftPanel());
+		menuBarController = new MenuBarController(menubar);
+		mainToolbarController = new MainToolbarController(toolbar);
+		centerPanelController = new CenterPanelController(centerPanel);
 	}
-	protected void OpenDSMStatus(File openFile)
+	protected void openDSMFile(File openFile)
 	{
 		int currentID;
 		

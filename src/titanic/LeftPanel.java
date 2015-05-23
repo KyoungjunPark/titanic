@@ -105,7 +105,7 @@ public class LeftPanel extends JPanel implements Controllerable{
 			add(deleteButton);
 			
 		}
-		public void OpenDSMStatus()
+		public void changeDSMStatus()
 		{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
