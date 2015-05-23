@@ -110,6 +110,25 @@ public class LeftPanel extends JPanel implements Controllerable{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
 	    }
+		protected void changeSubRootStatus()
+		{
+			groupButton.setEnabled(true);
+			ungroupButton.setEnabled(true);
+			deleteButton.setEnabled(true);
+			
+			//must change!
+			moveUpButton.setEnabled(true);
+			moveDownButton.setEnabled(true);
+		}
+		protected void changeItemStatus()
+		{
+			groupButton.setEnabled(true);
+			deleteButton.setEnabled(true);
+			
+			//must change!
+			moveUpButton.setEnabled(true);
+			moveDownButton.setEnabled(true);
+		}
 		@Override
 		public void setAction(String title, ActionListener action) {
 	        for(Component component : this.getComponents()){

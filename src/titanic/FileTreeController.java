@@ -8,6 +8,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import model.EventManager;
+import util.TreeNode;
+
 
 public class FileTreeController extends LeftPanelController {
 
@@ -33,18 +36,27 @@ public class FileTreeController extends LeftPanelController {
 				JTree treeSource = (JTree) e.getSource();
 			//	System.out.println("Min: " + treeSource.getMinSelectionRow());
 			//	System.out.println("Max: " + treeSource.getMaxSelectionRow());
-				DefaultMutableTreeNode node = (DefaultMutableTreeNode) treeFile
+				TreeNode node = (TreeNode) treeFile
 						.getLastSelectedPathComponent();
 
 				if (node == null)
 					// Nothing is selected.
 					return;
 				
+				if(node.isRoot()){
+					
+					
+				}else if(node.isLeaf()){
+					EventManager.callEvent("changeItemStatus");
+					
+				}else{
+					EventManager.callEvent("changeSubRootStatus");
+				}
 		
 				
 				TreePath[] paths = treeFile.getSelectionPaths();
 				selectedPaths = paths;
-				/*test version
+				/* test version
 				for(TreePath path : paths){
 					System.out.println(path.getLastPathComponent());
 					
@@ -76,5 +88,6 @@ public class FileTreeController extends LeftPanelController {
 	protected void delete(FileTree tree) {
 		treeFile.delete(tree);
 	}
+
 
 }

@@ -21,8 +21,14 @@ public class LeftPanelController extends CenterPanelController{
 	public LeftPanelController(){}
 	public LeftPanelController(LeftPanel leftPanel){
 		this.leftPanel = leftPanel;
-		setEvent();
 		setControllers();
+		setEvent();
+		
+	}
+	private void setControllers()
+	{
+		leftToolbarController = new LeftToolbarController(leftPanel.getToolbar());
+		fileTreeController = new FileTreeController(leftPanel.getfileTree());
 		
 	}
 	private void setEvent()
@@ -42,9 +48,13 @@ public class LeftPanelController extends CenterPanelController{
         EventManager.addEvent(new Event("moveUp"){
         	public void action(){
         		moveUp();
-        		
+        	} 	
+        });
+        
+        EventManager.addEvent(new Event("changeSubRootStatus"){
+        	public void action(){
+        		changeSubRootStatus();
         	}
-        	
         });
         
         EventManager.addEvent(new Event("delete"){
@@ -54,14 +64,16 @@ public class LeftPanelController extends CenterPanelController{
         	}
         	
         });
+
+        EventManager.addEvent(new Event("changeItemStatus"){
+        	public void action(){
+        		changeSubRootStatus();
+        	}
+        });
+       
 		
 	}
-	private void setControllers()
-	{
-		leftToolbarController = new LeftToolbarController(leftPanel.getToolbar());
-		fileTreeController = new FileTreeController(leftPanel.getfileTree());
-		
-	}
+
 	public void OpenDSMStatus()
 	{
 		
@@ -70,7 +82,7 @@ public class LeftPanelController extends CenterPanelController{
 	protected void moveUp(){
 		fileTreeController.moveUp();
 		
-	}
+	}	
 	protected void expandTree() {
 		fileTreeController.expandAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
 	}
@@ -78,6 +90,16 @@ public class LeftPanelController extends CenterPanelController{
 		fileTreeController.collapseAll(leftPanel.getfileTree(), 0, leftPanel.getfileTree().getRowCount());
 	}
 	protected void deleteTree() {
-		fileTreeController.delete(leftPanel.getfileTree());;
+		fileTreeController.delete(leftPanel.getfileTree());
+	}
+
+	protected void changeSubRootStatus()
+	{
+		leftToolbarController.changeSubRootStatus();
+		
+	}
+	protected void changeItemStatus()
+	{
+		leftToolbarController.changeItemStatus();
 	}
 }
