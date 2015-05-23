@@ -36,56 +36,21 @@ public class FileTreeController extends LeftPanelController {
 					EventManager.callEvent("changeRootStatus");
 					
 				}else if(node.isLeaf()){
-					EventManager.callEvent("changeItemStatus");
+					if(node.getPreviousLeaf() == null){ //if this node is first leaf node of parent's(disable move up icon)
+						EventManager.callEvent("changeItemStatusTop");
+					}
+					else if(node.getNextLeaf() == null){//if this node is first leaf node of parent's(disable move down icon)
+						EventManager.callEvent("changeItemStatusBottom");
+					}
+					else{
+						EventManager.callEvent("changeItemStatus");
+					}
 					
 				}else{
 					EventManager.callEvent("changeSubRootStatus");
 				}
 			}
 		});
-		/*
-		//listener of item selection
-		treeFile.getSelectionModel().setSelectionMode(
-		TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
-		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
-
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-
-				JTree treeSource = (JTree) e.getSource();
-			//	System.out.println("Min: " + treeSource.getMinSelectionRow());
-			//	System.out.println("Max: " + treeSource.getMaxSelectionRow());
-				TreeNode node = (TreeNode) treeSource
-						.getLastSelectedPathComponent();
-
-				if (node == null)
-					// Nothing is selected.
-					return;
-				
-				DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
-				
-				if(node.isRoot()){
-					EventManager.callEvent("changeRootStatus");
-					
-				}else if(node.isLeaf()){
-					EventManager.callEvent("changeItemStatus");
-					
-				}else{
-					EventManager.callEvent("changeSubRootStatus");
-				}
-		
-				
-				TreePath[] paths = treeFile.getSelectionPaths();
-				selectedPaths = paths;
-				// test version
-				for(TreePath path : paths){
-					System.out.println(path.getLastPathComponent());
-					
-				}
-				
-			}
-		});
-		*/
 
 	}
 

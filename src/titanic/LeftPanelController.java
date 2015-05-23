@@ -67,8 +67,24 @@ public class LeftPanelController extends CenterPanelController{
 
         EventManager.addEvent(new Event("changeItemStatus"){
         	public void action(){
-        		changeSubRootStatus();
+        		changeItemStatus();
+        	}	
+        });
+         
+        EventManager.addEvent(new Event("changeItemStatusTop"){
+        	public void action(){
+        		changeItemStatusTop();
+        		
         	}
+        	
+        });
+        
+        EventManager.addEvent(new Event("changeItemStatusBottom"){
+        	public void action(){
+        		changeItemStatusBottom();
+        		
+        	}
+        	
         });
         
         EventManager.addEvent(new Event("changeRootStatus"){
@@ -78,8 +94,7 @@ public class LeftPanelController extends CenterPanelController{
         	}
         	
         });
-       
-		
+      
 	}
 
 	public void OpenDSMStatus()
@@ -109,6 +124,14 @@ public class LeftPanelController extends CenterPanelController{
 	protected void changeItemStatus()
 	{
 		leftToolbarController.changeItemStatus();
+	}
+	protected void changeItemStatusTop()
+	{
+		leftToolbarController.changeItemStatusTop();
+	}
+	protected void changeItemStatusBottom()
+	{
+		leftToolbarController.changeItemStatusBottom();
 	}
 	protected void changeRootStatus()
 	{

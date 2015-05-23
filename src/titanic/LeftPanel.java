@@ -109,7 +109,11 @@ public class LeftPanel extends JPanel implements Controllerable{
 		{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
-			deleteButton.setEnabled(true);			// 삭제요망. test용.
+			groupButton.setEnabled(false);
+			ungroupButton.setEnabled(false);
+			moveUpButton.setEnabled(false);
+			moveDownButton.setEnabled(false);
+			deleteButton.setEnabled(false);
 	    }
 		protected void changeRootStatus()
 		{
@@ -124,27 +128,47 @@ public class LeftPanel extends JPanel implements Controllerable{
 		}
 		protected void changeSubRootStatus()
 		{
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(true);
-			deleteButton.setEnabled(true);
 			
 			//must change!
-			moveUpButton.setEnabled(true);
-			moveDownButton.setEnabled(true);
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
+			groupButton.setEnabled(false);
+			ungroupButton.setEnabled(false);
+			moveUpButton.setEnabled(false);
+			moveDownButton.setEnabled(false);
+			deleteButton.setEnabled(false);
 		}
 		protected void changeItemStatus()
 		{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
 			groupButton.setEnabled(true);
-			deleteButton.setEnabled(true);
-			//must change!
+			ungroupButton.setEnabled(false);
 			moveUpButton.setEnabled(true);
 			moveDownButton.setEnabled(true);
+			deleteButton.setEnabled(true);
 			
+		}
+		protected void changeItemStatusTop()
+		{
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
+			groupButton.setEnabled(true);
 			ungroupButton.setEnabled(false);
+			moveUpButton.setEnabled(false);
+			moveDownButton.setEnabled(true);
+			deleteButton.setEnabled(true);
+			
+		}
+		protected void changeItemStatusBottom()
+		{
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
+			groupButton.setEnabled(true);
+			ungroupButton.setEnabled(false);
+			moveUpButton.setEnabled(true);
+			moveDownButton.setEnabled(false);
+			deleteButton.setEnabled(true);
 			
 		}
 		@Override

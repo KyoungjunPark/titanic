@@ -34,21 +34,17 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	protected void moveUp()
 	{
-	
-		int[] rosw =this.getSelectionRows();
+		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
 		
-	
-		/*
-		 * TreePath[] paths = this.getSelectionPaths();
-		for(TreePath path : paths){
-
-			System.out.println("getPathCount : " + path.getPathCount());
-			for(int i = 0; i < path.getPathCount() ; i++){
-				System.out.println(""+i+path.getPathComponent(i));
+		for(int i = 0 ; i <nodes.size(); i++){
+			DefaultMutableTreeNode node = nodes.get(i);
+			if(node.getPreviousLeaf() == null){
+				
+				
 			}
+			//((DefaultTreeModel)this.getModel()).
+			
 		}
-		*/
-		
 		
 	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
@@ -68,17 +64,21 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	protected void delete() {
 		
+		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		for(int i = 0 ; i< nodes.size(); i++){
+			((DefaultTreeModel)this.getModel()).removeNodeFromParent(nodes.get(i));
+		}
+		
+	}
+	private ArrayList<DefaultMutableTreeNode> getSelectedNodes()
+	{
 		TreePath[] paths = this.getSelectionPaths();
 		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
 		for(TreePath path : paths){
 			nodes.add((DefaultMutableTreeNode)path.getLastPathComponent());
 		}
 		
-		for(int i = 0 ; i< nodes.size(); i++){
-
-			((DefaultTreeModel)this.getModel()).removeNodeFromParent(nodes.get(i));
-			
-		}
+		return nodes;
 		
 	}
 	public DefaultMutableTreeNode findNode(String search) {
