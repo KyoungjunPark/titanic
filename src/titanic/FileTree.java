@@ -1,6 +1,7 @@
 package titanic;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.JOptionPane;
@@ -29,15 +30,24 @@ public class FileTree extends JTree implements Controllerable {
 				.getGroupNode().getTreeNode();
 		setModel(new DefaultTreeModel(root));
 	}
-	protected void moveUp(TreePath[] selectedPath)
+	protected void moveUp()
 	{
-		for(TreePath path : selectedPath){
-			DefaultMutableTreeNode node = findNode((String)path.getLastPathComponent());
-			
-			DefaultTreeModel treeModel = (DefaultTreeModel)this.getModel();
-			
-			treeModel.insertNodeInto(node, (DefaultMutableTreeNode)node.getParent(), node.getParent().getIndex(node));
+	
+		int[] rosw =this.getSelectionRows();
+		
+	
+		/*
+		 * TreePath[] paths = this.getSelectionPaths();
+		for(TreePath path : paths){
+
+			System.out.println("getPathCount : " + path.getPathCount());
+			for(int i = 0; i < path.getPathCount() ; i++){
+				System.out.println(""+i+path.getPathComponent(i));
+			}
 		}
+		*/
+		
+		
 	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
 		for(int i=startingIndex; i<rowCount; i++){
@@ -55,7 +65,17 @@ public class FileTree extends JTree implements Controllerable {
 
 	}
 	protected void delete() {
-		removeSelectionRows(getSelectionRows());
+		TreePath[] paths = this.getSelectionPaths();
+		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+		for(TreePath path : paths){
+			nodes.add((DefaultMutableTreeNode)path.getLastPathComponent());
+		}
+		
+		for(int i = 0 ; i< nodes.size(); i++){
+
+			((DefaultTreeModel)this.getModel()).removeNodeFromParent(nodes.get(i));
+			
+		}
 		
 	}
 	public DefaultMutableTreeNode findNode(String search) {

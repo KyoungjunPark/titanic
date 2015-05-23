@@ -26,6 +26,23 @@ public class FileTreeController extends LeftPanelController {
 
 	private void init() {
 		
+		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
+			
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
+				
+				if(node.isRoot()){
+					EventManager.callEvent("changeRootStatus");
+					
+				}else if(node.isLeaf()){
+					EventManager.callEvent("changeItemStatus");
+					
+				}else{
+					EventManager.callEvent("changeSubRootStatus");
+				}
+			}
+		});
 		/*
 		//listener of item selection
 		treeFile.getSelectionModel().setSelectionMode(
@@ -77,7 +94,7 @@ public class FileTreeController extends LeftPanelController {
 	}
 	protected void moveUp()
 	{
-		treeFile.moveUp(selectedPaths);
+		treeFile.moveUp();
 	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
 		treeFile.expandAll(tree, startingIndex, rowCount);
