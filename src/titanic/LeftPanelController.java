@@ -46,6 +46,14 @@ public class LeftPanelController extends CenterPanelController{
         	}
         	
         });
+        
+        EventManager.addEvent(new Event("delete"){
+        	public void action(){
+        		moveUp();
+        		
+        	}
+        	
+        });
 		
 	}
 	private void setControllers()
