@@ -35,9 +35,10 @@ public class MainController {
 	}
 	private void setControllers()
 	{
+		
 		menuBarController = new MenuBarController(menubar);
 		mainToolbarController = new MainToolbarController(toolbar);
-		mainController = new LeftPanelController(mainPanel.getLeftPanel());
+		centerPanelController = new CenterPanelController(centerPanel);
 	}
 	private void setEvent()
 	{
@@ -63,19 +64,9 @@ public class MainController {
 			
 		}});
 		
-<<<<<<< HEAD
 	}
 	
-	private void setControllers()
-	{
-		
-		menuBarController = new MenuBarController(menubar);
-		mainToolbarController = new MainToolbarController(toolbar);
-		centerPanelController = new CenterPanelController(centerPanel);
-=======
-		
->>>>>>> 2777978fc303ca0358195d557677c76c84b88344
-	}
+
 	protected void openDSMFile(File openFile)
 	{
 		int currentID;
