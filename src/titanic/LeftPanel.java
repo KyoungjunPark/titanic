@@ -110,8 +110,21 @@ public class LeftPanel extends JPanel implements Controllerable{
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
 	    }
+		protected void changeRootStatus()
+		{
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
+			groupButton.setEnabled(false);
+			ungroupButton.setEnabled(false);
+			moveUpButton.setEnabled(false);
+			moveDownButton.setEnabled(false);
+			deleteButton.setEnabled(false);
+			
+		}
 		protected void changeSubRootStatus()
 		{
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
 			groupButton.setEnabled(true);
 			ungroupButton.setEnabled(true);
 			deleteButton.setEnabled(true);
@@ -122,6 +135,8 @@ public class LeftPanel extends JPanel implements Controllerable{
 		}
 		protected void changeItemStatus()
 		{
+			expandAllButton.setEnabled(true);
+			collapseAllButton.setEnabled(true);
 			groupButton.setEnabled(true);
 			deleteButton.setEnabled(true);
 			

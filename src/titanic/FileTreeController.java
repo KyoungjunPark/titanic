@@ -1,6 +1,7 @@
 package titanic;
 
 
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -44,12 +45,14 @@ public class FileTreeController extends LeftPanelController {
 					return;
 				
 				if(node.isRoot()){
-					
+					EventManager.callEvent("changeRootStatus");
 					
 				}else if(node.isLeaf()){
+					JOptionPane.showMessageDialog(null, "left is clicked");
 					EventManager.callEvent("changeItemStatus");
 					
 				}else{
+					JOptionPane.showMessageDialog(null, "subroot is clicked");
 					EventManager.callEvent("changeSubRootStatus");
 				}
 		
