@@ -90,7 +90,11 @@ public class DSMModel extends Model{
         }
         return matrixList;
     }
-    private void changeColumn(ArrayList<Integer> arrayList, int i, int j){
-
+    private void changeColumn(ArrayList<Integer> arrayList, int foo, int bar){
+        ArrayList<Integer> temp = new ArrayList(arrayList);
+        for( int i = 0 ; i < this.dependencyNumber ; i++){
+            arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
+            arrayList.set(this.dependencyNumber * bar + i, temp.get(this.dependencyNumber * foo + i));
+        }
     }
 }
