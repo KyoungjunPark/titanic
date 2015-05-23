@@ -139,10 +139,12 @@ public class LeftPanel extends JPanel implements Controllerable{
 			collapseAllButton.setEnabled(true);
 			groupButton.setEnabled(true);
 			deleteButton.setEnabled(true);
-			
 			//must change!
 			moveUpButton.setEnabled(true);
 			moveDownButton.setEnabled(true);
+			
+			ungroupButton.setEnabled(false);
+			
 		}
 		@Override
 		public void setAction(String title, ActionListener action) {

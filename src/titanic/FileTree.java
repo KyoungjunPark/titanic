@@ -31,9 +31,12 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	protected void moveUp(TreePath[] selectedPath)
 	{
-		JOptionPane.showMessageDialog(null, "ok");
 		for(TreePath path : selectedPath){
-			System.out.println(path.getLastPathComponent());			
+			DefaultMutableTreeNode node = findNode((String)path.getLastPathComponent());
+			
+			DefaultTreeModel treeModel = (DefaultTreeModel)this.getModel();
+			
+			treeModel.insertNodeInto(node, (DefaultMutableTreeNode)node.getParent(), node.getParent().getIndex(node));
 		}
 	}
 	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
@@ -62,21 +65,7 @@ public class FileTree extends JTree implements Controllerable {
 		}
 		
 	}
-
-	/*
-	 * This function's purpose is to assign tags witch are differentiate a root
-	 * node, sub root node, leaf node
-	 */
-	private void setTreeTag() {
-		Enumeration nodeEnumeration = root.breadthFirstEnumeration();
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) nodeEnumeration.nextElement();
-
-		JOptionPane.showMessageDialog(null, root.getDepth());
-
-	}
-
-	public DefaultMutableTreeNode findNode(DefaultMutableTreeNode root,
-			String search) {
+	public DefaultMutableTreeNode findNode(String search) {
 		
 		Enumeration nodeEnumeration = root.breadthFirstEnumeration();
 		while (nodeEnumeration.hasMoreElements()) {

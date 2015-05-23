@@ -48,11 +48,9 @@ public class FileTreeController extends LeftPanelController {
 					EventManager.callEvent("changeRootStatus");
 					
 				}else if(node.isLeaf()){
-					JOptionPane.showMessageDialog(null, "left is clicked");
 					EventManager.callEvent("changeItemStatus");
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "subroot is clicked");
 					EventManager.callEvent("changeSubRootStatus");
 				}
 		
