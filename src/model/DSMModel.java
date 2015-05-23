@@ -59,4 +59,19 @@ public class DSMModel extends Model{
         result += String.join("\n", this.elementsNameArray);
 		return result;
 	}
+    protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
+        ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
+        if(clsx != null){
+
+        }else{
+            ArrayList<String> data = new ArrayList<String>();
+            for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
+                data.add(this.elementsNameArray.get(i));
+                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++){
+                    data.add(this.dependencyRelationArray.get(i) + "");
+                }
+            }
+        }
+        return matrixList;
+    }
 }
