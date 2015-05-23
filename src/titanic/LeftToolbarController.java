@@ -99,10 +99,6 @@ public class LeftToolbarController extends LeftPanelController{
 	{
 		leftToolbar.changeItemStatus();
 	}
-	protected void changeRootStatus()
-	{
-		leftToolbar.changeRootStatus();
-	}
 	protected void changeItemStatusTop()
 	{
 		leftToolbar.changeItemStatusTop();
@@ -111,4 +107,17 @@ public class LeftToolbarController extends LeftPanelController{
 	{
 		leftToolbar.changeItemStatusBottom();
 	}
+	protected void changeRootStatus()
+	{
+		leftToolbar.changeRootStatus();
+	}
+	protected void changeSubRootStatusTop()
+	{
+		leftToolbar.changeSubRootStatusTop();
+	}
+	protected void changeSubRootStatusBottom()
+	{
+		leftToolbar.changeSubRootStatusBottom();
+	}
+	
 }

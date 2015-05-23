@@ -36,10 +36,12 @@ public class FileTreeController extends LeftPanelController {
 					EventManager.callEvent("changeRootStatus");
 					
 				}else if(node.isLeaf()){
-					if(node.getPreviousLeaf() == null){ //if this node is first leaf node of parent's(disable move up icon)
+					if(node.getPreviousLeaf() == null){ 
+						//if this node is first leaf of parent's(disable move up icon)
 						EventManager.callEvent("changeItemStatusTop");
 					}
-					else if(node.getNextLeaf() == null){//if this node is first leaf node of parent's(disable move down icon)
+					else if(node.getNextLeaf() == null){
+						//if this node is last leaf of parent's(disable move down icon)
 						EventManager.callEvent("changeItemStatusBottom");
 					}
 					else{
@@ -47,7 +49,18 @@ public class FileTreeController extends LeftPanelController {
 					}
 					
 				}else{
+					if(node.getPreviousSibling() == null){
+						//if this node is first node of parent's(disable move up icon)
+						EventManager.callEvent("changeSubRootStatusTop");
+						
+					}
+					else if(node.getNextSibling() == null ){
+						//if this node is first node of parent's(disable move up icon)
+						EventManager.callEvent("changeSubRootStatusBottom");
+						
+					}else{
 					EventManager.callEvent("changeSubRootStatus");
+					}
 				}
 			}
 		});
