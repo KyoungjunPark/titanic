@@ -37,7 +37,6 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Collapse All is clicked");
 				EventManager.callEvent("collapseAll");
 				
 			}
@@ -70,7 +69,7 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Move Down is clicked");
+				EventManager.callEvent("moveDown");
 				
 			}
 		});

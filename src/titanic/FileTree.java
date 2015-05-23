@@ -35,14 +35,17 @@ public class FileTree extends JTree implements Controllerable {
 
 		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getGroupNode().getTreeNode();
+
 		setModel(new DefaultTreeModel(root));
+
+		this.setSelectionPath(new TreePath(root));
 	}
 
 	protected void moveUp() {
 
 		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
-
-		System.out.println(nodes.size());
+		TreePath[] treePath = new TreePath[nodes.size()];
+		
 		for (int i = 0; i < nodes.size(); i++) {
 			DefaultMutableTreeNode node = nodes.get(i);
 
@@ -58,21 +61,37 @@ public class FileTree extends JTree implements Controllerable {
 			node.removeFromParent();
 
 			model.reload(root);
-
-			/*
-			 * DefaultMutableTreeNode node = nodes.get(i);
-			 * 
-			 * ((DefaultTreeModel)this.getModel()).insertNodeInto((MutableTreeNode
-			 * )node, (MutableTreeNode)node.getParent() ,
-			 * node.getParent().getIndex(node) - 1);
-			 * 
-			 * System.out.println(node.getParent().getIndex(node)+1);
-			 * ((DefaultMutableTreeNode
-			 * )node.getParent()).remove((node.getParent().getIndex(node)+1));
-			 * 
-			 * node.getParent().remove();
-			 */
+			treePath[i] = new TreePath(newNode.getPath());
 		}
+		
+		this.setSelectionPaths(treePath);
+		
+
+	}
+
+	protected void moveDown() {
+		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		TreePath[] treePath = new TreePath[nodes.size()];
+		
+		for (int i = 0; i < nodes.size(); i++) {
+			DefaultMutableTreeNode node = nodes.get(i);
+
+			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
+			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
+					.getRoot();
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+
+			newNode = (DefaultMutableTreeNode) deepClone(node);
+			model.insertNodeInto(newNode, root,
+					node.getParent().getIndex(node) + 2);
+
+			node.removeFromParent();
+
+			model.reload(root);
+			treePath[i] = new TreePath(newNode.getPath());
+		}
+		
+		this.setSelectionPaths(treePath);
 
 	}
 
@@ -86,23 +105,6 @@ public class FileTree extends JTree implements Controllerable {
 		}
 		return newNode;
 	} // end of deepClone
-
-	public Object copySubTree(DefaultMutableTreeNode subRoot,
-			DefaultMutableTreeNode sourceTree)
-			throws CloneNotSupportedException {
-		if (sourceTree == null || sourceTree.isLeaf()) {
-			return new DefaultMutableTreeNode(sourceTree);
-		}
-		for (int i = 0; i < sourceTree.getChildCount(); i++) {
-			DefaultMutableTreeNode child = (DefaultMutableTreeNode) sourceTree
-					.getChildAt(i);
-			DefaultMutableTreeNode clone = new DefaultMutableTreeNode(
-					child.getUserObject());
-			subRoot.add(clone);
-			copySubTree(clone, child);
-		}
-		return subRoot;
-	}
 
 	protected void addItem() {
 		DefaultTreeModel model = (DefaultTreeModel) this.getModel();

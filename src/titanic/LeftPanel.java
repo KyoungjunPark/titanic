@@ -100,7 +100,16 @@ public class LeftPanel extends JPanel implements Controllerable {
 
 		}
 
-		public void changeDSMStatus() {
+		/*
+		protected void setExpandAllButton(boolean bool){expandAllButton.setEnabled(bool);}
+		protected void setcollapseAllButton(boolean bool){collapseAllButton.setEnabled(bool);}
+		protected void setgroupButton(boolean bool){groupButton.setEnabled(bool);}
+		protected void setungroupButton(boolean bool){ungroupButton.setEnabled(bool);}
+		protected void setmoveUpButton(boolean bool){moveUpButton.setEnabled(bool);}
+		protected void setmoveDownButton(boolean bool){moveDownButton.setEnabled(bool);}
+		protected void setdeleteButton(boolean bool){deleteButton.setEnabled(bool);}
+		*/
+		protected void changeDSMStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
 			groupButton.setEnabled(false);
