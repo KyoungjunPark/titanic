@@ -81,7 +81,7 @@ public class MainController {
 	protected void OpenClsxStatus(File openFile)
 	{
 		try {
-			ModelManager.sharedModelManager().createTitanicModel(openFile);
+			ModelManager.sharedModelManager().setFile(openFile);
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

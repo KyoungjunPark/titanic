@@ -25,7 +25,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Expand All is clicked");
-				
+				expandTree();
 			}
 		});
 		leftToolbar.setAction("Collapse All", new ActionListener() {

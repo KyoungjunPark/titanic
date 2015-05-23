@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 
 public class LeftPanelController extends CenterPanelController{
 	
-	private JPanel leftPanel;
+	private LeftPanel leftPanel;
 	
 	public LeftPanelController(){}
-	public LeftPanelController(JPanel leftPanel){
+	public LeftPanelController(LeftPanel leftPanel){
 		this.leftPanel = leftPanel;
 		init();
 		
@@ -18,6 +18,11 @@ public class LeftPanelController extends CenterPanelController{
 	public void OpenDSMStatus()
 	{
 		
+		
+	}
+	protected void expandTree()
+	{
+		leftPanel.getfileTree();
 		
 	}
 }

@@ -99,14 +99,6 @@ public class MainToolbarController extends BackgroundPanelController{
 				if(yn != JFileChooser.APPROVE_OPTION) return;
 				
 				openFile = fc.getSelectedFile();
-				try {
-					ModelManager.sharedModelManager().createTitanicModel(openFile);
-				} catch (CreateException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				//when file open success, then available icon must be changed!
-				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when clsx file is 
 				OpenClsxStatus(openFile);
