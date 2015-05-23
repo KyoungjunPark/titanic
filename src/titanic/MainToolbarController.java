@@ -12,7 +12,7 @@ import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.ModelManager;
 
-public class MainToolbarController extends BackgroundPanelController{
+public class MainToolbarController extends MainController{
 	
 	private MainToolbar toolbar;
 	

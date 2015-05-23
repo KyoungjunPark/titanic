@@ -42,7 +42,6 @@ public class DSMModel extends Model{
 	public GroupNode getGroupNode(){
 		this.node = new GroupNode("root$");
 		for(String name : this.elementsNameArray){
-			System.out.println(name);
 			this.node.addItem(new ItemNode(name));
 		}
 		return this.node;

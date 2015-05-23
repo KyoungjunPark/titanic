@@ -1,6 +1,6 @@
 package titanic;
 
-public class CenterPanelController extends BackgroundPanelController{
+public class CenterPanelController extends MainController{
 
 	private CenterPanel centerPanel;
 	
