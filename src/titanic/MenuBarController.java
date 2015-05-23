@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileFilter;
 import model.CreateException;
 import model.ModelManager;
 
-public class MenuBarController extends BackgroundPanelController{
+public class MenuBarController extends MainController{
 	
 	private MenuBar menu;
 	
@@ -55,17 +55,9 @@ public class MenuBarController extends BackgroundPanelController{
 				if(yn != JFileChooser.APPROVE_OPTION) return;
 				
 				openFile = fc.getSelectedFile();
-				try {
-					ModelManager.sharedModelManager().createTitanicModel(openFile);
-				} catch (CreateException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				//when file open success, then available icon must be changed!
-				//Then Manager must give a message like "It's ok".
-				
+
 				//setting chaned when dsm file is open
-				OpenDSMStatus(openFile);
+				openDSMFile(openFile);
 				
 			}
 		});
@@ -102,16 +94,10 @@ public class MenuBarController extends BackgroundPanelController{
 				if(yn != JFileChooser.APPROVE_OPTION) return;
 				
 				openFile = fc.getSelectedFile();
-				try {
-					ModelManager.sharedModelManager().createTitanicModel(openFile);
-				} catch (CreateException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				//when file open success, then available icon must be changed!
-				//Then Manager must give a message like "It's ok".
 				
 				//setting chaned when clsx file is 
+				OpenClsxStatus(openFile);
+
 			}
 		});	
 		menu.setAction("Save Clustering", new ActionListener() {
@@ -217,5 +203,9 @@ public class MenuBarController extends BackgroundPanelController{
 		});
 	}
 
-	
+	protected void changeDSMStatus()
+	{
+		menu.changeDSMStatus();
+		
+	}
 }

@@ -40,13 +40,12 @@ public class DSMModel extends Model{
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
 	public GroupNode getGroupNode(){
-		this.node = new GroupNode();
-		GroupNode root = new GroupNode("root$");
-		for(String name : this.elementsNameArray)
-			root.addItem(new ItemNode(name));
-		node.addItem(root);
+		this.node = new GroupNode("root$");
+		for(String name : this.elementsNameArray){
+			this.node.addItem(new ItemNode(name));
+		}
 		return this.node;
-	};
+	}
 	public String toString(){
 		String result = ""+this.dependencyNumber;
 		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
@@ -60,4 +59,19 @@ public class DSMModel extends Model{
         result += String.join("\n", this.elementsNameArray);
 		return result;
 	}
+    protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
+        ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
+        if(clsx != null){
+
+        }else{
+            ArrayList<String> data = new ArrayList<String>();
+            for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
+                data.add(this.elementsNameArray.get(i));
+                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++){
+                    data.add(this.dependencyRelationArray.get(i) + "");
+                }
+            }
+        }
+        return matrixList;
+    }
 }

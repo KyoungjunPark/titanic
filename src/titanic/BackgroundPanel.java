@@ -101,7 +101,7 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 			
 			
 		}
-		public void OpenDSMStatus()
+		public void changeDSMStatus()
 		{
 
 	        for(Component component : this.getComponents()){

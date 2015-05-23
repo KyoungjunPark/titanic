@@ -17,7 +17,10 @@ public class ItemNode extends Node{
     public ItemNode(String name){
         this(null, name);
     }
-    public DefaultMutableTreeNode getTreeNode(){
-        return new DefaultMutableTreeNode(this.getName());
+    public TreeNode getTreeNode(){
+        return new TreeNode(this.getName(), this);
+    }
+    public String getType(){
+        return "I";
     }
 }

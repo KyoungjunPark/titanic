@@ -2,6 +2,7 @@ package titanic;
 
 import java.io.File;
 
+import model.EventManager;
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.ModelManager;
@@ -15,29 +16,30 @@ public class MainController {
 
 	private MainToolbar toolbar;
 	private MenuBar menubar;
-	private CenterPanel mainPanel;
+	private CenterPanel centerPanel;
+	
 	private MenuBarController menuBarController;
 	private MainToolbarController mainToolbarController;
-	private LeftPanelController mainController;
+	private CenterPanelController centerPanelController ;
+	
 
 	public MainController(){}
-	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel mainPanel){
+	public MainController(MainToolbar toolbar, MenuBar menubar, CenterPanel centerPanel){
 		this.toolbar = toolbar;
 		this.menubar = menubar;
-		this.mainPanel = mainPanel;
+		this.centerPanel = centerPanel;
 
-		setEvent();
 		setControllers();
+		setEvent();
 
 		currentID = ModelManager.sharedModelManager().getCurrentID();
-
-	
 	}
 	private void setControllers()
 	{
+		
 		menuBarController = new MenuBarController(menubar);
 		mainToolbarController = new MainToolbarController(toolbar);
-		mainController = new LeftPanelController(mainPanel.getLeftPanel());
+		centerPanelController = new CenterPanelController(centerPanel);
 	}
 	private void setEvent()
 	{
@@ -49,20 +51,32 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		ModelManager.sharedModelManager().addEvent(new Event("after-open"){ public void action(){
-			menubar.OpenDSMStatus();
-			toolbar.OpenDSMStatus();
-			mainPanel.getLeftPanel().getToolbar().OpenDSMStatus();
-			mainPanel.getLeftPanel().getfileTree().makeTree();
-		}});
-		
-		ModelManager.sharedModelManager().addEvent(new Event("expandAll"){ public void action(){
-			
-		}});
-		
+		EventManager.addEvent(new Event("after-open") {
+            public void action() {
+                menuBarController.changeDSMStatus();
+                mainToolbarController.changeDSMStatus();
+                centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
+                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+
+            }
+        });
+
+        EventManager.addEvent(new Event("expandAll") {
+            public void action() {
+            	centerPanelController.getLeftPanelController().expandTree();
+            }
+        });
+        
+        EventManager.addEvent(new Event("collapseAll") {
+            public void action() {
+            	centerPanelController.getLeftPanelController().collapseTree();
+            }
+        });
 		
 	}
-	protected void OpenDSMStatus(File openFile)
+	
+
+	protected void openDSMFile(File openFile)
 	{
 		int currentID;
 		
@@ -74,6 +88,15 @@ public class MainController {
 		}
 		
 		
+	}
+	protected void OpenClsxStatus(File openFile)
+	{
+		try {
+			ModelManager.sharedModelManager().setFile(openFile);
+		} catch (CreateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

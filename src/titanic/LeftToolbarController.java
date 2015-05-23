@@ -7,6 +7,8 @@ import java.util.Enumeration;
 import javax.swing.JOptionPane;
 
 
+
+import model.EventManager;
 import titanic.LeftPanel.LeftToolBar;
 
 
@@ -27,8 +29,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Expand All is clicked");
-				expandTree();
-				//callEvent("expand all");
+				EventManager.callEvent("expandAll");
 			}
 		});
 		leftToolbar.setAction("Collapse All", new ActionListener() {
@@ -36,6 +37,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Collapse All is clicked");
+				EventManager.callEvent("collapseAll");
 				
 			}
 		});
@@ -59,7 +61,7 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Move Up is clicked");
+				moveUp();
 				
 			}
 		});
@@ -83,4 +85,9 @@ public class LeftToolbarController extends LeftPanelController{
 		
 	}
 	
+	protected void changeDSMStatus()
+	{
+		leftToolbar.changeDSMStatus();
+		
+	}
 }

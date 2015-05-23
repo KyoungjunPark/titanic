@@ -4,6 +4,7 @@ import util.GroupNode;
 import util.JSFiles;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class TitanicModel {
 
@@ -39,14 +40,15 @@ public class TitanicModel {
         this.clsxModel = clsxModel;
     }
 	protected void setClsxModel(File file)throws CreateException{
-		if(JSFiles.getFileExtension(file).toLowerCase().equals(".clsx")) {
+		if(JSFiles.getFileExtension(file).toLowerCase().compareTo(".clsx") ==0) {
 			CLSXModel clsx = new CLSXModel(file);
 			this.setClsxModel(clsx);
 		}
 	}
 	public GroupNode getGroupNode(){
-		if(this.clsxModel != null)
-			return this.getGroupNode();
+		if(this.clsxModel != null){
+			return this.clsxModel.getGroupNode();
+		}
 		return this.dsmModel.getGroupNode();
 	}
 	public int getID(){
@@ -56,4 +58,7 @@ public class TitanicModel {
 	static private int nextID(){
 		return TitanicModel.nextID++;
 	}
+    public ArrayList<ArrayList<String>> getMatrixData(){
+        return this.dsmModel.getMatrix(this.clsxModel);
+    }
 }
