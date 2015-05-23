@@ -73,5 +73,8 @@ public class FileTreeController extends LeftPanelController {
 		 * tree.getRowCount()); }
 		 */
 	}
+	protected void delete(FileTree tree) {
+		treeFile.delete(tree);
+	}
 
 }

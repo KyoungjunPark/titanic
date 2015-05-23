@@ -1,6 +1,7 @@
 package titanic;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.*;
@@ -8,10 +9,14 @@ import javax.swing.table.*;
 
 public class WholeDSMTable extends JPanel {
 
+	/**
+	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만든다. DSM 정보는 ArrayList<ArrayList>의 형식이며
+	 * list.get(i)는 name, dependency 의 집합 이다.
+	 */
 	private ArrayList<ArrayList> rows;
 
-	WholeDSMTable(ArrayList<ArrayList> rows) {
-		init(rows);
+	WholeDSMTable(ArrayList<ArrayList> rows) throws NullPointerException {
+			init(rows);
 	}
 
 	private void init(ArrayList<ArrayList> rows) {
@@ -21,30 +26,33 @@ public class WholeDSMTable extends JPanel {
 		JTable wholeDSMTable = new JTable(tableModel);
 
 		tableDistributeInit(wholeDSMTable);
-		this.add(wholeDSMTable);
+
+		this.setLayout(new BorderLayout());
+		this.add(new JScrollPane(wholeDSMTable), BorderLayout.CENTER);
+
 	}
 
 	private void tableDistributeInit(JTable table) {
 		// JTable distributes
-
+		int columnWidth = 100;
+		int firstLine = 0;
 		int rowHeight = 50;
+
+		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, 40));
 
-		// wholeDSMTable.setColumnSelectionAllowed(true);
-		// wholeDSMTable.setRowSelectionAllowed(true);
-		// wholeDSMTable.setCellSelectionEnabled(true);
-		// wholeDSMTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
 		DefaultTableCellRenderer firstLineRender = new DefaultTableCellRenderer();
 		DefaultTableCellRenderer restRender = new DefaultTableCellRenderer();
-		int firstLine = 0;
+
 		firstLineRender.setBackground(Color.LIGHT_GRAY);
-		table.getColumnModel().getColumn(firstLine).setCellRenderer(firstLineRender);
-		table.getColumnModel().getColumn(firstLine).setPreferredWidth(250);
-		table.setAutoscrolls(true);
+		firstLineRender.setHorizontalAlignment(JLabel.RIGHT);
 		restRender.setHorizontalAlignment(JLabel.CENTER);
-		for (int i = 1; i < table.getRowCount(); i++) {
+		table.getColumnModel().getColumn(firstLine)
+				.setCellRenderer(firstLineRender);
+		table.getColumnModel().getColumn(firstLine)
+				.setPreferredWidth(columnWidth);
+		for (int i = 1; i < table.getRowCount() + 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
 
@@ -62,18 +70,18 @@ public class WholeDSMTable extends JPanel {
 
 		private void init(ArrayList<ArrayList> rows) {
 
-			showRowLabels = false; // 임의 설정
+			// 임의로 설정된 상태임 setShowRowLabels(boolean) 이용해서 설정해줘야 함
+			// 삭제할 것
+			showRowLabels = false;
 
 			tableData = rows;
 			columnIndex = new ArrayList();
-			columnIndex.add("");
-			for (int i = 0; i < this.tableData.size(); i++)
-				columnIndex.add("" + (i + 1));
-			tableData.add(0, columnIndex);
 
-			for (int i = 1; i < this.tableData.size(); i++) {
+			columnIndex.add("");
+			for (int i = 0; i < this.tableData.size(); i++) {
 				String s = new String();
-				s = i + "";
+				s = (i + 1) + "";
+				columnIndex.add(s);
 				if (this.showRowLabels == true) {
 					s = s + " " + this.getValueAt(i, 0).toString();
 				}
@@ -100,9 +108,11 @@ public class WholeDSMTable extends JPanel {
 
 			String data = new String((String) tableData.get(rowIndex).get(
 					columnIndex));
-
-			if (rowIndex != 0 && columnIndex != 0) {
-				if (rowIndex == columnIndex)
+			int row, column;
+			row = rowIndex + 1;
+			column = columnIndex;
+			if (row != 0 && column != 0) {
+				if (row == column)
 					return "·";
 
 				switch (data) {
@@ -113,7 +123,13 @@ public class WholeDSMTable extends JPanel {
 				}
 			} else
 				return data;
+
+		}
+
+		public String getColumnName(int columnIndex) {
+			return (String) this.columnIndex.get(columnIndex);
 		}
 	}
 
 }
+

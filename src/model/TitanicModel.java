@@ -4,6 +4,7 @@ import util.GroupNode;
 import util.JSFiles;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class TitanicModel {
 
@@ -57,4 +58,7 @@ public class TitanicModel {
 	static private int nextID(){
 		return TitanicModel.nextID++;
 	}
+    public ArrayList<ArrayList<String>> getMatrixData(){
+        return this.dsmModel.getMatrix(this.clsxModel);
+    }
 }

@@ -79,7 +79,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Delete is clicked");
-				
+				EventManager.callEvent("delete");
 			}
 		});
 		
