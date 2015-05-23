@@ -51,15 +51,8 @@ public class FileTree extends JTree implements Controllerable {
 		}
 
 	}
-	protected void delete(FileTree tree) {
-		/*Integer selectedRowIndex[] = new Integer[tree.getSelectionRows().length];
-		for(int i=0; i<selectedRowIndex.length; i++) {
-			selectedRowIndex[i] = new Integer(tree.getSelectionRows()[i]);
-		}*/
-		
-		for(int i=0; i<tree.getSelectionRows().length; i++) {
-			tree.remove(tree.getSelectionRows()[i]);
-		}
+	protected void delete() {
+		removeSelectionRows(getSelectionRows());
 		
 	}
 
