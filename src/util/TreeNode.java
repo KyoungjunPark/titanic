@@ -17,4 +17,7 @@ public class TreeNode extends DefaultMutableTreeNode {
     public String getType(){
         return this.node.getType();
     }
+    public Node getNode(){
+        return this.node;
+    }
 }
