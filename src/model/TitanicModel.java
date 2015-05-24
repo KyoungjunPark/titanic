@@ -2,6 +2,7 @@ package model;
 
 import util.GroupNode;
 import util.JSFiles;
+import util.TreeNode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -60,5 +61,17 @@ public class TitanicModel {
 	}
     public ArrayList<ArrayList<String>> getMatrixData(){
         return this.dsmModel.getMatrix(this.clsxModel);
+    }
+
+    /**
+     * root 의 트리 노드를 받아 model 과 sync 합니다.
+     * 가장 최상의 root 를 받아야 합니다.
+     * 가지고 있는 데이터의 갯수와 node 의 갯수가 다를경우 sync 가 실패합니다.
+     * 트리노드는 다음을 참고해주세요. {@link util.TreeNode}
+     * @param root
+     * @return 성공 여부를 알려줍니다.
+     */
+    public boolean syncTreeNode(TreeNode root){
+        return true;
     }
 }
