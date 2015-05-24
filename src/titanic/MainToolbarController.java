@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileFilter;
 
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
+import model.EventManager;
 import model.ModelManager;
 
 public class MainToolbarController extends MainController{
@@ -64,7 +65,7 @@ public class MainToolbarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Redraw is clicked");
-				
+				EventManager.callEvent("Redraw");
 				
 			
 			}

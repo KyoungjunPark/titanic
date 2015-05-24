@@ -176,4 +176,5 @@ public class LeftPanelController extends CenterPanelController {
 
 		leftToolbarController.changeSubRootStatusBottom();
 	}
+
 }
