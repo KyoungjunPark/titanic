@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+
 import model.EventManager;
 
 public class FileTreeController extends LeftPanelController {
 
 	private FileTree treeFile;
-
 
 	public FileTreeController(FileTree treeFile) {
 		this.treeFile = treeFile;
@@ -19,81 +21,161 @@ public class FileTreeController extends LeftPanelController {
 
 	private void init() {
 		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
-			//must consider status changed........(multiple icon problem..)
-			/*
-			 * tag에 따라 현재 적용할 Status를 결정한다. 
-			 * if tag -> changeRootStatus = node가 Root인 경우
-			 * 
-			 * if tag -> changeItemStatusTop = leaf의 집합들 중 Top leaf를 포함하는 경우
-			 * if tag -> changeItemStatusBottom = leaf의 집합들 중 Bottom leaf를 포함하는 경우
-			 * if tag -> changeItemStatusAll = leaf의 집합들 중 Top과 Bottom leaf를 모두 포함하는 경우
-			 * if tag -> changeItemStatus = leaf의 집합들 중 Top과 Bottom이 아닌 중간 leaf들만 포함하는 경우
-			 * 
-			 * 
-			 * if tag -> changeSubRootStatusTop = node의 집합들 중 Top node를 포함하는 경우
-			 * if tag -> changeSubRootStatusBottom = node의 집합들 중 Bottom node를 포함하는 경우
-			 * if tag -> changeSubRootStatusAll = node의 집합들 중 Top과 Bottom node를 모두 포함하는 경우
-			 * if tag -> changeSubRootStatus = node의 집합들 중 Top과 Bottom이 아닌 중간 node들만 포함하는 경우
-			 */
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
+				ArrayList<String> tag = new ArrayList<>();
+				TreePath[] paths = treeFile.getSelectionModel().getSelectionPaths();
+				ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<>();
+				
+				if(paths.length == 0) return;
+				for (TreePath path : paths) {
 
-				treeFile.addTreeSelectionListener(new TreeSelectionListener() {
+					DefaultMutableTreeNode node = (DefaultMutableTreeNode) path
+							.getLastPathComponent();
+					nodes.add(node);
+					
+					if (node.isRoot()) {
+						tag.add("Root");
 
-					@Override
-					public void valueChanged(TreeSelectionEvent e) {
-						DefaultMutableTreeNode node = (DefaultMutableTreeNode) e
-								.getPath().getLastPathComponent();
+					} else if (node.isLeaf()) {
+						tag.add("Leaf");
+						if (node.getPreviousLeaf() == null
+								|| ((DefaultMutableTreeNode) node.getParent())
+										.getFirstChild() == node) {
+							// if this node is first leaf of parent's(disable
+							// move
+							// up icon)
+							tag.add("TopItem");
+						} else if (node.getNextLeaf() == null
+								|| ((DefaultMutableTreeNode) node.getParent())
+										.getLastChild() == node) {
+							// if this node is last leaf of parent's(disable
+							// move
+							// down icon)
+							tag.add("BottomItem");
+						} else {
+							tag.add("Item");
+						}
 
-						if (node.isRoot()) {
-							EventManager.callEvent("changeRootStatus");
+					} else {
+						tag.add("Not Leaf");
+						if (node.getPreviousSibling() == null) {
+							// if this node is first node of parent's(disable
+							// move
+							// up icon)
+							tag.add("TopSubRoot");
 
-						} else if (node.isLeaf()) {
-							/*
-							 * test version System.out.println("leaf & top leaf : " +
-							 * node.getPreviousLeaf());
-							 * System.out.println("leaf & Bottom leaf : "
-							 * +node.getNextLeaf());
-							 * System.out.println("getFirstLeaf : " +
-							 * ((DefaultMutableTreeNode
-							 * )node.getParent()).getFirstChild());
-							 * System.out.println("getLastLeaf : " +
-							 * ((DefaultMutableTreeNode
-							 * )node.getParent()).getLastChild());
-							 */
-							if (node.getPreviousLeaf() == null
-									|| ((DefaultMutableTreeNode) node.getParent())
-											.getFirstChild() == node) {
-								// if this node is first leaf of parent's(disable move
-								// up icon)
-								EventManager.callEvent("changeItemStatusTop");
-							} else if (node.getNextLeaf() == null
-									|| ((DefaultMutableTreeNode) node.getParent())
-											.getLastChild() == node) {
-								// if this node is last leaf of parent's(disable move
-								// down icon)
-								EventManager.callEvent("changeItemStatusBottom");
-							} else {
-								EventManager.callEvent("changeItemStatus");
-							}
+						} else if (node.getNextSibling() == null) {
+							// if this node is first node of parent's(disable
+							// move
+							// up icon)
+							tag.add("BottomSubRoot");
 
 						} else {
-							if (node.getPreviousSibling() == null) {
-								// if this node is first node of parent's(disable move
-								// up icon)
-								EventManager.callEvent("changeSubRootStatusTop");
-
-							} else if (node.getNextSibling() == null) {
-								// if this node is first node of parent's(disable move
-								// up icon)
-								EventManager.callEvent("changeSubRootStatusBottom");
-
-							} else {
-								EventManager.callEvent("changeSubRootStatus");
-							}
+							tag.add("SubRoot");
 						}
 					}
-				});
+
+				}
+				//design issue ( in titan root->folder & folder->root selection status is different!
+			
+				//case : ExpandAllButton
+				EventManager.callEvent("expandAllButtonEnable");
+				/*must enabled*/
+			
+				//case : CollapseAllButton
+				/*must enabled*/
+				EventManager.callEvent("collapseAllButtonEnable");
+				
+				//case : GroupButton
+				Boolean bool = true;
+				TreeNode temp = nodes.get(0).getParent();
+				
+				for(int i = 1 ; i <nodes.size(); i++){
+					if(temp != nodes.get(i).getParent()){
+						bool = false;
+						break;
+					}
+				}	
+				if(tag.contains("Root")){
+					//disabled
+					EventManager.callEvent("groupButtonDisable");
+				}else if(tag.contains("Leaf") && tag.contains("Not Leaf")){
+					//disabled
+					EventManager.callEvent("groupButtonDisable");
+				}else if(!bool){
+					//if bool is false -> group disabled
+					EventManager.callEvent("groupButtonDisable");
+					
+				}else{
+					//enabled
+					EventManager.callEvent("groupButtonEnable");
+				}
+			
+				//case : UngroupButton
+				if(tag.contains("Leaf")){
+					//disabled
+					EventManager.callEvent("ungroupButtonDisable");
+					
+				}
+				else if(tag.contains("Leaf") && tag.contains("Not Leaf")){
+					//disabled
+					EventManager.callEvent("ungroupButtonDisable");
+				}
+				else if(tag.contains("Root")){
+					//disabled
+					EventManager.callEvent("ungroupButtonDisable");
+				}else{
+					//enabled
+					EventManager.callEvent("ungroupButtonEnable");
+				}
+				
+				//case : MoveUpButton
+				if(tag.contains("Root")){
+					//disabled
+					EventManager.callEvent("moveUpButtonDisable");
+				}
+				else if(tag.contains("TopItem")){
+					//disabled
+					EventManager.callEvent("moveUpButtonDisable");
+				}
+				else if(tag.contains("TopSubRoot")){
+					//disabled
+					EventManager.callEvent("moveUpButtonDisable");
+				}else if(tag.contains("Leaf") && tag.contains("Not Leaf")){
+					EventManager.callEvent("moveUpButtonDisable");
+				}
+				else{
+					//enabled
+					EventManager.callEvent("moveUpButtonEnable");
+				}
+			
+				//case : MoveDownButton
+				if(tag.contains("Root")){
+					//disabled
+					EventManager.callEvent("moveDownButtonDisable");
+				}
+				else if(tag.contains("BottomItem")){
+					//disabled
+					EventManager.callEvent("moveDownButtonDisable");
+				}
+				else if(tag.contains("BottomSubRoot")){
+					//disabled
+					EventManager.callEvent("moveDownButtonDisable");
+				}else if(tag.contains("Leaf") && tag.contains("Not Leaf")){
+					EventManager.callEvent("moveDownButtonDisable");
+				}else{
+					//enabled
+					EventManager.callEvent("moveDownButtonEnable");
+				}
+				//case : DeleteButton
+				if(tag.contains("Root")){
+					//disabled
+					EventManager.callEvent("deleteButtonDisable");
+				}else{
+					//enabled
+					EventManager.callEvent("deleteButtonEnable");
+				}
 			}
 		});
 

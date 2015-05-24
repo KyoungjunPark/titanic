@@ -53,7 +53,13 @@ public class MainController {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
-                centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
+                EventManager.callEvent("expandAllButtonEnable");
+                EventManager.callEvent("collapseAllButtonEnable");
+                EventManager.callEvent("groupButtonDisable");
+                EventManager.callEvent("ungroupButtonDisable");
+                EventManager.callEvent("moveUpButtonDisable");
+                EventManager.callEvent("moveDownButtonDisable");
+                EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
             }
         });

@@ -99,16 +99,49 @@ public class LeftPanel extends JPanel implements Controllerable {
 			add(deleteButton);
 
 		}
-
-		/*
-		protected void setExpandAllButton(boolean bool){expandAllButton.setEnabled(bool);}
-		protected void setcollapseAllButton(boolean bool){collapseAllButton.setEnabled(bool);}
-		protected void setgroupButton(boolean bool){groupButton.setEnabled(bool);}
-		protected void setungroupButton(boolean bool){ungroupButton.setEnabled(bool);}
-		protected void setmoveUpButton(boolean bool){moveUpButton.setEnabled(bool);}
-		protected void setmoveDownButton(boolean bool){moveDownButton.setEnabled(bool);}
-		protected void setdeleteButton(boolean bool){deleteButton.setEnabled(bool);}
-		*/
+		protected void expandAllButtonEnable(){
+			this.expandAllButton.setEnabled(true);
+		}
+		protected void expandAllButtonDisable(){
+			this.expandAllButton.setEnabled(false);
+		}
+		protected void collapseAllButtonEnable(){
+			this.collapseAllButton.setEnabled(true);
+		}
+		protected void collapseAllButtonDisable(){
+			this.collapseAllButton.setEnabled(false);
+		}
+		protected void groupButtonEnable(){
+			this.groupButton.setEnabled(true);
+		}
+		protected void groupButtonDisable(){
+			this.groupButton.setEnabled(false);
+		}
+		protected void ungroupButtonEnable(){
+			this.ungroupButton.setEnabled(true);
+		}
+		protected void ungroupButtonDisable(){
+			this.ungroupButton.setEnabled(false);
+		}
+		protected void moveUpButtonEnable(){
+			this.moveUpButton.setEnabled(true);
+		}
+		protected void moveUpButtonDisable(){
+			this.moveUpButton.setEnabled(false);
+		}
+		protected void moveDownButtonEnable(){
+			this.moveDownButton.setEnabled(true);
+		}
+		protected void moveDownButtonDisable(){
+			this.moveDownButton.setEnabled(false);
+		}
+		protected void deleteButtonEnable(){
+			this.deleteButton.setEnabled(true);
+		}
+		protected void deleteButtonDisable(){
+			this.deleteButton.setEnabled(false);
+		}
+		
 		protected void changeDSMStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);

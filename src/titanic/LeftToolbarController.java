@@ -85,38 +85,47 @@ public class LeftToolbarController extends LeftPanelController{
 		
 	}
 	
-	protected void changeDSMStatus()
-	{
-		leftToolbar.changeDSMStatus();
+	protected void expandAllButtonEnable(){
+		leftToolbar.expandAllButtonEnable();
 	}
-	
-	protected void changeSubRootStatus()
-	{
-		leftToolbar.changeSubRootStatus();
+	protected void expandAllButtonDisable(){
+		leftToolbar.expandAllButtonDisable();
 	}
-	protected void changeItemStatus()
-	{
-		leftToolbar.changeItemStatus();
+	protected void collapseAllButtonEnable(){
+		leftToolbar.collapseAllButtonEnable();
 	}
-	protected void changeItemStatusTop()
-	{
-		leftToolbar.changeItemStatusTop();
+	protected void collapseAllButtonDisable(){
+		leftToolbar.collapseAllButtonDisable();
 	}
-	protected void changeItemStatusBottom()
-	{
-		leftToolbar.changeItemStatusBottom();
+	protected void groupButtonEnable(){
+		leftToolbar.groupButtonEnable();
 	}
-	protected void changeRootStatus()
-	{
-		leftToolbar.changeRootStatus();
+	protected void groupButtonDisable(){
+		leftToolbar.groupButtonDisable();
 	}
-	protected void changeSubRootStatusTop()
-	{
-		leftToolbar.changeSubRootStatusTop();
+	protected void ungroupButtonEnable(){
+		leftToolbar.ungroupButtonEnable();
 	}
-	protected void changeSubRootStatusBottom()
-	{
-		leftToolbar.changeSubRootStatusBottom();
+	protected void ungroupButtonDisable(){
+		leftToolbar.ungroupButtonDisable();
 	}
-	
+	protected void moveUpButtonEnable(){
+		leftToolbar.moveUpButtonEnable();
+	}
+	protected void moveUpButtonDisable(){
+		leftToolbar.moveUpButtonDisable();
+	}
+	protected void moveDownButtonEnable(){
+		leftToolbar.moveDownButtonEnable();
+	}
+	protected void moveDownButtonDisable(){
+		leftToolbar.moveDownButtonDisable();
+	}
+	protected void deleteButtonEnable(){
+		leftToolbar.deleteButtonEnable();
+	}
+	protected void deleteButtonDisable(){
+		leftToolbar.deleteButtonDisable();
+	}
+
 }

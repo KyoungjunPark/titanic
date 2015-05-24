@@ -61,12 +61,6 @@ public class LeftPanelController extends CenterPanelController {
 			}
 		});
 
-		EventManager.addEvent(new Event("changeSubRootStatus") {
-			public void action() {
-				changeSubRootStatus();
-			}
-		});
-
 		EventManager.addEvent(new Event("delete") {
 			public void action() {
 				deleteTree();
@@ -74,52 +68,107 @@ public class LeftPanelController extends CenterPanelController {
 			}
 
 		});
-
-		EventManager.addEvent(new Event("changeItemStatus") {
+		
+		//status setting
+		EventManager.addEvent(new Event("expandAllButtonEnable") {
 			public void action() {
-				changeItemStatus();
-			}
-		});
-
-		EventManager.addEvent(new Event("changeItemStatusTop") {
-			public void action() {
-				changeItemStatusTop();
+				expandAllButtonEnable();
 
 			}
 
 		});
-
-		EventManager.addEvent(new Event("changeItemStatusBottom") {
+		EventManager.addEvent(new Event("expandAllButtonDisable") {
 			public void action() {
-				changeItemStatusBottom();
+				expandAllButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("collapseAllButtonEnable") {
+			public void action() {
+				collapseAllButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("collapseAllButtonDisable") {
+			public void action() {
+				collapseAllButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("groupButtonEnable") {
+			public void action() {
+				groupButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("groupButtonDisable") {
+			public void action() {
+				groupButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("ungroupButtonEnable") {
+			public void action() {
+				ungroupButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("ungroupButtonDisable") {
+			public void action() {
+				ungroupButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("moveUpButtonEnable") {
+			public void action() {
+				moveUpButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("moveUpButtonDisable") {
+			public void action() {
+				moveUpButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("moveDownButtonEnable") {
+			public void action() {
+				moveDownButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("moveDownButtonDisable") {
+			public void action() {
+				moveDownButtonDisable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("deleteButtonEnable") {
+			public void action() {
+				deleteButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("deleteButtonDisable") {
+			public void action() {
+				deleteButtonDisable();
 
 			}
 
 		});
 
-		EventManager.addEvent(new Event("changeRootStatus") {
-			public void action() {
-				changeRootStatus();
-
-			}
-
-		});
-
-		EventManager.addEvent(new Event("changeSubRootStatusTop") {
-			public void action() {
-				changeSubRootStatusTop();
-
-			}
-
-		});
-
-		EventManager.addEvent(new Event("changeSubRootStatusBottom") {
-			public void action() {
-				changeSubRootStatusBottom();
-
-			}
-
-		});
 	}
 
 	public void OpenDSMStatus() {
@@ -147,33 +196,48 @@ public class LeftPanelController extends CenterPanelController {
 	protected void deleteTree() {
 		fileTreeController.delete();
 	}
-
-	protected void changeSubRootStatus() {
-		leftToolbarController.changeSubRootStatus();
+	
+	protected void expandAllButtonEnable(){
+		leftToolbarController.expandAllButtonEnable();
 	}
-
-	protected void changeItemStatus() {
-		leftToolbarController.changeItemStatus();
+	protected void expandAllButtonDisable(){
+		leftToolbarController.expandAllButtonDisable();
 	}
-
-	protected void changeItemStatusTop() {
-		leftToolbarController.changeItemStatusTop();
+	protected void collapseAllButtonEnable(){
+		leftToolbarController.collapseAllButtonEnable();
 	}
-
-	protected void changeItemStatusBottom() {
-		leftToolbarController.changeItemStatusBottom();
+	protected void collapseAllButtonDisable(){
+		leftToolbarController.collapseAllButtonDisable();
 	}
-
-	protected void changeRootStatus() {
-		leftToolbarController.changeRootStatus();
+	protected void groupButtonEnable(){
+		leftToolbarController.groupButtonEnable();
 	}
-
-	protected void changeSubRootStatusTop() {
-		leftToolbarController.changeSubRootStatusTop();
+	protected void groupButtonDisable(){
+		leftToolbarController.groupButtonDisable();
 	}
-
-	protected void changeSubRootStatusBottom() {
-
-		leftToolbarController.changeSubRootStatusBottom();
+	protected void ungroupButtonEnable(){
+		leftToolbarController.ungroupButtonEnable();
 	}
+	protected void ungroupButtonDisable(){
+		leftToolbarController.ungroupButtonDisable();
+	}
+	protected void moveUpButtonEnable(){
+		leftToolbarController.moveUpButtonEnable();
+	}
+	protected void moveUpButtonDisable(){
+		leftToolbarController.moveUpButtonDisable();
+	}
+	protected void moveDownButtonEnable(){
+		leftToolbarController.moveDownButtonEnable();
+	}
+	protected void moveDownButtonDisable(){
+		leftToolbarController.moveDownButtonDisable();
+	}
+	protected void deleteButtonEnable(){
+		leftToolbarController.deleteButtonEnable();
+	}
+	protected void deleteButtonDisable(){
+		leftToolbarController.deleteButtonDisable();
+	}
+	
 }
