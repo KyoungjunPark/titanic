@@ -15,12 +15,12 @@ import model.ModelManager;
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-	private RightPanel firstPanel;
-	private int tabIndex = 0;
+	private int tabIndex;
 	ArrayList<ArrayList<String>> newData;
 
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
+
 
 		/*
 		 * tab feature test JLabel mainLabel; JPanel mainPanel;
@@ -29,6 +29,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		 * mainPanel = new JPanel(); mainPanel.add(mainLabel);
 		 * addTab("1",mainPanel);
 		 */
+		
+		RightPanel firstPage = new RightPanel();
+		contents.add(firstPage);
 
 	}
 
@@ -37,13 +40,18 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		regetTableData(tabIndex);
 
 		contents.get(this.tabIndex-1).setTableData(newData);
-		contents.get(this.tabIndex-1).makeTable();
+		contents.get(this.tabIndex-1).redrawPanel();
 
 		if (tabIndex == 0)
 			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex-1));
 		else{
 			repaint();
 		}
+	}
+
+	public ArrayList<RightPanel> getRightPanel()
+	{
+		return contents;
 	}
 
 	@Override
@@ -55,11 +63,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		newData = new ArrayList<ArrayList<String>>();
 
-		if (tabIndex == 0) {
+		if (tabIndex == 0) 
 			this.tabIndex = 1;
-			firstPanel = new RightPanel();
-			contents.add(firstPanel);
-		} else
+		 else
 			this.tabIndex = tabIndex;
 
 		newData = ModelManager.sharedModelManager().getCurrentTitanicModel()

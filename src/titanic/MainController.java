@@ -44,7 +44,7 @@ public class MainController {
 	private void setEvent()
 	{
 	    /**
-	     * DSM파일이 실행되면
+	     * DSM파일 or CLSX파일이 실행되면
 	     * 1. disable되어 있던 기능(아이콘)들이 활성화 된다.
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
@@ -53,7 +53,13 @@ public class MainController {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
-                centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
+                EventManager.callEvent("expandAllButtonEnable");
+                EventManager.callEvent("collapseAllButtonEnable");
+                EventManager.callEvent("groupButtonDisable");
+                EventManager.callEvent("ungroupButtonDisable");
+                EventManager.callEvent("moveUpButtonDisable");
+                EventManager.callEvent("moveDownButtonDisable");
+                EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                 
                 // 만들면 일단 redraw
@@ -62,8 +68,8 @@ public class MainController {
             }
         });
 		EventManager.addEvent(new Event("Redraw"){
-			
 			public void action(){
+
 				int top;
 				top = centerPanelController.getContentsPanelController().getTop();
 				centerPanelController.getContentsPanelController().redrawPanel(top);
