@@ -31,15 +31,18 @@ public class ContentsPanelController extends CenterPanelController{
 		
 	}
 	
-
 	protected void redrawPanel(int tabIndex) {
 		contentsPanel.regetTableData(tabIndex);
 		contentsPanel.drawTableAtTab(tabIndex);
 	}
+	
 	protected int getTop(){
 		return this.contentsPanel.TOP;
 	}
 	
+	public void setShowRowLabels(boolean state, int tabIndex) {
+		contentsPanel.setShowRowLabels(state, tabIndex);
+	}
 	/* From 세현 : 주석처리 내가 해놨음!
 	protected void redrawPanel() {
 		rightPanelController.redrawPanel();

@@ -12,7 +12,7 @@ public class RightPanel extends JPanel implements Controllerable{
 	private int id;
 	private WholeDSMTable table;
 	private ArrayList<ArrayList<String>> tableData;
-	
+	private boolean setShowRowLabels;	
 	/**
 	 * DSM을 오픈했을 때 그려지는 테이블 하나를 포함하는 패널입니다.
 	 * 테이블에 들어갈 데이터를 WholeDSMTable의 함수 인자로 넘겨주면 앞에서 넘겨진 데이터의 테이블이 생성됩니다.
@@ -41,12 +41,15 @@ public class RightPanel extends JPanel implements Controllerable{
 		tableData=newData;
 	}
 
-	
+
 	protected void redrawPanel(ArrayList<ArrayList<String>> newData){
 		tableData=newData;
-		table = new WholeDSMTable(tableData);
+		table = new WholeDSMTable(tableData, this.setShowRowLabels);
+		this.removeAll();
 		this.add(table, BorderLayout.CENTER);
 	}
-	
+	public void setShowRowLabels(boolean state) {
+		this.setShowRowLabels=state;
+	}
 	
 }

@@ -144,6 +144,9 @@ public class MenuBar extends JMenuBar implements Controllerable{
         about.setMnemonic('A');
 		
 	}
+	public boolean getShowRowLabelsState(){
+		return showRowLabels.isSelected();
+	}
 	public void changeDSMStatus()
 	{
         for(Component component : this.getComponents()){

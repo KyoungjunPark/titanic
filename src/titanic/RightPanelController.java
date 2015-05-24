@@ -22,4 +22,5 @@ public class RightPanelController extends CenterPanelController {
 	protected int getID(){
 		return this.rightPanel.getID();
 	}
+
 }

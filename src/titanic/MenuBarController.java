@@ -176,10 +176,12 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Show Row Labels is clicked");
-				
+				EventManager.callEvent("Redraw");
 				
 			}
 		});
+		
+		/* 구현x
 		menu.setAction("Show Dependency Strength", new ActionListener() {
 			
 			@Override
@@ -188,7 +190,7 @@ public class MenuBarController extends MainController{
 				
 			}
 		});
-	
+	*/
 		//Help Menu
 		menu.setAction("About...", new ActionListener() {
 			
