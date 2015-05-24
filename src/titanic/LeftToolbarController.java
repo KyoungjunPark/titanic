@@ -37,7 +37,6 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Collapse All is clicked");
 				EventManager.callEvent("collapseAll");
 				
 			}
@@ -70,7 +69,7 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Move Down is clicked");
+				EventManager.callEvent("moveDown");
 				
 			}
 		});
@@ -89,6 +88,35 @@ public class LeftToolbarController extends LeftPanelController{
 	protected void changeDSMStatus()
 	{
 		leftToolbar.changeDSMStatus();
-		
 	}
+	
+	protected void changeSubRootStatus()
+	{
+		leftToolbar.changeSubRootStatus();
+	}
+	protected void changeItemStatus()
+	{
+		leftToolbar.changeItemStatus();
+	}
+	protected void changeItemStatusTop()
+	{
+		leftToolbar.changeItemStatusTop();
+	}
+	protected void changeItemStatusBottom()
+	{
+		leftToolbar.changeItemStatusBottom();
+	}
+	protected void changeRootStatus()
+	{
+		leftToolbar.changeRootStatus();
+	}
+	protected void changeSubRootStatusTop()
+	{
+		leftToolbar.changeSubRootStatusTop();
+	}
+	protected void changeSubRootStatusBottom()
+	{
+		leftToolbar.changeSubRootStatusBottom();
+	}
+	
 }
