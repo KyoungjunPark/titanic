@@ -55,7 +55,7 @@ public class FileTree extends JTree implements Controllerable {
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
 			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, root,
+			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
 					node.getParent().getIndex(node) - 1);
 
 			node.removeFromParent();
@@ -70,6 +70,7 @@ public class FileTree extends JTree implements Controllerable {
 	}
 
 	protected void moveDown() {
+
 		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
@@ -82,7 +83,7 @@ public class FileTree extends JTree implements Controllerable {
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
 
 			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, root,
+			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
 					node.getParent().getIndex(node) + 2);
 
 			node.removeFromParent();
@@ -92,6 +93,7 @@ public class FileTree extends JTree implements Controllerable {
 		}
 		
 		this.setSelectionPaths(treePath);
+		
 
 	}
 
