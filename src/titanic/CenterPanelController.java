@@ -26,4 +26,7 @@ public class CenterPanelController extends MainController{
 	
 	
 	// redraw 
+	private void redrawPanel() {
+		contentsPanelController.redrawPanel();
+	}
 }

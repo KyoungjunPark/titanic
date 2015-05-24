@@ -13,7 +13,9 @@ import javax.swing.filechooser.FileFilter;
 
 
 
+
 import model.CreateException;
+import model.EventManager;
 import model.ModelManager;
 
 public class MenuBarController extends MainController{
@@ -157,6 +159,7 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Redraw is clicked");
+				EventManager.callEvent("Redraw");
 				
 			}
 		});

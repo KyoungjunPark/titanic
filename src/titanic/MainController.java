@@ -66,7 +66,7 @@ public class MainController {
 		EventManager.addEvent(new Event("Redraw"){
 			
 			public void action(){
-			//	centerPanelController.getContentsPanelController();
+				centerPanelController.getContentsPanelController();
 				
 			}
 		});
