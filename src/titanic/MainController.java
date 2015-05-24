@@ -64,6 +64,7 @@ public class MainController {
                 
                 // 만들면 일단 redraw
                 int top = 0;
+            	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
 				centerPanelController.getContentsPanelController().redrawPanel(top);
             }
         });
@@ -72,6 +73,7 @@ public class MainController {
 
 				int top;
 				top = centerPanelController.getContentsPanelController().getTop();
+				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
 				centerPanelController.getContentsPanelController().redrawPanel(top);
 			}
 		});

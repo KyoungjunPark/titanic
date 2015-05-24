@@ -18,6 +18,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
+
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
 
@@ -45,6 +46,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		if (tabIndex == 0)
 			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
 		else {
+			/*
+			this.removeAll();
+			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
+			*/
 			repaint();
 		}
 	}
@@ -70,5 +75,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		newData = new ArrayList<ArrayList<String>>();
 		newData = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getMatrixData();
+	}
+
+	public void setShowRowLabels(boolean state, int tabIndex) {
+		if (tabIndex == 0) {
+			contents.get(tabIndex).setShowRowLabels(state);
+		}
+		else
+			contents.get(tabIndex-1).setShowRowLabels(state);
 	}
 }

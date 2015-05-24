@@ -10,20 +10,22 @@ import javax.swing.table.*;
 public class WholeDSMTable extends JPanel {
 
 	/**
-	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만듭니다. 
-	 * DSM 정보는 ArrayList<ArrayList<String>>의 형식이며 
-	 * ArrayList<String>은 [name , 0, 1, other dependencies...]의 형식의 데이터를 저장하고 있습니다.
+	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만듭니다. DSM 정보는 ArrayList<ArrayList<String>>의
+	 * 형식이며 ArrayList<String>은 [name , 0, 1, other dependencies...]의 형식의 데이터를
+	 * 저장하고 있습니다.
 	 */
 	private ArrayList<ArrayList<String>> rows;
 
-	WholeDSMTable(ArrayList<ArrayList<String>> rows) throws NullPointerException {
-			init(rows);
+	WholeDSMTable(ArrayList<ArrayList<String>> rows, boolean showRowLabels)
+			throws NullPointerException {
+
+		init(rows, showRowLabels);
 	}
 
-	private void init(ArrayList<ArrayList<String>> rows) {
+	private void init(ArrayList<ArrayList<String>> rows, boolean showRowLabels) {
 
 		this.rows = rows;
-		TableModel tableModel = new TableModel(this.rows);
+		TableModel tableModel = new TableModel(this.rows, showRowLabels);
 		JTable wholeDSMTable = new JTable(tableModel);
 
 		tableDistributeInit(wholeDSMTable);
@@ -65,15 +67,12 @@ public class WholeDSMTable extends JPanel {
 		private ArrayList columnIndex;
 		private boolean showRowLabels;
 
-		TableModel(ArrayList<ArrayList<String>> rows) {
+		TableModel(ArrayList<ArrayList<String>> rows, boolean showRowLabels) {
+			setShowRowLabels(showRowLabels);
 			init(rows);
 		}
 
 		private void init(ArrayList<ArrayList<String>> rows) {
-
-			// 임의로 설정된 상태임 setShowRowLabels(boolean) 이용해서 설정해줘야 함
-			// 삭제할 것
-			showRowLabels = false;
 
 			tableData = rows;
 			columnIndex = new ArrayList();
@@ -84,14 +83,15 @@ public class WholeDSMTable extends JPanel {
 				s = (i + 1) + "";
 				columnIndex.add(s);
 				if (this.showRowLabels == true) {
-					s = s + " " + this.getValueAt(i, 0).toString();
+					s = this.getValueAt(i, 0).toString() + " " + s;
 				}
 				tableData.get(i).set(0, s);
 			}
 		}
 
 		public void setShowRowLabels(boolean state) {
-			showRowLabels = state;
+			this.showRowLabels = state;
+
 		}
 
 		@Override
@@ -133,4 +133,3 @@ public class WholeDSMTable extends JPanel {
 	}
 
 }
-
