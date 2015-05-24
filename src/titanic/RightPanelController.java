@@ -15,8 +15,8 @@ public class RightPanelController extends CenterPanelController {
 		this.rightPanel = rightPanel;
 	}
 	
-	protected void makeTable(){
-		this.rightPanel.makeTable();
+	protected void redrawPanel(){
+		this.rightPanel.redrawPanel();
 	}
 	
 	protected int getID(){

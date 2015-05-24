@@ -31,7 +31,7 @@ public class RightPanel extends JPanel implements Controllerable{
 	public int getID(){
 		return this.id;
 	}
-	protected void makeTable(){
+	protected void redrawPanel(){
 		tableData=ModelManager.sharedModelManager().getCurrentTitanicModel().getMatrixData();
 		table = new WholeDSMTable(tableData);
 		this.add(table, BorderLayout.CENTER);

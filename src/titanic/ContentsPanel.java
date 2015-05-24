@@ -12,19 +12,16 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ContentsPanel(){
 		contents = new ArrayList<RightPanel>();
 		
-		/* tab feature test 
-		JLabel mainLabel;
-		JPanel mainPanel;
-		
-		mainLabel = new JLabel("first page", SwingConstants.CENTER);
-		mainPanel = new JPanel();
-		mainPanel.add(mainLabel);
-		addTab("1",mainPanel);
-		*/
+		RightPanel firstPage = new RightPanel();
+		contents.add(firstPage);
 	}
 	public void addRightPanel(RightPanel rightPanel)
 	{
 		contents.add(rightPanel);
+	}
+	public ArrayList<RightPanel> getRightPanel()
+	{
+		return contents;
 	}
 	@Override
 	public void setAction(String title, ActionListener action) {

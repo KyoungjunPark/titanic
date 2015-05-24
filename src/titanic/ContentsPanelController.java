@@ -10,12 +10,15 @@ public class ContentsPanelController extends CenterPanelController{
 	public ContentsPanelController(ContentsPanel contentsPanel)
 	{
 		this.contentsPanel = contentsPanel;
+		//must changed! test version
+		setControllers();
 		setEvent();
 	}
 	
-	private void setController() {
+	private void setControllers() {
 		//To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
-		rightPanelController = new RightPanelController();
+		//must changed! test version
+		rightPanelController = new RightPanelController(contentsPanel.getRightPanel().get(0));
 	}
 	
 	
@@ -24,7 +27,7 @@ public class ContentsPanelController extends CenterPanelController{
 	}
 	
 	protected void redrawPanel() {
-		rightPanelController.makeTable();
+		rightPanelController.redrawPanel();
 	}
 	
 }
