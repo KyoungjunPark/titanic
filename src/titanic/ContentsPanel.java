@@ -1,10 +1,11 @@
 package titanic;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTabbedPane;
 
-public class ContentsPanel extends JTabbedPane{
+public class ContentsPanel extends JTabbedPane implements Controllerable {
 	
 	private ArrayList<RightPanel> contents;
 	
@@ -24,6 +25,10 @@ public class ContentsPanel extends JTabbedPane{
 	public void addRightPanel(RightPanel rightPanel)
 	{
 		contents.add(rightPanel);
+	}
+	@Override
+	public void setAction(String title, ActionListener action) {
+		
 	}
 	
 }

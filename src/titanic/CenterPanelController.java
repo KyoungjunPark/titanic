@@ -3,16 +3,15 @@ package titanic;
 public class CenterPanelController extends MainController{
 
 	private CenterPanel centerPanel;
-	
 	private LeftPanelController leftPanelController;
+	private ContentsPanelController contentsPanelController;
+	
 	public LeftPanelController getLeftPanelController() {
 		return leftPanelController;
 	}
 	public ContentsPanelController getContentsPanelController() {
 		return contentsPanelController;
 	}
-	private ContentsPanelController contentsPanelController;
-	
 	public CenterPanelController(){}
 	public CenterPanelController(CenterPanel centerPanel){
 		this.centerPanel = centerPanel;
@@ -22,7 +21,9 @@ public class CenterPanelController extends MainController{
 	private void setControllers()
 	{
 		leftPanelController = new LeftPanelController(centerPanel.getLeftPanel());
-		contentsPanelController = new ContentsPanelController(centerPanel.getContentsPanel());
-		
+		contentsPanelController = new ContentsPanelController(centerPanel.getContentsPanel());       
 	}
+	
+	
+	// redraw 
 }

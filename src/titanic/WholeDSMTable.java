@@ -13,13 +13,13 @@ public class WholeDSMTable extends JPanel {
 	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만든다. DSM 정보는 ArrayList<ArrayList>의 형식이며
 	 * list.get(i)는 name, dependency 의 집합 이다.
 	 */
-	private ArrayList<ArrayList> rows;
+	private ArrayList<ArrayList<String>> rows;
 
-	WholeDSMTable(ArrayList<ArrayList> rows) throws NullPointerException {
+	WholeDSMTable(ArrayList<ArrayList<String>> rows) throws NullPointerException {
 			init(rows);
 	}
 
-	private void init(ArrayList<ArrayList> rows) {
+	private void init(ArrayList<ArrayList<String>> rows) {
 
 		this.rows = rows;
 		TableModel tableModel = new TableModel(this.rows);
@@ -60,15 +60,15 @@ public class WholeDSMTable extends JPanel {
 
 	private class TableModel extends AbstractTableModel {
 
-		private ArrayList<ArrayList> tableData;
+		private ArrayList<ArrayList<String>> tableData;
 		private ArrayList columnIndex;
 		private boolean showRowLabels;
 
-		TableModel(ArrayList<ArrayList> rows) {
+		TableModel(ArrayList<ArrayList<String>> rows) {
 			init(rows);
 		}
 
-		private void init(ArrayList<ArrayList> rows) {
+		private void init(ArrayList<ArrayList<String>> rows) {
 
 			// 임의로 설정된 상태임 setShowRowLabels(boolean) 이용해서 설정해줘야 함
 			// 삭제할 것

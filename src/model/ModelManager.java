@@ -18,7 +18,7 @@ public class ModelManager {
 
     /**
      * ModelManager 의 Singletone 함수 입니다.
-     * ModelManger 가 1개만 생성됨을 보장합니다.
+     * ModelManager 가 1개만 생성됨을 보장합니다.
      *
      * @return {@link ModelManager}
      */

@@ -9,6 +9,11 @@ public class ContentsPanelController extends CenterPanelController{
 	public ContentsPanelController(ContentsPanel contentsPanel)
 	{
 		this.contentsPanel = contentsPanel;
+		setEvent();
+	}
+	
+	
+	private void setEvent(){
 		
 	}
 }

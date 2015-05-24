@@ -43,8 +43,6 @@ public class MainController {
 	}
 	private void setEvent()
 	{
-	
-	
 	    /**
 	     * DSM파일이 실행되면
 	     * 1. disable되어 있던 기능(아이콘)들이 활성화 된다.
@@ -60,8 +58,13 @@ public class MainController {
 
             }
         });
-
-		
+		EventManager.addEvent(new Event("Redraw"){
+			
+			public void action(){
+			//	centerPanelController.getContentsPanelController();
+				
+			}
+		});
 	}
 	
 
