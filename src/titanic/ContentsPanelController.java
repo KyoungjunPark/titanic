@@ -14,7 +14,7 @@ public class ContentsPanelController extends CenterPanelController{
 	}
 	
 	private void setController() {
-		//여기 파라미터 없어도 되나요...?
+		//To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
 		rightPanelController = new RightPanelController();
 	}
 	

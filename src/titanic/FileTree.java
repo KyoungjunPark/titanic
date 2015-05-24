@@ -116,19 +116,20 @@ public class FileTree extends JTree implements Controllerable {
 
 	}
 
-	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
+	protected void expandAll(int startingIndex, int rowCount) {
+
 		for (int i = startingIndex; i < rowCount; i++) {
-			tree.expandRow(i);
+			this.expandRow(i);
 		}
 
-		if (tree.getRowCount() != rowCount) {
-			expandAll(tree, rowCount, tree.getRowCount());
+		if (this.getRowCount() != rowCount) {
+			expandAll(/*this, */rowCount, this.getRowCount());
 		}
 	}
 
-	protected void collapseAll(FileTree tree, int startingIndex, int rowCount) {
+	protected void collapseAll(int startingIndex, int rowCount) {
 		for (int i = rowCount - 1; i >= startingIndex; i--) {
-			tree.collapseRow(i);
+			this.collapseRow(i);
 		}
 
 	}
@@ -140,7 +141,8 @@ public class FileTree extends JTree implements Controllerable {
 			((DefaultTreeModel) this.getModel()).removeNodeFromParent(nodes
 					.get(i));
 		}
-
+		
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
 	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {

@@ -112,13 +112,13 @@ public class FileTreeController extends LeftPanelController {
 
 	}
 
-	protected void expandAll(FileTree tree, int startingIndex, int rowCount) {
-		treeFile.expandAll(tree, startingIndex, rowCount);
+	protected void expandAll(int startingIndex, int rowCount) {
+		treeFile.expandAll(startingIndex, rowCount);
 
 	}
 
-	protected void collapseAll(FileTree tree, int startingIndex, int rowCount) {
-		treeFile.collapseAll(tree, startingIndex, rowCount);
+	protected void collapseAll(int startingIndex, int rowCount) {
+		treeFile.collapseAll(startingIndex, rowCount);
 
 	}
 

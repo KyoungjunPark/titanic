@@ -135,13 +135,11 @@ public class LeftPanelController extends CenterPanelController {
 	}
 
 	protected void expandTree() {
-		fileTreeController.expandAll(leftPanel.getfileTree(), 0, leftPanel
-				.getfileTree().getRowCount());
+		fileTreeController.expandAll(0, leftPanel.getfileTree().getRowCount());
 	}
 
 	protected void collapseTree() {
-		fileTreeController.collapseAll(leftPanel.getfileTree(), 0, leftPanel
-				.getfileTree().getRowCount());
+		fileTreeController.collapseAll(0, leftPanel.getfileTree().getRowCount());
 	}
 
 	protected void deleteTree() {
