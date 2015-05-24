@@ -10,8 +10,9 @@ import javax.swing.table.*;
 public class WholeDSMTable extends JPanel {
 
 	/**
-	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만든다. DSM 정보는 ArrayList<ArrayList>의 형식이며
-	 * list.get(i)는 name, dependency 의 집합 이다.
+	 * DSM 정보를 받아와서 화면에 표시할 테이블을 만듭니다. 
+	 * DSM 정보는 ArrayList<ArrayList<String>>의 형식이며 
+	 * ArrayList<String>은 [name , 0, 1, other dependencies...]의 형식의 데이터를 저장하고 있습니다.
 	 */
 	private ArrayList<ArrayList<String>> rows;
 

@@ -14,11 +14,11 @@ public class RightPanelController extends CenterPanelController {
 	RightPanelController(RightPanel rightPanel) {
 		this.rightPanel = rightPanel;
 	}
-	
+	/*
 	protected void redrawPanel(){
 		this.rightPanel.redrawPanel();
 	}
-	
+	*/
 	protected int getID(){
 		return this.rightPanel.getID();
 	}

@@ -15,12 +15,11 @@ import model.ModelManager;
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-	private int tabIndex;
-	ArrayList<ArrayList<String>> newData;
 
+	private ArrayList<ArrayList<String>> newData;
+	private int tabIndex;
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
-
 
 		/*
 		 * tab feature test JLabel mainLabel; JPanel mainPanel;
@@ -29,7 +28,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		 * mainPanel = new JPanel(); mainPanel.add(mainLabel);
 		 * addTab("1",mainPanel);
 		 */
-		
+
 		RightPanel firstPage = new RightPanel();
 		contents.add(firstPage);
 
@@ -37,20 +36,20 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	public void drawTableAtTab(int tabIndex) {
 
+		// redraw를 하기 위해서 정보를 갱신한다.
 		regetTableData(tabIndex);
+		contents.get(this.tabIndex - 1).setTableData(newData);
+		contents.get(this.tabIndex - 1).redrawPanel(newData);
 
-		contents.get(this.tabIndex-1).setTableData(newData);
-		contents.get(this.tabIndex-1).redrawPanel();
-
+		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
 		if (tabIndex == 0)
-			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex-1));
-		else{
+			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
+		else {
 			repaint();
 		}
 	}
 
-	public ArrayList<RightPanel> getRightPanel()
-	{
+	public ArrayList<RightPanel> getRightPanel() {
 		return contents;
 	}
 
@@ -59,17 +58,17 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	}
 
+	// 정보 갱신
 	public void regetTableData(int tabIndex) {
-
-		newData = new ArrayList<ArrayList<String>>();
-
-		if (tabIndex == 0) 
+		// 맨 처음 탭을 위한 숫자 조정
+		if (tabIndex == 0)
 			this.tabIndex = 1;
-		 else
+		else
 			this.tabIndex = tabIndex;
 
+		// 요기서 다시 받아옴
+		newData = new ArrayList<ArrayList<String>>();
 		newData = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getMatrixData();
-		contents.get(this.tabIndex - 1).setTableData(newData);
 	}
 }

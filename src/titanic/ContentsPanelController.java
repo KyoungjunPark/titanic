@@ -21,6 +21,7 @@ public class ContentsPanelController extends CenterPanelController{
 		//To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
 		
 		//must changed! test version
+		// From 세현 : rightPanelController 안쓴다며..? ㅜㅜ  
 		rightPanelController = new RightPanelController(contentsPanel.getRightPanel().get(0));
 
 	}
@@ -38,7 +39,10 @@ public class ContentsPanelController extends CenterPanelController{
 	protected int getTop(){
 		return this.contentsPanel.TOP;
 	}
+	
+	/* From 세현 : 주석처리 내가 해놨음!
 	protected void redrawPanel() {
 		rightPanelController.redrawPanel();
 	}
+	*/
 }

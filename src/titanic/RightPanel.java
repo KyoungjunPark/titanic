@@ -13,10 +13,12 @@ public class RightPanel extends JPanel implements Controllerable{
 	private WholeDSMTable table;
 	private ArrayList<ArrayList<String>> tableData;
 	
-	
+	/**
+	 * DSM을 오픈했을 때 그려지는 테이블 하나를 포함하는 패널입니다.
+	 * 테이블에 들어갈 데이터를 WholeDSMTable의 함수 인자로 넘겨주면 앞에서 넘겨진 데이터의 테이블이 생성됩니다.
+	 * */
 	public RightPanel(){
-		setLayout(new BorderLayout(0,0));
-		
+		setLayout(new BorderLayout(0,0));	
 	}
 
 	@Override
@@ -33,12 +35,15 @@ public class RightPanel extends JPanel implements Controllerable{
 		return this.id;
 	}
 
+	
+	// redraw를 통해 테이블을 갱신할 때 필요한 함수.
 	protected void setTableData(ArrayList<ArrayList<String>> newData){
 		tableData=newData;
 	}
 
-	protected void redrawPanel(){
-		tableData=ModelManager.sharedModelManager().getCurrentTitanicModel().getMatrixData();
+	
+	protected void redrawPanel(ArrayList<ArrayList<String>> newData){
+		tableData=newData;
 		table = new WholeDSMTable(tableData);
 		this.add(table, BorderLayout.CENTER);
 	}
