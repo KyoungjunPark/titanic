@@ -55,13 +55,18 @@ public class MainController {
                 mainToolbarController.changeDSMStatus();
                 centerPanelController.getLeftPanelController().getLeftToolbarController().changeDSMStatus();
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+                
+                // 만들면 일단 redraw
+                int top = 0;
+				centerPanelController.getContentsPanelController().redrawPanel(top);
             }
         });
 		EventManager.addEvent(new Event("Redraw"){
 			
 			public void action(){
-				centerPanelController.getContentsPanelController();
-				
+				int top;
+				top = centerPanelController.getContentsPanelController().getTop();
+				centerPanelController.getContentsPanelController().redrawPanel(top);
 			}
 		});
 	}

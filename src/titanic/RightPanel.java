@@ -16,7 +16,7 @@ public class RightPanel extends JPanel implements Controllerable{
 	
 	public RightPanel(){
 		setLayout(new BorderLayout(0,0));
-	
+		
 	}
 
 	@Override
@@ -27,15 +27,18 @@ public class RightPanel extends JPanel implements Controllerable{
 	{
 		this.id = id;
 	}
-
+	
+	// 필요 없을듯
 	public int getID(){
 		return this.id;
 	}
+	
+	protected void setTableData(ArrayList<ArrayList<String>> newData){
+		tableData=newData;
+	}
 	protected void makeTable(){
-		tableData=ModelManager.sharedModelManager().getCurrentTitanicModel().getMatrixData();
 		table = new WholeDSMTable(tableData);
 		this.add(table, BorderLayout.CENTER);
-		
 	}
 	
 	

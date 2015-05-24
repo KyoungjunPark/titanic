@@ -36,11 +36,11 @@ public class WholeDSMTable extends JPanel {
 		// JTable distributes
 		int columnWidth = 100;
 		int firstLine = 0;
-		int rowHeight = 50;
-
+		int rowHeight = 30;
+		int fontSize = 20;
 		// set rowHeight
 		table.setRowHeight(rowHeight);
-		table.setFont(new Font("SansSerif", Font.PLAIN, 40));
+		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
 		DefaultTableCellRenderer firstLineRender = new DefaultTableCellRenderer();
 		DefaultTableCellRenderer restRender = new DefaultTableCellRenderer();

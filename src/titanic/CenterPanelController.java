@@ -23,10 +23,4 @@ public class CenterPanelController extends MainController{
 		leftPanelController = new LeftPanelController(centerPanel.getLeftPanel());
 		contentsPanelController = new ContentsPanelController(centerPanel.getContentsPanel());       
 	}
-	
-	
-	// redraw 
-	private void redrawPanel() {
-		contentsPanelController.redrawPanel();
-	}
 }
