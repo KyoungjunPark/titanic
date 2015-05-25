@@ -118,19 +118,19 @@ public class MenuBarController extends MainController{
 				
 			}
 		});
-		menu.setAction("DSM...", new ActionListener() {
+		menu.setAction("Save DSM", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "DSM... is clicked");
+				 JOptionPane.showMessageDialog(null, "Save DSM is clicked");
 				
 			}
 		});		
-		menu.setAction("Excel...", new ActionListener() {
+		menu.setAction("Save DSM...", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Excel... is clicked");
+				 JOptionPane.showMessageDialog(null, "Save DSM... is clicked");
 				
 			}
 		});		
@@ -169,7 +169,6 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Find... is clicked");
-				
 			}
 		});
 		menu.setAction("Show Row Labels", new ActionListener() {

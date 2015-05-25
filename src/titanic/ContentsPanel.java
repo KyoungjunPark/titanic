@@ -1,7 +1,5 @@
 package titanic;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -25,8 +23,8 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		// redraw를 하기 위해서 정보를 갱신한다.
 		regetTableData(tabIndex);
-		contents.get(this.tabIndex - 1).setTableData(newData);
-		contents.get(this.tabIndex - 1).redrawPanel(newData);
+		contents.get(this.tabIndex).setTableData(newData);
+		contents.get(this.tabIndex).redrawPanel(newData);
 
 		String tabName = new String();
 
@@ -44,7 +42,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	protected void addRightPanel(RightPanel panel) {
 
 		contents.add(panel);
-		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+		this.add(panel, ModelManager.sharedModelManager()
 				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
@@ -52,7 +50,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
-		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+		this.add(panel, ModelManager.sharedModelManager()
 				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
@@ -77,6 +75,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	public void setShowRowLabels(boolean state, int tabIndex) {
 
-			contents.get(tabIndex - 1).setShowRowLabels(state);
+			contents.get(tabIndex).setShowRowLabels(state);
 	}
 }

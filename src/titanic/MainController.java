@@ -60,9 +60,6 @@ public class MainController {
                   
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
-                if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
-                	EventManager.callEvent("Redraw");
-                
             }
         });
 		EventManager.addEvent(new Event("after-openCLSX") {
@@ -84,10 +81,8 @@ public class MainController {
 		EventManager.addEvent(new Event("Redraw"){
 			public void action(){
 
-				int top;
-				top = centerPanelController.getContentsPanelController().getTop();
-				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
-				centerPanelController.getContentsPanelController().redrawPanel(top);
+				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), ModelManager.sharedModelManager().getCurrentID());
+				centerPanelController.getContentsPanelController().redrawPanel();
 			}
 		});
 	}
@@ -101,6 +96,8 @@ public class MainController {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
 			 EventManager.callEvent("after-openDSM");
+			 EventManager.callEvent("Redraw");
+			 
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +110,7 @@ public class MainController {
 		
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
-
+			EventManager.callEvent("Redraw");
 			
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
