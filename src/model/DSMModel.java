@@ -71,19 +71,18 @@ public class DSMModel extends Model{
             ArrayList<Node> nodeList = clsx.getGroupNode().getItemList();
             ArrayList<Integer> relationArray = new ArrayList<Integer>(this.dependencyRelationArray);
             ArrayList<Integer> tempRelationArray = new ArrayList<>(relationArray);
+
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeRow(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
             tempRelationArray = new ArrayList<>(relationArray);
-            System.out.println(relationArray);
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeColumn(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
-            System.out.println(relationArray);
+
             for( int i = 0 ; i < nodeList.size() ; i++){
                 ArrayList<String> data = new ArrayList<String>();
                 data.add(nodeList.get(i).getName());
-                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++){
+                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++)
                     data.add(relationArray.get(j) + "");
-                }
                 matrixList.add(data);
             }
             for(ArrayList<String> arrayList : matrixList){
@@ -106,13 +105,11 @@ public class DSMModel extends Model{
     private void changeRow(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
-            arrayList.set(this.dependencyNumber * bar + i, temp.get(this.dependencyNumber * foo + i));
         }
     }
     private void changeColumn(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
-            arrayList.set(bar + this.dependencyNumber * i, temp.get(foo + this.dependencyNumber * i));
         }
     }
 }
