@@ -25,8 +25,7 @@ public class FileTree extends JTree implements Controllerable {
 	private TreeNode root;
 
 	public FileTree() {
-		setModel(null);
-
+		this.setModel(null);
 	}
 
 	public void makeTree() {
@@ -40,6 +39,7 @@ public class FileTree extends JTree implements Controllerable {
 		this.collapseRow(0);
 
 		this.setSelectionPath(new TreePath(root));
+
 	}
 
 	protected void moveUp() {
