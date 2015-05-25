@@ -34,7 +34,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		String tabName = new String();
 		
 		// 수정필요
-		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();//getFileName(); 
+		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName(); 
 		
 		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
 		if (tabIndex == 0)
