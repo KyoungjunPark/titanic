@@ -52,13 +52,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	protected void addRightPanel() {
-<<<<<<< HEAD
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
 		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
-=======
-		contents.add(new RightPanel());
->>>>>>> 538bccf0b856979c2384431c681b55b94668bd5d
 	}
 
 	@Override
