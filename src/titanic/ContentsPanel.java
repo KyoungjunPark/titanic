@@ -1,7 +1,11 @@
 package titanic;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import model.ModelManager;
@@ -15,7 +19,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
-
 	}
 
 	public void drawTableAtTab(int tabIndex) {
@@ -27,19 +30,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		String tabName = new String();
 		
-		// 수정필요
 		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName(); 
 		
-		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
-		if (tabIndex == 0)
-			this.addTab(tabName, contents.get(this.tabIndex - 1));
-		else {
-			/*
-			 * this.removeAll(); this.addTab("" + (this.tabIndex),
-			 * contents.get(this.tabIndex - 1));
-			 */
-			repaint();
-		}
+		repaint();
+
 	}
 
 	public ArrayList<RightPanel> getRightPanel() {
@@ -47,11 +41,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	protected void addRightPanel(RightPanel panel) {
+		
 		contents.add(panel);
 		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	protected void addRightPanel() {
+		
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
 		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
@@ -64,12 +60,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	// 정보 갱신
 	public void regetTableData(int tabIndex) {
-		// 맨 처음 탭을 위한 숫자 조정
-		if (tabIndex == 0)
-			this.tabIndex = 1;
-		else
-			this.tabIndex = tabIndex;
-
+		this.tabIndex = tabIndex;
 		// 요기서 다시 받아옴
 		newData = new ArrayList<ArrayList<String>>();
 		newData = ModelManager.sharedModelManager().getCurrentTitanicModel()
@@ -77,9 +68,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	public void setShowRowLabels(boolean state, int tabIndex) {
-		if (tabIndex == 0) {
-			contents.get(tabIndex).setShowRowLabels(state);
-		} else
+		
 			contents.get(tabIndex - 1).setShowRowLabels(state);
 	}
 }
