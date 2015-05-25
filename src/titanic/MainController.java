@@ -57,7 +57,6 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-                  
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
             }
@@ -74,7 +73,7 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-                  
+           
             }
         });
 
