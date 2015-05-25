@@ -46,7 +46,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Group is clicked");
-				
+				EventManager.callEvent("group");
 			}
 		});
 		leftToolbar.setAction("Ungroup", new ActionListener() {
@@ -54,6 +54,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Ungroup is clicked");
+				EventManager.callEvent("ungroup");
 				
 			}
 		});
@@ -62,6 +63,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("moveUp");
+				EventManager.callEvent("Redraw");
 				
 			}
 		});
@@ -70,7 +72,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("moveDown");
-				
+				EventManager.callEvent("Redraw");
 			}
 		});
 		leftToolbar.setAction("Delete", new ActionListener() {
@@ -79,6 +81,7 @@ public class LeftToolbarController extends LeftPanelController{
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Delete is clicked");
 				EventManager.callEvent("delete");
+				EventManager.callEvent("Redraw");
 			}
 		});
 		

@@ -53,7 +53,7 @@ public class RightPanel extends JPanel implements Controllerable{
 		this.removeAll();
 		
 		this.setLayout(new BorderLayout());
-		this.add(new JScrollPane(table), BorderLayout.CENTER);
+		this.add(table, BorderLayout.CENTER);
 	}
 	public void setShowRowLabels(boolean state) {
 		this.setShowRowLabels=state;

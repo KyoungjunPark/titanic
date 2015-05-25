@@ -178,7 +178,7 @@ public class MenuBarController extends MainController{
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Show Row Labels is clicked");
 				
-				
+			if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)	
 				EventManager.callEvent("Redraw");
 				
 			}
