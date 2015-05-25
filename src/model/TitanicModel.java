@@ -46,6 +46,8 @@ public class TitanicModel {
 			this.setClsxModel(clsx);
 		}
 	}
+    public DSMModel getDsmModel(){ return this.dsmModel; }
+    public CLSXModel getClsxModel(){ return this.clsxModel; }
 	public GroupNode getGroupNode(){
 		if(this.clsxModel != null){
 			return this.clsxModel.getGroupNode();

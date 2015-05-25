@@ -49,7 +49,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-open") {
+		EventManager.addEvent(new Event("after-openDSM") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -63,6 +63,25 @@ public class MainController {
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                 
                 centerPanelController.getContentsPanelController().addRightPanel();
+                
+                // 만들면 일단 redraw
+                int top = 0;
+            	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
+				centerPanelController.getContentsPanelController().redrawPanel(top);
+            }
+        });
+		EventManager.addEvent(new Event("after-openCLSX") {
+            public void action() {
+                menuBarController.changeDSMStatus();
+                mainToolbarController.changeDSMStatus();
+                EventManager.callEvent("expandAllButtonEnable");
+                EventManager.callEvent("collapseAllButtonEnable");
+                EventManager.callEvent("groupButtonDisable");
+                EventManager.callEvent("ungroupButtonDisable");
+                EventManager.callEvent("moveUpButtonDisable");
+                EventManager.callEvent("moveDownButtonDisable");
+                EventManager.callEvent("deleteButtonDisable");
+                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                 
                 // 만들면 일단 redraw
                 int top = 0;
