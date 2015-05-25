@@ -22,7 +22,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
 
-
 	}
 
 	public void drawTableAtTab(int tabIndex) {
@@ -32,14 +31,19 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		contents.get(this.tabIndex - 1).setTableData(newData);
 		contents.get(this.tabIndex - 1).redrawPanel(newData);
 
+		String tabName = new String();
+		
+		// 수정필요
+		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();//getFileName(); 
+		
 		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
 		if (tabIndex == 0)
-			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
+			this.addTab(tabName, contents.get(this.tabIndex - 1));
 		else {
 			/*
-			this.removeAll();
-			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
-			*/
+			 * this.removeAll(); this.addTab("" + (this.tabIndex),
+			 * contents.get(this.tabIndex - 1));
+			 */
 			repaint();
 		}
 	}
@@ -47,10 +51,12 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ArrayList<RightPanel> getRightPanel() {
 		return contents;
 	}
-	protected void addRightPanel(RightPanel panel){
+
+	protected void addRightPanel(RightPanel panel) {
 		contents.add(panel);
 	}
-	protected void addRightPanel(){
+
+	protected void addRightPanel() {
 		contents.add(new RightPanel());
 	}
 
@@ -76,8 +82,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public void setShowRowLabels(boolean state, int tabIndex) {
 		if (tabIndex == 0) {
 			contents.get(tabIndex).setShowRowLabels(state);
-		}
-		else
-			contents.get(tabIndex-1).setShowRowLabels(state);
+		} else
+			contents.get(tabIndex - 1).setShowRowLabels(state);
 	}
 }

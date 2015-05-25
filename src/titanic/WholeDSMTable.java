@@ -40,7 +40,7 @@ public class WholeDSMTable extends JPanel {
 		int columnWidth = 100;
 		int firstLine = 0;
 		int rowHeight = 30;
-		int fontSize = 20;
+		int fontSize = 15;
 		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
@@ -51,10 +51,12 @@ public class WholeDSMTable extends JPanel {
 		firstLineRender.setBackground(Color.LIGHT_GRAY);
 		firstLineRender.setHorizontalAlignment(JLabel.RIGHT);
 		restRender.setHorizontalAlignment(JLabel.CENTER);
+		
 		table.getColumnModel().getColumn(firstLine)
 				.setCellRenderer(firstLineRender);
-		table.getColumnModel().getColumn(firstLine)
-				.setPreferredWidth(columnWidth);
+		table.setRowSelectionAllowed(true);
+	
+		//table.getColumnModel().getColumn(firstLine).setPreferredWidth(columnWidth);
 		for (int i = 1; i < table.getRowCount() + 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
