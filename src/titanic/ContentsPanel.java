@@ -2,6 +2,8 @@ package titanic;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import model.ModelManager;
@@ -48,17 +50,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	protected void addRightPanel(RightPanel panel) {
 		contents.add(panel);
-		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	protected void addRightPanel() {
-<<<<<<< HEAD
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
-		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
-=======
-		contents.add(new RightPanel());
->>>>>>> 538bccf0b856979c2384431c681b55b94668bd5d
+		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	@Override

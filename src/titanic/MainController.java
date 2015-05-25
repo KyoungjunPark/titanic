@@ -58,10 +58,8 @@ public class MainController {
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                   
-                int id = ModelManager.sharedModelManager().getCurrentID();
-                RightPanel panel = new RightPanel(id);
                 
-                centerPanelController.getContentsPanelController().addRightPanel(panel);
+                centerPanelController.getContentsPanelController().addRightPanel();
                 /*
                 // 만들면 일단 redraw
                 int top = 0;

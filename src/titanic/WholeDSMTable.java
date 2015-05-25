@@ -31,7 +31,7 @@ public class WholeDSMTable extends JPanel {
 		tableDistributeInit(wholeDSMTable);
 
 		this.setLayout(new BorderLayout());
-		this.add(new JScrollPane(wholeDSMTable), BorderLayout.CENTER);
+		this.add(wholeDSMTable, BorderLayout.CENTER);
 
 	}
 

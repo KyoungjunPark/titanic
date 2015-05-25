@@ -25,13 +25,10 @@ public class FileTree extends JTree implements Controllerable {
 	private TreeNode root;
 
 	public FileTree() {
-		setModel(null);
-
+		this.setModel(null);
 	}
 
 	public void makeTree() {
-		ModelManager.sharedModelManager().setTitanicModelID(0); // must be
-																// deleted!!!!
 
 		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getGroupNode().getTreeNode();
@@ -40,6 +37,7 @@ public class FileTree extends JTree implements Controllerable {
 		this.collapseRow(0);
 
 		this.setSelectionPath(new TreePath(root));
+
 	}
 
 	protected void moveUp() {
@@ -67,7 +65,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
 	protected void moveDown() {
@@ -95,7 +93,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
 	private DefaultMutableTreeNode deepClone(DefaultMutableTreeNode source) {
@@ -132,7 +130,6 @@ public class FileTree extends JTree implements Controllerable {
 		for (int i = this.getRowCount() - 1; i >= 0; i--) {
 			this.collapseRow(i);
 		}
-
 	}
 
 	protected void delete() {
