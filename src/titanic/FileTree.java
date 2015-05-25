@@ -129,7 +129,9 @@ public class FileTree extends JTree implements Controllerable {
 	}
 
 	protected void collapseAll() {
-		this.collapseRow(0);
+		for (int i = this.getRowCount() - 1; i >= 0; i--) {
+			this.collapseRow(i);
+		}
 
 	}
 
