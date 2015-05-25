@@ -17,7 +17,9 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	private JMenuItem loadClusteringItem;
 	private JMenuItem saveClusteringItem;
 	private JMenuItem saveClusteringAsItem;
-	private JMenuItem exportAsItem;
+	private JMenuItem saveDSMItem;
+	private JMenuItem saveDSMAsItem;
+	//private JMenuItem exportAsItem;
 	private JMenuItem exitActionItem;
 	private JMenuItem propagationCostItem;
 	
@@ -25,12 +27,12 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	private JMenuItem find;
 	
 	private JCheckBoxMenuItem showRowLabels;
-	private JCheckBoxMenuItem showDependencyStrength;
+	//private JCheckBoxMenuItem showDependencyStrength;
 	
 	private JMenuItem about;
 
-	private JMenuItem DSM;
-	private JMenuItem excel;
+	//private JMenuItem DSM;
+	//private JMenuItem excel;
 	
 	public MenuBar()
 	{
@@ -67,10 +69,20 @@ public class MenuBar extends JMenuBar implements Controllerable{
         saveClusteringAsItem = new JMenuItem("Save Clustering...", new ImageIcon("util/save-clsx-as.png"));
         saveClusteringAsItem.setToolTipText("Save Clustering As");
         saveClusteringAsItem.setEnabled(false);
-        exportAsItem = new JMenu("Export As");
-        exportAsItem.setToolTipText("Export As");
+        saveDSMItem = new JMenuItem("Save DSM", new ImageIcon("util/save-clsx.png"));
+        saveDSMItem.setToolTipText("Save DSM");
+        saveDSMItem.setEnabled(false);
+        saveDSMAsItem = new JMenuItem("Save DSM...", new ImageIcon("util/save-clsx-as.png"));
+        saveDSMAsItem.setToolTipText("Save DSM As");
+        saveDSMAsItem.setEnabled(false);
+        /*
+         * export기능은 없고 save DSM과 save DSM As 기능이 있어 대체합니다.
+         * exportAsItem = new JMenu("Export As");
+         * exportAsItem.setToolTipText("Export As");
+        */
         exitActionItem = new JMenuItem("Exit");
         exitActionItem.setToolTipText("Exit");
+
         propagationCostItem = new JMenuItem("Propagation Cost");
         propagationCostItem.setToolTipText("Propagation Cost");
         propagationCostItem.setEnabled(false);
@@ -82,18 +94,19 @@ public class MenuBar extends JMenuBar implements Controllerable{
         find.setToolTipText("Find");
         find.setEnabled(false);
         showRowLabels = new JCheckBoxMenuItem("Show Row Labels");
-        showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
+        //showDependencyStrength = new JCheckBoxMenuItem("Show Dependency Strength");
         
         about = new JMenuItem("About...");
         about.setToolTipText("About");
         
+        /*
         DSM = new JMenuItem("DSM...");
         DSM.setToolTipText("DSM");
         DSM.setEnabled(false);
         excel = new JMenuItem("Excel...");
         excel.setToolTipText("Excel");
         excel.setEnabled(false);
-        
+        */
         
         mnFile.add(openDSMItem);
         mnFile.addSeparator();
@@ -103,24 +116,32 @@ public class MenuBar extends JMenuBar implements Controllerable{
         mnFile.add(saveClusteringItem);
         mnFile.add(saveClusteringAsItem);
         mnFile.addSeparator();
+        mnFile.add(saveDSMItem);
+        mnFile.add(saveDSMAsItem);
+        mnFile.addSeparator();
+        /*
         mnFile.add(exportAsItem);
         mnFile.addSeparator();
+        */
         mnFile.add(exitActionItem);
+        
         openDSMItem.setMnemonic('O');
         newClusteringItem.setMnemonic('N');
         loadClusteringItem.setMnemonic('L');
         saveClusteringItem.setMnemonic('S');
         saveClusteringAsItem.setMnemonic('a');
-        exportAsItem.setMnemonic('E');
-        exitActionItem.setMnemonic('x');
+        //exportAsItem.setMnemonic('E');
+        //exitActionItem.setMnemonic('x');
         openDSMItem.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK, false));
         loadClusteringItem.setAccelerator(KeyStroke.getKeyStroke('O', Event.CTRL_MASK + Event.SHIFT_MASK, false));
         saveClusteringItem.setAccelerator(KeyStroke.getKeyStroke('S', Event.CTRL_MASK, false));
  
+        /*
         exportAsItem.add(DSM);
         exportAsItem.add(excel);
         DSM.setMnemonic('D');
         excel.setMnemonic('E');
+        */
         
         mnMetrics.add(propagationCostItem);
         propagationCostItem.setMnemonic('P');
@@ -131,12 +152,12 @@ public class MenuBar extends JMenuBar implements Controllerable{
         mnView.addSeparator();
         
         mnView.add(showRowLabels);
-        mnView.add(showDependencyStrength);
+        //mnView.add(showDependencyStrength);
         
         redraw.setMnemonic('R');
         find.setMnemonic('F');
         showRowLabels.setMnemonic('L');
-        showDependencyStrength.setMnemonic('D');
+        //showDependencyStrength.setMnemonic('D');
         redraw.setAccelerator(KeyStroke.getKeyStroke(0, Event.F5, false));			//F5 ????? ???? ?????
         find.setAccelerator(KeyStroke.getKeyStroke('F', Event.CTRL_MASK, false));
         
