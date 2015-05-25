@@ -45,7 +45,7 @@ public class DependencyTable extends JPanel {
 		// JTable Attributes
 		int firstLine = 0;
 		int rowHeight = 30;
-		int fontSize = 10;
+		int fontSize = 15;
 		int columnWidth = 100;
 		JTableHeader header = table.getTableHeader();
 		
@@ -67,6 +67,11 @@ public class DependencyTable extends JPanel {
 		for (int i = 1; i < table.getRowCount() + 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
+		
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for( int i = 0 ; i < table.getColumnCount() ; i++)
+            table.getColumnModel().getColumn(i).setPreferredWidth(25);
+        table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.setRowSelectionAllowed(false);
 	}
 
