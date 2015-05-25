@@ -29,4 +29,7 @@ public abstract class Node {
      */
     abstract public DefaultMutableTreeNode getTreeNode();
     abstract public String getType();
+    public String toString(){
+        return getType()+" "+getName()+"\n";
+    }
 }
