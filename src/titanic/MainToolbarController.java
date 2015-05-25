@@ -55,7 +55,7 @@ public class MainToolbarController extends MainController {
 				// when file open success, then available icon must be changed!
 				// Then Manager must give a message like "It's ok".
 
-				// setting chaned when dsm file is open
+				// setting changed when dsm file is open
 				// issue! setting값을 좀 더 구조적으로 배치할 수 없을까?
 				openDSMFile(openFile);
 
