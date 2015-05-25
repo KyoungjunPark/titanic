@@ -10,7 +10,7 @@ import model.ModelManager;
 public class RightPanel extends JPanel implements Controllerable{
 	
 	private int id;
-	private WholeDSMTable table;
+	private DependencyTable table;
 	private ArrayList<ArrayList<String>> tableData;
 	private boolean setShowRowLabels;	
 	/**
@@ -44,7 +44,7 @@ public class RightPanel extends JPanel implements Controllerable{
 
 	protected void redrawPanel(ArrayList<ArrayList<String>> newData){
 		tableData=newData;
-		table = new WholeDSMTable(tableData, this.setShowRowLabels);
+		table = new DependencyTable(tableData, this.setShowRowLabels);
 		this.removeAll();
 		this.add(table, BorderLayout.CENTER);
 	}

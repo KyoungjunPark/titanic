@@ -22,13 +22,16 @@ public class ContentsPanelController extends CenterPanelController{
 		
 		//must changed! test version
 		// From 세현 : rightPanelController 안쓴다며..? ㅜㅜ  
-		rightPanelController = new RightPanelController(contentsPanel.getRightPanel().get(0));
 
 	}
 	
-	
 	private void setEvent(){
 		
+	}
+	
+	protected void addRightPanel()
+	{
+		contentsPanel.addRightPanel();
 	}
 	
 	protected void redrawPanel(int tabIndex) {

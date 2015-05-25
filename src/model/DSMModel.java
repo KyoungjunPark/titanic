@@ -83,7 +83,7 @@ public class DSMModel extends Model{
                 ArrayList<String> data = new ArrayList<String>();
                 data.add(this.elementsNameArray.get(i));
                 for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++){
-                    data.add(this.dependencyRelationArray.get(i) + "");
+                    data.add(this.dependencyRelationArray.get(j) + "");
                 }
                 matrixList.add(data);
             }

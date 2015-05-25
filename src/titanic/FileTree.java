@@ -36,7 +36,8 @@ public class FileTree extends JTree implements Controllerable {
 		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getGroupNode().getTreeNode();
 
-		setModel(new DefaultTreeModel(root));
+		this.setModel(new DefaultTreeModel(root));
+		this.collapseRow(0);
 
 		this.setSelectionPath(new TreePath(root));
 	}
@@ -127,8 +128,8 @@ public class FileTree extends JTree implements Controllerable {
 		}
 	}
 
-	protected void collapseAll(int startingIndex, int rowCount) {
-		for (int i = rowCount - 1; i >= startingIndex; i--) {
+	protected void collapseAll() {
+		for (int i = this.getRowCount() - 1; i >= 0; i--) {
 			this.collapseRow(i);
 		}
 
