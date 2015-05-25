@@ -75,13 +75,13 @@ public class MenuBar extends JMenuBar implements Controllerable{
         saveDSMAsItem = new JMenuItem("Save DSM...", new ImageIcon("util/save-clsx-as.png"));
         saveDSMAsItem.setToolTipText("Save DSM As");
         saveDSMAsItem.setEnabled(false);
+        exitActionItem = new JMenuItem("Exit");
+        exitActionItem.setToolTipText("Exit");
         /*
          * export기능은 없고 save DSM과 save DSM As 기능이 있어 대체합니다.
          * exportAsItem = new JMenu("Export As");
          * exportAsItem.setToolTipText("Export As");
         */
-        exitActionItem = new JMenuItem("Exit");
-        exitActionItem.setToolTipText("Exit");
 
         propagationCostItem = new JMenuItem("Propagation Cost");
         propagationCostItem.setToolTipText("Propagation Cost");

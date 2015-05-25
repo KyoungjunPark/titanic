@@ -186,23 +186,18 @@ public class LeftPanelController extends CenterPanelController {
 	public void OpenDSMStatus() {
 
 	}
-
 	protected void moveUp() {
 		fileTreeController.moveUp();
 	}
-
 	protected void moveDown() {
 		fileTreeController.moveDown();
 	}
-
 	protected void expandTree() {
 		fileTreeController.expandAll(0, leftPanel.getfileTree().getRowCount());
 	}
-
 	protected void collapseTree() {
 		fileTreeController.collapseAll();
 	}
-
 	protected void deleteTree() {
 		fileTreeController.delete();
 	}
