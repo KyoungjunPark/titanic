@@ -48,6 +48,18 @@ public class LeftPanelController extends CenterPanelController {
 				collapseTree();
 			}
 		});
+		
+		EventManager.addEvent(new Event("group") {
+			public void action() {
+				
+			}
+		});
+		
+		EventManager.addEvent(new Event("ungroup") {
+			public void action() {
+				
+			}
+		});
 
 		EventManager.addEvent(new Event("moveUp") {
 			public void action() {

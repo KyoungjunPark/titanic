@@ -65,7 +65,6 @@ public class MainToolbarController extends MainController {
 		toolbar.setAction("Redraw", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// JOptionPane.showMessageDialog(null, "Redraw is clicked");
 				EventManager.callEvent("Redraw");
 
 			}
