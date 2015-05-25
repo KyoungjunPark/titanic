@@ -60,9 +60,9 @@ public class MainController {
                   
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
-                /* 활성화시키면 열었을때 자동 리드로우 됨
-                EventManager.callEvent("Redraw");
-                */
+                if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
+                	EventManager.callEvent("Redraw");
+                
             }
         });
 		EventManager.addEvent(new Event("after-openCLSX") {
