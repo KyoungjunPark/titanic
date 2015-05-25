@@ -25,11 +25,15 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		contents.get(this.tabIndex - 1).setTableData(newData);
 		contents.get(this.tabIndex - 1).redrawPanel(newData);
 
+		String tabName = new String();
+		
+		// 수정필요
+		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName(); 
+		
 		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
-		if (tabIndex == 0) {
-			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
-			
-		} else {
+		if (tabIndex == 0)
+			this.addTab(tabName, contents.get(this.tabIndex - 1));
+		else {
 			/*
 			 * this.removeAll(); this.addTab("" + (this.tabIndex),
 			 * contents.get(this.tabIndex - 1));
@@ -48,9 +52,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	protected void addRightPanel() {
+<<<<<<< HEAD
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
 		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+=======
+		contents.add(new RightPanel());
+>>>>>>> 538bccf0b856979c2384431c681b55b94668bd5d
 	}
 
 	@Override

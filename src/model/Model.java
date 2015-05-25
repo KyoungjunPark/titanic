@@ -11,6 +11,7 @@ abstract class Model {
     public String getFilePath() {
         return filePath;
     }
+
     public String getFileName() {
         if(filePath.lastIndexOf("/") != -1)
             return filePath.substring(filePath.lastIndexOf("/"));
