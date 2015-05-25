@@ -74,6 +74,18 @@ public class TitanicModel {
      * @return 성공 여부를 알려줍니다.
      */
     public boolean syncTreeNode(TreeNode root){
+        try{
+            if(this.clsxModel == null){
+                this.setClsxModel(new CLSXModel(root));
+            }else{
+                this.clsxModel.setTreeNode(root);
+            }
+        }catch (CreateException e){
+            return false;
+        }
         return true;
+    }
+    public boolean isEdit(){
+        return this.dsmModel.isEdit() || this.clsxModel.isEdit();
     }
 }

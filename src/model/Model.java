@@ -8,6 +8,7 @@ import util.GroupNode;
 abstract class Model {
     private String filePath;
     private String fileName;
+    private boolean isEdit = false;
     protected GroupNode node = null;
     public String getFilePath() {
         return filePath;
@@ -23,4 +24,10 @@ abstract class Model {
         this.filePath = filePath;
     }
     public GroupNode getGroupNode(){return null;}
+    protected boolean isEdit(){
+        return this.isEdit;
+    }
+    protected void setIsEdit(boolean isEdit){
+        this.isEdit = isEdit;
+    }
 }
