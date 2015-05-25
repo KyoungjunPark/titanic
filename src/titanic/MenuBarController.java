@@ -67,7 +67,9 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "New Clustering is clicked");
+				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
+				EventManager.callEvent("Redraw");
+				EventManager.callEvent("after-open");
 				
 			}
 		});

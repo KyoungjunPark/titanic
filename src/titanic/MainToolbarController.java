@@ -8,6 +8,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.EventManager;
@@ -69,9 +71,9 @@ public class MainToolbarController extends MainController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane
-						.showMessageDialog(null, "New Clustering is clicked");
-
+				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
+				EventManager.callEvent("Redraw");
+				EventManager.callEvent("after-open");
 			}
 		});
 		toolbar.setAction("Load Clustering", new ActionListener() {

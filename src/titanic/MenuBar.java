@@ -173,7 +173,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
         for(Component component : this.getComponents()){
         	for(Component item : ((JMenu)component).getMenuComponents()){
 	            if( item instanceof JMenuItem)
-	                ((JMenuItem) item).setEnabled(true);;
+	               ((JMenuItem) item).setEnabled(true);
         	}
         }
 		

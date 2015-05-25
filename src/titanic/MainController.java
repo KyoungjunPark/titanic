@@ -45,7 +45,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-openDSM") {
+		EventManager.addEvent(new Event("after-open-First") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -57,11 +57,12 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+                  
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
             }
         });
-		EventManager.addEvent(new Event("after-openCLSX") {
+		EventManager.addEvent(new Event("after-open") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -73,7 +74,7 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-           
+                  
             }
         });
 
@@ -94,9 +95,8 @@ public class MainController {
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
-			 EventManager.callEvent("after-openDSM");
+			 EventManager.callEvent("after-open-First");
 			 EventManager.callEvent("Redraw");
-			 
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,6 +109,7 @@ public class MainController {
 		
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
+			EventManager.callEvent("after-open");
 			EventManager.callEvent("Redraw");
 			
 		} catch (CreateException e) {
