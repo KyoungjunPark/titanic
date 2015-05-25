@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import model.ModelManager;
@@ -43,14 +43,14 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	protected void addRightPanel(RightPanel panel) {
 		
 		contents.add(panel);
-		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	protected void addRightPanel() {
 		
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
-		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	@Override
