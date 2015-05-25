@@ -20,6 +20,7 @@ public class DSMModel extends Model{
     public DSMModel(File file)throws CreateException, IOException{
 		this(JSFiles.getAllString(file));
         this.setFilePath(file.getAbsolutePath());
+        this.setFileName(file.getName());
     }
 	public DSMModel(int dependencyNumber, 
 			ArrayList<Integer> dependencyRelationArray, 
