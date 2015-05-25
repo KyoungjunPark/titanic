@@ -1,5 +1,7 @@
 package titanic;
 
+import javax.swing.JScrollPane;
+
 import model.ModelManager;
 
 public class ContentsPanelController extends CenterPanelController{
@@ -34,7 +36,6 @@ public class ContentsPanelController extends CenterPanelController{
 	protected void addRightPanel()
 	{
 		int id = ModelManager.sharedModelManager().getCurrentID();
-        System.out.println("b : "+id);
         RightPanel panel = new RightPanel(id);
 		contentsPanel.addRightPanel(panel);
 	}

@@ -108,7 +108,6 @@ public class MainController {
 		
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
-			 System.out.println("a : "+currentID);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
 			 EventManager.callEvent("after-openDSM");
 		} catch (CreateException e) {
