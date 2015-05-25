@@ -19,9 +19,8 @@ class CLSXModel extends Model{
         this.setTreeNode(node);
     }
     protected void setTreeNode(TreeNode node)throws CreateException{
-        System.out.println(node+" ! ");
-        GroupNode g = (GroupNode)node.getGroupNode();
-        g.print();
+        this.node = (GroupNode)node.getGroupNode();
+        this.node.print();
         this.setIsEdit(true);
     }
     public GroupNode getGroupNode(){return this.node;};

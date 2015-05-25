@@ -80,6 +80,10 @@ public class DSMModel extends Model{
                 }
                 matrixList.add(data);
             }
+            for(ArrayList<String> arrayList : matrixList){
+                while(arrayList.size() > matrixList.size()+1)
+                    arrayList.remove(arrayList.size()-1);
+            }
         }else{
             for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
                 ArrayList<String> data = new ArrayList<String>();
@@ -90,6 +94,7 @@ public class DSMModel extends Model{
                 matrixList.add(data);
             }
         }
+        System.out.println(matrixList);
         return matrixList;
     }
     private void changeColumn(ArrayList<Integer> arrayList, int foo, int bar){
