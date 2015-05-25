@@ -17,10 +17,7 @@ abstract class Model {
         this.fileName = fileName;
     }
     public String getFileName() {
-        if(filePath.lastIndexOf("/") != -1)
-            return filePath.substring(filePath.lastIndexOf("/"));
-        else
-            return filePath.substring(filePath.lastIndexOf("\\")+1);
+        return this.fileName;
     }
     public void setFilePath(String filePath) {
         this.filePath = filePath;
