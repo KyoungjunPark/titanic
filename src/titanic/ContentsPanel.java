@@ -42,7 +42,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	protected void addRightPanel(RightPanel panel) {
 
 		contents.add(panel);
-		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+		this.add(panel, ModelManager.sharedModelManager()
 				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
@@ -50,7 +50,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
-		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+		this.add(panel, ModelManager.sharedModelManager()
 				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
