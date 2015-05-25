@@ -47,6 +47,12 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ArrayList<RightPanel> getRightPanel() {
 		return contents;
 	}
+	protected void addRightPanel(RightPanel panel){
+		contents.add(panel);
+	}
+	protected void addRightPanel(){
+		contents.add(new RightPanel());
+	}
 
 	@Override
 	public void setAction(String title, ActionListener action) {

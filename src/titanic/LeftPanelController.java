@@ -188,7 +188,7 @@ public class LeftPanelController extends CenterPanelController {
 	}
 
 	protected void collapseTree() {
-		fileTreeController.collapseAll(0, leftPanel.getfileTree().getRowCount());
+		fileTreeController.collapseAll();
 	}
 
 	protected void deleteTree() {

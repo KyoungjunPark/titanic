@@ -199,8 +199,8 @@ public class FileTreeController extends LeftPanelController {
 
 	}
 
-	protected void collapseAll(int startingIndex, int rowCount) {
-		treeFile.collapseAll(startingIndex, rowCount);
+	protected void collapseAll() {
+		treeFile.collapseAll();
 
 	}
 

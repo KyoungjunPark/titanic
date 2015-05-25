@@ -62,6 +62,8 @@ public class MainController {
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                 
+                centerPanelController.getContentsPanelController().addRightPanel();
+                
                 // 만들면 일단 redraw
                 int top = 0;
             	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);

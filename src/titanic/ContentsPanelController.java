@@ -25,9 +25,13 @@ public class ContentsPanelController extends CenterPanelController{
 
 	}
 	
-	
 	private void setEvent(){
 		
+	}
+	
+	protected void addRightPanel()
+	{
+		contentsPanel.addRightPanel();
 	}
 	
 	protected void redrawPanel(int tabIndex) {
