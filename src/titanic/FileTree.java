@@ -45,6 +45,10 @@ public class FileTree extends JTree implements Controllerable {
 		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
+		
+		
+		nodes = sortFromIndex(nodes);
+		
 		for (int i = 0; i < nodes.size(); i++) {
 			DefaultMutableTreeNode node = nodes.get(i);
 
@@ -73,9 +77,10 @@ public class FileTree extends JTree implements Controllerable {
 		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
+		nodes = reverseSortFromIndex(nodes);
+		
 		for (int i = 0; i < nodes.size(); i++) {
 			DefaultMutableTreeNode node = nodes.get(i);
-
 			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
 			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
 					.getRoot();
@@ -105,7 +110,47 @@ public class FileTree extends JTree implements Controllerable {
 					.nextElement()));
 		}
 		return newNode;
-	} // end of deepClone
+	} 
+	private ArrayList<DefaultMutableTreeNode> sortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+		
+		for(int i = 0 ; i<nodes.size() ; i++){
+			int min = root.getIndex(nodes.get(i));
+			int index = i;
+			for(int j = i+1 ;  j <nodes.size(); j++){
+				if(root.getIndex(nodes.get(j)) < min){
+					min = root.getIndex(nodes.get(j));
+					index = j;
+				}
+			}
+			if(i != index){
+				//exchange i & index 's contents
+				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				nodes.set(i, nodes.get(index));
+				nodes.set(index, tmpNode);
+			}
+		}
+		return nodes;
+	} 
+	private ArrayList<DefaultMutableTreeNode> reverseSortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+		
+		for(int i = 0 ; i<nodes.size() ; i++){
+			int max = root.getIndex(nodes.get(i));
+			int index = i;
+			for(int j = i+1 ;  j <nodes.size(); j++){
+				if(root.getIndex(nodes.get(j)) > max){
+					max = root.getIndex(nodes.get(j));
+					index = j;
+				}
+			}
+			if(i != index){
+				//exchange i & index 's contents
+				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				nodes.set(i, nodes.get(index));
+				nodes.set(index, tmpNode);
+			}
+		}
+		return nodes;
+	} 
 
 	protected void addItem() {
 		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
@@ -122,7 +167,7 @@ public class FileTree extends JTree implements Controllerable {
 		}
 
 		if (this.getRowCount() != rowCount) {
-			expandAll(/*this, */rowCount, this.getRowCount());
+			expandAll(rowCount, this.getRowCount());
 		}
 	}
 

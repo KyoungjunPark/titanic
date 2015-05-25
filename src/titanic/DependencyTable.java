@@ -28,7 +28,13 @@ public class DependencyTable extends JPanel {
 		TableModel tableModel = new TableModel(this.rows, showRowLabels);
 		JTable wholeDSMTable = new JTable(tableModel);
 
+
 		tableAttributeInit(wholeDSMTable);
+
+        wholeDSMTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for( int i = 0 ; i < wholeDSMTable.getColumnCount() ; i++)
+            wholeDSMTable.getColumnModel().getColumn(i).setPreferredWidth(25);
+        wholeDSMTable.getColumnModel().getColumn(0).setPreferredWidth(100);
 
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(wholeDSMTable), BorderLayout.CENTER);
