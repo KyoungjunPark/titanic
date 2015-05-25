@@ -32,12 +32,11 @@ public class DependencyTable extends JPanel {
 
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(wholeDSMTable), BorderLayout.CENTER);
-
 	}
 
 	private void tableDistributeInit(JTable table) {
 		// JTable distributes
-		int columnWidth = 100;
+
 		int firstLine = 0;
 		int rowHeight = 30;
 		int fontSize = 20;
@@ -53,12 +52,11 @@ public class DependencyTable extends JPanel {
 		restRender.setHorizontalAlignment(JLabel.CENTER);
 		table.getColumnModel().getColumn(firstLine)
 				.setCellRenderer(firstLineRender);
-		table.getColumnModel().getColumn(firstLine)
-				.setPreferredWidth(columnWidth);
+
 		for (int i = 1; i < table.getRowCount() + 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
-
+		table.setRowSelectionAllowed(false);
 	}
 
 	private class TableModel extends AbstractTableModel {

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import model.ModelManager;
 
 public class RightPanel extends JPanel implements Controllerable{
@@ -49,7 +51,9 @@ public class RightPanel extends JPanel implements Controllerable{
 		tableData=newData;
 		table = new DependencyTable(tableData, this.setShowRowLabels);
 		this.removeAll();
-		this.add(table, BorderLayout.CENTER);
+		
+		this.setLayout(new BorderLayout());
+		this.add(new JScrollPane(table), BorderLayout.CENTER);
 	}
 	public void setShowRowLabels(boolean state) {
 		this.setShowRowLabels=state;

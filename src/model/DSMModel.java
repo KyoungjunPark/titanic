@@ -9,6 +9,8 @@ import util.Node;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 
 
 public class DSMModel extends Model{
@@ -68,17 +70,24 @@ public class DSMModel extends Model{
         if(clsx != null){
             ArrayList<Node> nodeList = clsx.getGroupNode().getItemList();
             ArrayList<Integer> relationArray = new ArrayList<Integer>(this.dependencyRelationArray);
-            for( int i = 0 ; i < nodeList.size() ; i++){
-                String name = nodeList.get(i).getName();
-                changeColumn(relationArray, i, this.elementsNameArray.indexOf(name));
-            }
+            ArrayList<Integer> tempRelationArray = new ArrayList<>(relationArray);
+
+            for( int i = 0 ; i < nodeList.size() ; i++)
+                changeRow(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
+            tempRelationArray = new ArrayList<>(relationArray);
+            for( int i = 0 ; i < nodeList.size() ; i++)
+                changeColumn(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
+
             for( int i = 0 ; i < nodeList.size() ; i++){
                 ArrayList<String> data = new ArrayList<String>();
                 data.add(nodeList.get(i).getName());
-                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++){
-                    data.add(relationArray.get(i) + "");
-                }
+                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++)
+                    data.add(relationArray.get(j) + "");
                 matrixList.add(data);
+            }
+            for(ArrayList<String> arrayList : matrixList){
+                while(arrayList.size() > matrixList.size()+1)
+                    arrayList.remove(arrayList.size()-1);
             }
         }else{
             for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
@@ -90,18 +99,17 @@ public class DSMModel extends Model{
                 matrixList.add(data);
             }
         }
+        System.out.println(matrixList);
         return matrixList;
     }
-    private void changeColumn(ArrayList<Integer> arrayList, int foo, int bar){
-        ArrayList<Integer> temp = new ArrayList(arrayList);
+    private void changeRow(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
-            arrayList.set(this.dependencyNumber * bar + i, temp.get(this.dependencyNumber * foo + i));
         }
-        temp = new ArrayList<>(arrayList);
+    }
+    private void changeColumn(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
-            arrayList.set(bar + this.dependencyNumber * i, temp.get(foo + this.dependencyNumber * i));
         }
     }
 }

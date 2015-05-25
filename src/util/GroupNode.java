@@ -55,4 +55,11 @@ public class GroupNode extends Node{
     public String getType(){
         return "G";
     }
+    public void print(){
+        for(Node node: this.childNodeArray){
+            System.out.println(node);
+            if(node instanceof GroupNode)
+                ((GroupNode) node).print();
+        }
+    }
 }
