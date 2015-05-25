@@ -123,10 +123,34 @@ public class ModelManager {
 	 * @return {@link TitanicModel}
 	 */
 	public TitanicModel getCurrentTitanicModel(){
-		for(TitanicModel model : this.titanicModelArray){
-			if(model.getID() == this.getCurrentID())
-				return model;
-		}
-		return null;
+		return this.getTitanicMode(this.getCurrentID());
 	}
+
+    /**
+     * id 에 해당하는 Titanic 모델을 받습니다.
+     * @param id
+     * @return
+     */
+    private TitanicModel getTitanicMode(int id){
+        for(TitanicModel model : this.titanicModelArray){
+            if(model.getID() == id)
+                return model;
+        }
+        return null;
+    }
+    /**
+     * 현재 저장중인 TitanicModel 의 갯수를 반환합니다.
+     * @return integer
+     */
+    public int getTitanicModelCount(){
+        return this.titanicModelArray.size();
+    }
+
+    public void removeTitanicModel(int id){
+        TitanicModel model = this.getTitanicMode(id);
+        if(model != null){
+            this.titanicModelArray.remove(model);
+            model = null;
+        }
+    }
 }
