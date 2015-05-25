@@ -92,7 +92,7 @@ public class DependencyTable extends JPanel {
 				s = (i + 1) + "";
 				columnIndex.add(s);
 				if (this.showRowLabels == true) {
-					s = this.getValueAt(i, 0).toString() + " " + s;
+					s = s + "."+ this.getValueAt(i, 0).toString();
 				}
 				tableData.get(i).set(0, s);
 			}
