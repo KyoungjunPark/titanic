@@ -29,9 +29,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		contents.get(this.tabIndex - 1).redrawPanel(newData);
 
 		String tabName = new String();
-		
-		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName(); 
-		
+
+		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel()
+				.getDsmModel().getFileName();
+
 		repaint();
 
 	}
@@ -41,16 +42,18 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	protected void addRightPanel(RightPanel panel) {
-		
+
 		contents.add(panel);
-		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	protected void addRightPanel() {
-		
+
 		RightPanel panel = new RightPanel();
 		contents.add(panel);
-		this.add(new JScrollPane(panel),ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+		this.add(new JScrollPane(panel), ModelManager.sharedModelManager()
+				.getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	@Override
@@ -61,14 +64,19 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	// 정보 갱신
 	public void regetTableData(int tabIndex) {
 		this.tabIndex = tabIndex;
+		
 		// 요기서 다시 받아옴
 		newData = new ArrayList<ArrayList<String>>();
-		newData = ModelManager.sharedModelManager().getCurrentTitanicModel()
-				.getMatrixData();
+		try {
+			newData = ModelManager.sharedModelManager()
+					.getCurrentTitanicModel().getMatrixData();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setShowRowLabels(boolean state, int tabIndex) {
-		
+
 			contents.get(tabIndex - 1).setShowRowLabels(state);
 	}
 }

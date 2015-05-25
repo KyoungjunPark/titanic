@@ -28,18 +28,20 @@ public class DependencyTable extends JPanel {
 		TableModel tableModel = new TableModel(this.rows, showRowLabels);
 		JTable wholeDSMTable = new JTable(tableModel);
 
-		tableDistributeInit(wholeDSMTable);
+		tableAttributeInit(wholeDSMTable);
 
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(wholeDSMTable), BorderLayout.CENTER);
 	}
 
-	private void tableDistributeInit(JTable table) {
-		// JTable distributes
-
+	private void tableAttributeInit(JTable table) {
+		// JTable Attributes
 		int firstLine = 0;
 		int rowHeight = 30;
-		int fontSize = 20;
+		int fontSize = 10;
+		int columnWidth = 100;
+		JTableHeader header = table.getTableHeader();
+		
 		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
@@ -52,7 +54,9 @@ public class DependencyTable extends JPanel {
 		restRender.setHorizontalAlignment(JLabel.CENTER);
 		table.getColumnModel().getColumn(firstLine)
 				.setCellRenderer(firstLineRender);
-
+		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
+		table.getColumnModel().getColumn(firstLine).setPreferredWidth(columnWidth);
+		
 		for (int i = 1; i < table.getRowCount() + 1; i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}

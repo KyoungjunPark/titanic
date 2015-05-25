@@ -58,14 +58,11 @@ public class MainController {
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                   
-                
                 centerPanelController.getContentsPanelController().addRightPanel();
-                /*
-                // 만들면 일단 redraw
-                int top = 0;
-            	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
-				centerPanelController.getContentsPanelController().redrawPanel(top);
-            	*/
+                
+                /* 활성화시키면 열었을때 자동 리드로우 됨
+                EventManager.callEvent("Redraw");
+                */
             }
         });
 		EventManager.addEvent(new Event("after-openCLSX") {
@@ -81,12 +78,6 @@ public class MainController {
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
                   
-                /*
-                // 만들면 일단 redraw
-                int top = 0;
-            	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
-				centerPanelController.getContentsPanelController().redrawPanel(top);
-            	*/
             }
         });
 
