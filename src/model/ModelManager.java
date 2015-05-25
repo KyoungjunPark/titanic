@@ -67,19 +67,15 @@ public class ModelManager {
         	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
-        EventManager.callEvent("after-openDSM");
 		return model.getID();
 	}
-	public void setFile(File file)throws CreateException{
+	public void setClsx(File file)throws CreateException{
         EventManager.callEvent("before-open");
 		String extension = JSFiles.getFileExtension(file).toLowerCase();
-		System.out.println(extension);
 		TitanicModel model = this.getCurrentTitanicModel();
 		if(model == null)
 			throw new CreateException("You have to set id");
-		if(extension.compareTo(".dsm") ==0){
-
-		}else if(extension.compareTo(".clsx") == 0){
+		if(extension.compareTo(".clsx") == 0){
 			model.setClsxModel(file);
 		}else{
 			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
@@ -102,7 +98,7 @@ public class ModelManager {
     private void addTitanicModel(TitanicModel model){
         this.titanicModelArray.add(model);
     }
-    private void setCurrentID(int id){
+    public void setCurrentID(int id){
         this.currentID = id;
     }
     public int getCurrentID(){

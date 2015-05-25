@@ -11,7 +11,6 @@ class CLSXModel extends Model{
         try{
             node = new XMLParser().parseXML(file);
         }catch (Exception e){
-        	System.out.print(file.getAbsolutePath());
             throw new CreateException("CLSX 만드는데 실패했음. 세세한 이유는 아직 안알랴줌"+e);
         }
     }

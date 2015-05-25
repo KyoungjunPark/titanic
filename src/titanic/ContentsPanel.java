@@ -1,14 +1,8 @@
 package titanic;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 
 import model.ModelManager;
 
@@ -22,7 +16,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
 
-
 	}
 
 	public void drawTableAtTab(int tabIndex) {
@@ -33,13 +26,14 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		contents.get(this.tabIndex - 1).redrawPanel(newData);
 
 		// 아직 탭이 없으면 추가해주고, 아니라면 repaint만 해준다.
-		if (tabIndex == 0)
+		if (tabIndex == 0) {
 			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
-		else {
+			
+		} else {
 			/*
-			this.removeAll();
-			this.addTab("" + (this.tabIndex), contents.get(this.tabIndex - 1));
-			*/
+			 * this.removeAll(); this.addTab("" + (this.tabIndex),
+			 * contents.get(this.tabIndex - 1));
+			 */
 			repaint();
 		}
 	}
@@ -47,11 +41,16 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public ArrayList<RightPanel> getRightPanel() {
 		return contents;
 	}
-	protected void addRightPanel(RightPanel panel){
+
+	protected void addRightPanel(RightPanel panel) {
 		contents.add(panel);
+		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
-	protected void addRightPanel(){
-		contents.add(new RightPanel());
+
+	protected void addRightPanel() {
+		RightPanel panel = new RightPanel();
+		contents.add(panel);
+		this.add(panel,ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
 	}
 
 	@Override
@@ -76,8 +75,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public void setShowRowLabels(boolean state, int tabIndex) {
 		if (tabIndex == 0) {
 			contents.get(tabIndex).setShowRowLabels(state);
-		}
-		else
-			contents.get(tabIndex-1).setShowRowLabels(state);
+		} else
+			contents.get(tabIndex - 1).setShowRowLabels(state);
 	}
 }

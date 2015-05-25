@@ -15,7 +15,7 @@ abstract class Model {
         if(filePath.lastIndexOf("/") != -1)
             return filePath.substring(filePath.lastIndexOf("/"));
         else
-            return filePath.substring(filePath.lastIndexOf("\\"));
+            return filePath.substring(filePath.lastIndexOf("\\")+1);
     }
     public void setFilePath(String filePath) {
         this.filePath = filePath;

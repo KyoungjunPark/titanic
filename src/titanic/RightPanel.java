@@ -20,7 +20,9 @@ public class RightPanel extends JPanel implements Controllerable{
 	public RightPanel(){
 		setLayout(new BorderLayout(0,0));	
 	}
-
+	public RightPanel(int id){
+		this.id = id;
+	}
 	@Override
 	public void setAction(String title, ActionListener action) {
 		

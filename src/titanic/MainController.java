@@ -12,8 +12,6 @@ import javax.swing.*;
 
 public class MainController {
 	
-	private int currentID;
-
 	private MainToolbar toolbar;
 	private MenuBar menubar;
 	private CenterPanel centerPanel;
@@ -31,8 +29,6 @@ public class MainController {
 
 		setControllers();
 		setEvent();
-
-		currentID = ModelManager.sharedModelManager().getCurrentID();
 	}
 	private void setControllers()
 	{
@@ -61,13 +57,17 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+                  
+                int id = ModelManager.sharedModelManager().getCurrentID();
+                RightPanel panel = new RightPanel(id);
                 
-                centerPanelController.getContentsPanelController().addRightPanel();
-                
+                centerPanelController.getContentsPanelController().addRightPanel(panel);
+                /*
                 // 만들면 일단 redraw
                 int top = 0;
             	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
 				centerPanelController.getContentsPanelController().redrawPanel(top);
+            	*/
             }
         });
 		EventManager.addEvent(new Event("after-openCLSX") {
@@ -82,13 +82,16 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-                
+                  
+                /*
                 // 만들면 일단 redraw
                 int top = 0;
             	centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), top);
 				centerPanelController.getContentsPanelController().redrawPanel(top);
+            	*/
             }
         });
+
 		EventManager.addEvent(new Event("Redraw"){
 			public void action(){
 
@@ -102,11 +105,13 @@ public class MainController {
 	
 
 	protected void openDSMFile(File openFile)
-	{
+	{		
 		int currentID;
 		
 		try {
-			currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
+			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
+			 ModelManager.sharedModelManager().setCurrentID(currentID);
+			 EventManager.callEvent("after-openDSM");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,8 +121,11 @@ public class MainController {
 	}
 	protected void OpenClsxStatus(File openFile)
 	{
+		
 		try {
-			ModelManager.sharedModelManager().setFile(openFile);
+			ModelManager.sharedModelManager().setClsx(openFile);
+
+			
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

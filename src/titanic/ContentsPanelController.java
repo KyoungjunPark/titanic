@@ -33,6 +33,9 @@ public class ContentsPanelController extends CenterPanelController{
 	{
 		contentsPanel.addRightPanel();
 	}
+	protected void addRightPanel(RightPanel panel){
+		contentsPanel.addRightPanel(panel);
+	}
 	
 	protected void redrawPanel(int tabIndex) {
 		contentsPanel.regetTableData(tabIndex);
