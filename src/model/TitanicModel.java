@@ -88,4 +88,12 @@ public class TitanicModel {
     public boolean isEdit(){
         return this.dsmModel.isEdit() || this.clsxModel.isEdit();
     }
+
+    /**
+     * clsxmodel 을 제거합니다.
+     * New ClsxModel 등에 이용합니다.
+     */
+    public void removeClsxModel(){
+        this.clsxModel = null;
+    }
 }
