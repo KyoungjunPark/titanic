@@ -124,7 +124,7 @@ public class FileTree extends JTree implements Controllerable {
 		}
 
 		if (this.getRowCount() != rowCount) {
-			expandAll(/*this, */rowCount, this.getRowCount());
+			expandAll(rowCount, this.getRowCount());
 		}
 	}
 
