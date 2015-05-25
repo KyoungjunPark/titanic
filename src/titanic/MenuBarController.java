@@ -158,8 +158,7 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Redraw is clicked");
-				
+				EventManager.callEvent("Redraw");
 				// 타이타닉 모델이 하나라도 생성되어 있다면 리드로우 해줌
 				//if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
 				//	EventManager.callEvent("Redraw");
