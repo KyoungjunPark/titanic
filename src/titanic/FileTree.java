@@ -58,7 +58,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	protected void moveDown() {
@@ -87,7 +87,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	private DefaultMutableTreeNode deepClone(DefaultMutableTreeNode source) {
@@ -119,6 +119,7 @@ public class FileTree extends JTree implements Controllerable {
 			}
 		}
 		return nodes;
+
 	} 
 	private ArrayList<DefaultMutableTreeNode> reverseSortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
 		
@@ -174,7 +175,7 @@ public class FileTree extends JTree implements Controllerable {
 					.get(i));
 		}
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {
@@ -202,6 +203,16 @@ public class FileTree extends JTree implements Controllerable {
 		return null;
 	}
 
+	public void rename(DefaultMutableTreeNode node, String name){
+		node.setUserObject(name);
+		
+		repaint();
+		syncWithModel();
+	}
+	private void syncWithModel()
+	{
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+	}
 	@Override
 	public void setAction(String title, ActionListener action) {
 

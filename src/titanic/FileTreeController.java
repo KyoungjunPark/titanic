@@ -1,16 +1,23 @@
 package titanic;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+
+import com.sun.xml.internal.bind.v2.model.core.MaybeElement;
 
 import model.EventManager;
 
@@ -150,10 +157,37 @@ public class FileTreeController extends LeftPanelController {
 					DefaultMutableTreeNode node = (DefaultMutableTreeNode) ((TreePath) treeFile
 							.getPathForRow(row)).getLastPathComponent();
 
-					if (!node.isLeaf() || node.isRoot()){
-						JOptionPane.showMessageDialog(null, "implement contexts");
+					if (!node.isLeaf() || node.isRoot()) {
+
+						ActionListener menuListener = new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+
+								if (e.getActionCommand() == "Rename") {
+									String answer =JOptionPane.showInputDialog(null, "Enter new group name: ","Group Name", JOptionPane.PLAIN_MESSAGE);
+									treeFile.rename(node, answer);
+
+								} else if (e.getActionCommand() == "Sort") {
+
+									JOptionPane.showMessageDialog(null,
+											" Sort was pressed");
+								} else if (e.getActionCommand() == "Duplicate") {
+
+									JOptionPane.showMessageDialog(null,
+											" Duplicate was pressed");
+								} else {// case : Edit
+
+									JOptionPane.showMessageDialog(null,
+											" Edit was pressed");
+								}
+
+							}
+						};
+						PopupMenu popup = new PopupMenu(menuListener);
+						popup.show(e.getComponent(), e.getX(), e.getY());
 					}
-						
+
 				}
 
 			}
