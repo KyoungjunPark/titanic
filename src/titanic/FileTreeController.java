@@ -82,7 +82,10 @@ public class FileTreeController extends LeftPanelController {
 				}
 
 				// case : UngroupButton
-				if (tag.contains("Leaf")) {
+				if(nodes.size()> 1){
+					EventManager.callEvent("ungroupButtonDisable");
+				}
+				else if (tag.contains("Leaf")) {
 					// disabled
 					EventManager.callEvent("ungroupButtonDisable");
 
