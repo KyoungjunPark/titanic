@@ -150,11 +150,12 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				DefaultMutableTreeNode node;
 				if (SwingUtilities.isRightMouseButton(e)) {
 					int row = treeFile.getClosestRowForLocation(e.getX(),
 							e.getY());
 					treeFile.setSelectionRow(row);
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) ((TreePath) treeFile
+					node = (DefaultMutableTreeNode) ((TreePath) treeFile
 							.getPathForRow(row)).getLastPathComponent();
 
 					if (!node.isLeaf() || node.isRoot()) {
@@ -162,17 +163,17 @@ public class FileTreeController extends LeftPanelController {
 						ActionListener menuListener = new ActionListener() {
 
 							@Override
-							public void actionPerformed(ActionEvent e) {
+							public void actionPerformed(ActionEvent e1) {
 
-								if (e.getActionCommand() == "Rename") {
+								if (e1.getActionCommand() == "Rename") {
 									String answer =JOptionPane.showInputDialog(null, "Enter new group name: ","Group Name", JOptionPane.PLAIN_MESSAGE);
 									treeFile.rename(node, answer);
 
-								} else if (e.getActionCommand() == "Sort") {
+								} else if (e1.getActionCommand() == "Sort") {
 
 									JOptionPane.showMessageDialog(null,
 											" Sort was pressed");
-								} else if (e.getActionCommand() == "Duplicate") {
+								} else if (e1.getActionCommand() == "Duplicate") {
 
 									JOptionPane.showMessageDialog(null,
 											" Duplicate was pressed");
