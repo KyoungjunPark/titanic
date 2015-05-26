@@ -85,7 +85,6 @@ public class DSMModel extends Model{
                 matrixList.add(data);
             }
         }
-        System.out.println(matrixList);
         return matrixList;
     }
     private void changeRow(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){

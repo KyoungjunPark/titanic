@@ -42,6 +42,7 @@ abstract class Model {
         } catch ( IOException e ) {
             throw new CreateException("파일 에러");
         }
+        this.setFilePath(path);
         this.setIsEdit(false);
     }
     public void setFileName(String fileName){
