@@ -11,6 +11,8 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import util.TreeNode;
+import model.Event;
+import model.EventManager;
 import model.ModelManager;
 
 public class FileTree extends JTree implements Controllerable {
@@ -202,7 +204,19 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	
 	protected void unGroupTree() {
+		DefaultMutableTreeNode node = getSelectedNodes().get(0);
+		int index = node.getParent().getIndex(node);
+		int childCount = node.getChildCount();
 		
+		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+		for (int i=0; i<childCount; i++) {
+			//nodes.add((DefaultMutableTreeNode) node.getChildAt(i));
+			((DefaultTreeModel) this.getModel()).insertNodeInto
+			((MutableTreeNode)node.getChildAt(0), (MutableTreeNode)node.getParent(), index+i);
+		}
+		delete();
+		EventManager.callEvent("ungroupButtonDisable");
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
 	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {

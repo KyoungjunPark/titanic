@@ -61,7 +61,7 @@ public class LeftPanelController extends CenterPanelController {
 		
 		EventManager.addEvent(new Event("ungroup") {
 			public void action() {
-				
+				unGroupTree();
 			}
 		});
 
