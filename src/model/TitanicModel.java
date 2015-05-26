@@ -18,8 +18,17 @@ public class TitanicModel {
 		this.id = TitanicModel.nextID();
 	}
 
+    /**
+     * TitanicModel 을 save 합니다. ( DSM, CLSX )
+     * 만약 filePath 가 null 일 경우 save 에 실패합니다.
+     * 각자의 모델을 Save 하고 싶을경우, 각 모델에 save method 를 참고하세요. {@link model.DSMModel} {@link model.CLSXModel}
+     * save 에 실패할경우 SaveException 을 발생시킵니다.
+     * @throws SaveException
+     */
     public void save()throws SaveException{
-
+        this.dsmModel.save();
+        if(this.clsxModel != null)
+            this.clsxModel.save();
     }
 
 	protected void setDsmModel(DSMModel dsmModel){

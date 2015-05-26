@@ -6,8 +6,7 @@ import util.ItemNode;
 import util.JSFiles;
 import util.Node;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -51,19 +50,6 @@ public class DSMModel extends Model{
 			this.node.addItem(new ItemNode(name));
 		}
 		return this.node;
-	}
-	public String toString(){
-		String result = ""+this.dependencyNumber;
-		for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
-			if( i % this.dependencyNumber == 0)
-				result += '\n';
-			else
-				result += ' ';
-			result += this.dependencyRelationArray.get(i);
-		}
-		result += '\n';
-        result += String.join("\n", this.elementsNameArray);
-		return result;
 	}
     protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
         ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
@@ -111,5 +97,18 @@ public class DSMModel extends Model{
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
         }
+    }
+    public String toString(){
+        String result = ""+this.dependencyNumber;
+        for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
+            if( i % this.dependencyNumber == 0)
+                result += '\n';
+            else
+                result += ' ';
+            result += this.dependencyRelationArray.get(i);
+        }
+        result += '\n';
+        result += String.join("\n", this.elementsNameArray);
+        return result;
     }
 }

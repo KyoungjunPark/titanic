@@ -24,4 +24,7 @@ class CLSXModel extends Model{
         this.setIsEdit(true);
     }
     public GroupNode getGroupNode(){return this.node;};
+    public String toString(){
+        return "메렁 ㅎㅎ";
+    }
 }
