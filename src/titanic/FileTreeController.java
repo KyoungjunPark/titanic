@@ -302,5 +302,9 @@ public class FileTreeController extends LeftPanelController {
 	protected void groupTree(String sysMsg) {
 		treeFile.groupTree(sysMsg);
 	}
+	
+	protected void unGroupTree() {
+		treeFile.unGroupTree();
+	}
 
 }

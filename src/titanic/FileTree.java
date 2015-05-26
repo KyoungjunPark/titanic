@@ -200,6 +200,10 @@ public class FileTree extends JTree implements Controllerable {
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 		
 	}
+	
+	protected void unGroupTree() {
+		
+	}
 
 	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {
 		TreePath[] paths = this.getSelectionPaths();

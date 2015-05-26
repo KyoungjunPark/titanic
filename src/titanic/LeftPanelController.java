@@ -210,6 +210,10 @@ public class LeftPanelController extends CenterPanelController {
 		fileTreeController.groupTree(sysMsg);
 	}
 	
+	protected void unGroupTree() {
+		fileTreeController.unGroupTree();
+	}
+	
 	protected void expandAllButtonEnable(){
 		leftToolbarController.expandAllButtonEnable();
 	}
