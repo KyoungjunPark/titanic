@@ -81,7 +81,6 @@ public class ModelManager {
 			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
 			throw new CreateException("지원하지 않는 확장자입니다.");
 		}
-        EventManager.callEvent("after-openCLSX");
 	}
 	/**
 	 * id 값을 기준으로 현재 있는지 체크합니다.

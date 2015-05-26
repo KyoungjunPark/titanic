@@ -3,22 +3,11 @@ package titanic;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
-
-import util.GroupNode;
 import util.TreeNode;
-import model.EventManager;
 import model.ModelManager;
 
 public class FileTree extends JTree implements Controllerable {
@@ -69,7 +58,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	protected void moveDown() {
@@ -98,7 +87,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		this.setSelectionPaths(treePath);
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	private DefaultMutableTreeNode deepClone(DefaultMutableTreeNode source) {
@@ -130,6 +119,7 @@ public class FileTree extends JTree implements Controllerable {
 			}
 		}
 		return nodes;
+
 	} 
 	private ArrayList<DefaultMutableTreeNode> reverseSortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
 		
@@ -185,7 +175,7 @@ public class FileTree extends JTree implements Controllerable {
 					.get(i));
 		}
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 	
 	protected void groupTree(String groupName) {
@@ -233,6 +223,16 @@ public class FileTree extends JTree implements Controllerable {
 		return null;
 	}
 
+	public void rename(DefaultMutableTreeNode node, String name){
+		node.setUserObject(name);
+		
+		repaint();
+		syncWithModel();
+	}
+	private void syncWithModel()
+	{
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+	}
 	@Override
 	public void setAction(String title, ActionListener action) {
 

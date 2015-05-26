@@ -67,7 +67,9 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "New Clustering is clicked");
+				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
+				EventManager.callEvent("Redraw");
+				EventManager.callEvent("after-open");
 				
 			}
 		});
@@ -78,6 +80,19 @@ public class MenuBarController extends MainController{
 				File openFile;
 				
 				String dir = System.getProperty("user.dir");//this project's absolute path name
+				
+				if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()){
+					int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?","Save changes?", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null);
+					if(selected == 0){ //yes
+						//save feature
+					}else if(selected == 1){ //no
+						//just pass
+					}else{ // cancel
+						return;
+					}
+				}
+				
 				JFileChooser fc = new JFileChooser(dir);
 				fc.setFileFilter(new FileFilter() {
 					
@@ -118,19 +133,19 @@ public class MenuBarController extends MainController{
 				
 			}
 		});
-		menu.setAction("DSM...", new ActionListener() {
+		menu.setAction("Save DSM", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "DSM... is clicked");
+				 JOptionPane.showMessageDialog(null, "Save DSM is clicked");
 				
 			}
 		});		
-		menu.setAction("Excel...", new ActionListener() {
+		menu.setAction("Save DSM...", new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Excel... is clicked");
+				 JOptionPane.showMessageDialog(null, "Save DSM... is clicked");
 				
 			}
 		});		
@@ -158,8 +173,7 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Redraw is clicked");
-				
+				EventManager.callEvent("Redraw");
 				// 타이타닉 모델이 하나라도 생성되어 있다면 리드로우 해줌
 				//if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
 				//	EventManager.callEvent("Redraw");
@@ -170,7 +184,6 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Find... is clicked");
-				
 			}
 		});
 		menu.setAction("Show Row Labels", new ActionListener() {

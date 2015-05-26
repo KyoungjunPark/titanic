@@ -8,6 +8,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
 import model.EventManager;
@@ -52,11 +54,7 @@ public class MainToolbarController extends MainController {
 					return;
 
 				openFile = fc.getSelectedFile();
-				// when file open success, then available icon must be changed!
-				// Then Manager must give a message like "It's ok".
-
-				// setting changed when dsm file is open
-				// issue! setting값을 좀 더 구조적으로 배치할 수 없을까?
+				
 				openDSMFile(openFile);
 
 			}
@@ -65,7 +63,6 @@ public class MainToolbarController extends MainController {
 		toolbar.setAction("Redraw", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// JOptionPane.showMessageDialog(null, "Redraw is clicked");
 				EventManager.callEvent("Redraw");
 
 			}
@@ -74,9 +71,9 @@ public class MainToolbarController extends MainController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane
-						.showMessageDialog(null, "New Clustering is clicked");
-
+				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
+				EventManager.callEvent("Redraw");
+				EventManager.callEvent("after-open");
 			}
 		});
 		toolbar.setAction("Load Clustering", new ActionListener() {
@@ -88,6 +85,18 @@ public class MainToolbarController extends MainController {
 				String dir = System.getProperty("user.dir");// this project's
 															// absolute path
 															// name
+				
+				if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()){
+					int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?","Save changes?", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null);
+					if(selected == 0){ //yes
+						//save feature
+					}else if(selected == 1){ //no
+						//just pass
+					}else{ // cancel
+						return;
+					}
+				}
 				JFileChooser fc = new JFileChooser(dir);
 				fc.setFileFilter(new FileFilter() {
 

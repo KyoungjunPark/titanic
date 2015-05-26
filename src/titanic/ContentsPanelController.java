@@ -43,9 +43,9 @@ public class ContentsPanelController extends CenterPanelController{
 		contentsPanel.addRightPanel(panel);
 	}
 	
-	protected void redrawPanel(int tabIndex) {
-		contentsPanel.regetTableData(tabIndex);
-		contentsPanel.drawTableAtTab(tabIndex);
+	protected void redrawPanel() {
+		contentsPanel.regetTableData(ModelManager.sharedModelManager().getCurrentID());
+		contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
 	}
 	
 	protected int getTop(){
