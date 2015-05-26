@@ -56,11 +56,11 @@ public class DSMModel extends Model{
         if(clsx != null){
             ArrayList<Node> nodeList = clsx.getGroupNode().getItemList();
             ArrayList<Integer> relationArray = new ArrayList<Integer>(this.dependencyRelationArray);
-            ArrayList<Integer> tempRelationArray = new ArrayList<>(relationArray);
+            ArrayList<Integer> tempRelationArray = new ArrayList<Integer>(relationArray);
 
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeRow(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
-            tempRelationArray = new ArrayList<>(relationArray);
+            tempRelationArray = new ArrayList<Integer>(relationArray);
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeColumn(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
 

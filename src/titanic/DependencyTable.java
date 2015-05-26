@@ -143,12 +143,13 @@ public class DependencyTable extends JPanel {
 				if (row == column)
 					return "·";
 
-				switch (data) {
-				case ("0"):
+				if(data == "0") {
 					return "";
-				default:
+				}
+				else{
 					return "X";
 				}
+
 			} else
 				return data;
 

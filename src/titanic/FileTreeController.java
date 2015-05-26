@@ -34,11 +34,11 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				ArrayList<String> tag = new ArrayList<>();
+				ArrayList<String> tag = new ArrayList<String>();
 				
 				TreePath[] paths = treeFile.getSelectionModel()
 						.getSelectionPaths();
-				ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<>();
+				ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
 
 				if (paths.length == 0)
 					return;
@@ -150,15 +150,14 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				DefaultMutableTreeNode node;
+				final DefaultMutableTreeNode node;
 				if (SwingUtilities.isRightMouseButton(e)) {
 					int row = treeFile.getClosestRowForLocation(e.getX(),
 							e.getY());
 					treeFile.setSelectionRow(row);
 					node = (DefaultMutableTreeNode) ((TreePath) treeFile
 							.getPathForRow(row)).getLastPathComponent();
-
-					treeFile.
+//add this
 					if (!node.isLeaf() || node.isRoot()) {
 
 						ActionListener menuListener = new ActionListener() {

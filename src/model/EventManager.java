@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by kimjisoo on 5/23/15.
  */
 public class EventManager {
-    static private ArrayList<Event> eventArrayList = new ArrayList<>();
+    static private ArrayList<Event> eventArrayList = new ArrayList<Event>();
     /**
      * event 를 받습니다.
      * @param e event 객체를 받습니다. event 객체는 action 메서드를 오버라이드 해야합니다.
