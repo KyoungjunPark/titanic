@@ -23,4 +23,7 @@ public class ItemNode extends Node{
     public String getType(){
         return "I";
     }
+    public String toString(){
+        return "<item name=\""+this.getName()+"\" />\n";
+    }
 }

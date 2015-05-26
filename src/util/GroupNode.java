@@ -55,11 +55,18 @@ public class GroupNode extends Node{
     public String getType(){
         return "G";
     }
-    public void print(){
+    public String print(){
+        String result = this.toString();
         for(Node node: this.childNodeArray){
-            System.out.println(node);
-            if(node instanceof GroupNode)
-                ((GroupNode) node).print();
+            if(node instanceof GroupNode){
+                result += ((GroupNode) node).print();
+            }else
+                result += node.toString();
         }
+        result += "</group>\n";
+        return result;
+    }
+    public String toString(){
+        return "<group name=\""+this.getName()+"\">\n"; // </group> 가 없음
     }
 }

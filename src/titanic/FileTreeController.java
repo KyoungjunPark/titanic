@@ -158,7 +158,7 @@ public class FileTreeController extends LeftPanelController {
 					node = (DefaultMutableTreeNode) ((TreePath) treeFile
 							.getPathForRow(row)).getLastPathComponent();
 
-					treeFile.
+//					treeFile.
 					if (!node.isLeaf() || node.isRoot()) {
 
 						ActionListener menuListener = new ActionListener() {

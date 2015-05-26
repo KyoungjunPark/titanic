@@ -20,11 +20,11 @@ class CLSXModel extends Model{
     }
     protected void setTreeNode(TreeNode node)throws CreateException{
         this.node = (GroupNode)node.getGroupNode();
-        this.node.print();
+        System.out.println(this.node.print());
         this.setIsEdit(true);
     }
     public GroupNode getGroupNode(){return this.node;};
     public String toString(){
-        return "메렁 ㅎㅎ";
+        return this.node.print();
     }
 }
