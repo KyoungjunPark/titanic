@@ -80,6 +80,19 @@ public class MenuBarController extends MainController{
 				File openFile;
 				
 				String dir = System.getProperty("user.dir");//this project's absolute path name
+				
+				if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()){
+					int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?","Save changes?", JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null);
+					if(selected == 0){ //yes
+						//save feature
+					}else if(selected == 1){ //no
+						//just pass
+					}else{ // cancel
+						return;
+					}
+				}
+				
 				JFileChooser fc = new JFileChooser(dir);
 				fc.setFileFilter(new FileFilter() {
 					
