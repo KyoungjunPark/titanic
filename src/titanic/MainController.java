@@ -45,7 +45,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-open-First") {
+		EventManager.addEvent(new Event("after-open-DSM") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -62,7 +62,7 @@ public class MainController {
                 
             }
         });
-		EventManager.addEvent(new Event("after-open") {
+		EventManager.addEvent(new Event("after-open-CLSX") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -74,7 +74,8 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-                  
+
+				centerPanelController.getContentsPanelController().refreshTabName();
             }
         });
 
@@ -95,7 +96,7 @@ public class MainController {
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
-			 EventManager.callEvent("after-open-First");
+			 EventManager.callEvent("after-open-DSM");
 			 EventManager.callEvent("Redraw");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
@@ -109,7 +110,7 @@ public class MainController {
 		
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
-			EventManager.callEvent("after-open");
+			EventManager.callEvent("after-open-CLSX");
 			EventManager.callEvent("Redraw");
 			
 		} catch (CreateException e) {

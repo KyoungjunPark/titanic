@@ -7,10 +7,11 @@ import util.GroupNode;
 import util.TreeNode;
 import util.XMLParser;
 
-class CLSXModel extends Model{
+public class CLSXModel extends Model{
     public CLSXModel(File file) throws CreateException{
         try{
             node = new XMLParser().parseXML(file);
+            this.setFileName(file.getName());
         }catch (Exception e){
             throw new CreateException("CLSX 만드는데 실패했음. 세세한 이유는 아직 안알랴줌"+e);
         }

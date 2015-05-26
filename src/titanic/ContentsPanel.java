@@ -35,9 +35,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	}
 
-	public ArrayList<RightPanel> getRightPanel() {
-		return contents;
-	}
+	public int getRightPanelIndex(int id){
+        for(int i = 0 ; i < this.getComponentCount() ; i++){
+            if(((RightPanel)this.getComponentAt(i)).getID() == id) return i;
+
+        }
+        return Integer.parseInt(null);
+    }
 
 	protected void addRightPanel(RightPanel panel) {
 
@@ -77,4 +81,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 			contents.get(tabIndex).setShowRowLabels(state);
 	}
+
+    public void refreshTabName() {
+        int currentIndex = this.getRightPanelIndex(ModelManager.sharedModelManager().getCurrentID());
+
+        this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFileName());
+    }
 }

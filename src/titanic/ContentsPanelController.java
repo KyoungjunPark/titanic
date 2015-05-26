@@ -1,6 +1,7 @@
 package titanic;
 
 import javax.swing.JScrollPane;
+import javax.swing.text.html.parser.DTDConstants;
 
 import model.ModelManager;
 
@@ -54,6 +55,10 @@ public class ContentsPanelController extends CenterPanelController{
 	
 	public void setShowRowLabels(boolean state, int tabIndex) {
 		contentsPanel.setShowRowLabels(state, tabIndex);
+	}
+
+	public void refreshTabName() {
+		contentsPanel.refreshTabName();
 	}
 	/* From 세현 : 주석처리 내가 해놨음!
 	protected void redrawPanel() {
