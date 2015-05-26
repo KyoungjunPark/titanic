@@ -3,10 +3,13 @@ package titanic;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
+
 import util.TreeNode;
 import model.ModelManager;
 
