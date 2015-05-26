@@ -8,6 +8,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import util.TreeNode;
@@ -31,6 +32,7 @@ public class FileTree extends JTree implements Controllerable {
 		this.collapseRow(0);
 
 		this.setSelectionPath(new TreePath(root));
+		
 
 	}
 
