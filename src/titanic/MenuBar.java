@@ -12,6 +12,8 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	private JMenu mnMetrics;
 	private JMenu mnView;
 	private JMenu mnHelp;
+	
+	private JMenuItem newDSMItem;
 	private JMenuItem openDSMItem;
 	private JMenuItem newClusteringItem;
 	private JMenuItem loadClusteringItem;
@@ -19,6 +21,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	private JMenuItem saveClusteringAsItem;
 	private JMenuItem saveDSMItem;
 	private JMenuItem saveDSMAsItem;
+	
 	//private JMenuItem exportAsItem;
 	private JMenuItem exitActionItem;
 	private JMenuItem propagationCostItem;
@@ -54,7 +57,9 @@ public class MenuBar extends JMenuBar implements Controllerable{
 		add(mnHelp);
 		mnHelp.setMnemonic('H');
 
-		
+		newDSMItem = new JMenuItem("New DSM", new ImageIcon("util/new-clsx.png"));
+		newDSMItem.setToolTipText("New DSM");
+		newDSMItem.setEnabled(false);
 		openDSMItem = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
 		openDSMItem.setToolTipText("Open DSM");
 		newClusteringItem = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));
@@ -107,7 +112,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
         excel.setToolTipText("Excel");
         excel.setEnabled(false);
         */
-        
+        mnFile.add(newDSMItem);
         mnFile.add(openDSMItem);
         mnFile.addSeparator();
         mnFile.add(newClusteringItem);
@@ -163,7 +168,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
         
         mnHelp.add(about);
         about.setMnemonic('A');
-		
+
 	}
 	public boolean getShowRowLabelsState(){
 		return showRowLabels.isSelected();
@@ -172,11 +177,12 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	{
         for(Component component : this.getComponents()){
         	for(Component item : ((JMenu)component).getMenuComponents()){
-	            if( item instanceof JMenuItem)
+        		if( item instanceof JMenuItem)
 	               ((JMenuItem) item).setEnabled(true);
         	}
         }
-		
+     propagationCostItem.setEnabled(false);
+     find.setEnabled(false);
 	}
 	@Override
 	public void setAction(String title, ActionListener action) {
