@@ -207,5 +207,9 @@ public class FileTreeController extends LeftPanelController {
 	protected void delete() {
 		treeFile.delete();
 	}
+	
+	protected void groupTree(String sysMsg) {
+		treeFile.groupTree(sysMsg);
+	}
 
 }

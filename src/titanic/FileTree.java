@@ -187,6 +187,26 @@ public class FileTree extends JTree implements Controllerable {
 		
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
+	
+	protected void groupTree(String groupName) {
+		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		TreeNode newGroup = new TreeNode(groupName);
+		
+		nodes = sortFromIndex(nodes);
+		int index = nodes.get(0).getParent().getIndex(nodes.get(0));
+		MutableTreeNode parent = (MutableTreeNode) nodes.get(0).getParent();
+
+		for(int i=0; i<nodes.size(); i++) {
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			newNode = (DefaultMutableTreeNode) deepClone(nodes.get(i));
+			newGroup.add(newNode);
+		}
+		
+		((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
+		delete();
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		
+	}
 
 	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {
 		TreePath[] paths = this.getSelectionPaths();

@@ -1,5 +1,7 @@
 package titanic;
 
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Event;
@@ -51,7 +53,9 @@ public class LeftPanelController extends CenterPanelController {
 		
 		EventManager.addEvent(new Event("group") {
 			public void action() {
-				
+				String sysMsg = JOptionPane
+						.showInputDialog(null, "Enter group name:", "Group Name", JOptionPane.PLAIN_MESSAGE);
+				groupTree(sysMsg);
 			}
 		});
 		
@@ -205,6 +209,10 @@ public class LeftPanelController extends CenterPanelController {
 
 	protected void deleteTree() {
 		fileTreeController.delete();
+	}
+	
+	protected void groupTree(String sysMsg) {
+		fileTreeController.groupTree(sysMsg);
 	}
 	
 	protected void expandAllButtonEnable(){
