@@ -6,6 +6,9 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import util.GroupNode;
+import util.Node;
+
 public class DependencyTable extends JPanel {
 
 	/**
@@ -26,42 +29,49 @@ public class DependencyTable extends JPanel {
 		this.rows = rows;
 		TableModel tableModel = new TableModel(this.rows, showRowLabels);
 		JTable rightTable = new JTable(tableModel);
-        rightTable.setAutoCreateRowSorter(true);
-        rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
-        JScrollPane sp = new JScrollPane(rightTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		rightTable.setAutoCreateRowSorter(true);
+		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
+		JScrollPane sp = new JScrollPane(rightTable,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        JTable leftTable = new JTable(tableModel);
-        leftTable.setRowSorter(rightTable.getRowSorter());
-        leftTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for(int x = leftTable.getColumnCount()-1; x > 0 ; x--) leftTable.removeColumn(leftTable.getColumnModel().getColumn(x));
+		JTable leftTable = new JTable(tableModel);
+		leftTable.setRowSorter(rightTable.getRowSorter());
+		leftTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		for (int x = leftTable.getColumnCount() - 1; x > 0; x--)
+			leftTable.removeColumn(leftTable.getColumnModel().getColumn(x));
 
-        tableAttributeInit(rightTable);
-        tableAttributeInit(leftTable);
+		tableAttributeInit(rightTable);
+		tableAttributeInit(leftTable);
 
-        if( showRowLabels == false )
-            leftTable.getColumnModel().getColumn(0).setPreferredWidth(30);
-        else
-            leftTable.getColumnModel().getColumn(0).setPreferredWidth(300);
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setHorizontalAlignment(JLabel.LEFT);
-        renderer.setBackground(Color.LIGHT_GRAY);
-        leftTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
+		if (showRowLabels == false)
+			leftTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+		else
+			leftTable.getColumnModel().getColumn(0).setPreferredWidth(300);
+		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+		renderer.setHorizontalAlignment(JLabel.LEFT);
+		renderer.setBackground(Color.LIGHT_GRAY);
+		leftTable.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-        JScrollPane spLeft = new JScrollPane(leftTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        Dimension dim = spLeft.getPreferredSize();
-        spLeft.setPreferredSize(new Dimension((showRowLabels?300:30) ,dim.height));
-        sp.getVerticalScrollBar().setModel(spLeft.getVerticalScrollBar().getModel());
+		JScrollPane spLeft = new JScrollPane(leftTable,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		Dimension dim = spLeft.getPreferredSize();
+		spLeft.setPreferredSize(new Dimension((showRowLabels ? 300 : 30),
+				dim.height));
+		sp.getVerticalScrollBar().setModel(
+				spLeft.getVerticalScrollBar().getModel());
 
-        JPanel p = new JPanel(new BorderLayout());
-        p.add(sp);
-        p.add(spLeft,BorderLayout.WEST);
+		JPanel p = new JPanel(new BorderLayout());
+		p.add(sp);
+		p.add(spLeft, BorderLayout.WEST);
 
-        JScrollBar sb = new JScrollBar(SwingConstants.HORIZONTAL);
-        sb.setModel(sp.getHorizontalScrollBar().getModel());
+		JScrollBar sb = new JScrollBar(SwingConstants.HORIZONTAL);
+		sb.setModel(sp.getHorizontalScrollBar().getModel());
 
 		this.setLayout(new BorderLayout());
-        this.add(p);
-        this.add(sb, BorderLayout.SOUTH);
+		this.add(p);
+		this.add(sb, BorderLayout.SOUTH);
 	}
 
 	private void tableAttributeInit(JTable table) {
@@ -69,7 +79,7 @@ public class DependencyTable extends JPanel {
 		int rowHeight = 30;
 		int fontSize = 15;
 		JTableHeader header = table.getTableHeader();
-		
+
 		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
@@ -77,16 +87,36 @@ public class DependencyTable extends JPanel {
 		DefaultTableCellRenderer restRender = new DefaultTableCellRenderer();
 
 		restRender.setHorizontalAlignment(JLabel.CENTER);
+
 		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
-		for (int i = 0; i < table.getColumnCount() ; i++) {
+		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
-		
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for( int i = 0 ; i < table.getColumnCount() ; i++)
-            table.getColumnModel().getColumn(i).setPreferredWidth(25);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		for (int i = 0; i < table.getColumnCount(); i++)
+			table.getColumnModel().getColumn(i).setPreferredWidth(25);
 		table.setRowSelectionAllowed(false);
+	}
+
+	// 높이에 따른 색
+	private Color levelColor(int depth) {
+
+		switch (depth % 5) {
+		case (0):
+			return new Color(255, 255, 255);
+		case (1):
+			return new Color(255, 202, 0);
+		case (2):
+			return new Color(98, 12, 172);
+		case (3):
+			return new Color(15, 79, 168);
+		case (4):
+			return new Color(155, 108, 0);
+		default:
+			return new Color(0, 0, 0);
+		}
 	}
 
 	private class TableModel extends AbstractTableModel {
@@ -111,16 +141,18 @@ public class DependencyTable extends JPanel {
 				s = (i + 1) + "";
 				columnIndex.add(s);
 				if (this.showRowLabels == true) {
-					s = s + "."+ this.getValueAt(i, 0).toString();
+					s = s + "." + this.getValueAt(i, 0).toString();
 				}
 				tableData.get(i).set(0, s);
 			}
+			
 		}
 
 		public void setShowRowLabels(boolean state) {
 			this.showRowLabels = state;
 
 		}
+
 		@Override
 		public int getRowCount() {
 			return tableData.size();
@@ -136,6 +168,7 @@ public class DependencyTable extends JPanel {
 
 			String data = new String((String) tableData.get(rowIndex).get(
 					columnIndex));
+		
 			int row, column;
 			row = rowIndex + 1;
 			column = columnIndex;
@@ -155,9 +188,9 @@ public class DependencyTable extends JPanel {
 		}
 
 		public String getColumnName(int columnIndex) {
-            if(columnIndex == 0){
-                return " ";
-            }
+			if (columnIndex == 0) {
+				return " ";
+			}
 			return (String) this.columnIndex.get(columnIndex);
 		}
 	}

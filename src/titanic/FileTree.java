@@ -146,7 +146,6 @@ public class FileTree extends JTree implements Controllerable {
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 		root.add(new DefaultMutableTreeNode("another_child"));
 		model.reload(root);
-
 	}
 
 	protected void expandAll(int startingIndex, int rowCount) {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import util.GroupNode;
 import model.ModelManager;
 
 public class RightPanel extends JPanel implements Controllerable{
@@ -35,7 +36,6 @@ public class RightPanel extends JPanel implements Controllerable{
 		this.id = id;
 	}
 	
-	// 필요 없을듯
 	public int getID(){
 		return this.id;
 	}
@@ -46,7 +46,8 @@ public class RightPanel extends JPanel implements Controllerable{
 		tableData=newData;
 	}
 
-
+	
+	
 	protected void redrawPanel(ArrayList<ArrayList<String>> newData){
 		tableData=newData;
 		table = new DependencyTable(tableData, this.setShowRowLabels);
