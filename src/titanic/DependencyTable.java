@@ -81,6 +81,8 @@ public class DependencyTable extends JPanel {
 
 		rightTable.setAutoCreateRowSorter(true);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
+		rightTable.setShowGrid(false);
+		rightTable.setIntercellSpacing(new Dimension(0, 0));
 		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
