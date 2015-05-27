@@ -166,7 +166,12 @@ public class MainToolbarController extends MainController {
             public void actionPerformed(ActionEvent e) {
                 File openFile;
 
-                String dir = System.getProperty("user.dir");//this project's absolute path name
+                String dir = new String();
+
+                dir += ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();
+                int tmp = dir.lastIndexOf("\\");
+                dir = dir.substring(0, tmp + 1);
+
                 JFileChooser fc = new JFileChooser(dir);
                 fc.setFileFilter(new FileFilter() {
 
@@ -187,6 +192,7 @@ public class MainToolbarController extends MainController {
                 openFile = fc.getSelectedFile();
 
 
+                System.out.println("ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel() : " + ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel());
                 try {
                     ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
                 } catch (SaveException e1) {
