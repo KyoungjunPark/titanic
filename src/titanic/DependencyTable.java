@@ -1,5 +1,7 @@
 package titanic;
 
+import model.T3;
+
 import java.awt.*;
 import java.util.*;
 
@@ -101,7 +103,10 @@ public class DependencyTable extends JPanel {
 		}
 
 		private void init(ArrayList<ArrayList<String>> rows) {
-
+			ArrayList<T3> tupleList = new ArrayList<>();
+			tupleList.add(new T3(1, 1, 3));
+			tupleList.add(new T3(1, 5, 8));
+			
 			tableData = rows;
 			columnIndex = new ArrayList();
 
