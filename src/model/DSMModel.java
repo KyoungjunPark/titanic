@@ -63,12 +63,16 @@ public class DSMModel extends Model{
             tempRelationArray = new ArrayList<Integer>(relationArray);
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeColumn(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
-
             for( int i = 0 ; i < nodeList.size() ; i++){
                 ArrayList<String> data = new ArrayList<String>();
                 data.add(nodeList.get(i).getName());
-                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++)
-                    data.add(relationArray.get(j) + "");
+                for( int j = this.dependencyNumber * i ; j < this.dependencyNumber * (i+1) ; j++) {
+                    try {
+                        data.add(relationArray.get(j) + "");
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
+                }
                 matrixList.add(data);
             }
             for(ArrayList<String> arrayList : matrixList){

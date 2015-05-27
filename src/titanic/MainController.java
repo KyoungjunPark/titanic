@@ -56,7 +56,7 @@ public class MainController {
                 EventManager.callEvent("moveUpButtonDisable");
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
-                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+
                   
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
@@ -73,7 +73,8 @@ public class MainController {
                 EventManager.callEvent("moveUpButtonDisable");
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
-                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+
+				EventManager.callEvent("Redraw-FileTree");
 
 				centerPanelController.getContentsPanelController().refreshTabName();
             }
@@ -84,6 +85,12 @@ public class MainController {
 
 				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), ModelManager.sharedModelManager().getCurrentID());
 				centerPanelController.getContentsPanelController().redrawPanel();
+
+			}
+		});
+		EventManager.addEvent(new Event("Redraw-FileTree"){
+			public void action(){
+				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
 		});
 	}
@@ -98,6 +105,7 @@ public class MainController {
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
 			 EventManager.callEvent("after-open-DSM");
 			 EventManager.callEvent("Redraw");
+			EventManager.callEvent("Redraw-FileTree");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,6 +120,7 @@ public class MainController {
 			ModelManager.sharedModelManager().setClsx(openFile);
 			EventManager.callEvent("after-open-CLSX");
 			EventManager.callEvent("Redraw");
+			EventManager.callEvent("Redraw-FileTree");
 			
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block

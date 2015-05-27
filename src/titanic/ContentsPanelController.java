@@ -1,8 +1,11 @@
 package titanic;
 
-import javax.swing.JScrollPane;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.html.parser.DTDConstants;
 
+import model.EventManager;
 import model.ModelManager;
 
 public class ContentsPanelController extends CenterPanelController{
@@ -26,7 +29,16 @@ public class ContentsPanelController extends CenterPanelController{
 		//To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
 		
 		//must changed! test version
-		// From 세현 : rightPanelController 안쓴다며..? ㅜㅜ  
+		// From 세현 : rightPanelController 안쓴다며..? ㅜㅜ
+		contentsPanel.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+                JTabbedPane sourceTabbedPane = (JTabbedPane)e.getSource();
+                System.out.println("id : " + ((RightPanel)sourceTabbedPane.getSelectedComponent()).getID());
+			    ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
+                EventManager.callEvent("Redraw-FileTree");
+            }
+		});
 
 	}
 	
