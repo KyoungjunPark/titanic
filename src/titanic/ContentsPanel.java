@@ -24,8 +24,8 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public void drawTableAtTab(int tabIndex) {
 
 		// redraw를 하기 위해서 정보를 갱신한다.
-		//regetTableData(tabIndex);
-		// getGroupInfo(tabIndex);
+		regetTableData(tabIndex);
+		getGroupInfo();
 		//	contents.get(this.tabIndex).setTableData(newData);
 		contents.get(this.tabIndex).redrawPanel(newData,groupInfo);
 
@@ -79,7 +79,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 			e.printStackTrace();
 		}
 	}
-	public void getGroupInfo(int tabIndex){
+	public void getGroupInfo(){
 		
 		groupInfo = new ArrayList<>();
 

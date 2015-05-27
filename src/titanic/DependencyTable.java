@@ -52,8 +52,8 @@ public class DependencyTable extends JPanel {
 					int column) {
 				Component c = super.prepareRenderer(tcr, row, column);
 
-				if (colorInfo.containsKey(row + ":" + column) == true)
-					c.setBackground(colorInfo.get(row + ":" + column));
+				if (colorInfo.containsKey((row-1) + ":" + (column-1)) == true)
+					c.setBackground(colorInfo.get((row-1) + ":" + (column-1)));
 				else
 					c.setBackground(levelColor(0));
 				return c;
