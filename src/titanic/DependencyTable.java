@@ -97,7 +97,7 @@ public class DependencyTable extends JPanel {
 		if (showRowLabels == false)
 			leftTable.getColumnModel().getColumn(0).setPreferredWidth(30);
 		else
-			leftTable.getColumnModel().getColumn(0).setPreferredWidth(300);
+			leftTable.getColumnModel().getColumn(0).setPreferredWidth(500);
 		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setHorizontalAlignment(JLabel.LEFT);
 		renderer.setBackground(Color.LIGHT_GRAY);
@@ -107,7 +107,7 @@ public class DependencyTable extends JPanel {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		Dimension dim = spLeft.getPreferredSize();
-		spLeft.setPreferredSize(new Dimension((showRowLabels ? 300 : 30),
+		spLeft.setPreferredSize(new Dimension((showRowLabels ? 500 : 30),
 				dim.height));
 		sp.getVerticalScrollBar().setModel(
 				spLeft.getVerticalScrollBar().getModel());
@@ -139,7 +139,7 @@ public class DependencyTable extends JPanel {
 		restRender.setHorizontalAlignment(JLabel.CENTER);
 
 		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
-
+		table.getTableHeader().setReorderingAllowed(false);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
