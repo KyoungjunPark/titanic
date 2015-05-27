@@ -54,7 +54,7 @@ public class DSMModel extends Model{
     protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
         ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
         if(clsx != null){
-            ArrayList<Node> nodeList = clsx.getGroupNode().getItemList();
+            ArrayList<Node> nodeList = clsx.getGroupNode().getAllItemList();
             ArrayList<Integer> relationArray = new ArrayList<Integer>(this.dependencyRelationArray);
             ArrayList<Integer> tempRelationArray = new ArrayList<Integer>(relationArray);
 

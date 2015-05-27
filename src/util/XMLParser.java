@@ -63,7 +63,7 @@ public class XMLParser {
 
         GroupNode groupNode = new GroupNode();
         childNodes(nodeList, groupNode);
-        return groupNode.getChildGroupNode();
+        return groupNode.getFirstChildGroupNode();
     }
     private void childNodes(NodeList nodeList, GroupNode parentNode){
         for (int i = 0; i < nodeList.getLength(); i++) {
