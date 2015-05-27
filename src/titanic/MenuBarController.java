@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileFilter;
 import model.CreateException;
 import model.EventManager;
 import model.ModelManager;
+import model.SaveException;
 
 public class MenuBarController extends MainController{
 	
@@ -68,7 +69,7 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
-				EventManager.callEvent("Redraw");
+				EventManager.callEvent("Redraw-Table");
 				EventManager.callEvent("after-open-CLSX");
 				
 			}
@@ -122,6 +123,11 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				 JOptionPane.showMessageDialog(null, "Save Clustering is clicked");
+				try {
+					ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
+				} catch (SaveException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});		
@@ -130,6 +136,35 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				 JOptionPane.showMessageDialog(null, "Save Clustering... is clicked");
+
+				File openFile;
+
+				String dir = System.getProperty("user.dir");//this project's absolute path name
+				JFileChooser fc = new JFileChooser(dir);
+				fc.setFileFilter(new FileFilter() {
+
+					@Override
+					public String getDescription() {
+						return "CLSX Files";
+					}
+
+					@Override
+					public boolean accept(File f) {
+						// TODO Auto-generated method stub
+						return f.getName().endsWith(".dsm") || f.isDirectory();
+					}
+				});
+				int yn = fc.showSaveDialog(null);
+				if(yn != JFileChooser.APPROVE_OPTION) return;
+
+				openFile = fc.getSelectedFile();
+
+
+				try {
+					ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
+				} catch (SaveException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -137,7 +172,11 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Save DSM is clicked");
+				try {
+					ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+				} catch (SaveException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 		});		
@@ -145,8 +184,35 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Save DSM... is clicked");
-				
+				File openFile;
+
+				String dir = System.getProperty("user.dir");//this project's absolute path name
+				JFileChooser fc = new JFileChooser(dir);
+				fc.setFileFilter(new FileFilter() {
+
+					@Override
+					public String getDescription() {
+						return "DSM Files";
+					}
+
+					@Override
+					public boolean accept(File f) {
+						// TODO Auto-generated method stub
+						return f.getName().endsWith(".dsm") || f.isDirectory();
+					}
+				});
+				int yn = fc.showSaveDialog(null);
+				if(yn != JFileChooser.APPROVE_OPTION) return;
+
+				openFile = fc.getSelectedFile();
+
+				//setting chaned when dsm file is open
+				try {
+					ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save(openFile.getPath());
+				} catch (SaveException e1) {
+					e1.printStackTrace();
+				}
+
 			}
 		});		
 		menu.setAction("Exit", new ActionListener() {
@@ -173,7 +239,7 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EventManager.callEvent("Redraw");
+				EventManager.callEvent("Redraw-Table");
 				// 타이타닉 모델이 하나라도 생성되어 있다면 리드로우 해줌
 				//if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
 				//	EventManager.callEvent("Redraw");
@@ -193,7 +259,7 @@ public class MenuBarController extends MainController{
 				JOptionPane.showMessageDialog(null, "Show Row Labels is clicked");
 				
 			if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)	
-				EventManager.callEvent("Redraw");
+				EventManager.callEvent("Redraw-Table");
 				
 			}
 		});

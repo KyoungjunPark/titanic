@@ -71,10 +71,10 @@ public class GroupNode extends Node{
             }else
                 result += node.toString();
         }
-        result += "</group>\n";
+        result += "</group>\r\n";
         return result;
     }
     public String toString(){
-        return "<group name=\""+this.getName()+"\">\n"; // </group> 가 없음
+        return "<group name=\""+this.getName()+"\">\r\n"; // </group> 가 없음
     }
 }

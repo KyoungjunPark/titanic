@@ -45,7 +45,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-open-DSM") {
+		EventManager.addEvent(new Event("after-open-First-DSM") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -74,16 +74,21 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
 
-				centerPanelController.getContentsPanelController().refreshTabName();
+				EventManager.callEvent("Refresh-TabName");
             }
         });
 
-		EventManager.addEvent(new Event("Redraw"){
+		EventManager.addEvent(new Event("Redraw-Table"){
 			public void action(){
 
 				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), ModelManager.sharedModelManager().getCurrentID());
 				centerPanelController.getContentsPanelController().redrawPanel();
 
+			}
+		});
+		EventManager.addEvent(new Event("Refresh-TabName"){
+			public void action(){
+				centerPanelController.getContentsPanelController().refreshTabName();
 			}
 		});
 		EventManager.addEvent(new Event("Redraw-FileTree"){
@@ -101,8 +106,8 @@ public class MainController {
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
-			 EventManager.callEvent("after-open-DSM");
-			 EventManager.callEvent("Redraw");
+			 EventManager.callEvent("after-open-First-DSM");
+			 EventManager.callEvent("Redraw-Table");
 			 EventManager.callEvent("Redraw-FileTree");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
@@ -117,7 +122,7 @@ public class MainController {
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
 			EventManager.callEvent("after-open-CLSX");
-			EventManager.callEvent("Redraw");
+			EventManager.callEvent("Redraw-Table");
 			EventManager.callEvent("Redraw-FileTree");
 			
 		} catch (CreateException e) {

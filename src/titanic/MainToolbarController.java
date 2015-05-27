@@ -63,7 +63,7 @@ public class MainToolbarController extends MainController {
 		toolbar.setAction("Redraw", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EventManager.callEvent("Redraw");
+				EventManager.callEvent("Redraw-Table");
 
 			}
 		});
@@ -72,8 +72,8 @@ public class MainToolbarController extends MainController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
-				EventManager.callEvent("Redraw");
-				EventManager.callEvent("after-open-CLSX");
+				EventManager.callEvent("Redraw-Table");
+				EventManager.callEvent("Refresh-TabName");
 				EventManager.callEvent("Redraw-FileTree");
 
 

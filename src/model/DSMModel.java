@@ -107,13 +107,13 @@ public class DSMModel extends Model{
         String result = ""+this.dependencyNumber;
         for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
             if( i % this.dependencyNumber == 0)
-                result += '\n';
+                result += "\r\n";
             else
                 result += ' ';
             result += this.dependencyRelationArray.get(i);
         }
-        result += '\n';
-        result += String.join("\n", this.elementsNameArray);
+        result += "\r\n";
+        result += String.join("\rn", this.elementsNameArray);
         return result;
     }
 }
