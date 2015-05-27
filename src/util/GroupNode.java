@@ -133,7 +133,8 @@ public class GroupNode extends Node{
             nextGroupList = new ArrayList<Node>();
             for( Node node : currentGroupList){
                 GroupNode temp = (GroupNode)node;
-                T3 tuple = new T3(depth, itemList.indexOf(temp.getAllItemList().get(0)), itemList.indexOf(temp.getAllItemList().get(temp.getAllItemList().size()-1)));
+                ArrayList<Node> currentItemList = temp.getAllItemList();
+                T3 tuple = new T3(depth, itemList.indexOf(currentItemList.get(0)), itemList.indexOf(currentItemList.get(currentItemList.size()-1)));
                 if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
                     groupData.add(tuple);
                 nextGroupList.addAll(temp.getGroupList());
