@@ -1,7 +1,5 @@
 package util;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,8 +23,8 @@ public class GroupNode extends Node{
     public void addItem(Node node){
         this.childNodeArray.add(node);
     }
-    public TreeNode getTreeNode(){
-        TreeNode root = new TreeNode(this.getName(), this);
+    public GreenTreeNode getTreeNode(){
+        GreenTreeNode root = new GreenTreeNode(this.getName(), this);
         for(Node node : this.childNodeArray){
             root.add(node.getTreeNode());
         }
@@ -43,6 +41,16 @@ public class GroupNode extends Node{
         }
         return temp;
     }
+    public ArrayList<Node> getGroupList(){
+        ArrayList<Node> temp = new ArrayList<Node>();
+        for(Node node : this.childNodeArray){
+            if(node instanceof GroupNode){
+                temp.add(node);
+                temp.addAll(((GroupNode) node).getGroupList());
+            }
+        }
+        return temp;
+    }
     public GroupNode getChildGroupNode(){
         ArrayList<Node> temp = new ArrayList<Node>();
         for(Node node : this.childNodeArray){
@@ -55,11 +63,18 @@ public class GroupNode extends Node{
     public String getType(){
         return "G";
     }
-    public void print(){
+    public String print(){
+        String result = this.toString();
         for(Node node: this.childNodeArray){
-            System.out.println(node);
-            if(node instanceof GroupNode)
-                ((GroupNode) node).print();
+            if(node instanceof GroupNode){
+                result += ((GroupNode) node).print();
+            }else
+                result += node.toString();
         }
+        result += "</group>\n";
+        return result;
+    }
+    public String toString(){
+        return "<group name=\""+this.getName()+"\">\n"; // </group> 가 없음
     }
 }

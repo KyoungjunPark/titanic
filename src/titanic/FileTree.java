@@ -3,15 +3,18 @@ package titanic;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+
 import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
-import util.TreeNode;
+
+import util.GreenTreeNode;
+import model.EventManager;
 import model.ModelManager;
 
 public class FileTree extends JTree implements Controllerable {
-	private TreeNode root;
+	private GreenTreeNode root;
 
 	public FileTree() {
 		this.setModel(null);
@@ -25,13 +28,15 @@ public class FileTree extends JTree implements Controllerable {
 		this.setModel(new DefaultTreeModel(root));
 		this.collapseRow(0);
 
+
 		this.setSelectionPath(new TreePath(root));
+		
 
 	}
 
 	protected void moveUp() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
 		
@@ -39,68 +44,65 @@ public class FileTree extends JTree implements Controllerable {
 		nodes = sortFromIndex(nodes);
 		
 		for (int i = 0; i < nodes.size(); i++) {
-			DefaultMutableTreeNode node = nodes.get(i);
+			GreenTreeNode node = nodes.get(i);
 
 			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
+			GreenTreeNode root = (GreenTreeNode) model
 					.getRoot();
-			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			GreenTreeNode newNode;
 
-			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
+			newNode = deepClone(node);
+			model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
 					node.getParent().getIndex(node) - 1);
 
-			node.removeFromParent();
-
-			model.reload(root);
+			model.removeNodeFromParent(node);
 			treePath[i] = new TreePath(newNode.getPath());
 		}
 		
 		this.setSelectionPaths(treePath);
-		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+
+		syncWithModel();
 	}
 
 	protected void moveDown() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
 		nodes = reverseSortFromIndex(nodes);
 		
 		for (int i = 0; i < nodes.size(); i++) {
-			DefaultMutableTreeNode node = nodes.get(i);
+			GreenTreeNode node = nodes.get(i);
 			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
+			GreenTreeNode root = (GreenTreeNode) model
 					.getRoot();
-			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			GreenTreeNode newNode;
 
-			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
+			newNode =  deepClone(node);
+			model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
 					node.getParent().getIndex(node) + 2);
 
-			node.removeFromParent();
+			model.removeNodeFromParent(node);
 
-			model.reload(root);
 			treePath[i] = new TreePath(newNode.getPath());
 		}
 		
 		this.setSelectionPaths(treePath);
 		
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
-	private DefaultMutableTreeNode deepClone(DefaultMutableTreeNode source) {
-		DefaultMutableTreeNode newNode = (DefaultMutableTreeNode) source
+	private GreenTreeNode deepClone(GreenTreeNode source) {
+		GreenTreeNode newNode = (GreenTreeNode) source
 				.clone();
 		Enumeration enumeration = source.children();
 		while (enumeration.hasMoreElements()) {
-			newNode.add(deepClone((DefaultMutableTreeNode) enumeration
+			newNode.add(deepClone((GreenTreeNode) enumeration
 					.nextElement()));
 		}
 		return newNode;
 	} 
-	private ArrayList<DefaultMutableTreeNode> sortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+	private ArrayList<GreenTreeNode> sortFromIndex(ArrayList<GreenTreeNode> nodes){
 		
 		for(int i = 0 ; i<nodes.size() ; i++){
 			int min = root.getIndex(nodes.get(i));
@@ -113,14 +115,15 @@ public class FileTree extends JTree implements Controllerable {
 			}
 			if(i != index){
 				//exchange i & index 's contents
-				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				GreenTreeNode tmpNode = nodes.get(i);
 				nodes.set(i, nodes.get(index));
 				nodes.set(index, tmpNode);
 			}
 		}
 		return nodes;
+
 	} 
-	private ArrayList<DefaultMutableTreeNode> reverseSortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+	private ArrayList<GreenTreeNode> reverseSortFromIndex(ArrayList<GreenTreeNode> nodes){
 		
 		for(int i = 0 ; i<nodes.size() ; i++){
 			int max = root.getIndex(nodes.get(i));
@@ -133,7 +136,7 @@ public class FileTree extends JTree implements Controllerable {
 			}
 			if(i != index){
 				//exchange i & index 's contents
-				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				GreenTreeNode tmpNode = nodes.get(i);
 				nodes.set(i, nodes.get(index));
 				nodes.set(index, tmpNode);
 			}
@@ -143,8 +146,8 @@ public class FileTree extends JTree implements Controllerable {
 
 	protected void addItem() {
 		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-		root.add(new DefaultMutableTreeNode("another_child"));
+		GreenTreeNode root = (GreenTreeNode) model.getRoot();
+		root.add(new GreenTreeNode("another_child"));
 		model.reload(root);
 	}
 
@@ -167,31 +170,67 @@ public class FileTree extends JTree implements Controllerable {
 
 	protected void delete() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
 		for (int i = 0; i < nodes.size(); i++) {
 			((DefaultTreeModel) this.getModel()).removeNodeFromParent(nodes
 					.get(i));
 		}
 		
+		syncWithModel();
+	}
+	
+	protected void groupTree(String groupName) {
+		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
+		GreenTreeNode newGroup = new GreenTreeNode(groupName);
+		
+		nodes = sortFromIndex(nodes);
+		int index = nodes.get(0).getParent().getIndex(nodes.get(0));
+		MutableTreeNode parent = (MutableTreeNode) nodes.get(0).getParent();
+
+		for(int i=0; i<nodes.size(); i++) {
+			GreenTreeNode newNode = new GreenTreeNode();
+			newNode = (GreenTreeNode) deepClone(nodes.get(i));
+			newGroup.add(newNode);
+		}
+		
+		((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
+		delete();
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		
+	}
+	
+	protected void unGroupTree() {
+		GreenTreeNode node = getSelectedNodes().get(0);
+		int index = node.getParent().getIndex(node);
+		int childCount = node.getChildCount();
+		
+		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
+		for (int i=0; i<childCount; i++) {
+			//nodes.add((GreenTreeNode) node.getChildAt(i));
+			((DefaultTreeModel) this.getModel()).insertNodeInto
+			((MutableTreeNode)node.getChildAt(0), (MutableTreeNode)node.getParent(), index+i);
+		}
+		delete();
+		EventManager.callEvent("ungroupButtonDisable");
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
-	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {
+	private ArrayList<GreenTreeNode> getSelectedNodes() {
 		TreePath[] paths = this.getSelectionPaths();
-		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
 		for (TreePath path : paths) {
-			nodes.add((DefaultMutableTreeNode) path.getLastPathComponent());
+			nodes.add((GreenTreeNode) path.getLastPathComponent());
 		}
 
 		return nodes;
 
 	}
 
-	public DefaultMutableTreeNode findNode(String search) {
+	public GreenTreeNode findNode(String search) {
 
 		Enumeration nodeEnumeration = root.breadthFirstEnumeration();
 		while (nodeEnumeration.hasMoreElements()) {
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) nodeEnumeration
+			GreenTreeNode node = (GreenTreeNode) nodeEnumeration
 					.nextElement();
 			String found = (String) node.getUserObject();
 			if (search.equals(found)) {
@@ -201,6 +240,16 @@ public class FileTree extends JTree implements Controllerable {
 		return null;
 	}
 
+	public void rename(GreenTreeNode node, String name){
+		node.setUserObject(name);
+		
+		repaint();
+		syncWithModel();
+	}
+	private void syncWithModel()
+	{
+		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+	}
 	@Override
 	public void setAction(String title, ActionListener action) {
 

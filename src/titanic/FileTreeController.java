@@ -1,5 +1,7 @@
 package titanic;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -8,11 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
+
 import model.EventManager;
+import util.GreenTreeNode;
 
 public class FileTreeController extends LeftPanelController {
 
@@ -27,11 +29,11 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				ArrayList<String> tag = new ArrayList<>();
+				ArrayList<String> tag = new ArrayList<String>();
 				
 				TreePath[] paths = treeFile.getSelectionModel()
 						.getSelectionPaths();
-				ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<>();
+				ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
 
 				if (paths.length == 0)
 					return;
@@ -51,7 +53,7 @@ public class FileTreeController extends LeftPanelController {
 
 				// case : GroupButton
 				Boolean bool = true;
-				TreeNode temp = nodes.get(0).getParent();
+				GreenTreeNode temp = (GreenTreeNode)nodes.get(0).getParent();
 
 				for (int i = 1; i < nodes.size(); i++) {
 					if (temp != nodes.get(i).getParent()) {
@@ -75,7 +77,10 @@ public class FileTreeController extends LeftPanelController {
 				}
 
 				// case : UngroupButton
-				if (tag.contains("Leaf")) {
+				if(nodes.size()> 1){
+					EventManager.callEvent("ungroupButtonDisable");
+				}
+				else if (tag.contains("Leaf")) {
 					// disabled
 					EventManager.callEvent("ungroupButtonDisable");
 
@@ -143,17 +148,47 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				final GreenTreeNode node;
 				if (SwingUtilities.isRightMouseButton(e)) {
 					int row = treeFile.getClosestRowForLocation(e.getX(),
 							e.getY());
 					treeFile.setSelectionRow(row);
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) ((TreePath) treeFile
+					node = (GreenTreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
+//add this
 
-					if (!node.isLeaf() || node.isRoot()){
-						JOptionPane.showMessageDialog(null, "implement contexts");
+//					treeFile.
+					if (!node.isLeaf() || node.isRoot()) {
+
+						ActionListener menuListener = new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e1) {
+
+								if (e1.getActionCommand() == "Rename") {
+									String answer =JOptionPane.showInputDialog(null, "Enter new group name: ","Group Name", JOptionPane.PLAIN_MESSAGE);
+									treeFile.rename(node, answer);
+
+								} else if (e1.getActionCommand() == "Sort") {
+
+									JOptionPane.showMessageDialog(null,
+											" Sort was pressed");
+								} else if (e1.getActionCommand() == "Duplicate") {
+
+									JOptionPane.showMessageDialog(null,
+											" Duplicate was pressed");
+								} else {// case : Edit
+
+									JOptionPane.showMessageDialog(null,
+											" Edit was pressed");
+								}
+
+							}
+						};
+						PopupMenu popup = new PopupMenu(menuListener);
+						popup.show(e.getComponent(), e.getX(), e.getY());
 					}
-						
+
 				}
 
 			}
@@ -185,11 +220,11 @@ public class FileTreeController extends LeftPanelController {
 	 * 저장하고 있습니다. nodes : 모든 노드를 가지고 있습니다.
 	 */
 	private void analyzeNode(TreePath[] paths, ArrayList<String> tag,
-			ArrayList<DefaultMutableTreeNode> nodes) {
+			ArrayList<GreenTreeNode> nodes) {
 
 		for (TreePath path : paths) {
 			
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) path
+			GreenTreeNode node = (GreenTreeNode) path
 					.getLastPathComponent();
 			nodes.add(node);
 
@@ -199,14 +234,14 @@ public class FileTreeController extends LeftPanelController {
 			} else if (node.isLeaf()) {
 				tag.add("Leaf");
 				if (node.getPreviousLeaf() == null
-						|| ((DefaultMutableTreeNode) node.getParent())
+						|| ((GreenTreeNode) node.getParent())
 								.getFirstChild() == node) {
 					// if this node is first leaf of parent's(disable
 					// move
 					// up icon)
 					tag.add("TopItem");
 				} else if (node.getNextLeaf() == null
-						|| ((DefaultMutableTreeNode) node.getParent())
+						|| ((GreenTreeNode) node.getParent())
 								.getLastChild() == node) {
 					// if this node is last leaf of parent's(disable
 					// move
@@ -263,6 +298,14 @@ public class FileTreeController extends LeftPanelController {
 
 	protected void delete() {
 		treeFile.delete();
+	}
+	
+	protected void groupTree(String sysMsg) {
+		treeFile.groupTree(sysMsg);
+	}
+	
+	protected void unGroupTree() {
+		treeFile.unGroupTree();
 	}
 
 }

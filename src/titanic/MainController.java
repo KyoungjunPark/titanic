@@ -45,7 +45,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-open-First") {
+		EventManager.addEvent(new Event("after-open-DSM") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -56,13 +56,13 @@ public class MainController {
                 EventManager.callEvent("moveUpButtonDisable");
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
-                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
+
                   
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
             }
         });
-		EventManager.addEvent(new Event("after-open") {
+		EventManager.addEvent(new Event("after-open-CLSX") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -73,8 +73,8 @@ public class MainController {
                 EventManager.callEvent("moveUpButtonDisable");
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
-                centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
-                  
+
+				centerPanelController.getContentsPanelController().refreshTabName();
             }
         });
 
@@ -83,6 +83,12 @@ public class MainController {
 
 				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), ModelManager.sharedModelManager().getCurrentID());
 				centerPanelController.getContentsPanelController().redrawPanel();
+
+			}
+		});
+		EventManager.addEvent(new Event("Redraw-FileTree"){
+			public void action(){
+				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
 		});
 	}
@@ -95,8 +101,9 @@ public class MainController {
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
-			 EventManager.callEvent("after-open-First");
+			 EventManager.callEvent("after-open-DSM");
 			 EventManager.callEvent("Redraw");
+			 EventManager.callEvent("Redraw-FileTree");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,8 +116,9 @@ public class MainController {
 		
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
-			EventManager.callEvent("after-open");
+			EventManager.callEvent("after-open-CLSX");
 			EventManager.callEvent("Redraw");
+			EventManager.callEvent("Redraw-FileTree");
 			
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
