@@ -82,11 +82,11 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 	public void getGroupInfo(){
 		
-		groupInfo = new ArrayList<>();
+		groupInfo = new ArrayList<T3>();
 
 		try{
-			groupInfo = ModelManager.sharedModelManager()
-					.getCurrentTitanicModel().getClsxModel().getGroupNode().getGroupData();
+		//	groupInfo = ModelManager.sharedModelManager()
+		//			.getCurrentTitanicModel().getClsxModel().getGroupNode().get
 			
 		}catch(NullPointerException e){e.printStackTrace();}
 		

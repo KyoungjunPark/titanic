@@ -253,7 +253,6 @@ public class MenuBarController extends MainController{
 			}
 		});
 		menu.setAction("Show Row Labels", new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Show Row Labels is clicked");
