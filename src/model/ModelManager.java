@@ -33,13 +33,6 @@ public class ModelManager {
 		}
 		return modelManager;
 	}
-	public boolean setTitanicModelID(int id){
-		if(this.isExistModel(id)){
-			this.setCurrentID(id);
-			return true;
-		}
-		return false;
-	}
 
     /**
      * file object 파일을 받아 TitanicModel 을 만듭니다.
@@ -63,6 +56,7 @@ public class ModelManager {
 				throw new CreateException("IO Error");
 			}
 			model.setDsmModel(dsm);
+            model.setClsxModel(new CLSXModel(dsm.getGroupNode().getTreeNode()));
 			this.addTitanicModel(model);
         }else{
         	JOptionPane.showMessageDialog(null, extension + "file format is not accepted");
@@ -70,6 +64,12 @@ public class ModelManager {
         }
 		return model.getID();
 	}
+
+    /**
+     * 현재 TitanicModel 에 clsx 를 set 합니다.
+     * @param file set 할 clsx file
+     * @throws CreateException file open 등의 문제로 Exception 이 발생할 수 있습니다.
+     */
 	public void setClsx(File file)throws CreateException{
         EventManager.callEvent("before-open");
 		String extension = JSFiles.getFileExtension(file).toLowerCase();
@@ -95,12 +95,32 @@ public class ModelManager {
 		}
 		return false;
 	}
+
+    /**
+     * 새로운 Titanic Model 을 ModelManager 에 추가합니다.
+     * @param model 추가할 Titanic Model
+     */
     private void addTitanicModel(TitanicModel model){
         this.titanicModelArray.add(model);
     }
-    public void setCurrentID(int id){
-        this.currentID = id;
+
+    /**
+     * ModelManager 에 current ID 를 set 합니다.
+     * ModelManager 의 대부분의 동작은 current ID 에 종속적입니다.
+     * @param id set 할 Integer id
+     */
+    public boolean setCurrentID(int id){
+        if(this.isExistModel(id)){
+            this.currentID = id;
+            return true;
+        }
+        return false;
     }
+
+    /**
+     * 현재 set 되어있는 id 입니다.
+     * @return
+     */
     public int getCurrentID(){
     	return currentID;
     }
@@ -167,6 +187,11 @@ public class ModelManager {
         return this.titanicModelArray.size();
     }
 
+    /**
+     * titanicModel 을 제거합니다.
+     * 메모리에서 실제로 지울경우 할당되어 있는 titanicmodel 에 null 을 대입하여 가비지컬렉터가 수집할 수 있도록 해주세요.
+     * @param id 삭제할 id
+     */
     public void removeTitanicModel(int id){
         TitanicModel model = this.getTitanicMode(id);
         if(model != null){
