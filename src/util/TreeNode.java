@@ -1,5 +1,7 @@
 package util;
 
+import apple.laf.JRSUIUtils;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -18,6 +20,9 @@ public class TreeNode extends DefaultMutableTreeNode {
     }
     public String getType(){
         return this.node.getType();
+    }
+    public void setNode(Node node){
+        this.node = node;
     }
     public Node getNode(){
         return this.node;
@@ -39,5 +44,11 @@ public class TreeNode extends DefaultMutableTreeNode {
     }
     public void setIsExpanded(boolean isExpanded) {
         this.isExpanded = isExpanded;
+    }
+    public TreeNode clone() {
+        TreeNode node = (TreeNode)super.clone();
+        node.setNode(this.getNode());
+        node.setIsExpanded(this.isExpanded());
+        return node;
     }
 }
