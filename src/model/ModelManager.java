@@ -56,6 +56,7 @@ public class ModelManager {
 				throw new CreateException("IO Error");
 			}
 			model.setDsmModel(dsm);
+            model.setClsxModel(new CLSXModel(dsm.getGroupNode().getTreeNode()));
 			this.addTitanicModel(model);
         }else{
         	JOptionPane.showMessageDialog(null, extension + "file format is not accepted");
