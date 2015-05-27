@@ -78,8 +78,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 
 	public void setShowRowLabels(boolean state, int tabIndex) {
-
-			contents.get(tabIndex).setShowRowLabels(state);
+            for( RightPanel panel: contents)
+                if(panel.getID() == tabIndex)
+                    panel.setShowRowLabels(state);
 	}
 
 	/*
