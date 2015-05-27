@@ -74,8 +74,6 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
 
-				EventManager.callEvent("Redraw-FileTree");
-
 				centerPanelController.getContentsPanelController().refreshTabName();
             }
         });
@@ -105,7 +103,7 @@ public class MainController {
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
 			 EventManager.callEvent("after-open-DSM");
 			 EventManager.callEvent("Redraw");
-			EventManager.callEvent("Redraw-FileTree");
+			 EventManager.callEvent("Redraw-FileTree");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -51,20 +51,15 @@ public class ContentsPanelController extends CenterPanelController{
 		int id = ModelManager.sharedModelManager().getCurrentID();
         RightPanel panel = new RightPanel(id);
 		contentsPanel.addRightPanel(panel);
+        contentsPanel.setSelectedComponent(panel);
 	}
-	protected void addRightPanel(RightPanel panel){
-		contentsPanel.addRightPanel(panel);
-	}
-	
+
 	protected void redrawPanel() {
 		contentsPanel.regetTableData(ModelManager.sharedModelManager().getCurrentID());
 		contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
 	}
 	
-	protected int getTop(){
-		return this.contentsPanel.TOP;
-	}
-	
+
 	public void setShowRowLabels(boolean state, int tabIndex) {
 		contentsPanel.setShowRowLabels(state, tabIndex);
 	}

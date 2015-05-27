@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import util.TreeNode;
-import model.Event;
 import model.EventManager;
 import model.ModelManager;
 
@@ -31,6 +28,7 @@ public class FileTree extends JTree implements Controllerable {
 		this.setModel(new DefaultTreeModel(root));
 		this.collapseRow(0);
 
+
 		this.setSelectionPath(new TreePath(root));
 		
 
@@ -38,7 +36,7 @@ public class FileTree extends JTree implements Controllerable {
 
 	protected void moveUp() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<TreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
 		
@@ -46,49 +44,46 @@ public class FileTree extends JTree implements Controllerable {
 		nodes = sortFromIndex(nodes);
 		
 		for (int i = 0; i < nodes.size(); i++) {
-			DefaultMutableTreeNode node = nodes.get(i);
+			TreeNode node = nodes.get(i);
 
 			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
+			TreeNode root = (TreeNode) model
 					.getRoot();
-			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			TreeNode newNode;
 
-			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
+			newNode = deepClone(node);
+			model.insertNodeInto(newNode, (TreeNode)node.getParent(),
 					node.getParent().getIndex(node) - 1);
 
-			node.removeFromParent();
-
-			model.reload(root);
+			model.removeNodeFromParent(node);
 			treePath[i] = new TreePath(newNode.getPath());
 		}
 		
 		this.setSelectionPaths(treePath);
-		
+
 		syncWithModel();
 	}
 
 	protected void moveDown() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<TreeNode> nodes = getSelectedNodes();
 		TreePath[] treePath = new TreePath[nodes.size()];
 		
 		nodes = reverseSortFromIndex(nodes);
 		
 		for (int i = 0; i < nodes.size(); i++) {
-			DefaultMutableTreeNode node = nodes.get(i);
+			TreeNode node = nodes.get(i);
 			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			DefaultMutableTreeNode root = (DefaultMutableTreeNode) model
+			TreeNode root = (TreeNode) model
 					.getRoot();
-			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
+			TreeNode newNode;
 
-			newNode = (DefaultMutableTreeNode) deepClone(node);
-			model.insertNodeInto(newNode, (DefaultMutableTreeNode)node.getParent(),
+			newNode =  deepClone(node);
+			model.insertNodeInto(newNode, (TreeNode)node.getParent(),
 					node.getParent().getIndex(node) + 2);
 
-			node.removeFromParent();
+			model.removeNodeFromParent(node);
 
-			//model.reload(root);
 			treePath[i] = new TreePath(newNode.getPath());
 		}
 		
@@ -97,17 +92,17 @@ public class FileTree extends JTree implements Controllerable {
 		syncWithModel();
 	}
 
-	private DefaultMutableTreeNode deepClone(DefaultMutableTreeNode source) {
-		DefaultMutableTreeNode newNode = (DefaultMutableTreeNode) source
+	private TreeNode deepClone(TreeNode source) {
+		TreeNode newNode = (TreeNode) source
 				.clone();
 		Enumeration enumeration = source.children();
 		while (enumeration.hasMoreElements()) {
-			newNode.add(deepClone((DefaultMutableTreeNode) enumeration
+			newNode.add(deepClone((TreeNode) enumeration
 					.nextElement()));
 		}
 		return newNode;
 	} 
-	private ArrayList<DefaultMutableTreeNode> sortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+	private ArrayList<TreeNode> sortFromIndex(ArrayList<TreeNode> nodes){
 		
 		for(int i = 0 ; i<nodes.size() ; i++){
 			int min = root.getIndex(nodes.get(i));
@@ -120,7 +115,7 @@ public class FileTree extends JTree implements Controllerable {
 			}
 			if(i != index){
 				//exchange i & index 's contents
-				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				TreeNode tmpNode = nodes.get(i);
 				nodes.set(i, nodes.get(index));
 				nodes.set(index, tmpNode);
 			}
@@ -128,7 +123,7 @@ public class FileTree extends JTree implements Controllerable {
 		return nodes;
 
 	} 
-	private ArrayList<DefaultMutableTreeNode> reverseSortFromIndex(ArrayList<DefaultMutableTreeNode> nodes){
+	private ArrayList<TreeNode> reverseSortFromIndex(ArrayList<TreeNode> nodes){
 		
 		for(int i = 0 ; i<nodes.size() ; i++){
 			int max = root.getIndex(nodes.get(i));
@@ -141,7 +136,7 @@ public class FileTree extends JTree implements Controllerable {
 			}
 			if(i != index){
 				//exchange i & index 's contents
-				DefaultMutableTreeNode tmpNode = nodes.get(i);
+				TreeNode tmpNode = nodes.get(i);
 				nodes.set(i, nodes.get(index));
 				nodes.set(index, tmpNode);
 			}
@@ -151,8 +146,8 @@ public class FileTree extends JTree implements Controllerable {
 
 	protected void addItem() {
 		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-		root.add(new DefaultMutableTreeNode("another_child"));
+		TreeNode root = (TreeNode) model.getRoot();
+		root.add(new TreeNode("another_child"));
 		model.reload(root);
 
 	}
@@ -176,7 +171,7 @@ public class FileTree extends JTree implements Controllerable {
 
 	protected void delete() {
 
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<TreeNode> nodes = getSelectedNodes();
 		for (int i = 0; i < nodes.size(); i++) {
 			((DefaultTreeModel) this.getModel()).removeNodeFromParent(nodes
 					.get(i));
@@ -186,7 +181,7 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	
 	protected void groupTree(String groupName) {
-		ArrayList<DefaultMutableTreeNode> nodes = getSelectedNodes();
+		ArrayList<TreeNode> nodes = getSelectedNodes();
 		TreeNode newGroup = new TreeNode(groupName);
 		
 		nodes = sortFromIndex(nodes);
@@ -194,8 +189,8 @@ public class FileTree extends JTree implements Controllerable {
 		MutableTreeNode parent = (MutableTreeNode) nodes.get(0).getParent();
 
 		for(int i=0; i<nodes.size(); i++) {
-			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode();
-			newNode = (DefaultMutableTreeNode) deepClone(nodes.get(i));
+			TreeNode newNode = new TreeNode();
+			newNode = (TreeNode) deepClone(nodes.get(i));
 			newGroup.add(newNode);
 		}
 		
@@ -206,13 +201,13 @@ public class FileTree extends JTree implements Controllerable {
 	}
 	
 	protected void unGroupTree() {
-		DefaultMutableTreeNode node = getSelectedNodes().get(0);
+		TreeNode node = getSelectedNodes().get(0);
 		int index = node.getParent().getIndex(node);
 		int childCount = node.getChildCount();
 		
-		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+		ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
 		for (int i=0; i<childCount; i++) {
-			//nodes.add((DefaultMutableTreeNode) node.getChildAt(i));
+			//nodes.add((TreeNode) node.getChildAt(i));
 			((DefaultTreeModel) this.getModel()).insertNodeInto
 			((MutableTreeNode)node.getChildAt(0), (MutableTreeNode)node.getParent(), index+i);
 		}
@@ -221,22 +216,22 @@ public class FileTree extends JTree implements Controllerable {
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
 	}
 
-	private ArrayList<DefaultMutableTreeNode> getSelectedNodes() {
+	private ArrayList<TreeNode> getSelectedNodes() {
 		TreePath[] paths = this.getSelectionPaths();
-		ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+		ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
 		for (TreePath path : paths) {
-			nodes.add((DefaultMutableTreeNode) path.getLastPathComponent());
+			nodes.add((TreeNode) path.getLastPathComponent());
 		}
 
 		return nodes;
 
 	}
 
-	public DefaultMutableTreeNode findNode(String search) {
+	public TreeNode findNode(String search) {
 
 		Enumeration nodeEnumeration = root.breadthFirstEnumeration();
 		while (nodeEnumeration.hasMoreElements()) {
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) nodeEnumeration
+			TreeNode node = (TreeNode) nodeEnumeration
 					.nextElement();
 			String found = (String) node.getUserObject();
 			if (search.equals(found)) {
@@ -246,7 +241,7 @@ public class FileTree extends JTree implements Controllerable {
 		return null;
 	}
 
-	public void rename(DefaultMutableTreeNode node, String name){
+	public void rename(TreeNode node, String name){
 		node.setUserObject(name);
 		
 		repaint();

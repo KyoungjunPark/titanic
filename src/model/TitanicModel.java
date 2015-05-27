@@ -33,7 +33,7 @@ public class TitanicModel {
 
 	protected void setDsmModel(DSMModel dsmModel){
         /**
-         * Titanic의 dsmmodel 을 set 합니다.
+         * Titanic의 dsm model 을 set 합니다.
          * overwrite 하기 때문에 기존의 dsm 포인터는 사라집니다.
          *
          * @param {@link model.DSMModel}

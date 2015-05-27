@@ -74,6 +74,9 @@ public class MainToolbarController extends MainController {
 				ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
 				EventManager.callEvent("Redraw");
 				EventManager.callEvent("after-open-CLSX");
+				EventManager.callEvent("Redraw-FileTree");
+
+
 			}
 		});
 		toolbar.setAction("Load Clustering", new ActionListener() {

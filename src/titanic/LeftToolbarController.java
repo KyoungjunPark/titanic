@@ -45,7 +45,6 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Group is clicked");
 				EventManager.callEvent("group");
 			}
 		});
@@ -53,7 +52,6 @@ public class LeftToolbarController extends LeftPanelController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Ungroup is clicked");
 				EventManager.callEvent("ungroup");
 				
 			}

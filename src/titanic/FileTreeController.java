@@ -13,13 +13,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import com.sun.xml.internal.bind.v2.model.core.MaybeElement;
 
 import model.EventManager;
+import util.TreeNode;
 
 public class FileTreeController extends LeftPanelController {
 
@@ -38,7 +36,7 @@ public class FileTreeController extends LeftPanelController {
 				
 				TreePath[] paths = treeFile.getSelectionModel()
 						.getSelectionPaths();
-				ArrayList<DefaultMutableTreeNode> nodes = new ArrayList<DefaultMutableTreeNode>();
+				ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
 
 				if (paths.length == 0)
 					return;
@@ -58,7 +56,7 @@ public class FileTreeController extends LeftPanelController {
 
 				// case : GroupButton
 				Boolean bool = true;
-				TreeNode temp = nodes.get(0).getParent();
+				TreeNode temp = (TreeNode)nodes.get(0).getParent();
 
 				for (int i = 1; i < nodes.size(); i++) {
 					if (temp != nodes.get(i).getParent()) {
@@ -153,12 +151,12 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				final DefaultMutableTreeNode node;
+				final TreeNode node;
 				if (SwingUtilities.isRightMouseButton(e)) {
 					int row = treeFile.getClosestRowForLocation(e.getX(),
 							e.getY());
 					treeFile.setSelectionRow(row);
-					node = (DefaultMutableTreeNode) ((TreePath) treeFile
+					node = (TreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
 //add this
 
@@ -225,11 +223,11 @@ public class FileTreeController extends LeftPanelController {
 	 * 저장하고 있습니다. nodes : 모든 노드를 가지고 있습니다.
 	 */
 	private void analyzeNode(TreePath[] paths, ArrayList<String> tag,
-			ArrayList<DefaultMutableTreeNode> nodes) {
+			ArrayList<TreeNode> nodes) {
 
 		for (TreePath path : paths) {
 			
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) path
+			TreeNode node = (TreeNode) path
 					.getLastPathComponent();
 			nodes.add(node);
 
@@ -239,14 +237,14 @@ public class FileTreeController extends LeftPanelController {
 			} else if (node.isLeaf()) {
 				tag.add("Leaf");
 				if (node.getPreviousLeaf() == null
-						|| ((DefaultMutableTreeNode) node.getParent())
+						|| ((TreeNode) node.getParent())
 								.getFirstChild() == node) {
 					// if this node is first leaf of parent's(disable
 					// move
 					// up icon)
 					tag.add("TopItem");
 				} else if (node.getNextLeaf() == null
-						|| ((DefaultMutableTreeNode) node.getParent())
+						|| ((TreeNode) node.getParent())
 								.getLastChild() == node) {
 					// if this node is last leaf of parent's(disable
 					// move
