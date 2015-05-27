@@ -8,6 +8,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class TreeNode extends DefaultMutableTreeNode {
     private Node node;
     private boolean isExpanded = true;
+    public TreeNode(){super();}
     public TreeNode(String string){
         super(string);
     }
