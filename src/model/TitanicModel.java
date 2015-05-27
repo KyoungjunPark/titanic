@@ -89,12 +89,11 @@ public class TitanicModel {
             if( node.getGroupList().size() == 0 ){
                 this.dsmModel.setGroupNode(node);
                 this.dsmModel.setIsEdit(true);
-            }else{
-                if(this.clsxModel == null)
-                    this.setClsxModel(new CLSXModel());
-                this.clsxModel.setGroupNode(node);
-                this.clsxModel.setIsEdit(true);
             }
+            if(this.clsxModel == null)
+                this.setClsxModel(new CLSXModel());
+            this.clsxModel.setGroupNode(node);
+            this.clsxModel.setIsEdit(true);
         }catch (CreateException e){
             return false;
         }
