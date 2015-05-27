@@ -88,7 +88,7 @@ public class FileTree extends JTree implements Controllerable {
 
 			node.removeFromParent();
 
-			model.reload(root);
+			//model.reload(root);
 			treePath[i] = new TreePath(newNode.getPath());
 		}
 		
