@@ -7,6 +7,7 @@ import util.GreenTreeNode;
 import util.XMLParser;
 
 public class CLSXModel extends Model{
+    public CLSXModel()throws CreateException{}
     public CLSXModel(File file) throws CreateException{
         try{
             node = new XMLParser().parseXML(file);
@@ -21,8 +22,6 @@ public class CLSXModel extends Model{
     }
     protected void setTreeNode(GreenTreeNode node)throws CreateException{
         this.node = (GroupNode)node.getGroupNode();
-        System.out.println(this.node.print());
-        this.setIsEdit(true);
     }
     public GroupNode getGroupNode(){return this.node;};
     public String toString(){

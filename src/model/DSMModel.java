@@ -113,7 +113,7 @@ public class DSMModel extends Model{
             result += this.dependencyRelationArray.get(i);
         }
         result += "\r\n";
-        result += String.join("\rn", this.elementsNameArray);
+        result += String.join("\r\n", this.elementsNameArray);
         return result;
     }
 }
