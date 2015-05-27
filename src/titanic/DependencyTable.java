@@ -3,6 +3,7 @@ package titanic;
 import model.T3;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.*;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class DependencyTable extends JPanel {
 	 * 저장하고 있습니다.
 	 */
 	private ArrayList<ArrayList<String>> rows;
+	private ArrayList<String> rowNames;
 
 	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
 			boolean showRowLabels) throws NullPointerException {
@@ -58,6 +60,20 @@ public class DependencyTable extends JPanel {
 				else
 					c.setBackground(levelColor(0));
 				return c;
+			}
+
+			public String getToolTipText(MouseEvent e) {
+				String tip;
+				java.awt.Point p = e.getPoint();
+				int rowIndex = rowAtPoint(p);
+				int colIndex = columnAtPoint(p);
+
+				if (getValueAt(rowIndex, colIndex).toString().equals("X")) {
+					tip = (rowIndex + 1) + "." + rowNames.get(rowIndex) + " → "
+							+ (colIndex + 1) + "." + rowNames.get(colIndex);
+					return tip;
+				} else
+					return null;
 			}
 		};
 
@@ -137,21 +153,11 @@ public class DependencyTable extends JPanel {
 
 		switch (depth % 5) {
 		/*
-		 * case (0):
-			return new Color(255, 255, 255);
-		case (1):
-			return new Color(255, 202, 0);
-		case (2):
-			return new Color(98, 12, 172);
-		case (3):
-			return new Color(15, 79, 168);
-		case (4):
-			return new Color(255, 116, 0);
-		default:
-			return new Color(255, 255, 255);
-		 * 
-		 * */
-		
+		  case (0): return new Color(255, 255, 255); case (1): return new
+		  Color(255, 202, 0); case (2): return new Color(98, 12, 172); case
+		  (4): return new Color(15, 79, 168); case (3): return new Color(255,
+		  116, 0); default: return new Color(255, 255, 255);
+		 */
 		case (0):
 			return new Color(255, 255, 255, 80);
 		case (1):
@@ -159,11 +165,13 @@ public class DependencyTable extends JPanel {
 		case (2):
 			return new Color(98, 12, 172, 80);
 		case (3):
-			return new Color(15, 79, 168, 80);
-		case (4):
 			return new Color(255, 116, 0, 80);
+		case (4):
+			return new Color(15, 79, 168, 80);
+		
 		default:
 			return new Color(255, 255, 255, 80);
+
 		}
 	}
 
@@ -180,19 +188,15 @@ public class DependencyTable extends JPanel {
 
 		private void init(ArrayList<ArrayList<String>> rows) {
 
-			// 색 선정...?
-			/*
-			 * ArrayList<T3> tupleList = new ArrayList<>(); tupleList.add(new
-			 * T3(1, 1, 3)); tupleList.add(new T3(1, 5, 8));
-			 */
 			tableData = rows;
 			columnIndex = new ArrayList();
-
+			rowNames = new ArrayList<String>();
 			columnIndex.add("");
 			for (int i = 0; i < this.tableData.size(); i++) {
 				String s = new String();
 				s = (i + 1) + "";
 				columnIndex.add(s);
+				rowNames.add(this.getValueAt(i, 0).toString());
 				if (this.showRowLabels == true) {
 					s = s + "." + this.getValueAt(i, 0).toString();
 				}
