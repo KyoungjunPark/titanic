@@ -88,11 +88,13 @@ public class DSMModel extends Model{
         return matrixList;
     }
     private void changeRow(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
+        if(foo == -1 || bar == -1) return;
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
         }
     }
     private void changeColumn(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
+        if(foo == -1 || bar == -1) return;
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
         }
