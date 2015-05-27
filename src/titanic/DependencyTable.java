@@ -21,6 +21,8 @@ public class DependencyTable extends JPanel {
 	 */
 	private ArrayList<ArrayList<String>> rows;
 	private ArrayList<String> rowNames;
+	private Hashtable<String, Color> colorInfo;
+
 
 	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
 			boolean showRowLabels) throws NullPointerException {
@@ -36,7 +38,7 @@ public class DependencyTable extends JPanel {
 
 		/*********************************************************************************************/
 
-		Hashtable<String, Color> colorInfo = new Hashtable<String, Color>();
+		colorInfo = new Hashtable<String, Color>();
 		for (int i = 0; i < groupInfo.size(); i++) {
 			int first = groupInfo.get(i).getFirst() - 1;
 			int last = groupInfo.get(i).getLast() - 1;

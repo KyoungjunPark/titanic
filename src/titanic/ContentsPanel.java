@@ -28,7 +28,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		regetTableData();
 		getGroupInfo();
 		//	contents.get(this.tabIndex).setTableData(newData);
-		contents.get(this.tabIndex).redrawPanel(newData,groupInfo);
+        for(RightPanel panel : contents)
+            if(panel.getID() == this.tabIndex)
+                panel.redrawPanel(newData, groupInfo);
 
 		String tabName = new String();
 
@@ -82,7 +84,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 	public void getGroupInfo(){
 		
-		groupInfo = new ArrayList<>();
+		groupInfo = new ArrayList<T3>();
 
 		try{
 			groupInfo = ModelManager.sharedModelManager()

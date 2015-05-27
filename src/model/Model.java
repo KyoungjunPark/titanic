@@ -55,6 +55,9 @@ abstract class Model {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+    public void setGroupNode(GroupNode node){
+        this.node = node;
+    }
     public GroupNode getGroupNode(){return null;}
     protected boolean isEdit(){
         return this.isEdit;

@@ -96,6 +96,7 @@ public class MainController {
 				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
 		});
+
 	}
 	
 
