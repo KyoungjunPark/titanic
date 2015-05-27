@@ -143,7 +143,7 @@ public class DependencyTable extends JPanel {
 				if (row == column)
 					return "·";
 
-				if(data == "0") {
+				if(data.compareTo("0")==0) {
 					return "";
 				}
 				else{
