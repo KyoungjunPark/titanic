@@ -1,6 +1,7 @@
 package model;
 
 import util.JSFiles;
+import util.TreeNode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,7 +65,7 @@ public class ModelManager {
 			model.setDsmModel(dsm);
 			this.addTitanicModel(model);
         }else{
-        	JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
+        	JOptionPane.showMessageDialog(null, extension + "file format is not accepted");
             throw new CreateException("지원하지 않는 확장자입니다.");
         }
 		return model.getID();
@@ -78,7 +79,7 @@ public class ModelManager {
 		if(extension.compareTo(".clsx") == 0){
 			model.setClsxModel(file);
 		}else{
-			JOptionPane.showMessageDialog(null, extension+"file format is not accepted");
+			JOptionPane.showMessageDialog(null, extension + "file format is not accepted");
 			throw new CreateException("지원하지 않는 확장자입니다.");
 		}
 	}
@@ -125,6 +126,27 @@ public class ModelManager {
 		return this.getTitanicMode(this.getCurrentID());
 	}
 
+	/**
+	 * node 를 받아 tiatanic model 을 duplicate 합니다.
+	 * model 의 id 가 존재하는지 확인하세요.
+	 * @param id {@link TitanicModel} 의 id 입니다. 해당 model 의 dsm 데이터를 복사해 가져옵니다.
+	 * @param node {@link TreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 duplicate 합니다.
+	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
+	 */
+	public int duplicateTitanicModel(int id, TreeNode node){
+		return -1;
+	}
+
+	/**
+	 * node 를 받아 tiatanic model 을 edit 합니다.
+	 * model 의 id 가 존재하는지 확인하세요.
+	 * @param id {@link TitanicModel} 의 id 입니다. 해당 model 의 dsm 데이터를 공유합니다.
+	 * @param node {@link TreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 edit 합니다.
+	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
+	 */
+	public int editTatanicModel(int id, TreeNode node){
+		return -1;
+	}
     /**
      * id 에 해당하는 Titanic 모델을 받습니다.
      * @param id
