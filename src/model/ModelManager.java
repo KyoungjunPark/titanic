@@ -1,7 +1,7 @@
 package model;
 
+import util.GreenTreeNode;
 import util.JSFiles;
-import util.TreeNode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -130,10 +130,10 @@ public class ModelManager {
 	 * node 를 받아 tiatanic model 을 duplicate 합니다.
 	 * model 의 id 가 존재하는지 확인하세요.
 	 * @param id {@link TitanicModel} 의 id 입니다. 해당 model 의 dsm 데이터를 복사해 가져옵니다.
-	 * @param node {@link TreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 duplicate 합니다.
+	 * @param node {@link GreenTreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 duplicate 합니다.
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
-	public int duplicateTitanicModel(int id, TreeNode node){
+	public int duplicateTitanicModel(int id, GreenTreeNode node){
 		return -1;
 	}
 
@@ -141,10 +141,10 @@ public class ModelManager {
 	 * node 를 받아 tiatanic model 을 edit 합니다.
 	 * model 의 id 가 존재하는지 확인하세요.
 	 * @param id {@link TitanicModel} 의 id 입니다. 해당 model 의 dsm 데이터를 공유합니다.
-	 * @param node {@link TreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 edit 합니다.
+	 * @param node {@link GreenTreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 edit 합니다.
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
-	public int editTatanicModel(int id, TreeNode node){
+	public int editTatanicModel(int id, GreenTreeNode node){
 		return -1;
 	}
     /**

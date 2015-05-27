@@ -6,10 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -17,7 +14,7 @@ import javax.swing.tree.TreePath;
 
 
 import model.EventManager;
-import util.TreeNode;
+import util.GreenTreeNode;
 
 public class FileTreeController extends LeftPanelController {
 
@@ -36,7 +33,7 @@ public class FileTreeController extends LeftPanelController {
 				
 				TreePath[] paths = treeFile.getSelectionModel()
 						.getSelectionPaths();
-				ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
+				ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
 
 				if (paths.length == 0)
 					return;
@@ -56,7 +53,7 @@ public class FileTreeController extends LeftPanelController {
 
 				// case : GroupButton
 				Boolean bool = true;
-				TreeNode temp = (TreeNode)nodes.get(0).getParent();
+				GreenTreeNode temp = (GreenTreeNode)nodes.get(0).getParent();
 
 				for (int i = 1; i < nodes.size(); i++) {
 					if (temp != nodes.get(i).getParent()) {
@@ -151,12 +148,12 @@ public class FileTreeController extends LeftPanelController {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				final TreeNode node;
+				final GreenTreeNode node;
 				if (SwingUtilities.isRightMouseButton(e)) {
 					int row = treeFile.getClosestRowForLocation(e.getX(),
 							e.getY());
 					treeFile.setSelectionRow(row);
-					node = (TreeNode) ( treeFile
+					node = (GreenTreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
 //add this
 
@@ -223,11 +220,11 @@ public class FileTreeController extends LeftPanelController {
 	 * 저장하고 있습니다. nodes : 모든 노드를 가지고 있습니다.
 	 */
 	private void analyzeNode(TreePath[] paths, ArrayList<String> tag,
-			ArrayList<TreeNode> nodes) {
+			ArrayList<GreenTreeNode> nodes) {
 
 		for (TreePath path : paths) {
 			
-			TreeNode node = (TreeNode) path
+			GreenTreeNode node = (GreenTreeNode) path
 					.getLastPathComponent();
 			nodes.add(node);
 
@@ -237,14 +234,14 @@ public class FileTreeController extends LeftPanelController {
 			} else if (node.isLeaf()) {
 				tag.add("Leaf");
 				if (node.getPreviousLeaf() == null
-						|| ((TreeNode) node.getParent())
+						|| ((GreenTreeNode) node.getParent())
 								.getFirstChild() == node) {
 					// if this node is first leaf of parent's(disable
 					// move
 					// up icon)
 					tag.add("TopItem");
 				} else if (node.getNextLeaf() == null
-						|| ((TreeNode) node.getParent())
+						|| ((GreenTreeNode) node.getParent())
 								.getLastChild() == node) {
 					// if this node is last leaf of parent's(disable
 					// move

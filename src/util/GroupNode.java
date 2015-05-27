@@ -1,7 +1,5 @@
 package util;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,8 +23,8 @@ public class GroupNode extends Node{
     public void addItem(Node node){
         this.childNodeArray.add(node);
     }
-    public TreeNode getTreeNode(){
-        TreeNode root = new TreeNode(this.getName(), this);
+    public GreenTreeNode getTreeNode(){
+        GreenTreeNode root = new GreenTreeNode(this.getName(), this);
         for(Node node : this.childNodeArray){
             root.add(node.getTreeNode());
         }

@@ -1,20 +1,18 @@
 package util;
 
-import apple.laf.JRSUIUtils;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * Created by kimjisoo on 5/23/15.
  */
-public class TreeNode extends DefaultMutableTreeNode {
+public class GreenTreeNode extends DefaultMutableTreeNode {
     private Node node;
     private boolean isExpanded = true;
-    public TreeNode(){super();}
-    public TreeNode(String string){
+    public GreenTreeNode(){super();}
+    public GreenTreeNode(String string){
         super(string);
     }
-    public TreeNode(String string, Node node){
+    public GreenTreeNode(String string, Node node){
         this(string);
         this.node = node;
     }
@@ -30,7 +28,7 @@ public class TreeNode extends DefaultMutableTreeNode {
     public Node getGroupNode() {
         GroupNode groupNode = new GroupNode(this.toString());
         for (int i = 0; i < this.getChildCount(); i++) {
-            TreeNode node = (TreeNode) this.getChildAt(i);
+            GreenTreeNode node = (GreenTreeNode) this.getChildAt(i);
             if (node.getChildCount() == 0)
                 groupNode.addItem(new ItemNode(node.toString()));
             else
@@ -45,8 +43,8 @@ public class TreeNode extends DefaultMutableTreeNode {
     public void setIsExpanded(boolean isExpanded) {
         this.isExpanded = isExpanded;
     }
-    public TreeNode clone() {
-        TreeNode node = (TreeNode)super.clone();
+    public GreenTreeNode clone() {
+        GreenTreeNode node = (GreenTreeNode)super.clone();
         node.setNode(this.getNode());
         node.setIsExpanded(this.isExpanded());
         return node;
