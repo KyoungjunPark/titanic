@@ -23,6 +23,6 @@ public class ItemNode extends Node{
         return "I";
     }
     public String toString(){
-        return "<item name=\""+this.getName()+"\" />\n";
+        return "<item name=\""+this.getName()+"\" />\r\n";
     }
 }

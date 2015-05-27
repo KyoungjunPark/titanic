@@ -88,6 +88,7 @@ public class TitanicModel {
                 this.setClsxModel(new CLSXModel(root));
             }else{
                 this.clsxModel.setTreeNode(root);
+                System.out.println(this.clsxModel.getGroupNode().getGroupData());
             }
         }catch (CreateException e){
             return false;

@@ -107,9 +107,18 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 			contents.get(tabIndex).setShowRowLabels(state);
 	}
 
+	/*
+	 refrechTabName은 clsx파일이 있을 경우 해당 이름을 tab으로 설정하고 그 외는 dsm파일의 이름으로 tab이름을 설정합니다.
+	 */
     public void refreshTabName() {
-        int currentIndex = this.getRightPanelIndex(ModelManager.sharedModelManager().getCurrentID());
 
-        this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFileName());
+
+        int currentIndex = this.getRightPanelIndex(ModelManager.sharedModelManager().getCurrentID());
+        if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel() == null) {
+            this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+        }
+        else {
+            this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFileName());
+        }
     }
 }
