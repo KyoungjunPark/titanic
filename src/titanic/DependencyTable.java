@@ -20,9 +20,9 @@ public class DependencyTable extends JPanel {
 	 */
 	private ArrayList<ArrayList<String>> rows;
 
-	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo, boolean showRowLabels)
-			throws NullPointerException {
-		
+	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
+			boolean showRowLabels) throws NullPointerException {
+
 		init(rows, groupInfo, showRowLabels);
 	}
 
@@ -52,8 +52,9 @@ public class DependencyTable extends JPanel {
 					int column) {
 				Component c = super.prepareRenderer(tcr, row, column);
 
-				if (colorInfo.containsKey((row-1) + ":" + (column-1)) == true)
-					c.setBackground(colorInfo.get((row-1) + ":" + (column-1)));
+				if (colorInfo.containsKey((row - 1) + ":" + (column - 1)) == true)
+					c.setBackground(colorInfo.get((row - 1) + ":"
+							+ (column - 1)));
 				else
 					c.setBackground(levelColor(0));
 				return c;
@@ -114,11 +115,11 @@ public class DependencyTable extends JPanel {
 		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
-	
+
 		DefaultTableCellRenderer restRender = new DefaultTableCellRenderer();
 
 		restRender.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
 		for (int i = 0; i < table.getColumnCount(); i++) {
@@ -135,7 +136,8 @@ public class DependencyTable extends JPanel {
 	private Color levelColor(int depth) {
 
 		switch (depth % 5) {
-		case (0):
+		/*
+		 * case (0):
 			return new Color(255, 255, 255);
 		case (1):
 			return new Color(255, 202, 0);
@@ -147,6 +149,21 @@ public class DependencyTable extends JPanel {
 			return new Color(255, 116, 0);
 		default:
 			return new Color(255, 255, 255);
+		 * 
+		 * */
+		
+		case (0):
+			return new Color(255, 255, 255, 80);
+		case (1):
+			return new Color(255, 202, 0, 80);
+		case (2):
+			return new Color(98, 12, 172, 80);
+		case (3):
+			return new Color(15, 79, 168, 80);
+		case (4):
+			return new Color(255, 116, 0, 80);
+		default:
+			return new Color(255, 255, 255, 80);
 		}
 	}
 
