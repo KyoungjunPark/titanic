@@ -20,19 +20,49 @@ public class DependencyTable extends JPanel {
 	 */
 	private ArrayList<ArrayList<String>> rows;
 
-	DependencyTable(ArrayList<ArrayList<String>> rows, boolean showRowLabels)
+	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo, boolean showRowLabels)
 			throws NullPointerException {
-
-		init(rows, showRowLabels);
+		
+		init(rows, groupInfo, showRowLabels);
 	}
 
-	private void init(ArrayList<ArrayList<String>> rows, boolean showRowLabels) {
+	private void init(ArrayList<ArrayList<String>> rows,
+			ArrayList<T3> groupInfo, boolean showRowLabels) {
 
 		this.rows = rows;
 		TableModel tableModel = new TableModel(this.rows, showRowLabels);
-		JTable rightTable = new JTable(tableModel);
+
+		/*********************************************************************************************/
+
+		Hashtable<String, Color> colorInfo = new Hashtable<String, Color>();
+		for (int i = 0; i < groupInfo.size(); i++) {
+			int first = groupInfo.get(i).getFirst() - 1;
+			int last = groupInfo.get(i).getLast() - 1;
+
+			for (int j = first; j < last + 1; j++) {
+				for (int k = first; k < last + 1; k++) {
+					colorInfo.put(j + ":" + k, levelColor(groupInfo.get(i)
+							.getDepth()));
+				}
+			}
+		}
+
+		JTable rightTable = new JTable(tableModel) {
+			public Component prepareRenderer(TableCellRenderer tcr, int row,
+					int column) {
+				Component c = super.prepareRenderer(tcr, row, column);
+
+				if (colorInfo.containsKey(row + ":" + column) == true)
+					c.setBackground(colorInfo.get(row + ":" + column));
+				else
+					c.setBackground(levelColor(0));
+				return c;
+			}
+		};
+
 		rightTable.setAutoCreateRowSorter(true);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
+		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -43,7 +73,6 @@ public class DependencyTable extends JPanel {
 		for (int x = leftTable.getColumnCount() - 1; x > 0; x--)
 			leftTable.removeColumn(leftTable.getColumnModel().getColumn(x));
 
-		tableAttributeInit(rightTable);
 		tableAttributeInit(leftTable);
 
 		if (showRowLabels == false)
@@ -115,9 +144,9 @@ public class DependencyTable extends JPanel {
 		case (3):
 			return new Color(15, 79, 168);
 		case (4):
-			return new Color(155, 108, 0);
+			return new Color(255, 116, 0);
 		default:
-			return new Color(0, 0, 0);
+			return new Color(255, 255, 255);
 		}
 	}
 
@@ -133,10 +162,12 @@ public class DependencyTable extends JPanel {
 		}
 
 		private void init(ArrayList<ArrayList<String>> rows) {
-			ArrayList<T3> tupleList = new ArrayList<>();
-			tupleList.add(new T3(1, 1, 3));
-			tupleList.add(new T3(1, 5, 8));
-			
+
+			// 색 선정...?
+			/*
+			 * ArrayList<T3> tupleList = new ArrayList<>(); tupleList.add(new
+			 * T3(1, 1, 3)); tupleList.add(new T3(1, 5, 8));
+			 */
 			tableData = rows;
 			columnIndex = new ArrayList();
 
@@ -150,7 +181,7 @@ public class DependencyTable extends JPanel {
 				}
 				tableData.get(i).set(0, s);
 			}
-			
+
 		}
 
 		public void setShowRowLabels(boolean state) {
@@ -173,7 +204,7 @@ public class DependencyTable extends JPanel {
 
 			String data = new String((String) tableData.get(rowIndex).get(
 					columnIndex));
-		
+
 			int row, column;
 			row = rowIndex + 1;
 			column = columnIndex;
@@ -181,10 +212,9 @@ public class DependencyTable extends JPanel {
 				if (row == column)
 					return "·";
 
-				if(data.compareTo("0")==0) {
+				if (data.compareTo("0") == 0) {
 					return "";
-				}
-				else{
+				} else {
 					return "X";
 				}
 

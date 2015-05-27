@@ -2,16 +2,18 @@ package titanic;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import model.ModelManager;
+import model.T3;
 
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-
+	private ArrayList<T3> tupleList;
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
 
@@ -23,8 +25,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		// redraw를 하기 위해서 정보를 갱신한다.
 		regetTableData(tabIndex);
-		contents.get(this.tabIndex).setTableData(newData);
-		contents.get(this.tabIndex).redrawPanel(newData);
+		getGruopInfo(tabIndex);
+		//	contents.get(this.tabIndex).setTableData(newData);
+		contents.get(this.tabIndex).redrawPanel(newData,tupleList);
 
 		String tabName = new String();
 
@@ -76,7 +79,29 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 			e.printStackTrace();
 		}
 	}
-
+	public void getGruopInfo(int tabIndex){
+		
+		tupleList = new ArrayList<T3>();
+		
+		/***********************************************************************************************/
+		try{
+			
+			tupleList.add(new T3(1,-1,15));
+			tupleList.add(new T3(1,16,30));
+			tupleList.add(new T3(1,31,40));
+			tupleList.add(new T3(2,-1,10));
+			tupleList.add(new T3(2,11,15));
+			tupleList.add(new T3(3,1,5));
+			tupleList.add(new T3(3,6,10));
+			tupleList.add(new T3(2,16,20));
+			tupleList.add(new T3(2,21,30));
+			tupleList.add(new T3(3,21,25));
+			tupleList.add(new T3(3,26,30));
+			
+		}catch(NullPointerException e){e.printStackTrace();}
+		
+		
+	}
 	public void setShowRowLabels(boolean state, int tabIndex) {
 
 			contents.get(tabIndex).setShowRowLabels(state);
