@@ -114,11 +114,11 @@ public class DependencyTable extends JPanel {
 		// set rowHeight
 		table.setRowHeight(rowHeight);
 		table.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
-
+	
 		DefaultTableCellRenderer restRender = new DefaultTableCellRenderer();
 
 		restRender.setHorizontalAlignment(JLabel.CENTER);
-
+		
 		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
 		for (int i = 0; i < table.getColumnCount(); i++) {
