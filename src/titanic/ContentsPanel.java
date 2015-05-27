@@ -13,7 +13,7 @@ import model.T3;
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-	private ArrayList<T3> tupleList;
+	private ArrayList<T3> groupInfo;
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
 
@@ -24,10 +24,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	public void drawTableAtTab(int tabIndex) {
 
 		// redraw를 하기 위해서 정보를 갱신한다.
-		regetTableData(tabIndex);
-		getGruopInfo(tabIndex);
+		//regetTableData(tabIndex);
+		// getGroupInfo(tabIndex);
 		//	contents.get(this.tabIndex).setTableData(newData);
-		contents.get(this.tabIndex).redrawPanel(newData,tupleList);
+		contents.get(this.tabIndex).redrawPanel(newData,groupInfo);
 
 		String tabName = new String();
 
@@ -79,24 +79,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 			e.printStackTrace();
 		}
 	}
-	public void getGruopInfo(int tabIndex){
+	public void getGroupInfo(int tabIndex){
 		
-		tupleList = new ArrayList<T3>();
-		
-		/***********************************************************************************************/
+		groupInfo = new ArrayList<>();
+
 		try{
-			
-			tupleList.add(new T3(1,-1,15));
-			tupleList.add(new T3(1,16,30));
-			tupleList.add(new T3(1,31,40));
-			tupleList.add(new T3(2,-1,10));
-			tupleList.add(new T3(2,11,15));
-			tupleList.add(new T3(3,1,5));
-			tupleList.add(new T3(3,6,10));
-			tupleList.add(new T3(2,16,20));
-			tupleList.add(new T3(2,21,30));
-			tupleList.add(new T3(3,21,25));
-			tupleList.add(new T3(3,26,30));
+			groupInfo = ModelManager.sharedModelManager()
+					.getCurrentTitanicModel().getClsxModel().getGroupNode().getGroupData();
 			
 		}catch(NullPointerException e){e.printStackTrace();}
 		

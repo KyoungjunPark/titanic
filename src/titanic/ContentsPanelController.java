@@ -56,6 +56,7 @@ public class ContentsPanelController extends CenterPanelController{
 
 	protected void redrawPanel() {
 		//contentsPanel.regetTableData(ModelManager.sharedModelManager().getCurrentID());
+		//contentsPanel.getGroupInfo(ModelManager.sharedModelManager().getCurrentID());
 		contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
 	}
 	
