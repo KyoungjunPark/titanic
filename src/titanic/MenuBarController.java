@@ -150,9 +150,41 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Save Clustering is clicked");
 				try {
-					ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
+					if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() == null){
+						File openFile;
+
+						String dir = new String();
+
+						dir += ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();
+						int tmp = dir.lastIndexOf("\\");
+						dir = dir.substring(0, tmp + 1);
+
+						JFileChooser fc = new JFileChooser(dir);
+						fc.setFileFilter(new FileFilter() {
+
+							@Override
+							public String getDescription() {
+								return "CLSX Files";
+							}
+
+							@Override
+							public boolean accept(File f) {
+								// TODO Auto-generated method stub
+								return f.getName().endsWith(".clsx") || f.isDirectory();
+							}
+						});
+						int yn = fc.showSaveDialog(null);
+						if(yn != JFileChooser.APPROVE_OPTION) return;
+
+						openFile = fc.getSelectedFile();
+
+						ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
+
+					}else{
+						ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
+					}
+
 				} catch (SaveException e1) {
 					e1.printStackTrace();
 				}
@@ -205,7 +237,40 @@ public class MenuBarController extends MainController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+					if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() != null){
+						File openFile;
+
+						String dir = new String();
+
+						dir += ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();
+						int tmp = dir.lastIndexOf("\\");
+						dir = dir.substring(0, tmp + 1);
+
+						JFileChooser fc = new JFileChooser(dir);
+						fc.setFileFilter(new FileFilter() {
+
+							@Override
+							public String getDescription() {
+								return "DSM Files";
+							}
+
+							@Override
+							public boolean accept(File f) {
+								// TODO Auto-generated method stub
+								return f.getName().endsWith(".dsm") || f.isDirectory();
+							}
+						});
+						int yn = fc.showSaveDialog(null);
+						if(yn != JFileChooser.APPROVE_OPTION) return;
+
+						openFile = fc.getSelectedFile();
+
+						ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save(openFile.getPath());
+
+					}else{
+						ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+					}
+
 				} catch (SaveException e1) {
 					e1.printStackTrace();
 				}

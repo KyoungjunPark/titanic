@@ -25,6 +25,6 @@ public class CLSXModel extends Model{
     }
     public GroupNode getGroupNode(){return this.node;};
     public String toString(){
-        return "<cluster xmlns=\"http://rise.cs.drexel.edu/minos/clsx\">\r\n"+this.node.print()+"</cluster>\n";
+        return "<cluster xmlns=\"http://rise.cs.drexel.edu/minos/clsx\">\r\n"+this.node.print()+"</cluster>\r\n";
     }
 }
