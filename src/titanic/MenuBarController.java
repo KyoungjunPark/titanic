@@ -135,8 +135,6 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Save Clustering... is clicked");
-
 				File openFile;
 
 				String dir = System.getProperty("user.dir");//this project's absolute path name
@@ -151,7 +149,7 @@ public class MenuBarController extends MainController{
 					@Override
 					public boolean accept(File f) {
 						// TODO Auto-generated method stub
-						return f.getName().endsWith(".dsm") || f.isDirectory();
+						return f.getName().endsWith(".clsx") || f.isDirectory();
 					}
 				});
 				int yn = fc.showSaveDialog(null);
