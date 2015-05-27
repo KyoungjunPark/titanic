@@ -53,8 +53,17 @@ public class LeftPanelController extends CenterPanelController {
 		
 		EventManager.addEvent(new Event("group") {
 			public void action() {
-				String sysMsg = JOptionPane
-						.showInputDialog(null, "Enter group name:", "Group Name", JOptionPane.PLAIN_MESSAGE);
+				String sysMsg;
+
+					sysMsg = JOptionPane
+							.showInputDialog(null, "Enter group name:", "Group Name", JOptionPane.PLAIN_MESSAGE);
+
+                if(sysMsg.isEmpty()){
+                    while(sysMsg.isEmpty()) {
+                        sysMsg = JOptionPane
+                                .showInputDialog(null, "Empty input is not accepted! \nEnter group name:", "Group Name", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 				groupTree(sysMsg);
 			}
 		});
