@@ -84,11 +84,16 @@ public class TitanicModel {
      * @return 성공 여부를 알려줍니다.
      */
     public boolean syncTreeNode(GreenTreeNode root){
+        GroupNode node = (GroupNode)root.getGroupNode();
         try{
-            if(this.clsxModel == null){
-                this.setClsxModel(new CLSXModel(root));
+            if( node.getGroupList().size() == 0 ){
+                this.dsmModel.setGroupNode(node);
+                this.dsmModel.setIsEdit(true);
             }else{
-                this.clsxModel.setTreeNode(root);
+                if(this.clsxModel == null)
+                    this.setClsxModel(new CLSXModel());
+                this.clsxModel.setGroupNode(node);
+                this.clsxModel.setIsEdit(true);
             }
         }catch (CreateException e){
             return false;
