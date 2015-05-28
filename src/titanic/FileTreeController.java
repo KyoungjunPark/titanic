@@ -12,7 +12,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-
 import model.EventManager;
 import util.GreenTreeNode;
 

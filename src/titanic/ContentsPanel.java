@@ -2,9 +2,7 @@ package titanic;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import model.ModelManager;

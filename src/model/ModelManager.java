@@ -1,14 +1,14 @@
 package model;
 
-import util.GreenTreeNode;
-import util.JSFiles;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import util.GreenTreeNode;
+import util.JSFiles;
 
 public class ModelManager {
 	private volatile static ModelManager modelManager;

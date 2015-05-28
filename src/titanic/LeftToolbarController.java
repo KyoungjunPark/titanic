@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.Event;
 import model.EventManager;
 import titanic.LeftPanel.LeftToolBar;
 
