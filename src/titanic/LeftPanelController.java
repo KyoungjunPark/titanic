@@ -1,9 +1,12 @@
 package titanic;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import model.Event;
 import model.EventManager;
+import model.ModelManager;
 
 public class LeftPanelController extends CenterPanelController {
 
@@ -94,6 +97,14 @@ public class LeftPanelController extends CenterPanelController {
 					deleteTree();
 				}
 
+			}
+
+		});
+		
+		EventManager.addEvent(new Event("newDSMRow") {
+			public void action() {
+				addNewDSMRow();
+				
 			}
 
 		});
@@ -197,6 +208,20 @@ public class LeftPanelController extends CenterPanelController {
 			}
 
 		});
+		EventManager.addEvent(new Event("newDSMRowButtonEnable") {
+			public void action() {
+				newDSMRowButtonEnable();
+
+			}
+
+		});
+		EventManager.addEvent(new Event("newDSMRowButtonDisable") {
+			public void action() {
+				newDSMRowButtonDisable();
+
+			}
+
+		});
 
 	}
 
@@ -225,6 +250,39 @@ public class LeftPanelController extends CenterPanelController {
 	
 	protected void unGroupTree() {
 		fileTreeController.unGroupTree();
+	}
+	
+	protected void addNewDSMRow() {
+		String answer = JOptionPane.showInputDialog(null,
+				"Enter new row name: ", "New DSM Row Name",
+				JOptionPane.PLAIN_MESSAGE);
+
+		while (answer != null && answer.isEmpty()) {
+			answer = JOptionPane.showInputDialog(null,
+					"Empty input is not accepted!\n Enter new row name: ",
+					"New DSM Row Name", JOptionPane.ERROR_MESSAGE);
+		}
+		if (answer != null) {
+			int size = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getDependencyNum();
+			String[] tableHeader = new String[size];
+			for(int i=0; i<size; i++) {
+				tableHeader[i] = new String("i+1");
+			}
+			
+			DefaultTableModel model = new DefaultTableModel(tableHeader, 0);
+			JTable newRowData = new JTable(model);
+			/*
+			 * JOptionPane에 JTable 붙이기
+			 * Object[][] rows = {
+			 * 		{element,symbol,atomicNumber,atomicMass,valence}
+			 * };
+			 * Object[] cols = { "Name","Symbol","Atomic Number","Atomic Mass", "# of Valence Electrons" };
+			 * JTable table = new JTable(rows, cols);
+			 * JOptionPane.showMessageDialog(null, new JScrollPane(table));
+			 */
+			
+		}
+		
 	}
 	
 	protected void expandAllButtonEnable(){
@@ -268,5 +326,11 @@ public class LeftPanelController extends CenterPanelController {
 	}
 	protected void deleteButtonDisable(){
 		leftToolbarController.deleteButtonDisable();
+	}
+	protected void newDSMRowButtonEnable(){
+		leftToolbarController.newDSMRowButtonEnable();
+	}
+	protected void newDSMRowButtonDisable(){
+		leftToolbarController.newDSMRowButtonDisable();
 	}
 }

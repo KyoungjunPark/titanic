@@ -50,6 +50,7 @@ public class LeftPanel extends JPanel implements Controllerable {
 		private JButton moveUpButton;
 		private JButton moveDownButton;
 		private JButton deleteButton;
+		private JButton newDSMRowButton;
 
 		public LeftToolBar() {
 
@@ -103,6 +104,12 @@ public class LeftPanel extends JPanel implements Controllerable {
 			deleteButton.setToolTipText("Delete");
 			deleteButton.setEnabled(false);
 			add(deleteButton);
+			
+			newDSMRowButton = new JButton();
+			newDSMRowButton.setName("New DSM Row");
+			newDSMRowButton.setToolTipText("New DSM Row");
+			newDSMRowButton.setEnabled(false);
+			add(newDSMRowButton);
 
 		}
 		protected void expandAllButtonEnable(){

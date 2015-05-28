@@ -82,6 +82,15 @@ public class LeftToolbarController extends LeftPanelController{
 				EventManager.callEvent("Redraw-Table");
 			}
 		});
+
+		leftToolbar.setAction("New DSM Row", new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EventManager.callEvent("newDSMRow");
+				EventManager.callEvent("Redraw-Table");
+			}
+		});
 		
 		
 	}

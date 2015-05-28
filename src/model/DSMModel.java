@@ -57,6 +57,9 @@ public class DSMModel extends Model{
 		}
 		return this.node;
 	}
+	public int getDependencyNum() {
+		return this.dependencyNumber;
+	}
     protected ArrayList<ArrayList<String>> getMatrix(CLSXModel clsx){
         ArrayList<ArrayList<String>> matrixList = new ArrayList<ArrayList<String>>();
         if(clsx != null){

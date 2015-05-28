@@ -224,6 +224,10 @@ public class FileTree extends JTree implements Controllerable {
 		EventManager.callEvent("ungroupButtonDisable");
 		syncWithModel();
 	}
+	
+	protected void addNewDSMRow() {
+		
+	}
 
 	private ArrayList<GreenTreeNode> getSelectedNodes() {
 		TreePath[] paths = this.getSelectionPaths();
