@@ -44,6 +44,12 @@ public class DSMModel extends Model{
 		for(int i = 0 ; i < this.dependencyNumber ; i++)
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
+	public void setGroupNode(GroupNode node){
+	        this.node = node;
+	        /*
+	         node data 기준으로 dsm 을 수정할것임.
+	         */
+	}
 	public GroupNode getGroupNode(){
 		this.node = new GroupNode("root$");
 		for(String name : this.elementsNameArray){

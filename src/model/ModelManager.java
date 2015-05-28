@@ -154,7 +154,18 @@ public class ModelManager {
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
 	public int duplicateTitanicModel(int id, GreenTreeNode node){
-		return -1;
+		TitanicModel parentModel = this.getTitanicMode(id);
+		TitanicModel model = new TitanicModel();
+		try {
+			model.setDsmModel(new DSMModel(parentModel.getDsmModel().toString()));
+			model.setClsxModel(new CLSXModel(node));
+		} catch (CreateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+		this.addTitanicModel(model);
+		return model.getID();
 	}
 
 	/**
@@ -165,6 +176,7 @@ public class ModelManager {
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
 	public int editTatanicModel(int id, GreenTreeNode node){
+		
 		return -1;
 	}
     /**
