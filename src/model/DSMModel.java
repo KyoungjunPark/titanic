@@ -112,6 +112,18 @@ public class DSMModel extends Model{
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
         }
     }
+
+    /**
+     * element 의 이름을 바꿉니다.
+     * element 는 이미 dsm 에 존재하고 있어야 합니다.
+     * @param originalName 원본 element 의 이름입니다.
+     * @param newName 바꿀 이름입니다.
+     */
+    public void changeName(String originalName, String newName){
+        int offset = this.elementsNameArray.indexOf(originalName);
+        if(offset != -1)
+            this.elementsNameArray.set(offset, newName);
+    }
     public String toString(){
         String result = ""+this.dependencyNumber;
         for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
