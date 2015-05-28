@@ -269,4 +269,5 @@ public class FileTree extends JTree implements Controllerable {
 	public void setAction(String title, ActionListener action) {
 
 	}
+
 }

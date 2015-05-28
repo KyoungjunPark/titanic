@@ -15,6 +15,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
 import model.EventManager;
+import model.ModelManager;
 import util.GreenTreeNode;
 
 public class FileTreeController extends LeftPanelController {
@@ -46,10 +47,8 @@ public class FileTreeController extends LeftPanelController {
 
 				// case : ExpandAllButton
 				EventManager.callEvent("expandAllButtonEnable");
-				/* must enabled */
 
 				// case : CollapseAllButton
-				/* must enabled */
 				EventManager.callEvent("collapseAllButtonEnable");
 
 				// case : GroupButton
@@ -142,10 +141,7 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -157,14 +153,26 @@ public class FileTreeController extends LeftPanelController {
 					node = (GreenTreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
 
+					if(node.isLeaf()){
+						ActionListener menuListener = new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e1) {
+                                if(e1.getActionCommand() == "Delete"){
+                                    treeFile.delete();
+                                }
+							}
+						};
+                        PopupMenu popup = new PopupMenu(menuListener, "Delete");
+                        popup.show(e.getComponent(), e.getX(), e.getY());
+					}
 					if (!node.isLeaf() || node.isRoot()) {
 
 						ActionListener menuListener = new ActionListener() {
 
 							@Override
-							public void actionPerformed(ActionEvent e1) {
+							public void actionPerformed(ActionEvent e2) {
 
-								if (e1.getActionCommand() == "Rename") {
+								if (e2.getActionCommand() == "Rename") {
 									String answer;
 
 									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Rename", JOptionPane.PLAIN_MESSAGE);
@@ -176,24 +184,27 @@ public class FileTreeController extends LeftPanelController {
 									if(answer != null) {
 										treeFile.rename(node, answer);
 									}
-								} else if (e1.getActionCommand() == "Sort") {
+								} else if (e2.getActionCommand() == "Sort") {
 
 									JOptionPane.showMessageDialog(null,
 											" Sort was pressed");
-								} else if (e1.getActionCommand() == "Duplicate") {
-
-									JOptionPane.showMessageDialog(null,
-											" Duplicate was pressed");
+								} else if (e2.getActionCommand() == "Duplicate") {
+                                    int newID = ModelManager.sharedModelManager().duplicateTitanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
+                                    ModelManager.sharedModelManager().setCurrentID(newID);
+                                    EventManager.callEvent("after-open-First-DSM");
+                                    EventManager.callEvent("Redraw-Table");
+                                    EventManager.callEvent("Redraw-FileTree");
 								} else {// case : Edit
-
-									JOptionPane.showMessageDialog(null,
-											" Edit was pressed");
-								}
+                                    int newID = ModelManager.sharedModelManager().editTatanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
+								    //must implement!
+                                }
 
 							}
 						};
-						PopupMenu popup = new PopupMenu(menuListener);
-						popup.show(e.getComponent(), e.getX(), e.getY());
+
+                        PopupMenu popup = new PopupMenu(menuListener, "Rename", "Sort", "Duplicate", "Edit");
+
+                        popup.show(e.getComponent(), e.getX(), e.getY());
 					}
 
 				}
@@ -201,22 +212,13 @@ public class FileTreeController extends LeftPanelController {
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseExited(MouseEvent e) {}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseEntered(MouseEvent e) {}
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 		treeFile.addTreeExpansionListener(new TreeExpansionListener() {
 			@Override
@@ -239,7 +241,7 @@ public class FileTreeController extends LeftPanelController {
 	/*
 	 * 이 함수는 현재 입력받은 node들이 어떠한 특성을 가지고 있는지 분석해줍니다.
 	 * 
-	 * @parameter: paths : node들의 path들을 가지고 있습니다. tag : 각각의 node들이 가지고 있느 특성을
+	 * @parameter: paths : node들의 path들을 가지고 있습니다. tag : 각각의 node들이 가지고 있는 특성을
 	 * 저장하고 있습니다. nodes : 모든 노드를 가지고 있습니다.
 	 */
 	private void analyzeNode(TreePath[] paths, ArrayList<String> tag,
