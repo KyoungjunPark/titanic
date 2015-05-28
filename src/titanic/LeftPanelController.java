@@ -88,7 +88,11 @@ public class LeftPanelController extends CenterPanelController {
 
 		EventManager.addEvent(new Event("delete") {
 			public void action() {
-				deleteTree();
+				int answer = JOptionPane.showConfirmDialog(null,
+						"Are you sure?", "Delete", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if(answer == JOptionPane.OK_OPTION) {
+					deleteTree();
+				}
 
 			}
 
