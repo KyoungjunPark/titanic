@@ -3,10 +3,7 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 
-import util.GreenTreeNode;
-import util.GroupNode;
-import util.JSFiles;
-import util.Node;
+import util.*;
 
 public class TitanicModel {
 
@@ -129,16 +126,32 @@ public class TitanicModel {
         ArrayList<Node> nextGroupList = this.getGroupNode().getGroupList();
         ArrayList<T3> groupData = new ArrayList<T3>();
         int depth = 1;
+        if(this.getGroupNode().isExpanded() == false)
+            return groupData;
         while(nextGroupList.size() != 0){
             currentGroupList = nextGroupList;
             nextGroupList = new ArrayList<Node>();
             for( Node node : currentGroupList){
                 GroupNode temp = (GroupNode)node;
-                ArrayList<Node> currentItemList = temp.getAllItemList();
-                T3 tuple = new T3(depth, itemList.indexOf(currentItemList.get(0)), itemList.indexOf(currentItemList.get(currentItemList.size()-1)));
-                if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
+                if(temp.isExpanded() == true){
+                    ArrayList<Node> currentItemList = temp.getAllItemList();
+                    T3 tuple = new T3(depth, itemList.indexOf(currentItemList.get(0)), itemList.indexOf(currentItemList.get(currentItemList.size()-1)));
+                    if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
+                        groupData.add(tuple);
+                    nextGroupList.addAll(temp.getGroupList());
+                }else{
+                    ItemNode firstItem = (ItemNode)((GroupNode) node).getAllItemList().get(0);
+                    ItemNode lastItem = (ItemNode)((GroupNode) node).getAllItemList().get(((GroupNode) node).getAllItemList().size() - 1);
+                    ArrayList<Node> tempList = ((GroupNode) node).getAllItemList();
+                    int firstIndex= itemList.indexOf(firstItem);
+                    int lastIndex= itemList.indexOf(lastItem);
+                    if(firstIndex == -1 || lastIndex == -1) continue;
+                    T3 tuple = new T3(depth, firstIndex, firstIndex);
                     groupData.add(tuple);
-                nextGroupList.addAll(temp.getGroupList());
+                    while (lastIndex > firstIndex){
+                        itemList.remove(lastIndex--);
+                    }
+                }
             }
             depth++;
         }

@@ -7,6 +7,7 @@ import util.JSFiles;
 import util.Node;
 
 import java.io.*;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -66,7 +67,13 @@ public class DSMModel extends Model{
             ArrayList<Node> nodeList = clsx.getGroupNode().getAllItemList();
             ArrayList<Integer> relationArray = new ArrayList<Integer>(this.dependencyRelationArray);
             ArrayList<Integer> tempRelationArray = new ArrayList<Integer>(relationArray);
-
+            if(clsx.getGroupNode().isExpanded() == false){
+                ArrayList<String> data = new ArrayList<String>();
+                data.add(clsx.getGroupNode().getName());
+                data.add("1");
+                matrixList.add(data);
+                return matrixList;
+            }
             for( int i = 0 ; i < nodeList.size() ; i++)
                 changeRow(relationArray, tempRelationArray, i, this.elementsNameArray.indexOf(nodeList.get(i).getName()));
             tempRelationArray = new ArrayList<Integer>(relationArray);
@@ -87,6 +94,12 @@ public class DSMModel extends Model{
             for(ArrayList<String> arrayList : matrixList){
                 while(arrayList.size() > matrixList.size()+1)
                     arrayList.remove(arrayList.size()-1);
+            }
+
+            nodeList = clsx.getGroupNode().getAllGroupList();
+            for(Node node : nodeList){
+                if(((GroupNode)node).isExpanded() == false)
+                    this.mergeRowAndColumn(matrixList, (GroupNode)node);
             }
         }else{
             for( int i = 0 ; i < this.elementsNameArray.size() ; i++){
@@ -112,7 +125,36 @@ public class DSMModel extends Model{
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
         }
     }
-
+    private void mergeRowAndColumn(ArrayList<ArrayList<String>> arrayList, GroupNode node){
+        ItemNode firstItem = (ItemNode)node.getAllItemList().get(0);
+        ItemNode lastItem = (ItemNode)node.getAllItemList().get(node.getAllItemList().size() - 1);
+        int firstIndex=-1, lastIndex=-1;
+        for(int i = 0; i < arrayList.size() ; i++){
+            ArrayList<String> tempArray = arrayList.get(i);
+            if(tempArray.get(0).compareTo(firstItem.getName()) == 0)
+                firstIndex = i;
+            if(tempArray.get(0).compareTo(lastItem.getName()) == 0)
+                lastIndex = i;
+        }
+        if(firstIndex == -1 || lastIndex == -1) return;
+        ArrayList<String> targetArray = arrayList.get(firstIndex);
+        targetArray.set(0, node.getName());
+        for(int i = lastIndex ; i > firstIndex ; i --){
+            ArrayList<String> tempArray = arrayList.get(i);
+            for(int j = 1 ; j < targetArray.size() ; j++)
+                targetArray.set(j, (Integer.parseInt(targetArray.get(j)) + Integer.parseInt(tempArray.get(j))) > 0 ?"1":"0" );
+            arrayList.remove(tempArray);
+        }
+        firstIndex++;
+        lastIndex++;
+        for(int i = lastIndex ; i > firstIndex ; i --){
+            for(int j = 0 ; j < arrayList.size() ; j++){
+                ArrayList<String> tempArray = arrayList.get(j);
+                tempArray.set(firstIndex, (Integer.parseInt(tempArray.get(firstIndex)) + Integer.parseInt(tempArray.get(i))) > 0?"1":"0");
+                tempArray.remove(i);
+            }
+        }
+    }
     /**
      * element 의 이름을 바꿉니다.
      * element 는 이미 dsm 에 존재하고 있어야 합니다.

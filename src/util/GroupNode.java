@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class GroupNode extends Node{
     private ArrayList<Node> childNodeArray = new ArrayList<Node>();
+    private boolean isExpanded = false;
     public GroupNode(){
 
     }
@@ -129,5 +130,13 @@ public class GroupNode extends Node{
     }
     public String toString(){
         return "<group name=\""+this.getName()+"\">\r\n"; // </group> 가 없음
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean isExpanded) {
+        this.isExpanded = isExpanded;
     }
 }

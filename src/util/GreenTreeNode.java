@@ -27,6 +27,7 @@ public class GreenTreeNode extends DefaultMutableTreeNode {
     }
     public Node getGroupNode() {
         GroupNode groupNode = new GroupNode(this.toString());
+        groupNode.setExpanded(this.isExpanded);
         for (int i = 0; i < this.getChildCount(); i++) {
             GreenTreeNode node = (GreenTreeNode) this.getChildAt(i);
             if (node.getChildCount() == 0)
