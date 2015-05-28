@@ -12,7 +12,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-
 import model.EventManager;
 import util.GreenTreeNode;
 
@@ -155,9 +154,7 @@ public class FileTreeController extends LeftPanelController {
 					treeFile.setSelectionRow(row);
 					node = (GreenTreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
-//add this
 
-//					treeFile.
 					if (!node.isLeaf() || node.isRoot()) {
 
 						ActionListener menuListener = new ActionListener() {
@@ -166,9 +163,17 @@ public class FileTreeController extends LeftPanelController {
 							public void actionPerformed(ActionEvent e1) {
 
 								if (e1.getActionCommand() == "Rename") {
-									String answer =JOptionPane.showInputDialog(null, "Enter new group name: ","Group Name", JOptionPane.PLAIN_MESSAGE);
-									treeFile.rename(node, answer);
+									String answer;
 
+									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Rename", JOptionPane.PLAIN_MESSAGE);
+
+									while(answer != null && answer.isEmpty()) {
+										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Rename", JOptionPane.ERROR_MESSAGE);
+
+									}
+									if(answer != null) {
+										treeFile.rename(node, answer);
+									}
 								} else if (e1.getActionCommand() == "Sort") {
 
 									JOptionPane.showMessageDialog(null,

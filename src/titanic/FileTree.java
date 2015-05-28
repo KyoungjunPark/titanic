@@ -149,7 +149,6 @@ public class FileTree extends JTree implements Controllerable {
 		GreenTreeNode root = (GreenTreeNode) model.getRoot();
 		root.add(new GreenTreeNode("another_child"));
 		model.reload(root);
-
 	}
 
 	protected void expandAll(int startingIndex, int rowCount) {

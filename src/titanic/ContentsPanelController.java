@@ -1,9 +1,8 @@
 package titanic;
 
-import javax.swing.*;
+import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.html.parser.DTDConstants;
 
 import model.EventManager;
 import model.ModelManager;
@@ -34,9 +33,9 @@ public class ContentsPanelController extends CenterPanelController{
 			@Override
 			public void stateChanged(ChangeEvent e) {
                 JTabbedPane sourceTabbedPane = (JTabbedPane)e.getSource();
-                System.out.println("id : " + ((RightPanel)sourceTabbedPane.getSelectedComponent()).getID());
 			    ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
                 EventManager.callEvent("Redraw-FileTree");
+				EventManager.callEvent("Redraw-Table");
             }
 		});
 
@@ -55,7 +54,6 @@ public class ContentsPanelController extends CenterPanelController{
 	}
 
 	protected void redrawPanel() {
-		contentsPanel.regetTableData(ModelManager.sharedModelManager().getCurrentID());
 		contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
 	}
 	

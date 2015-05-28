@@ -1,11 +1,12 @@
 package model;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import util.GreenTreeNode;
 import util.GroupNode;
 import util.JSFiles;
-
-import java.io.File;
-import java.util.ArrayList;
+import util.Node;
 
 public class TitanicModel {
 
@@ -83,20 +84,23 @@ public class TitanicModel {
      * @return 성공 여부를 알려줍니다.
      */
     public boolean syncTreeNode(GreenTreeNode root){
+        GroupNode node = (GroupNode)root.getGroupNode();
         try{
-            if(this.clsxModel == null){
-                this.setClsxModel(new CLSXModel(root));
-            }else{
-                this.clsxModel.setTreeNode(root);
+            if( node.getGroupList().size() == 0 ){
+                this.dsmModel.setGroupNode(node);
+                this.dsmModel.setIsEdit(true);
             }
+            if(this.clsxModel == null)
+                this.setClsxModel(new CLSXModel());
+            this.clsxModel.setGroupNode(node);
+            this.clsxModel.setIsEdit(true);
         }catch (CreateException e){
             return false;
         }
         return true;
     }
     public boolean isEdit(){
-    	return true;
-        //return this.dsmModel.isEdit() || this.clsxModel.isEdit();
+        return this.dsmModel.isEdit() ||  (this.clsxModel != null && this.clsxModel.isEdit());
     }
 
     /**
@@ -106,5 +110,34 @@ public class TitanicModel {
     public void removeClsxModel(){
         this.clsxModel = null;
         this.syncTreeNode(this.dsmModel.getGroupNode().getTreeNode());
+    }
+
+    /**
+     * Node 의 Group 정보를 T3 형태로 표시합니다.
+     * T3 은 다음을 참조하세요. {@link T3}
+     * 현재 Group 의 depth 는 0이라 가정하며 생략합니다.
+     * 이하의 그룹에 대해서는 (depth, 시작 index, 끝 index) 의 T3 정보를 갖는 ArrayList 를 반환합니다.
+     * @return T3 데이터를 갖는 ArrayList 입니다.
+     */
+    public ArrayList<T3> getGroupData(){
+        ArrayList<Node> itemList = this.getGroupNode().getAllItemList();
+        ArrayList<Node> currentGroupList;
+        ArrayList<Node> nextGroupList = this.getGroupNode().getGroupList();
+        ArrayList<T3> groupData = new ArrayList<T3>();
+        int depth = 1;
+        while(nextGroupList.size() != 0){
+            currentGroupList = nextGroupList;
+            nextGroupList = new ArrayList<Node>();
+            for( Node node : currentGroupList){
+                GroupNode temp = (GroupNode)node;
+                ArrayList<Node> currentItemList = temp.getAllItemList();
+                T3 tuple = new T3(depth, itemList.indexOf(currentItemList.get(0)), itemList.indexOf(currentItemList.get(currentItemList.size()-1)));
+                if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
+                    groupData.add(tuple);
+                nextGroupList.addAll(temp.getGroupList());
+            }
+            depth++;
+        }
+        return groupData;
     }
 }

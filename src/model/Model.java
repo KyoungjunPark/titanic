@@ -2,10 +2,7 @@ package model;
 
 import util.GroupNode;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by kimjisoo on 5/20/15.
@@ -18,14 +15,18 @@ abstract class Model {
     public String getFilePath() {
         return filePath;
     }
+    /*
+        must modify dsm save's feature because move up & down & delete
+     */
     public void save()throws SaveException{
         if(this.getFilePath() == null)
             throw new SaveException("file 의 경로를 지정해주세요.");
         BufferedWriter output = null;
         try {
             File file = new File(this.getFilePath());
-            output = new BufferedWriter(new FileWriter(file));
+            output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getPath()),"UTF8"));
             output.write(this.toString());
+            System.out.println("aa"+this.toString());
             output.close();
         } catch ( IOException e ) {
             throw new CreateException("파일 에러");
@@ -53,6 +54,9 @@ abstract class Model {
     }
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+    public void setGroupNode(GroupNode node){
+        this.node = node;
     }
     public GroupNode getGroupNode(){return null;}
     protected boolean isEdit(){

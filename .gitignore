@@ -1,3 +1,5 @@
+*.dsm
+*.clsx
 *.pydevproject
 .metadata
 .gradle

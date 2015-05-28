@@ -1,12 +1,18 @@
 package titanic;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.*;
-
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 
 public class LeftPanel extends JPanel implements Controllerable {
 

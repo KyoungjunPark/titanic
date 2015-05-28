@@ -2,13 +2,11 @@ package titanic;
 
 import java.io.File;
 
-import model.EventManager;
-import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
-import model.ModelManager;
 import model.Event;
-
-import javax.swing.*;
+import model.EventManager;
+import model.ModelManager;
+import titanic.BackgroundPanel.MainToolbar;
 
 public class MainController {
 	
@@ -45,7 +43,7 @@ public class MainController {
 	     * 2. 좌측 패널에 file tree를 보여준다.
 	     *
 	     */
-		EventManager.addEvent(new Event("after-open-DSM") {
+		EventManager.addEvent(new Event("after-open-First-DSM") {
             public void action() {
                 menuBarController.changeDSMStatus();
                 mainToolbarController.changeDSMStatus();
@@ -74,11 +72,11 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
 
-				centerPanelController.getContentsPanelController().refreshTabName();
+				EventManager.callEvent("Refresh-TabName");
             }
         });
 
-		EventManager.addEvent(new Event("Redraw"){
+		EventManager.addEvent(new Event("Redraw-Table"){
 			public void action(){
 
 				centerPanelController.getContentsPanelController().setShowRowLabels(menubar.getShowRowLabelsState(), ModelManager.sharedModelManager().getCurrentID());
@@ -86,11 +84,17 @@ public class MainController {
 
 			}
 		});
+		EventManager.addEvent(new Event("Refresh-TabName"){
+			public void action(){
+				centerPanelController.getContentsPanelController().refreshTabName();
+			}
+		});
 		EventManager.addEvent(new Event("Redraw-FileTree"){
 			public void action(){
 				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
 		});
+
 	}
 	
 
@@ -101,8 +105,8 @@ public class MainController {
 		try {
 			 currentID = ModelManager.sharedModelManager().createTitanicModel(openFile);
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
-			 EventManager.callEvent("after-open-DSM");
-			 EventManager.callEvent("Redraw");
+			 EventManager.callEvent("after-open-First-DSM");
+			 EventManager.callEvent("Redraw-Table");
 			 EventManager.callEvent("Redraw-FileTree");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
@@ -117,7 +121,7 @@ public class MainController {
 		try {
 			ModelManager.sharedModelManager().setClsx(openFile);
 			EventManager.callEvent("after-open-CLSX");
-			EventManager.callEvent("Redraw");
+			EventManager.callEvent("Redraw-Table");
 			EventManager.callEvent("Redraw-FileTree");
 			
 		} catch (CreateException e) {

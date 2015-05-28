@@ -35,4 +35,7 @@ public class T3{
     public void setLast(int last) {
         this.last = last;
     }
+    public String toString(){
+        return "depth "+depth+" first "+first+" last "+last+"\n";
+    }
 }
