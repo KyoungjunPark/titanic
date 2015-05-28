@@ -105,5 +105,6 @@ public class TitanicModel {
      */
     public void removeClsxModel(){
         this.clsxModel = null;
+        this.syncTreeNode(this.dsmModel.getGroupNode().getTreeNode());
     }
 }
