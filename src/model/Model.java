@@ -62,7 +62,7 @@ abstract class Model {
     protected boolean isEdit(){
         return this.isEdit;
     }
-    protected void setIsEdit(boolean isEdit){
+    public void setIsEdit(boolean isEdit){
         this.isEdit = isEdit;
     }
 }

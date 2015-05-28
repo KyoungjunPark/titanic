@@ -224,16 +224,29 @@ public class FileTreeController extends LeftPanelController {
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
 
+                boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
 				System.out.println("expanded : " + node);
 				treeFile.expandNode(node);
+
+                if(checkIsEdit == false){
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+                }
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
+
+                boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
 				System.out.println("collapsed : " + node);
 				treeFile.collapseNode(node);
+
+                if(checkIsEdit == false){
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+                }
 			}
 		});
 	}
