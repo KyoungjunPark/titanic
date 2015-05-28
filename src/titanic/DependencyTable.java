@@ -154,12 +154,12 @@ public class DependencyTable extends JPanel {
 	private Color levelColor(int depth) {
 
 		switch (depth % 5) {
-		/*
+		
 		  case (0): return new Color(255, 255, 255); case (1): return new
 		  Color(255, 202, 0); case (2): return new Color(98, 12, 172); case
 		  (4): return new Color(15, 79, 168); case (3): return new Color(255,
 		  116, 0); default: return new Color(255, 255, 255);
-		 */
+		 /*
 		case (0):
 			return new Color(255, 255, 255, 80);
 		case (1):
@@ -173,7 +173,7 @@ public class DependencyTable extends JPanel {
 		
 		default:
 			return new Color(255, 255, 255, 80);
-
+*/
 		}
 	}
 
