@@ -89,7 +89,7 @@ public class DependencyTable extends JPanel {
 			}
 		};
 
-		rightTable.setAutoCreateRowSorter(true);
+		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
 		rightTable.setShowGrid(false);
 		rightTable.setIntercellSpacing(new Dimension(0, 0));
