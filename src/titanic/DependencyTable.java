@@ -166,22 +166,29 @@ public class DependencyTable extends JPanel {
 	// 높이에 따른 색
 	private Color levelColor(int depth) {
 		int a = 200;
-		switch (depth % 5) {
 
-		// 노랑 분홍 연두 파랑
-		case (0):
+		if (depth == 0) {
 			return new Color(255, 255, 255);
-		case (1):
-			return new Color(255, 202, 0);
-		case (2):
-			return new Color(246, 111, 137);
-		case (3):
-			return new Color(186, 243, 0);
-		case (4):
-			return new Color(63, 146, 210);
-		default:
-			return new Color(255, 255, 255);
+		} else {
+			switch (depth % 5) {
 
+			// 노랑 분홍 연두 파랑 주황 
+			//case (0):
+				//return new Color(255, 255, 255);
+			case (3)://연두
+				return new Color(63, 146, 210);
+			case (1)://노랑
+				return new Color(255, 202, 0);
+			case (2)://분홍
+				return new Color(246, 111, 137);
+			case (0)://주황
+				return new Color(255,116,0); 
+			case (4)://파랑
+				return new Color(186, 243, 0);
+			
+			default:
+				return new Color(255, 255, 255);
+			}
 		}
 	}
 
