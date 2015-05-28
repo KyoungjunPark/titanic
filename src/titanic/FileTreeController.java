@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-
 import model.EventManager;
+import model.ModelManager;
 import util.GreenTreeNode;
 
 public class FileTreeController extends LeftPanelController {
@@ -45,10 +47,8 @@ public class FileTreeController extends LeftPanelController {
 
 				// case : ExpandAllButton
 				EventManager.callEvent("expandAllButtonEnable");
-				/* must enabled */
 
 				// case : CollapseAllButton
-				/* must enabled */
 				EventManager.callEvent("collapseAllButtonEnable");
 
 				// case : GroupButton
@@ -141,10 +141,7 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -155,38 +152,59 @@ public class FileTreeController extends LeftPanelController {
 					treeFile.setSelectionRow(row);
 					node = (GreenTreeNode) ( treeFile
 							.getPathForRow(row)).getLastPathComponent();
-//add this
 
-//					treeFile.
+					if(node.isLeaf()){
+						ActionListener menuListener = new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e1) {
+                                if(e1.getActionCommand() == "Delete"){
+                                    treeFile.delete();
+                                }
+							}
+						};
+                        PopupMenu popup = new PopupMenu(menuListener, "Delete");
+                        popup.show(e.getComponent(), e.getX(), e.getY());
+					}
 					if (!node.isLeaf() || node.isRoot()) {
 
 						ActionListener menuListener = new ActionListener() {
 
 							@Override
-							public void actionPerformed(ActionEvent e1) {
+							public void actionPerformed(ActionEvent e2) {
 
-								if (e1.getActionCommand() == "Rename") {
-									String answer =JOptionPane.showInputDialog(null, "Enter new group name: ","Group Name", JOptionPane.PLAIN_MESSAGE);
-									treeFile.rename(node, answer);
+								if (e2.getActionCommand() == "Rename") {
+									String answer;
 
-								} else if (e1.getActionCommand() == "Sort") {
+									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Rename", JOptionPane.PLAIN_MESSAGE);
+
+									while(answer != null && answer.isEmpty()) {
+										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Rename", JOptionPane.ERROR_MESSAGE);
+
+									}
+									if(answer != null) {
+										treeFile.rename(node, answer);
+									}
+								} else if (e2.getActionCommand() == "Sort") {
 
 									JOptionPane.showMessageDialog(null,
 											" Sort was pressed");
-								} else if (e1.getActionCommand() == "Duplicate") {
-
-									JOptionPane.showMessageDialog(null,
-											" Duplicate was pressed");
+								} else if (e2.getActionCommand() == "Duplicate") {
+                                    int newID = ModelManager.sharedModelManager().duplicateTitanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
+                                    ModelManager.sharedModelManager().setCurrentID(newID);
+                                    EventManager.callEvent("after-open-First-DSM");
+                                    EventManager.callEvent("Redraw-Table");
+                                    EventManager.callEvent("Redraw-FileTree");
 								} else {// case : Edit
-
-									JOptionPane.showMessageDialog(null,
-											" Edit was pressed");
-								}
+                                    int newID = ModelManager.sharedModelManager().editTatanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
+								    //must implement!
+                                }
 
 							}
 						};
-						PopupMenu popup = new PopupMenu(menuListener);
-						popup.show(e.getComponent(), e.getX(), e.getY());
+
+                        PopupMenu popup = new PopupMenu(menuListener, "Rename", "Sort", "Duplicate", "Edit");
+
+                        popup.show(e.getComponent(), e.getX(), e.getY());
 					}
 
 				}
@@ -194,21 +212,41 @@ public class FileTreeController extends LeftPanelController {
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
+			public void mouseExited(MouseEvent e) {}
 
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
+		treeFile.addTreeExpansionListener(new TreeExpansionListener() {
+			@Override
+			public void treeExpanded(TreeExpansionEvent event) {
+
+                boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
+				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
+				System.out.println("expanded : " + node);
+				treeFile.expandNode(node);
+
+                if(checkIsEdit == false){
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+                }
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
+			public void treeCollapsed(TreeExpansionEvent event) {
 
-			}
+                boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
+				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
+				System.out.println("collapsed : " + node);
+				treeFile.collapseNode(node);
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
+                if(checkIsEdit == false){
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+                    ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+                }
 			}
 		});
 	}
@@ -216,7 +254,7 @@ public class FileTreeController extends LeftPanelController {
 	/*
 	 * 이 함수는 현재 입력받은 node들이 어떠한 특성을 가지고 있는지 분석해줍니다.
 	 * 
-	 * @parameter: paths : node들의 path들을 가지고 있습니다. tag : 각각의 node들이 가지고 있느 특성을
+	 * @parameter: paths : node들의 path들을 가지고 있습니다. tag : 각각의 node들이 가지고 있는 특성을
 	 * 저장하고 있습니다. nodes : 모든 노드를 가지고 있습니다.
 	 */
 	private void analyzeNode(TreePath[] paths, ArrayList<String> tag,

@@ -1,30 +1,19 @@
 package titanic;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 
 public class PopupMenu extends JPopupMenu{
 
-	public PopupMenu(ActionListener menuListener){
-		
-		JMenuItem rename =  new JMenuItem("Rename");
-		JMenuItem sort = new JMenuItem("Sort");
-		JMenuItem duplicate = new JMenuItem("Duplicate");
-		JMenuItem edit = new JMenuItem("Edit");
+	public PopupMenu(ActionListener menuListener, String... names){
 
-		this.add(rename);
-		this.add(sort);
-		this.addSeparator();
-		this.add(duplicate);
-		this.add(edit);
-		
-		rename.addActionListener(menuListener);
-		sort.addActionListener(menuListener);
-		duplicate.addActionListener(menuListener);
-		edit.addActionListener(menuListener);
+		for(String name : names){
+			JMenuItem menuItem = new JMenuItem(name);
+			this.add(menuItem);
+			menuItem.addActionListener(menuListener);
+		}
 	}
+
 	
 }

@@ -1,12 +1,12 @@
 package model;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import util.GreenTreeNode;
 import util.GroupNode;
 import util.JSFiles;
 import util.Node;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class TitanicModel {
 
@@ -28,7 +28,7 @@ public class TitanicModel {
      */
     public void save()throws SaveException{
         this.dsmModel.save();
-        if(this.clsxModel != null)
+        if(this.clsxModel.getFilePath() != null)
             this.clsxModel.save();
     }
 
@@ -100,8 +100,7 @@ public class TitanicModel {
         return true;
     }
     public boolean isEdit(){
-    	return true;
-        //return this.dsmModel.isEdit() || this.clsxModel.isEdit();
+        return this.dsmModel.isEdit() ||  (this.clsxModel != null && this.clsxModel.isEdit());
     }
 
     /**
@@ -109,7 +108,12 @@ public class TitanicModel {
      * New ClsxModel 등에 이용합니다.
      */
     public void removeClsxModel(){
+
         this.clsxModel = null;
+        this.syncTreeNode(this.dsmModel.getGroupNode().getTreeNode());
+        //must change!
+        this.clsxModel.setIsEdit(false);
+        this.dsmModel.setIsEdit(false);
     }
 
     /**

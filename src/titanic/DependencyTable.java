@@ -1,15 +1,27 @@
 package titanic;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 import model.T3;
-
-import java.awt.*;
-import java.util.*;
-
-import javax.swing.*;
-import javax.swing.table.*;
-
-import util.GroupNode;
-import util.Node;
 
 public class DependencyTable extends JPanel {
 
@@ -19,6 +31,7 @@ public class DependencyTable extends JPanel {
 	 * 저장하고 있습니다.
 	 */
 	private ArrayList<ArrayList<String>> rows;
+	private ArrayList<String> rowNames;
 	private Hashtable<String, Color> colorInfo;
 
 	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
@@ -60,10 +73,27 @@ public class DependencyTable extends JPanel {
 					c.setBackground(levelColor(0));
 				return c;
 			}
+
+			public String getToolTipText(MouseEvent e) {
+				String tip;
+				java.awt.Point p = e.getPoint();
+				int rowIndex = rowAtPoint(p);
+				int colIndex = columnAtPoint(p);
+
+				if (getValueAt(rowIndex, colIndex).toString().equals("X")) {
+					tip = (rowIndex + 1) + "." + rowNames.get(rowIndex) + " → "
+							+ (colIndex + 1) + "." + rowNames.get(colIndex);
+					return tip;
+				} else
+					return null;
+			}
 		};
 
-		rightTable.setAutoCreateRowSorter(true);
+		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
+		rightTable.setShowGrid(false);
+		rightTable.setIntercellSpacing(new Dimension(0, 0));
+		rightTable.setEnabled(false);
 		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -80,7 +110,7 @@ public class DependencyTable extends JPanel {
 		if (showRowLabels == false)
 			leftTable.getColumnModel().getColumn(0).setPreferredWidth(30);
 		else
-			leftTable.getColumnModel().getColumn(0).setPreferredWidth(300);
+			leftTable.getColumnModel().getColumn(0).setPreferredWidth(500);
 		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 		renderer.setHorizontalAlignment(JLabel.LEFT);
 		renderer.setBackground(Color.LIGHT_GRAY);
@@ -90,7 +120,7 @@ public class DependencyTable extends JPanel {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		Dimension dim = spLeft.getPreferredSize();
-		spLeft.setPreferredSize(new Dimension((showRowLabels ? 300 : 30),
+		spLeft.setPreferredSize(new Dimension((showRowLabels ? 500 : 30),
 				dim.height));
 		sp.getVerticalScrollBar().setModel(
 				spLeft.getVerticalScrollBar().getModel());
@@ -122,7 +152,7 @@ public class DependencyTable extends JPanel {
 		restRender.setHorizontalAlignment(JLabel.CENTER);
 
 		header.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
-
+		table.getTableHeader().setReorderingAllowed(false);
 		for (int i = 0; i < table.getColumnCount(); i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(restRender);
 		}
@@ -135,36 +165,30 @@ public class DependencyTable extends JPanel {
 
 	// 높이에 따른 색
 	private Color levelColor(int depth) {
+		int a = 200;
 
-		switch (depth % 5) {
-		/*
-		 * case (0):
+		if (depth == 0) {
 			return new Color(255, 255, 255);
-		case (1):
-			return new Color(255, 202, 0);
-		case (2):
-			return new Color(98, 12, 172);
-		case (3):
-			return new Color(15, 79, 168);
-		case (4):
-			return new Color(255, 116, 0);
-		default:
-			return new Color(255, 255, 255);
-		 * 
-		 * */
-		
-		case (0):
-			return new Color(255, 255, 255, 80);
-		case (1):
-			return new Color(255, 202, 0, 80);
-		case (2):
-			return new Color(98, 12, 172, 80);
-		case (3):
-			return new Color(15, 79, 168, 80);
-		case (4):
-			return new Color(255, 116, 0, 80);
-		default:
-			return new Color(255, 255, 255, 80);
+		} else {
+			switch (depth % 5) {
+
+			// 노랑 분홍 연두 파랑 주황 
+			//case (0):
+				//return new Color(255, 255, 255);
+			case (3)://연두
+				return new Color(63, 146, 210);
+			case (1)://노랑
+				return new Color(255, 202, 0);
+			case (2)://분홍
+				return new Color(246, 111, 137);
+			case (0)://주황
+				return new Color(255,116,0); 
+			case (4)://파랑
+				return new Color(186, 243, 0);
+			
+			default:
+				return new Color(255, 255, 255);
+			}
 		}
 	}
 
@@ -181,19 +205,15 @@ public class DependencyTable extends JPanel {
 
 		private void init(ArrayList<ArrayList<String>> rows) {
 
-			// 색 선정...?
-			/*
-			 * ArrayList<T3> tupleList = new ArrayList<>(); tupleList.add(new
-			 * T3(1, 1, 3)); tupleList.add(new T3(1, 5, 8));
-			 */
 			tableData = rows;
 			columnIndex = new ArrayList();
-
+			rowNames = new ArrayList<String>();
 			columnIndex.add("");
 			for (int i = 0; i < this.tableData.size(); i++) {
 				String s = new String();
 				s = (i + 1) + "";
 				columnIndex.add(s);
+				rowNames.add(this.getValueAt(i, 0).toString());
 				if (this.showRowLabels == true) {
 					s = s + "." + this.getValueAt(i, 0).toString();
 				}

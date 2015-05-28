@@ -2,8 +2,8 @@ package model;
 
 import java.io.File;
 
-import util.GroupNode;
 import util.GreenTreeNode;
+import util.GroupNode;
 import util.XMLParser;
 
 public class CLSXModel extends Model{

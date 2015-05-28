@@ -157,18 +157,25 @@ public class FileTree extends JTree implements Controllerable {
 	protected void expandAll(int startingIndex, int rowCount) {
 
 		for (int i = startingIndex; i < rowCount; i++) {
+			GreenTreeNode node = (GreenTreeNode)this.getPathForRow(i).getLastPathComponent();
+			node.setIsExpanded(true);
 			this.expandRow(i);
 		}
 
 		if (this.getRowCount() != rowCount) {
 			expandAll(rowCount, this.getRowCount());
 		}
+		syncWithModel();
 	}
 
 	protected void collapseAll() {
 		for (int i = this.getRowCount() - 1; i >= 0; i--) {
+			GreenTreeNode node = (GreenTreeNode)this.getPathForRow(i).getLastPathComponent();
+			node.setIsExpanded(false);
 			this.collapseRow(i);
 		}
+
+		syncWithModel();
 	}
 
 	protected void delete() {
@@ -198,7 +205,7 @@ public class FileTree extends JTree implements Controllerable {
 		
 		((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
 		delete();
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 		
 	}
 	
@@ -215,7 +222,7 @@ public class FileTree extends JTree implements Controllerable {
 		}
 		delete();
 		EventManager.callEvent("ungroupButtonDisable");
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+		syncWithModel();
 	}
 
 	private ArrayList<GreenTreeNode> getSelectedNodes() {
@@ -249,6 +256,14 @@ public class FileTree extends JTree implements Controllerable {
 		repaint();
 		syncWithModel();
 	}
+	public void expandNode(GreenTreeNode node){
+		node.setIsExpanded(true);
+		syncWithModel();
+	}
+	public void collapseNode(GreenTreeNode node){
+		node.setIsExpanded(false);
+		syncWithModel();
+	}
 	private void syncWithModel()
 	{
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
@@ -257,4 +272,5 @@ public class FileTree extends JTree implements Controllerable {
 	public void setAction(String title, ActionListener action) {
 
 	}
+
 }

@@ -316,8 +316,26 @@ public class MenuBarController extends MainController{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 JOptionPane.showMessageDialog(null, "Exit is clicked");
-				
+				if (ModelManager.sharedModelManager().getCurrentTitanicModel() == null){
+					System.exit(0);
+
+				}
+				else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()) {
+					int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+					if (selected == 0) { //yes
+						try {
+							ModelManager.sharedModelManager().getCurrentTitanicModel().save();
+						} catch (SaveException e1) {
+							e1.printStackTrace();
+						}
+						System.exit(0);
+					} else if (selected == 1) { //no
+						System.exit(0);
+					} else { // cancel
+						return;
+					}
+				}
+				System.exit(0);
 			}
 		});		
 

@@ -1,9 +1,15 @@
 package titanic;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Event;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 
 public class MenuBar extends JMenuBar implements Controllerable{
