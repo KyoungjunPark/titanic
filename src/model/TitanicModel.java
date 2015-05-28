@@ -108,12 +108,9 @@ public class TitanicModel {
      * New ClsxModel 등에 이용합니다.
      */
     public void removeClsxModel(){
-        try {
-            this.setClsxModel(new CLSXModel());
-            this.clsxModel.setGroupNode(this.dsmModel.getGroupNode());
-        } catch (CreateException e) {
-            e.printStackTrace();
-        }
+
+        this.clsxModel = null;
+        this.syncTreeNode(this.dsmModel.getGroupNode().getTreeNode());
     }
 
     /**
