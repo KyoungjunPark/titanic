@@ -100,8 +100,7 @@ public class TitanicModel {
         return true;
     }
     public boolean isEdit(){
-    	return true;
-        //return this.dsmModel.isEdit() || this.clsxModel.isEdit();
+        return this.dsmModel.isEdit() || this.clsxModel.isEdit();
     }
 
     /**
