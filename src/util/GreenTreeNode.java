@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class GreenTreeNode extends DefaultMutableTreeNode {
     private Node node;
-    private boolean isExpanded = true;
+    private boolean isExpanded = false;
     public GreenTreeNode(){super();}
     public GreenTreeNode(String string){
         super(string);

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
@@ -214,6 +216,22 @@ public class FileTreeController extends LeftPanelController {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
+			}
+		});
+		treeFile.addTreeExpansionListener(new TreeExpansionListener() {
+			@Override
+			public void treeExpanded(TreeExpansionEvent event) {
+
+				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
+				System.out.println("expanded : " + node);
+				treeFile.expandNode(node);
+			}
+
+			@Override
+			public void treeCollapsed(TreeExpansionEvent event) {
+				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
+				System.out.println("collapsed : " + node);
+				treeFile.collapseNode(node);
 			}
 		});
 	}

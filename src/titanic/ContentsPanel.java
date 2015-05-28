@@ -105,7 +105,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 
         int currentIndex = this.getRightPanelIndex(ModelManager.sharedModelManager().getCurrentID());
-        if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel() == null) {
+        if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() == null) {
             this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
         }
         else {

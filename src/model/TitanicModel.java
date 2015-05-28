@@ -28,7 +28,7 @@ public class TitanicModel {
      */
     public void save()throws SaveException{
         this.dsmModel.save();
-        if(this.clsxModel != null)
+        if(this.clsxModel.getFilePath() != null)
             this.clsxModel.save();
     }
 
@@ -111,6 +111,9 @@ public class TitanicModel {
 
         this.clsxModel = null;
         this.syncTreeNode(this.dsmModel.getGroupNode().getTreeNode());
+        //must change!
+        this.clsxModel.setIsEdit(false);
+        this.dsmModel.setIsEdit(false);
     }
 
     /**
