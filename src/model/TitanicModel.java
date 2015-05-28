@@ -1,12 +1,12 @@
 package model;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import util.GreenTreeNode;
 import util.GroupNode;
 import util.JSFiles;
 import util.Node;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class TitanicModel {
 

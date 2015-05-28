@@ -1,8 +1,6 @@
 package titanic;
 
-import javax.swing.Icon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import model.Event;
 import model.EventManager;

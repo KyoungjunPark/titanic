@@ -2,13 +2,11 @@ package titanic;
 
 import java.io.File;
 
-import model.EventManager;
-import titanic.BackgroundPanel.MainToolbar;
 import model.CreateException;
-import model.ModelManager;
 import model.Event;
-
-import javax.swing.*;
+import model.EventManager;
+import model.ModelManager;
+import titanic.BackgroundPanel.MainToolbar;
 
 public class MainController {
 	

@@ -12,7 +12,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
-
 import model.EventManager;
 import util.GreenTreeNode;
 
@@ -166,10 +165,11 @@ public class FileTreeController extends LeftPanelController {
 								if (e1.getActionCommand() == "Rename") {
 									String answer;
 
-									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Group Name", JOptionPane.PLAIN_MESSAGE);
+									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Rename", JOptionPane.PLAIN_MESSAGE);
 
 									while(answer.isEmpty()) {
-										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Group Name", JOptionPane.ERROR_MESSAGE);
+										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Rename", JOptionPane.ERROR_MESSAGE);
+
 									}
 									if(answer != null) {
 										treeFile.rename(node, answer);

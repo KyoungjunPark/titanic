@@ -1,16 +1,27 @@
 package titanic;
 
-import model.T3;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
-import util.GroupNode;
-import util.Node;
+import model.T3;
 
 public class DependencyTable extends JPanel {
 
@@ -22,7 +33,6 @@ public class DependencyTable extends JPanel {
 	private ArrayList<ArrayList<String>> rows;
 	private ArrayList<String> rowNames;
 	private Hashtable<String, Color> colorInfo;
-
 
 	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
 			boolean showRowLabels) throws NullPointerException {
@@ -79,10 +89,11 @@ public class DependencyTable extends JPanel {
 			}
 		};
 
-		rightTable.setAutoCreateRowSorter(true);
+		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
 		rightTable.setShowGrid(false);
 		rightTable.setIntercellSpacing(new Dimension(0, 0));
+		rightTable.setEnabled(false);
 		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -154,28 +165,30 @@ public class DependencyTable extends JPanel {
 
 	// 높이에 따른 색
 	private Color levelColor(int depth) {
+		int a = 200;
 
-		switch (depth % 5) {
-		/*
-		  case (0): return new Color(255, 255, 255); case (1): return new
-		  Color(255, 202, 0); case (2): return new Color(98, 12, 172); case
-		  (4): return new Color(15, 79, 168); case (3): return new Color(255,
-		  116, 0); default: return new Color(255, 255, 255);
-		 */
-		case (0):
-			return new Color(255, 255, 255, 80);
-		case (1):
-			return new Color(255, 202, 0, 80);
-		case (2):
-			return new Color(98, 12, 172, 80);
-		case (3):
-			return new Color(255, 116, 0, 80);
-		case (4):
-			return new Color(15, 79, 168, 80);
-		
-		default:
-			return new Color(255, 255, 255, 80);
+		if (depth == 0) {
+			return new Color(255, 255, 255);
+		} else {
+			switch (depth % 5) {
 
+			// 노랑 분홍 연두 파랑 주황 
+			//case (0):
+				//return new Color(255, 255, 255);
+			case (3)://연두
+				return new Color(63, 146, 210);
+			case (1)://노랑
+				return new Color(255, 202, 0);
+			case (2)://분홍
+				return new Color(246, 111, 137);
+			case (0)://주황
+				return new Color(255,116,0); 
+			case (4)://파랑
+				return new Color(186, 243, 0);
+			
+			default:
+				return new Color(255, 255, 255);
+			}
 		}
 	}
 

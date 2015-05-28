@@ -5,10 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import util.GroupNode;
-import model.ModelManager;
 import model.T3;
 
 public class RightPanel extends JPanel implements Controllerable{
