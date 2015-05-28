@@ -1,8 +1,7 @@
 package titanic;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.*;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
@@ -12,6 +11,7 @@ import javax.swing.tree.TreePath;
 import util.GreenTreeNode;
 import model.EventManager;
 import model.ModelManager;
+
 
 public class FileTree extends JTree implements Controllerable {
 	private GreenTreeNode root;
@@ -268,6 +268,24 @@ public class FileTree extends JTree implements Controllerable {
 		node.setIsExpanded(false);
 		syncWithModel();
 	}
+	public void sortNode(GreenTreeNode node){
+		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
+		for(int i = 0 ; i < node.getChildCount() ; i++) {
+			nodes.add((GreenTreeNode) node.getChildAt(i));
+		}
+
+		Comparator<GreenTreeNode> sort = new Comparator<GreenTreeNode>() {
+			@Override
+			public int compare(GreenTreeNode o1, GreenTreeNode o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		};
+
+		Collections.sort(nodes, sort);
+
+		syncWithModel();
+	}
+
 	private void syncWithModel()
 	{
 		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
@@ -276,5 +294,4 @@ public class FileTree extends JTree implements Controllerable {
 	public void setAction(String title, ActionListener action) {
 
 	}
-
 }
