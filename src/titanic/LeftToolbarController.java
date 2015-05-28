@@ -45,6 +45,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("group");
+				EventManager.callEvent("Redraw-Table");
 			}
 		});
 		leftToolbar.setAction("Ungroup", new ActionListener() {
@@ -52,6 +53,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("ungroup");
+				EventManager.callEvent("Redraw-Table");
 				
 			}
 		});
