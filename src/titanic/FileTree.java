@@ -34,6 +34,9 @@ public class FileTree extends JTree implements Controllerable {
 
 	}
 
+	/*
+		must implement flag clone!!
+	 */
 	protected void moveUp() {
 
 		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
