@@ -297,6 +297,13 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
 
     }
+    public void redrawTree(){
+        //must changed!
+        this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
+                .getGroupNode().getTreeNode();
+        this.setModel(new DefaultTreeModel(root));
+        ((DefaultTreeModel) this.getModel()).reload();
+    }
 
     protected void syncWithModel() {
         ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);

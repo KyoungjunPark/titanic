@@ -90,10 +90,13 @@ public class MainController {
 				centerPanelController.getContentsPanelController().refreshTabName();
 			}
 		});
-		EventManager.addEvent(new Event("Redraw-FileTree"){
+		EventManager.addEvent(new Event("FileTree-Load"){
 			public void action(){
 				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
+		});
+		EventManager.addEvent(new Event("FileTree-redraw"){
+			public void action(){centerPanelController.getLeftPanelController().getFileTreeController().redrawTree();}
 		});
         EventManager.addEvent((new Event("makeDefaultNodes"){
             public void action(String... param){
@@ -113,7 +116,7 @@ public class MainController {
 			 ModelManager.sharedModelManager().setCurrentID(currentID);
 			 EventManager.callEvent("after-open-First-DSM");
 			 EventManager.callEvent("Redraw-Table");
-			 EventManager.callEvent("Redraw-FileTree");
+			 EventManager.callEvent("FileTree-Load");
 		} catch (CreateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,7 +128,7 @@ public class MainController {
             ModelManager.sharedModelManager().setClsx(openFile);
             EventManager.callEvent("after-open-CLSX");
             EventManager.callEvent("Redraw-Table");
-            EventManager.callEvent("Redraw-FileTree");
+            EventManager.callEvent("FileTree-Load");
 
         } catch (CreateException e) {
             // TODO Auto-generated catch block

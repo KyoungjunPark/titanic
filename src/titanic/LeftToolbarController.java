@@ -88,7 +88,7 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("newDSMRow");
-				EventManager.callEvent("Redraw-FileTree");
+				EventManager.callEvent("FileTree-redraw");
 				EventManager.callEvent("Redraw-Table");
 				System.out.println("everything is alright");
 			}

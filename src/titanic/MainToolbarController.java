@@ -92,7 +92,7 @@ public class MainToolbarController extends MainController {
                 ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
                 EventManager.callEvent("Redraw-Table");
                 EventManager.callEvent("Refresh-TabName");
-                EventManager.callEvent("Redraw-FileTree");
+                EventManager.callEvent("FileTree-Load");
             }
 
         });
