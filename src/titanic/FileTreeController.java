@@ -170,7 +170,7 @@ public class FileTreeController extends LeftPanelController {
 									if(answer != null) {
 										treeFile.rename(node, answer);
 									}
-
+									EventManager.callEvent("Redraw-Table");
 								}
 								if(e1.getActionCommand() == "Delete"){
                                     treeFile.delete();
