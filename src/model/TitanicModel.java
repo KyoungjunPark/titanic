@@ -181,7 +181,7 @@ public class TitanicModel {
                 GroupNode temp = (GroupNode)node;
                 if(temp.isExpanded() == true){
                     ArrayList<Node> currentItemList = temp.getAllItemList();
-                    T3 tuple = new T3(depth, itemList.indexOf(currentItemList.get(0)), itemList.indexOf(currentItemList.get(currentItemList.size()-1)));
+                    T3 tuple = new T3(depth, currentItemList.get(0).hashCode(), (currentItemList.get(currentItemList.size()-1)).hashCode());
                     if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
                         groupData.add(tuple);
                     nextGroupList.addAll(temp.getGroupList());
@@ -192,14 +192,28 @@ public class TitanicModel {
                     int firstIndex= itemList.indexOf(firstItem);
                     int lastIndex= itemList.indexOf(lastItem);
                     if(firstIndex == -1 || lastIndex == -1) continue;
-                    T3 tuple = new T3(depth, firstIndex, firstIndex);
+                    T3 tuple = new T3(depth, firstItem.hashCode(), firstItem.hashCode());
                     groupData.add(tuple);
                     while (lastIndex > firstIndex){
+                        Node tempNode = itemList.get(lastIndex);
+                        for( T3 t : groupData){
+                            if(t.getLast() == tempNode.hashCode())
+                                t.setLast(itemList.get(lastIndex-1).hashCode());
+                        }
                         itemList.remove(lastIndex--);
                     }
                 }
             }
             depth++;
+        }
+        for( T3 t : groupData){
+            for(int i = 0 ; i < itemList.size() ; i++){
+                Node node = itemList.get(i);
+                if(t.getFirst() == node.hashCode())
+                    t.setFirst(i);
+                if(t.getLast() == node.hashCode())
+                    t.setLast(i);
+            }
         }
         return groupData;
     }

@@ -26,7 +26,6 @@ abstract class Model {
             File file = new File(this.getFilePath());
             output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getPath()),"UTF8"));
             output.write(this.toString());
-            System.out.println("aa"+this.toString());
             output.close();
         } catch ( IOException e ) {
             throw new CreateException("파일 에러");
