@@ -64,12 +64,16 @@ public class ModelManager {
         }
 		return model.getID();
 	}
-
-    /**
-     * 현재 TitanicModel 에 clsx 를 set 합니다.
-     * @param file set 할 clsx file
-     * @throws CreateException file open 등의 문제로 Exception 이 발생할 수 있습니다.
-     */
+    public int createTitanicModel(DSMModel dsm)throws CreateException{
+        TitanicModel model =  new TitanicModel();
+        model.setDsmModel(dsm);
+        return model.getID();
+    }
+        /**
+         * 현재 TitanicModel 에 clsx 를 set 합니다.
+         * @param file set 할 clsx file
+         * @throws CreateException file open 등의 문제로 Exception 이 발생할 수 있습니다.
+         */
 	public void setClsx(File file)throws CreateException{
         EventManager.callEvent("before-open");
 		String extension = JSFiles.getFileExtension(file).toLowerCase();
