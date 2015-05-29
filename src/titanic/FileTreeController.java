@@ -170,7 +170,7 @@ public class FileTreeController extends LeftPanelController {
 									if(answer != null) {
 										treeFile.rename(node, answer);
 									}
-
+									EventManager.callEvent("Redraw-Table");
 								}
 								if(e1.getActionCommand() == "Delete"){
                                     treeFile.delete();
@@ -209,7 +209,7 @@ public class FileTreeController extends LeftPanelController {
                                     ModelManager.sharedModelManager().setCurrentID(newID);
                                     EventManager.callEvent("after-open-First-DSM");
                                     EventManager.callEvent("Redraw-Table");
-                                    EventManager.callEvent("Redraw-FileTree");
+                                    EventManager.callEvent("FileTree-Load");
 								} else {// case : Edit
                                     int newID = ModelManager.sharedModelManager().editTatanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
 								    //must implement!
@@ -333,6 +333,7 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.makeTree();
 	}
 
+	protected void redrawTree(){treeFile.redrawTree();}
 	protected void moveUp() {
 		treeFile.moveUp();
 	}

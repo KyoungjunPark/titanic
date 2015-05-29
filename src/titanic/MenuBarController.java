@@ -58,7 +58,7 @@ public class MenuBarController extends MainController {
                     ModelManager.sharedModelManager().setCurrentID(currentID);
                     EventManager.callEvent("after-open-First-DSM");
                     //EventManager.callEvent("makeDefaultNodes", input);
-                    EventManager.callEvent("Redraw-FileTree");
+                    EventManager.callEvent("FileTree-Load");
                 }
             }
         });
@@ -118,7 +118,7 @@ public class MenuBarController extends MainController {
                                     ModelManager.sharedModelManager().getCurrentTitanicModel().removeClsxModel();
                                     EventManager.callEvent("Redraw-Table");
                                     EventManager.callEvent("Refresh-TabName");
-                                    EventManager.callEvent("Redraw-FileTree");
+                                    EventManager.callEvent("FileTree-Load");
 
                                 }
 

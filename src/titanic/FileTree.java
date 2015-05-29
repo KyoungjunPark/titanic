@@ -157,6 +157,7 @@ public class FileTree extends JTree implements Controllerable {
     }
 
     protected void expandAll(int startingIndex, int rowCount) {
+        boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 
         for (int i = startingIndex; i < rowCount; i++) {
             GreenTreeNode node = (GreenTreeNode) this.getPathForRow(i).getLastPathComponent();
@@ -167,17 +168,28 @@ public class FileTree extends JTree implements Controllerable {
         if (this.getRowCount() != rowCount) {
             expandAll(rowCount, this.getRowCount());
         }
+
         syncWithModel();
+        if(checkIsEdit == false){
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+        }
     }
 
     protected void collapseAll() {
+
+        boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
+
         for (int i = this.getRowCount() - 1; i >= 0; i--) {
             GreenTreeNode node = (GreenTreeNode) this.getPathForRow(i).getLastPathComponent();
             node.setIsExpanded(false);
             this.collapseRow(i);
         }
 
-        syncWithModel();
+        if(checkIsEdit == false){
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
+        }
     }
 
     protected void delete() {
@@ -284,6 +296,13 @@ public class FileTree extends JTree implements Controllerable {
         }
         syncWithModel();
 
+    }
+    public void redrawTree(){
+        //must changed!
+        this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
+                .getGroupNode().getTreeNode();
+        this.setModel(new DefaultTreeModel(root));
+        ((DefaultTreeModel) this.getModel()).reload();
     }
 
     protected void syncWithModel() {
