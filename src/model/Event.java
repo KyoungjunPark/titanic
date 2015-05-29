@@ -5,10 +5,19 @@ package model;
  */
 public class Event {
     private String tag;
+    private String[] param;
+
     public Event(String tag){
         this.setTag(tag);
     }
+    public Event(String tag, String... param){
+        this.setTag(tag);
+        this.param = param;
+    }
     public void action(){
+
+    }
+    public void action(String... param){
 
     }
     public String getTag() {

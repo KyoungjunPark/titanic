@@ -50,12 +50,15 @@ public class MenuBarController extends MainController {
                 }
 
                 String input = JOptionPane.showInputDialog(null, "Enter the New DSM's row number : ","New DSM",JOptionPane.PLAIN_MESSAGE);
-                if(input == null) System.out.println("yes");
                 while((input != null) &&(input.isEmpty() || !isPositiveInteger(input))) {
                     input = JOptionPane.showInputDialog(null, "\""+input+"\" is not accepted!\n Enter the New DSM's row number : ", "New DSM", JOptionPane.ERROR_MESSAGE);
                 }
                 if(input != null) {
-
+                    int currentID = ModelManager.sharedModelManager().createTitanicModel(Integer.parseInt(input));
+                    ModelManager.sharedModelManager().setCurrentID(currentID);
+                    EventManager.callEvent("after-open-First-DSM");
+                    //EventManager.callEvent("makeDefaultNodes", input);
+                    EventManager.callEvent("Redraw-FileTree");
                 }
             }
         });

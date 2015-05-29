@@ -34,4 +34,11 @@ public class EventManager {
             }
         }
     }
+    static public void callEvent(String tag, String... param){
+        for(Event e : EventManager.eventArrayList){
+            if(e.getTag().compareTo(tag) == 0){
+                e.action(param);
+            }
+        }
+    }
 }

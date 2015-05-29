@@ -64,8 +64,15 @@ public class ModelManager {
         }
 		return model.getID();
 	}
-    public int createTitanicModel(){
+
+	/**
+	 * New DSM 기능을 위한 함수입니다.
+	 * TitanicModel 과 dsmModel 을 생성하며 filePath 는 지정되지 않습니다.
+	 * @return 생성된 titan 의 ID를 리턴합니다.
+	 */
+    public int createTitanicModel(int nodeSize){
         TitanicModel model =  new TitanicModel();
+		model.setDsmModel(new DSMModel(nodeSize)); /* New DSM 기능을 위해 추가됨*/
         this.addTitanicModel(model);
         return model.getID();
     }

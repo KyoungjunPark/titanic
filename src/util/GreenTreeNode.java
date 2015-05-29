@@ -42,7 +42,7 @@ public class GreenTreeNode extends DefaultMutableTreeNode {
     }
 
     public void sortAlphabetic(){
-        ArrayList<GreenTreeNode> nodes = new ArrayList<>();
+        ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
         for(int i = 0 ; i < this.getChildCount() ; i++) {
             nodes.add((GreenTreeNode) this.getChildAt(i));
         }
