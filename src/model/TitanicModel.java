@@ -225,9 +225,21 @@ public class TitanicModel {
      * @param newNodeName 새로 만들 item 의 이름
      */
     public void addNode(String newNodeName){
+        if( this.getDsmModel().isExistName(newNodeName) ) return;
         if(this.getClsxModel() != null){
             this.getClsxModel().getGroupNode().addItem(new ItemNode(newNodeName));
         }
         this.getDsmModel().addNode(newNodeName);
+    }
+    public void rename(String originalName, String changedName){
+        this.getDsmModel().rename(originalName, changedName);
+        if(this.getClsxModel() != null){
+            for( Node node : this.getClsxModel().getGroupNode().getAllItemList() ){
+                if(node.getName().compareTo(originalName) == 0){
+                    node.setName(changedName);
+                    break;
+                }
+            }
+        }
     }
 }
