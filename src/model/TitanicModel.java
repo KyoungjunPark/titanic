@@ -47,27 +47,73 @@ public class TitanicModel {
          */
         this.clsxModel = clsxModel;
     }
+
+    /**
+     * 해당 TitanicModel 에
+     * clsx를 set 합니다.
+     * @param file clsx file object 를 받습니다.
+     * @throws CreateException file 로부터 clsx 를 생성하기 때문에 CreateException 이 발생할 수 있습니다.
+     */
 	protected void setClsxModel(File file)throws CreateException{
 		if(JSFiles.getFileExtension(file).toLowerCase().compareTo(".clsx") ==0) {
 			CLSXModel clsx = new CLSXModel(file);
 			this.setClsxModel(clsx);
 		}
 	}
+
+    /**
+     * 해당 TitanicModel 에 set되어있는 dsmModel 을 가져옵니다.
+     * 해당 데이터는 항상 존재합니다.
+     * @return {@link DSMModel} 데이터
+     */
     public DSMModel getDsmModel(){ return this.dsmModel; }
+
+    /**
+     * 해당 TitanicModel 에 set되어있는 clsxModel 을 가져옵니다.
+     * 해당 데이터는 NULL일 수 있습니다.
+     * @return {@link CLSXModel} 데이터
+     */
     public CLSXModel getClsxModel(){ return this.clsxModel; }
+
+    /**
+     * GroupNode 를 가져옵니다.
+     * CLSX 가 있다면, Clsx 의 GroupNode 를 가져오며,
+     * 없다면 DSM 의 GroupNode 가 반환됩니다.
+     * @return GroupNode 의 형태는 {@link GroupNode} 를 참고하세요.
+     */
 	public GroupNode getGroupNode(){
 		if(this.clsxModel != null){
 			return this.clsxModel.getGroupNode();
 		}
 		return this.dsmModel.getGroupNode();
 	}
+
+    /**
+     * 해당 TitanicModel 의 ID 를 얻어옵니다.
+     * ID 은 유니크합니다.
+     * @return 해당 모델의 Integer id
+     */
 	public int getID(){
 		return this.id;
 	}
 
+    /**
+     * TitanicModel 의 다음 id 를 반환합니다.
+     * 해당 아이디는 TitanicModel의 생성시에 사용됩니다.
+     * @return 다음 TitanicModel 의 id value
+     */
 	static private int nextID(){
 		return TitanicModel.nextID++;
 	}
+
+    /**
+     * Table 의 사용할 MatrixData 를 반환합니다.
+     * DSMModel 과 CLSXModel 에 상태에 따라 적절한 데이터를 반환합니다.
+     * 양식은 다음과 같습니다.
+     * ArrayList 를 저장하는 ArrayList 가 있습니다.
+     * 내부에 있는 ArrayList 는 String 을 가지며, 첫번째는 아이템의 이름, 그이후로는 디펜던시 데이터가 있습니다.
+     * @return arrayList 형태의 데이터
+     */
     public ArrayList<ArrayList<String>> getMatrixData(){
         return this.dsmModel.getMatrix(this.clsxModel);
     }

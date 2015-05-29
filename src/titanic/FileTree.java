@@ -277,12 +277,12 @@ public class FileTree extends JTree implements Controllerable {
 		Comparator<GreenTreeNode> sort = new Comparator<GreenTreeNode>() {
 			@Override
 			public int compare(GreenTreeNode o1, GreenTreeNode o2) {
-				return o1.toString().compareTo(o2.toString());
+				return o1.toString().toLowerCase().compareTo(o2.toString().toLowerCase());
 			}
 		};
 
 		Collections.sort(nodes, sort);
-
+		for(GreenTreeNode n : nodes) System.out.println(n);
 		syncWithModel();
 	}
 

@@ -20,10 +20,22 @@ public class CLSXModel extends Model{
     public CLSXModel(GreenTreeNode node) throws CreateException{
         this.setTreeNode(node);
     }
+
+    /**
+     * TreeNode 로 부터 GroupNode 를 얻어 clsx 를 sync 합니다.
+     * @param node {@link GreenTreeNode} 의 최상의 Node 를 받습니다.
+     * @throws CreateException
+     */
     protected void setTreeNode(GreenTreeNode node)throws CreateException{
         this.node = (GroupNode)node.getGroupNode();
     }
     public GroupNode getGroupNode(){return this.node;};
+
+    /**
+     * 해당 CLSX 를 XML 형태로 만들어줍니다.
+     * 최상의 노드는 cluster 이 됩니다.
+     * @return XML 양식의 String 데이터
+     */
     public String toString(){
         return "<cluster xmlns=\"http://rise.cs.drexel.edu/minos/clsx\">\r\n"+this.node.print()+"</cluster>\r\n";
     }
