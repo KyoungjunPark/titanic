@@ -104,7 +104,8 @@ public class LeftPanelController extends CenterPanelController {
 		EventManager.addEvent(new Event("newDSMRow") {
 			public void action() {
 				addNewDSMRow();
-				
+				//ModelManager에 데이터 넘겨줌
+
 			}
 
 		});
@@ -264,13 +265,10 @@ public class LeftPanelController extends CenterPanelController {
 		}
 		if (answer != null) {
 			int size = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getDependencyNum();
-			String[] tableHeader = new String[size];
-			for(int i=0; i<size; i++) {
-				tableHeader[i] = new String("i+1");
-			}
-			
-			DefaultTableModel model = new DefaultTableModel(tableHeader, 0);
-			JTable newRowData = new JTable(model);
+			/*
+			 * table을 두개 생성. ArrayList<String> newRowValue와 ArrayList<String> newColumnValue, String name을 가지는
+			 * ArrayList를 ModelManager에 전달.
+			 * */
 			/*
 			 * JOptionPane에 JTable 붙이기
 			 * Object[][] rows = {
