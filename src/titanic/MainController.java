@@ -117,8 +117,6 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	protected void OpenClsxStatus(File openFile) {
 
