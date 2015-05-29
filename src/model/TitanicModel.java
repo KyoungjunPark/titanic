@@ -87,15 +87,6 @@ public class TitanicModel {
 		}
 		return this.dsmModel.getGroupNode();
 	}
-	
-	public void addNode(String newNodeName){
-		if(this.clsxModel != null){
-			this.clsxModel.addNode(newNodeName);
-		}
-		else {
-			this.dsmModel.addNode(newNodeName);
-		}
-	}
 
     /**
      * 해당 TitanicModel 의 ID 를 얻어옵니다.

@@ -114,7 +114,6 @@ public class LeftPanelController extends CenterPanelController {
 				}
 				if (answer != null) {
 					addNewDSMRow(answer);
-					leftPanel.getfileTree().syncWithModel();
 				}
 
 			}
@@ -265,7 +264,7 @@ public class LeftPanelController extends CenterPanelController {
 	}
 	
 	protected void addNewDSMRow(String newNodeName) {
-		ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().addNode(newNodeName);
+		ModelManager.sharedModelManager().getCurrentTitanicModel().addNode(newNodeName);
 	}
 	
 	protected void expandAllButtonEnable(){

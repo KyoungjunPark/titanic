@@ -198,25 +198,6 @@ public class DSMModel extends Model{
         if(offset != -1)
             this.elementsNameArray.set(offset, newName);
     }
-    
-    public void addNode(String newNodeName) {
-    	this.dependencyNumber++;
-    	this.elementsNameArray.add(newNodeName);
-    	for(int i=dependencyNumber-1; i<(dependencyNumber-1)*dependencyNumber; i+=dependencyNumber) {
-    		this.dependencyRelationArray.add(i, 0);
-    	}
-    	for(int i=(dependencyNumber-1)*dependencyNumber; i<dependencyNumber*dependencyNumber; i++) {
-    		this.dependencyRelationArray.add(0);
-    	}
-    	ModelManager.sharedModelManager().getCurrentTitanicModel().
-    	syncTreeNode(ModelManager.sharedModelManager().getCurrentTitanicModel().getGroupNode().getTreeNode());
-    	System.out.println("dependencyNumber");
-    	for(int i=0; i<dependencyNumber*dependencyNumber; i++) {
-    		if(i%dependencyNumber==0)
-    			System.out.println("\n");
-    		System.out.print(dependencyRelationArray.get(i));
-    	}
-    }
 
     /**
      * 해당 DSMModel 을 dsm 양식에 맞추어 만들어줍니다.
