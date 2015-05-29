@@ -94,7 +94,12 @@ public class MainController {
 				centerPanelController.getLeftPanelController().getFileTreeController().makeTree();
 			}
 		});
-
+        EventManager.addEvent((new Event("makeDefaultNodes"){
+            public void action(String... param){
+                int numNode = Integer.parseInt(param[0]);
+                centerPanelController.getLeftPanelController().getFileTreeController().makeDefaultNodes(numNode);
+            }
+        }));
 	}
 	
 
@@ -115,19 +120,17 @@ public class MainController {
 		
 		
 	}
-	protected void OpenClsxStatus(File openFile)
-	{
-		
-		try {
-			ModelManager.sharedModelManager().setClsx(openFile);
-			EventManager.callEvent("after-open-CLSX");
-			EventManager.callEvent("Redraw-Table");
-			EventManager.callEvent("Redraw-FileTree");
-			
-		} catch (CreateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	protected void OpenClsxStatus(File openFile) {
 
+        try {
+            ModelManager.sharedModelManager().setClsx(openFile);
+            EventManager.callEvent("after-open-CLSX");
+            EventManager.callEvent("Redraw-Table");
+            EventManager.callEvent("Redraw-FileTree");
+
+        } catch (CreateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

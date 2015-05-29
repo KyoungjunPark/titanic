@@ -11,6 +11,7 @@ import javax.swing.tree.TreePath;
 import util.GreenTreeNode;
 import model.EventManager;
 import model.ModelManager;
+import util.GroupNode;
 
 
 public class FileTree extends JTree implements Controllerable {
@@ -274,8 +275,19 @@ public class FileTree extends JTree implements Controllerable {
 
     public void sortNode(GreenTreeNode node) {
         node.sortAlphabetic();
-        ((DefaultTreeModel)this.getModel()).reload();
+        ((DefaultTreeModel) this.getModel()).reload();
         syncWithModel();
+    }
+
+    public void makeDefaultNodes(int numNode){
+
+        this.root.getNode().setName("root$");
+        for (int i = 0; i < numNode; i++) {
+            GreenTreeNode node = new GreenTreeNode("entity_" + (i + 1));
+            this.root.add(node);
+        }
+        syncWithModel();
+
     }
 
     private void syncWithModel() {
@@ -286,4 +298,5 @@ public class FileTree extends JTree implements Controllerable {
     public void setAction(String title, ActionListener action) {
 
     }
+
 }

@@ -157,12 +157,28 @@ public class FileTreeController extends LeftPanelController {
 						ActionListener menuListener = new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e1) {
-                                if(e1.getActionCommand() == "Delete"){
+
+								if(e1.getActionCommand() == "Rename"){
+									String answer;
+
+									answer = JOptionPane.showInputDialog(null, "Enter new group name: ", "Rename", JOptionPane.PLAIN_MESSAGE);
+
+									while(answer != null && answer.isEmpty()) {
+										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Rename", JOptionPane.ERROR_MESSAGE);
+
+									}
+									if(answer != null) {
+										treeFile.rename(node, answer);
+									}
+
+								}
+								if(e1.getActionCommand() == "Delete"){
                                     treeFile.delete();
                                 }
 							}
 						};
-                        PopupMenu popup = new PopupMenu(menuListener, "Delete");
+
+                        PopupMenu popup = new PopupMenu(menuListener, "Rename","Delete");
                         popup.show(e.getComponent(), e.getX(), e.getY());
 					}
 					if (!node.isLeaf() || node.isRoot()) {
@@ -348,4 +364,9 @@ public class FileTreeController extends LeftPanelController {
 		treeFile.unGroupTree();
 	}
 
+	protected void makeDefaultNodes(int numNode){
+		treeFile.makeDefaultNodes(numNode);
+
+
+	}
 }

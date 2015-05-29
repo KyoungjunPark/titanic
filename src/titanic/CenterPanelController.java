@@ -18,9 +18,8 @@ public class CenterPanelController extends MainController{
 		setControllers();
 		
 	}
-	private void setControllers()
-	{
+	private void setControllers() {
 		leftPanelController = new LeftPanelController(centerPanel.getLeftPanel());
-		contentsPanelController = new ContentsPanelController(centerPanel.getContentsPanel());       
+		contentsPanelController = new ContentsPanelController(centerPanel.getContentsPanel());
 	}
 }

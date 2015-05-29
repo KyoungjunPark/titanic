@@ -35,7 +35,6 @@ public class ContentsPanelController extends CenterPanelController{
                 JTabbedPane sourceTabbedPane = (JTabbedPane)e.getSource();
 			    ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
                 EventManager.callEvent("Redraw-FileTree");
-				EventManager.callEvent("Redraw-Table");
             }
 		});
 
