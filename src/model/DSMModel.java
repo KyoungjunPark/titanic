@@ -113,18 +113,41 @@ public class DSMModel extends Model{
         }
         return matrixList;
     }
+    /**
+     * arrayList foo line에 temp bar line 의 데이터를 덮어씁니다.
+     * @param arrayList 조작될 arrayList
+     * @param temp 조작에 사용할 arrayList
+     * @param foo line foo
+     * @param bar line bar
+     */
     private void changeRow(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         if(foo == -1 || bar == -1) return;
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(this.dependencyNumber * foo + i, temp.get(this.dependencyNumber * bar + i));
         }
     }
+
+    /**
+     * arrayList foo column에 temp bar cloumn 의 데이터를 덮어씁니다.
+     * @param arrayList 조작될 arrayList
+     * @param temp 조작에 사용할 arrayList
+     * @param foo column foo
+     * @param bar column bar
+     */
     private void changeColumn(ArrayList<Integer> arrayList, ArrayList<Integer> temp, int foo, int bar){
         if(foo == -1 || bar == -1) return;
         for( int i = 0 ; i < this.dependencyNumber ; i++){
             arrayList.set(foo + this.dependencyNumber * i, temp.get(bar + this.dependencyNumber * i));
         }
     }
+
+    /**
+     * Group 이 닫혀있을때 해당 라인을 합쳐줍니다.
+     * 아이템 1~10 이 있을때, 그룹이 닫혀있다면 해당 데이터들이 merge 된 1개의 아이템으로 보여줍니다.
+     * 해당 Method 는 param 으로 받는 arrayList 를 직접 조작합니다.
+     * @param arrayList 조작될 ArrayList
+     * @param node Expanded 를 알 수 있는 node
+     */
     private void mergeRowAndColumn(ArrayList<ArrayList<String>> arrayList, GroupNode node){
         ItemNode firstItem = (ItemNode)node.getAllItemList().get(0);
         ItemNode lastItem = (ItemNode)node.getAllItemList().get(node.getAllItemList().size() - 1);
@@ -166,6 +189,11 @@ public class DSMModel extends Model{
         if(offset != -1)
             this.elementsNameArray.set(offset, newName);
     }
+
+    /**
+     * 해당 DSMModel 을 dsm 양식에 맞추어 만들어줍니다.
+     * @return dsm 양식에 맞는 string 형태
+     */
     public String toString(){
         String result = ""+this.dependencyNumber;
         for( int i = 0; i < this.dependencyRelationArray.size() ; i++){
