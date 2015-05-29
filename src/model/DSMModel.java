@@ -235,4 +235,14 @@ public class DSMModel extends Model{
         result += String.join("\r\n", this.elementsNameArray);
         return result;
     }
+    public void addNode(String newNodeName) {
+        this.dependencyNumber++;
+        this.elementsNameArray.add(newNodeName);
+        for(int i=dependencyNumber-1; i<(dependencyNumber-1)*dependencyNumber; i+=dependencyNumber) {
+            this.dependencyRelationArray.add(i, 0);
+        }
+        for(int i=(dependencyNumber-1)*dependencyNumber; i<dependencyNumber*dependencyNumber; i++) {
+            this.dependencyRelationArray.add(0);
+        }
+    }
 }
