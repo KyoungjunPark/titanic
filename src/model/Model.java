@@ -58,6 +58,7 @@ abstract class Model {
         this.node = node;
     }
     public GroupNode getGroupNode(){return null;}
+    public void addNode(String newNodeName){}
     protected boolean isEdit(){
         return this.isEdit;
     }

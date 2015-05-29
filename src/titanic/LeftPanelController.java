@@ -113,7 +113,7 @@ public class LeftPanelController extends CenterPanelController {
 							"New DSM Row Name", JOptionPane.ERROR_MESSAGE);
 				}
 				if (answer != null) {
-					addNewDSMRow();
+					addNewDSMRow(answer);
 				}
 
 			}
@@ -263,8 +263,8 @@ public class LeftPanelController extends CenterPanelController {
 		fileTreeController.unGroupTree();
 	}
 	
-	protected void addNewDSMRow() {
-		
+	protected void addNewDSMRow(String newNodeName) {
+		ModelManager.sharedModelManager().getCurrentTitanicModel().addNode(newNodeName);
 	}
 	
 	protected void expandAllButtonEnable(){

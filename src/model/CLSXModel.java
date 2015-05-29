@@ -30,6 +30,10 @@ public class CLSXModel extends Model{
         this.node = (GroupNode)node.getGroupNode();
     }
     public GroupNode getGroupNode(){return this.node;};
+    
+    public void addNode(String newNodeName) {
+    	
+    }
 
     /**
      * 해당 CLSX 를 XML 형태로 만들어줍니다.

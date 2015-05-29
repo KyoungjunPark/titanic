@@ -54,6 +54,7 @@ public class MainController {
                 EventManager.callEvent("moveUpButtonDisable");
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
+                EventManager.callEvent("newDSMRowButtonEnable");
 
                   
                 centerPanelController.getContentsPanelController().addRightPanel();

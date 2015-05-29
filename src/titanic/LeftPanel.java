@@ -105,7 +105,8 @@ public class LeftPanel extends JPanel implements Controllerable {
 			deleteButton.setEnabled(false);
 			add(deleteButton);
 			
-			newDSMRowButton = new JButton();
+			ImageIcon newDSMRowIcon = new ImageIcon("util/add.png");
+			newDSMRowButton = new JButton(newDSMRowIcon);
 			newDSMRowButton.setName("New DSM Row");
 			newDSMRowButton.setToolTipText("New DSM Row");
 			newDSMRowButton.setEnabled(false);
@@ -153,6 +154,12 @@ public class LeftPanel extends JPanel implements Controllerable {
 		}
 		protected void deleteButtonDisable(){
 			this.deleteButton.setEnabled(false);
+		}
+		protected void newDSMRowButtonEnable(){
+			this.newDSMRowButton.setEnabled(true);
+		}
+		protected void newDSMRowButtonDisable(){
+			this.newDSMRowButton.setEnabled(false);
 		}
 		
 		protected void changeDSMStatus() {

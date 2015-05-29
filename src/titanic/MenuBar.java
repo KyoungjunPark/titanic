@@ -65,7 +65,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
 
 		newDSMItem = new JMenuItem("New DSM", new ImageIcon("util/new-clsx.png"));
 		newDSMItem.setToolTipText("New DSM");
-		newDSMItem.setEnabled(false);
+		//newDSMItem.setEnabled(false);
 		openDSMItem = new JMenuItem("Open DSM...", new ImageIcon("util/open-dsm.png"));
 		openDSMItem.setToolTipText("Open DSM");
 		newClusteringItem = new JMenuItem("New Clustering", new ImageIcon("util/new-clsx.png"));

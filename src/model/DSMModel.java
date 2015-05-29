@@ -19,7 +19,9 @@ public class DSMModel extends Model{
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
 	private ArrayList<String> elementsNameArray = new ArrayList<String>();
 
-    /*New DSM기능을 위해 추가됨*/
+    /**
+     * New DSM기능을 위해 추가됨
+     * */
     public DSMModel(int nodeSize){
         dependencyNumber = nodeSize;
         for(int i = 0 ; i < nodeSize*nodeSize ; i++){
