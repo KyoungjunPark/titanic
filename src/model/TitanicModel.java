@@ -217,4 +217,17 @@ public class TitanicModel {
         }
         return groupData;
     }
+
+    /**
+     * Item 을 추가합니다.
+     * 해당 아이템은 DSM 에 가장 하단에 위치하며, clsx 에 가장 하단의 Item 으로 존재하게 됩니다.
+     * 디펜던시는 0으로 셋됩니다.
+     * @param newNodeName 새로 만들 item 의 이름
+     */
+    public void addNode(String newNodeName){
+        if(this.getClsxModel() != null){
+            this.getClsxModel().getGroupNode().addItem(new ItemNode(newNodeName));
+        }
+        this.getDsmModel().addNode(newNodeName);
+    }
 }
