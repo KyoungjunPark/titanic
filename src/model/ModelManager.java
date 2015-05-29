@@ -64,9 +64,9 @@ public class ModelManager {
         }
 		return model.getID();
 	}
-    public int createTitanicModel(DSMModel dsm)throws CreateException{
+    public int createTitanicModel(){
         TitanicModel model =  new TitanicModel();
-        model.setDsmModel(dsm);
+        this.addTitanicModel(model);
         return model.getID();
     }
         /**
