@@ -57,8 +57,8 @@ public class GreenTreeNode extends DefaultMutableTreeNode {
 
 
         Collections.sort(nodes, sort);
-        this.removeAllChildren();
 
+        this.removeAllChildren();
         for(GreenTreeNode node : nodes) {
             this.add(node);
         }

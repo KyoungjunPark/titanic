@@ -229,6 +229,7 @@ public class FileTreeController extends LeftPanelController {
 				System.out.println("expanded : " + node);
 				treeFile.expandNode(node);
 
+				EventManager.callEvent("Redraw-Table");
                 if(checkIsEdit == false){
                     ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
                     ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
@@ -242,6 +243,7 @@ public class FileTreeController extends LeftPanelController {
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
 				System.out.println("collapsed : " + node);
 				treeFile.collapseNode(node);
+				EventManager.callEvent("Redraw-Table");
 
                 if(checkIsEdit == false){
                     ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
