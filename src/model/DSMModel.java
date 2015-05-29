@@ -19,7 +19,9 @@ public class DSMModel extends Model{
 	private ArrayList<Integer> dependencyRelationArray = new ArrayList<Integer>();
 	private ArrayList<String> elementsNameArray = new ArrayList<String>();
 
-    /*New DSM기능을 위해 추가됨*/
+    /**
+     * New DSM기능을 위해 추가됨
+     * */
     public DSMModel(int nodeSize){
         dependencyNumber = nodeSize;
         for(int i = 0 ; i < nodeSize*nodeSize ; i++){
@@ -195,6 +197,25 @@ public class DSMModel extends Model{
         int offset = this.elementsNameArray.indexOf(originalName);
         if(offset != -1)
             this.elementsNameArray.set(offset, newName);
+    }
+    
+    public void addNode(String newNodeName) {
+    	this.dependencyNumber++;
+    	this.elementsNameArray.add(newNodeName);
+    	for(int i=dependencyNumber-1; i<(dependencyNumber-1)*dependencyNumber; i+=dependencyNumber) {
+    		this.dependencyRelationArray.add(i, 0);
+    	}
+    	for(int i=(dependencyNumber-1)*dependencyNumber; i<dependencyNumber*dependencyNumber; i++) {
+    		this.dependencyRelationArray.add(0);
+    	}
+    	ModelManager.sharedModelManager().getCurrentTitanicModel().
+    	syncTreeNode(ModelManager.sharedModelManager().getCurrentTitanicModel().getGroupNode().getTreeNode());
+    	System.out.println("dependencyNumber");
+    	for(int i=0; i<dependencyNumber*dependencyNumber; i++) {
+    		if(i%dependencyNumber==0)
+    			System.out.println("\n");
+    		System.out.print(dependencyRelationArray.get(i));
+    	}
     }
 
     /**

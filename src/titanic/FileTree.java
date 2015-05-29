@@ -227,10 +227,6 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
     }
 
-    protected void addNewDSMRow() {
-
-    }
-
     private ArrayList<GreenTreeNode> getSelectedNodes() {
         TreePath[] paths = this.getSelectionPaths();
         ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
@@ -290,7 +286,7 @@ public class FileTree extends JTree implements Controllerable {
 
     }
 
-    private void syncWithModel() {
+    protected void syncWithModel() {
         ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
     }
 

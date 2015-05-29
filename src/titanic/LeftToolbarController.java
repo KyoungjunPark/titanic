@@ -88,7 +88,9 @@ public class LeftToolbarController extends LeftPanelController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventManager.callEvent("newDSMRow");
+				EventManager.callEvent("Redraw-FileTree");
 				EventManager.callEvent("Redraw-Table");
+				System.out.println("everything is alright");
 			}
 		});
 		
@@ -136,6 +138,12 @@ public class LeftToolbarController extends LeftPanelController{
 	}
 	protected void deleteButtonDisable(){
 		leftToolbar.deleteButtonDisable();
+	}
+	protected void newDSMRowButtonEnable(){
+		leftToolbar.newDSMRowButtonEnable();
+	}
+	protected void newDSMRowButtonDisable(){
+		leftToolbar.newDSMRowButtonDisable();
 	}
 
 }

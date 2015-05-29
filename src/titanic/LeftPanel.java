@@ -154,6 +154,12 @@ public class LeftPanel extends JPanel implements Controllerable {
 		protected void deleteButtonDisable(){
 			this.deleteButton.setEnabled(false);
 		}
+		protected void newDSMRowButtonEnable(){
+			this.newDSMRowButton.setEnabled(true);
+		}
+		protected void newDSMRowButtonDisable(){
+			this.newDSMRowButton.setEnabled(false);
+		}
 		
 		protected void changeDSMStatus() {
 			expandAllButton.setEnabled(true);
