@@ -1,6 +1,9 @@
 package util;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by kimjisoo on 5/23/15.
@@ -36,6 +39,31 @@ public class GreenTreeNode extends DefaultMutableTreeNode {
                 groupNode.addItem(node.getGroupNode());
         }
         return groupNode;
+    }
+
+    public void sortAlphabetic(){
+        ArrayList<GreenTreeNode> nodes = new ArrayList<>();
+        for(int i = 0 ; i < this.getChildCount() ; i++) {
+            nodes.add((GreenTreeNode) this.getChildAt(i));
+        }
+
+
+        Comparator<GreenTreeNode> sort = new Comparator<GreenTreeNode>() {
+            @Override
+            public int compare(GreenTreeNode o1, GreenTreeNode o2) {
+                return o1.toString().toLowerCase().compareTo(o2.toString().toLowerCase());
+            }
+        };
+
+
+        Collections.sort(nodes, sort);
+        this.removeAllChildren();
+
+        for(GreenTreeNode node : nodes) {
+            this.add(node);
+        }
+
+
     }
 
     public boolean isExpanded() {

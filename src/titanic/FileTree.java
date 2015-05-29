@@ -14,284 +14,276 @@ import model.ModelManager;
 
 
 public class FileTree extends JTree implements Controllerable {
-	private GreenTreeNode root;
+    private GreenTreeNode root;
 
-	public FileTree() {
-		this.setModel(null);
-	}
+    public FileTree() {
+        this.setModel(null);
+    }
 
-	public void makeTree() {
+    public void makeTree() {
 
-		root = ModelManager.sharedModelManager().getCurrentTitanicModel()
-				.getGroupNode().getTreeNode();
+        root = ModelManager.sharedModelManager().getCurrentTitanicModel()
+                .getGroupNode().getTreeNode();
 
-		this.setModel(new DefaultTreeModel(root));
-		this.collapseRow(0);
+        this.setModel(new DefaultTreeModel(root));
+        this.collapseRow(0);
 
 
-		this.setSelectionPath(new TreePath(root));
-		
+        this.setSelectionPath(new TreePath(root));
 
-	}
 
-	/*
-		must implement flag clone!!
-	 */
-	protected void moveUp() {
+    }
 
-		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
-		TreePath[] treePath = new TreePath[nodes.size()];
-		
-		
-		
-		nodes = sortFromIndex(nodes);
-		
-		for (int i = 0; i < nodes.size(); i++) {
-			GreenTreeNode node = nodes.get(i);
+    /*
+        must implement flag clone!!
+     */
+    protected void moveUp() {
 
-			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			GreenTreeNode root = (GreenTreeNode) model
-					.getRoot();
-			GreenTreeNode newNode;
+        ArrayList<GreenTreeNode> nodes = getSelectedNodes();
+        TreePath[] treePath = new TreePath[nodes.size()];
 
-			newNode = deepClone(node);
-			model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
-					node.getParent().getIndex(node) - 1);
 
-			model.removeNodeFromParent(node);
-			treePath[i] = new TreePath(newNode.getPath());
-		}
-		
-		this.setSelectionPaths(treePath);
+        nodes = sortFromIndex(nodes);
 
-		syncWithModel();
-	}
+        for (int i = 0; i < nodes.size(); i++) {
+            GreenTreeNode node = nodes.get(i);
 
-	protected void moveDown() {
+            DefaultTreeModel model = (DefaultTreeModel) this.getModel();
+            GreenTreeNode root = (GreenTreeNode) model
+                    .getRoot();
+            GreenTreeNode newNode;
 
-		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
-		TreePath[] treePath = new TreePath[nodes.size()];
-		
-		nodes = reverseSortFromIndex(nodes);
-		
-		for (int i = 0; i < nodes.size(); i++) {
-			GreenTreeNode node = nodes.get(i);
-			DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-			GreenTreeNode root = (GreenTreeNode) model
-					.getRoot();
-			GreenTreeNode newNode;
+            newNode = deepClone(node);
+            model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
+                    node.getParent().getIndex(node) - 1);
 
-			newNode =  deepClone(node);
-			model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
-					node.getParent().getIndex(node) + 2);
+            model.removeNodeFromParent(node);
+            treePath[i] = new TreePath(newNode.getPath());
+        }
 
-			model.removeNodeFromParent(node);
+        this.setSelectionPaths(treePath);
 
-			treePath[i] = new TreePath(newNode.getPath());
-		}
-		
-		this.setSelectionPaths(treePath);
-		
-		syncWithModel();
-	}
+        syncWithModel();
+    }
 
-	private GreenTreeNode deepClone(GreenTreeNode source) {
-		GreenTreeNode newNode = (GreenTreeNode) source
-				.clone();
-		Enumeration enumeration = source.children();
-		while (enumeration.hasMoreElements()) {
-			newNode.add(deepClone((GreenTreeNode) enumeration
-					.nextElement()));
-		}
-		return newNode;
-	} 
-	private ArrayList<GreenTreeNode> sortFromIndex(ArrayList<GreenTreeNode> nodes){
-		
-		for(int i = 0 ; i<nodes.size() ; i++){
-			int min = root.getIndex(nodes.get(i));
-			int index = i;
-			for(int j = i+1 ;  j <nodes.size(); j++){
-				if(root.getIndex(nodes.get(j)) < min){
-					min = root.getIndex(nodes.get(j));
-					index = j;
-				}
-			}
-			if(i != index){
-				//exchange i & index 's contents
-				GreenTreeNode tmpNode = nodes.get(i);
-				nodes.set(i, nodes.get(index));
-				nodes.set(index, tmpNode);
-			}
-		}
-		return nodes;
+    protected void moveDown() {
 
-	} 
-	private ArrayList<GreenTreeNode> reverseSortFromIndex(ArrayList<GreenTreeNode> nodes){
-		
-		for(int i = 0 ; i<nodes.size() ; i++){
-			int max = root.getIndex(nodes.get(i));
-			int index = i;
-			for(int j = i+1 ;  j <nodes.size(); j++){
-				if(root.getIndex(nodes.get(j)) > max){
-					max = root.getIndex(nodes.get(j));
-					index = j;
-				}
-			}
-			if(i != index){
-				//exchange i & index 's contents
-				GreenTreeNode tmpNode = nodes.get(i);
-				nodes.set(i, nodes.get(index));
-				nodes.set(index, tmpNode);
-			}
-		}
-		return nodes;
-	} 
+        ArrayList<GreenTreeNode> nodes = getSelectedNodes();
+        TreePath[] treePath = new TreePath[nodes.size()];
 
-	protected void addItem() {
-		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-		GreenTreeNode root = (GreenTreeNode) model.getRoot();
-		root.add(new GreenTreeNode("another_child"));
-		model.reload(root);
-	}
+        nodes = reverseSortFromIndex(nodes);
 
-	protected void expandAll(int startingIndex, int rowCount) {
+        for (int i = 0; i < nodes.size(); i++) {
+            GreenTreeNode node = nodes.get(i);
+            DefaultTreeModel model = (DefaultTreeModel) this.getModel();
+            GreenTreeNode root = (GreenTreeNode) model
+                    .getRoot();
+            GreenTreeNode newNode;
 
-		for (int i = startingIndex; i < rowCount; i++) {
-			GreenTreeNode node = (GreenTreeNode)this.getPathForRow(i).getLastPathComponent();
-			node.setIsExpanded(true);
-			this.expandRow(i);
-		}
+            newNode = deepClone(node);
+            model.insertNodeInto(newNode, (GreenTreeNode) node.getParent(),
+                    node.getParent().getIndex(node) + 2);
 
-		if (this.getRowCount() != rowCount) {
-			expandAll(rowCount, this.getRowCount());
-		}
-		syncWithModel();
-	}
+            model.removeNodeFromParent(node);
 
-	protected void collapseAll() {
-		for (int i = this.getRowCount() - 1; i >= 0; i--) {
-			GreenTreeNode node = (GreenTreeNode)this.getPathForRow(i).getLastPathComponent();
-			node.setIsExpanded(false);
-			this.collapseRow(i);
-		}
+            treePath[i] = new TreePath(newNode.getPath());
+        }
 
-		syncWithModel();
-	}
+        this.setSelectionPaths(treePath);
 
-	protected void delete() {
+        syncWithModel();
+    }
 
-		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
-		for (int i = 0; i < nodes.size(); i++) {
-			((DefaultTreeModel) this.getModel()).removeNodeFromParent(nodes
-					.get(i));
-		}
-		
-		syncWithModel();
-	}
-	
-	protected void groupTree(String groupName) {
-		ArrayList<GreenTreeNode> nodes = getSelectedNodes();
-		GreenTreeNode newGroup = new GreenTreeNode(groupName);
-		
-		nodes = sortFromIndex(nodes);
-		int index = nodes.get(0).getParent().getIndex(nodes.get(0));
-		MutableTreeNode parent = (MutableTreeNode) nodes.get(0).getParent();
+    private GreenTreeNode deepClone(GreenTreeNode source) {
+        GreenTreeNode newNode = (GreenTreeNode) source
+                .clone();
+        Enumeration enumeration = source.children();
+        while (enumeration.hasMoreElements()) {
+            newNode.add(deepClone((GreenTreeNode) enumeration
+                    .nextElement()));
+        }
+        return newNode;
+    }
 
-		for(int i=0; i<nodes.size(); i++) {
-			GreenTreeNode newNode = new GreenTreeNode();
-			newNode = (GreenTreeNode) deepClone(nodes.get(i));
-			newGroup.add(newNode);
-		}
-		
-		((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
-		delete();
-		syncWithModel();
-		
-	}
-	
-	protected void unGroupTree() {
-		GreenTreeNode node = getSelectedNodes().get(0);
-		int index = node.getParent().getIndex(node);
-		int childCount = node.getChildCount();
-		
-		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
-		for (int i=0; i<childCount; i++) {
-			//nodes.add((GreenTreeNode) node.getChildAt(i));
-			((DefaultTreeModel) this.getModel()).insertNodeInto
-			((MutableTreeNode)node.getChildAt(0), (MutableTreeNode)node.getParent(), index+i);
-		}
-		delete();
-		EventManager.callEvent("ungroupButtonDisable");
-		syncWithModel();
-	}
-	
-	protected void addNewDSMRow() {
-		
-	}
+    private ArrayList<GreenTreeNode> sortFromIndex(ArrayList<GreenTreeNode> nodes) {
 
-	private ArrayList<GreenTreeNode> getSelectedNodes() {
-		TreePath[] paths = this.getSelectionPaths();
-		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
-		for (TreePath path : paths) {
-			nodes.add((GreenTreeNode) path.getLastPathComponent());
-		}
+        for (int i = 0; i < nodes.size(); i++) {
+            int min = root.getIndex(nodes.get(i));
+            int index = i;
+            for (int j = i + 1; j < nodes.size(); j++) {
+                if (root.getIndex(nodes.get(j)) < min) {
+                    min = root.getIndex(nodes.get(j));
+                    index = j;
+                }
+            }
+            if (i != index) {
+                //exchange i & index 's contents
+                GreenTreeNode tmpNode = nodes.get(i);
+                nodes.set(i, nodes.get(index));
+                nodes.set(index, tmpNode);
+            }
+        }
+        return nodes;
 
-		return nodes;
+    }
 
-	}
+    private ArrayList<GreenTreeNode> reverseSortFromIndex(ArrayList<GreenTreeNode> nodes) {
 
-	public GreenTreeNode findNode(String search) {
+        for (int i = 0; i < nodes.size(); i++) {
+            int max = root.getIndex(nodes.get(i));
+            int index = i;
+            for (int j = i + 1; j < nodes.size(); j++) {
+                if (root.getIndex(nodes.get(j)) > max) {
+                    max = root.getIndex(nodes.get(j));
+                    index = j;
+                }
+            }
+            if (i != index) {
+                //exchange i & index 's contents
+                GreenTreeNode tmpNode = nodes.get(i);
+                nodes.set(i, nodes.get(index));
+                nodes.set(index, tmpNode);
+            }
+        }
+        return nodes;
+    }
 
-		Enumeration nodeEnumeration = root.breadthFirstEnumeration();
-		while (nodeEnumeration.hasMoreElements()) {
-			GreenTreeNode node = (GreenTreeNode) nodeEnumeration
-					.nextElement();
-			String found = (String) node.getUserObject();
-			if (search.equals(found)) {
-				return node;
-			}
-		}
-		return null;
-	}
+    protected void addItem() {
+        DefaultTreeModel model = (DefaultTreeModel) this.getModel();
+        GreenTreeNode root = (GreenTreeNode) model.getRoot();
+        root.add(new GreenTreeNode("another_child"));
+        model.reload(root);
+    }
 
-	public void rename(GreenTreeNode node, String name){
-		node.setUserObject(name);
-		
-		repaint();
-		syncWithModel();
-	}
-	public void expandNode(GreenTreeNode node){
-		node.setIsExpanded(true);
-		syncWithModel();
-	}
-	public void collapseNode(GreenTreeNode node){
-		node.setIsExpanded(false);
-		syncWithModel();
-	}
-	public void sortNode(GreenTreeNode node){
-		ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
-		for(int i = 0 ; i < node.getChildCount() ; i++) {
-			nodes.add((GreenTreeNode) node.getChildAt(i));
-		}
+    protected void expandAll(int startingIndex, int rowCount) {
 
-		Comparator<GreenTreeNode> sort = new Comparator<GreenTreeNode>() {
-			@Override
-			public int compare(GreenTreeNode o1, GreenTreeNode o2) {
-				return o1.toString().toLowerCase().compareTo(o2.toString().toLowerCase());
-			}
-		};
+        for (int i = startingIndex; i < rowCount; i++) {
+            GreenTreeNode node = (GreenTreeNode) this.getPathForRow(i).getLastPathComponent();
+            node.setIsExpanded(true);
+            this.expandRow(i);
+        }
 
-		Collections.sort(nodes, sort);
-		for(GreenTreeNode n : nodes) System.out.println(n);
-		syncWithModel();
-	}
+        if (this.getRowCount() != rowCount) {
+            expandAll(rowCount, this.getRowCount());
+        }
+        syncWithModel();
+    }
 
-	private void syncWithModel()
-	{
-		ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
-	}
-	@Override
-	public void setAction(String title, ActionListener action) {
+    protected void collapseAll() {
+        for (int i = this.getRowCount() - 1; i >= 0; i--) {
+            GreenTreeNode node = (GreenTreeNode) this.getPathForRow(i).getLastPathComponent();
+            node.setIsExpanded(false);
+            this.collapseRow(i);
+        }
 
-	}
+        syncWithModel();
+    }
+
+    protected void delete() {
+
+        ArrayList<GreenTreeNode> nodes = getSelectedNodes();
+        for (int i = 0; i < nodes.size(); i++) {
+            ((DefaultTreeModel) this.getModel()).removeNodeFromParent(nodes
+                    .get(i));
+        }
+
+        syncWithModel();
+    }
+
+    protected void groupTree(String groupName) {
+        ArrayList<GreenTreeNode> nodes = getSelectedNodes();
+        GreenTreeNode newGroup = new GreenTreeNode(groupName);
+
+        nodes = sortFromIndex(nodes);
+        int index = nodes.get(0).getParent().getIndex(nodes.get(0));
+        MutableTreeNode parent = (MutableTreeNode) nodes.get(0).getParent();
+
+        for (int i = 0; i < nodes.size(); i++) {
+            GreenTreeNode newNode = new GreenTreeNode();
+            newNode = (GreenTreeNode) deepClone(nodes.get(i));
+            newGroup.add(newNode);
+        }
+
+        ((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
+        delete();
+        syncWithModel();
+
+    }
+
+    protected void unGroupTree() {
+        GreenTreeNode node = getSelectedNodes().get(0);
+        int index = node.getParent().getIndex(node);
+        int childCount = node.getChildCount();
+
+        ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
+        for (int i = 0; i < childCount; i++) {
+            //nodes.add((GreenTreeNode) node.getChildAt(i));
+            ((DefaultTreeModel) this.getModel()).insertNodeInto
+                    ((MutableTreeNode) node.getChildAt(0), (MutableTreeNode) node.getParent(), index + i);
+        }
+        delete();
+        EventManager.callEvent("ungroupButtonDisable");
+        syncWithModel();
+    }
+
+    protected void addNewDSMRow() {
+
+    }
+
+    private ArrayList<GreenTreeNode> getSelectedNodes() {
+        TreePath[] paths = this.getSelectionPaths();
+        ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
+        for (TreePath path : paths) {
+            nodes.add((GreenTreeNode) path.getLastPathComponent());
+        }
+
+        return nodes;
+
+    }
+
+    public GreenTreeNode findNode(String search) {
+
+        Enumeration nodeEnumeration = root.breadthFirstEnumeration();
+        while (nodeEnumeration.hasMoreElements()) {
+            GreenTreeNode node = (GreenTreeNode) nodeEnumeration
+                    .nextElement();
+            String found = (String) node.getUserObject();
+            if (search.equals(found)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public void rename(GreenTreeNode node, String name) {
+        node.setUserObject(name);
+
+        repaint();
+        syncWithModel();
+    }
+
+    public void expandNode(GreenTreeNode node) {
+        node.setIsExpanded(true);
+        syncWithModel();
+    }
+
+    public void collapseNode(GreenTreeNode node) {
+        node.setIsExpanded(false);
+        syncWithModel();
+    }
+
+    public void sortNode(GreenTreeNode node) {
+        node.sortAlphabetic();
+        ((DefaultTreeModel)this.getModel()).reload();
+        syncWithModel();
+    }
+
+    private void syncWithModel() {
+        ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);
+    }
+
+    @Override
+    public void setAction(String title, ActionListener action) {
+
+    }
 }
