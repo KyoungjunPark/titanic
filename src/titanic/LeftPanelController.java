@@ -103,8 +103,18 @@ public class LeftPanelController extends CenterPanelController {
 		
 		EventManager.addEvent(new Event("newDSMRow") {
 			public void action() {
-				addNewDSMRow();
-				//ModelManager에 데이터 넘겨줌
+				String answer = JOptionPane.showInputDialog(null,
+						"Enter new row name: ", "New DSM Row Name",
+						JOptionPane.PLAIN_MESSAGE);
+
+				while (answer != null && answer.isEmpty()) {
+					answer = JOptionPane.showInputDialog(null,
+							"Empty input is not accepted!\n Enter new row name: ",
+							"New DSM Row Name", JOptionPane.ERROR_MESSAGE);
+				}
+				if (answer != null) {
+					addNewDSMRow();
+				}
 
 			}
 
@@ -254,32 +264,6 @@ public class LeftPanelController extends CenterPanelController {
 	}
 	
 	protected void addNewDSMRow() {
-		String answer = JOptionPane.showInputDialog(null,
-				"Enter new row name: ", "New DSM Row Name",
-				JOptionPane.PLAIN_MESSAGE);
-
-		while (answer != null && answer.isEmpty()) {
-			answer = JOptionPane.showInputDialog(null,
-					"Empty input is not accepted!\n Enter new row name: ",
-					"New DSM Row Name", JOptionPane.ERROR_MESSAGE);
-		}
-		if (answer != null) {
-			int size = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getDependencyNum();
-			/*
-			 * table을 두개 생성. ArrayList<String> newRowValue와 ArrayList<String> newColumnValue, String name을 가지는
-			 * ArrayList를 ModelManager에 전달.
-			 * */
-			/*
-			 * JOptionPane에 JTable 붙이기
-			 * Object[][] rows = {
-			 * 		{element,symbol,atomicNumber,atomicMass,valence}
-			 * };
-			 * Object[] cols = { "Name","Symbol","Atomic Number","Atomic Mass", "# of Valence Electrons" };
-			 * JTable table = new JTable(rows, cols);
-			 * JOptionPane.showMessageDialog(null, new JScrollPane(table));
-			 */
-			
-		}
 		
 	}
 	
