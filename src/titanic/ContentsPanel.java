@@ -60,10 +60,13 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName() == null){
 			fileName = "untitle-" + contents.size();
 		}
-		else {
-			fileName = ModelManager.sharedModelManager()
-					.getCurrentTitanicModel().getDsmModel().getFileName();
-		}
+		else{
+            fileName = ModelManager.sharedModelManager()
+                    .getCurrentTitanicModel().getDsmModel().getFileName();
+        }
+        if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
+            fileName += "(Edit)";
+        }
 
 		JLabel title = new JLabel(fileName);
 
@@ -79,7 +82,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit()){
+                if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit() && !ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
                     int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
                     if (selected == 0) { //yes
                         try {
@@ -97,8 +100,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
                 removeTab(panel.getID());
                 ModelManager.sharedModelManager().removeTitanicModel(panel.getID());
                 EventManager.callEvent("FileTree-redraw");
-
-
 
             }
         });

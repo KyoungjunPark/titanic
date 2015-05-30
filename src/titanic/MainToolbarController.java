@@ -238,4 +238,7 @@ public class MainToolbarController extends MainController {
         toolbar.changeDSMStatus();
 
     }
+    protected void changeEditStatus(){
+        toolbar.changeEditStatus();
+    }
 }

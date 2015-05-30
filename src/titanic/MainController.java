@@ -104,6 +104,13 @@ public class MainController {
                 centerPanelController.getLeftPanelController().getFileTreeController().makeDefaultNodes(numNode);
             }
         }));
+		EventManager.addEvent((new Event("after-open-Edit"){
+			public void action(){
+				menuBarController.changeEditStatus();
+				mainToolbarController.changeEditStatus();
+				centerPanelController.getContentsPanelController().addRightPanel();
+			}
+		}));
 	}
 	
 

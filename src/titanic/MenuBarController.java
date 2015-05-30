@@ -473,4 +473,8 @@ public class MenuBarController extends MainController {
         menu.changeDSMStatus();
 
     }
+    protected void changeEditStatus(){
+        menu.changeEditStatus();
+    }
+
 }

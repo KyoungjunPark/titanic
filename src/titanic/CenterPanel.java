@@ -15,12 +15,6 @@ public class CenterPanel extends JSplitPane{
 		leftPanel = new LeftPanel();
 		setLeftComponent(leftPanel);
 		
-		/*
-		rightPanel = new RightPanel();
-		rightPanel.setBackground(Color.LIGHT_GRAY);
-		setRightComponent(rightPanel);
-		*/
-		
 		contentsPanel = new ContentsPanel();
 		setRightComponent(contentsPanel);
 		contentsPanel.setBackground(Color.LIGHT_GRAY);
