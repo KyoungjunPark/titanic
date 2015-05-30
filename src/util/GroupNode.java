@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by kimjisoo on 5/19/15.
  */
 public class GroupNode extends Node{
-    private ArrayList<Node> childNodeArray = new ArrayList<Node>();
+    public ArrayList<Node> childNodeArray = new ArrayList<Node>();
     private boolean isExpanded = false;
     public GroupNode(){
 

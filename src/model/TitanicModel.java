@@ -11,7 +11,7 @@ public class TitanicModel {
 	private int id;
 	private DSMModel dsmModel = null;
 	private CLSXModel clsxModel = null;
-	
+	private boolean isEditModel = false;
 	public TitanicModel(){
 		this.id = TitanicModel.nextID();
 	}
@@ -247,5 +247,24 @@ public class TitanicModel {
             this.getClsxModel().setMetaModel(nodeName);
         else
             this.getDsmModel().setMetaModel(nodeName);
+    }
+
+    public boolean isEditModel() {
+        return isEditModel;
+    }
+
+    public void setEditModel(boolean isEditModel) {
+        this.isEditModel = isEditModel;
+    }
+    protected void adjustMetaMode(){
+        if(this.isEditModel()){
+            if(this.getClsxModel() != null)
+                this.getClsxModel().loadMetaModel();
+            this.getDsmModel().loadMetaModel();
+        }else{
+            if(this.getClsxModel() != null)
+                this.getClsxModel().saveMetaModel();
+            this.getDsmModel().saveMetaModel();
+        }
     }
 }
