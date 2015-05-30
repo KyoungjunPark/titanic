@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.plaf.metal.MetalIconFactory;
 import javax.xml.ws.Service;
 
+import com.sun.javafx.sg.prism.NGShape;
 import model.EventManager;
 import model.ModelManager;
 import model.SaveException;
@@ -57,7 +58,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		String fileName;
 		if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName() == null){
-			fileName = "untitle-" + ModelManager.sharedModelManager().getTitanicModelCount();
+			fileName = "untitle-" + contents.size();
 		}
 		else {
 			fileName = ModelManager.sharedModelManager()
