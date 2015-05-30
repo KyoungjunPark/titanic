@@ -101,8 +101,6 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
                 ModelManager.sharedModelManager().removeTitanicModel(panel.getID());
                 EventManager.callEvent("FileTree-redraw");
 
-
-
             }
         });
 		GridBagConstraints gridBag = new GridBagConstraints();
