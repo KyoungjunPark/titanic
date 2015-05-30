@@ -1,16 +1,11 @@
 package model;
 
-class MetaModel {
-	private String fileType; //dsm or clsx
-	
-	public MetaModel()
+import util.GroupNode;
+
+class MetaModel  {
+    GroupNode node = null;
+	public MetaModel(GroupNode node)
 	{
-		
+		this.node = node;
 	}
-	public MetaModel(String fileType)
-	{
-		this.fileType = fileType;
-		
-	}
-	
 }

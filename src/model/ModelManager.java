@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import util.GreenTreeNode;
+import util.GroupNode;
 import util.JSFiles;
 
 public class ModelManager {
@@ -188,9 +189,22 @@ public class ModelManager {
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
 	public int editTatanicModel(int id, GreenTreeNode node){
-		
-		return -1;
+		MetaModel meta = new MetaModel((GroupNode)node.getGroupNode());
+        TitanicModel model = new TitanicModel();
+        model.setClsxModel(this.getTitanicModel(id).getClsxModel());
+        model.setDsmModel(this.getTitanicModel(id).getDsmModel());
+        model.setMetaModel(meta);
+		return model.getID();
 	}
+    /**
+     * node 를 받아 titanic model 을 edit 합니다.
+     * 현재의 titanicmodel 을 기준으로 작업합니다.
+     * @param node {@link GreenTreeNode} 그룹 정보입니다. 해당 그룹정보를 가지고 edit 합니다.
+     * @return 새로 생성된 tiatanic의 id 를 반화합니다.
+     */
+    public int editTatanicModel(GreenTreeNode node){
+        return editTatanicModel(this.getCurrentID(), node);
+    }
     /**
      * id 에 해당하는 Titanic 모델을 받습니다.
      * @param id

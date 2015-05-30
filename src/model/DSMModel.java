@@ -64,6 +64,7 @@ public class DSMModel extends Model{
 	         */
 	}
 	public GroupNode getGroupNode(){
+        if( this.getMetaModel() != null ) return this.getMetaModel().node;
 		this.node = new GroupNode("root$");
 		for(String name : this.elementsNameArray){
 			this.node.addItem(new ItemNode(name));

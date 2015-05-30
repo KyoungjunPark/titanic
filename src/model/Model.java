@@ -11,6 +11,7 @@ abstract class Model {
     private String filePath;
     private String fileName;
     private boolean isEdit = false;
+    private MetaModel metaModel = null;
     protected GroupNode node = null;
     public String getFilePath() {
         return filePath;
@@ -64,5 +65,13 @@ abstract class Model {
     }
     public void setIsEdit(boolean isEdit){
         this.isEdit = isEdit;
+    }
+
+    protected MetaModel getMetaModel() {
+        return metaModel;
+    }
+
+    protected void setMetaModel(MetaModel metaModel) {
+        this.metaModel = metaModel;
     }
 }

@@ -29,7 +29,10 @@ public class CLSXModel extends Model{
     protected void setTreeNode(GreenTreeNode node)throws CreateException{
         this.node = (GroupNode)node.getGroupNode();
     }
-    public GroupNode getGroupNode(){return this.node;};
+    public GroupNode getGroupNode(){
+        if( this.getMetaModel() != null ) return this.getMetaModel().node;
+        return this.node;
+    };
     
     public void addNode(String newNodeName) {
     	
