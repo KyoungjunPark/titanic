@@ -1,6 +1,7 @@
 package model;
 
 import util.GroupNode;
+import util.Node;
 
 import java.io.*;
 
@@ -71,7 +72,21 @@ abstract class Model {
         return metaModel;
     }
 
-    protected void setMetaModel(MetaModel metaModel) {
-        this.metaModel = metaModel;
+    protected void setMetaModel(String nodeName) {
+        for(Node groupNode : this.node.getAllGroupList()){
+            if(groupNode.toString().compareTo(nodeName) == 0){
+                this.metaModel = new MetaModel((GroupNode)groupNode);
+                break;
+            }
+        }
+    }
+    protected void syncMetaModel(){
+        if( metaModel == null) return;
+        for(Node groupNode : this.node.getAllGroupList()){
+            if(groupNode.toString().compareTo(metaModel.node.toString()) == 0){
+                this.metaModel = new MetaModel((GroupNode)groupNode);
+                break;
+            }
+        }
     }
 }

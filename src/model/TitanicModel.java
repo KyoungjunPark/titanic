@@ -242,10 +242,10 @@ public class TitanicModel {
             }
         }
     }
-    protected void setMetaModel(MetaModel model){
+    protected void setMetaModel(String nodeName){
         if(this.getClsxModel() != null)
-            this.getClsxModel().setMetaModel(model);
+            this.getClsxModel().setMetaModel(nodeName);
         else
-            this.getDsmModel().setMetaModel(model);
+            this.getDsmModel().setMetaModel(nodeName);
     }
 }

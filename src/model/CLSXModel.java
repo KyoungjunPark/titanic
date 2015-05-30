@@ -28,6 +28,7 @@ public class CLSXModel extends Model{
      */
     protected void setTreeNode(GreenTreeNode node)throws CreateException{
         this.node = (GroupNode)node.getGroupNode();
+        this.syncMetaModel();
     }
     public GroupNode getGroupNode(){
         if( this.getMetaModel() != null ) return this.getMetaModel().node;

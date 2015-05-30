@@ -58,7 +58,8 @@ public class DSMModel extends Model{
 			this.elementsNameArray.add(lines[i + 1 + this.dependencyNumber]);
 	}
 	public void setGroupNode(GroupNode node){
-	        this.node = node;
+        this.node = node;
+        this.syncMetaModel();
 	        /*
 	         node data 기준으로 dsm 을 수정할것임.
 	         */
