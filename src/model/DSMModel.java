@@ -225,4 +225,11 @@ public class DSMModel extends Model{
             this.dependencyRelationArray.add(0);
         this.dependencyNumber++;
     }
+    protected boolean isExistName(String name){
+        return this.elementsNameArray.indexOf(name) == -1 ? false:true;
+    }
+    protected void rename(String originalName, String changedName){
+        if(isExistName(originalName))
+            this.elementsNameArray.set(this.elementsNameArray.indexOf(originalName), changedName);
+    }
 }

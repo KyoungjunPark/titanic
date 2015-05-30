@@ -142,6 +142,7 @@ public class ModelManager {
      */
     public void save()throws SaveException{
         EventManager.callEvent("before-save");
+        this.getCurrentTitanicModel().save();
         EventManager.callEvent("after-save");
     }
 
