@@ -31,6 +31,7 @@ public class GroupNode extends Node{
      */
     public GreenTreeNode getTreeNode(){
         GreenTreeNode root = new GreenTreeNode(this.getName(), this);
+        root.setIsExpanded(this.isExpanded);
         for(Node node : this.childNodeArray){
             root.add(node.getTreeNode());
         }
