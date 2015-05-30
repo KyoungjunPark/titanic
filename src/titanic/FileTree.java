@@ -264,12 +264,11 @@ public class FileTree extends JTree implements Controllerable {
     public void rename(GreenTreeNode node, String name) {
         node.setUserObject(name);
 
-        repaint();
+        ((DefaultTreeModel) this.getModel()).reload();
         syncWithModel();
     }
     public void expandNode(GreenTreeNode node) {
         node.setIsExpanded(true);
-        System.out.println(node+"/"+node.isExpanded());
         syncWithModel();
     }
     public void collapseNode(GreenTreeNode node) {
@@ -298,17 +297,16 @@ public class FileTree extends JTree implements Controllerable {
         else{
             this.root = null;
         }
-        /*
+
+        this.setModel(new DefaultTreeModel(this.root));
+
         Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
         while(nodeEnumeration.hasMoreElements()){
             GreenTreeNode node = (GreenTreeNode) nodeEnumeration.nextElement();
-            System.out.println(node +"/"+node.isExpanded());
             if(node.isExpanded()) {
-                System.out.println("checked"+node);
+                this.expandPath(new TreePath(node.getPath()));
             }
         }
-        */
-        this.setModel(new DefaultTreeModel(root));
 
     }
 
