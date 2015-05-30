@@ -248,10 +248,9 @@ public class FileTree extends JTree implements Controllerable {
         return nodes;
 
     }
-
     public GreenTreeNode findNode(String search) {
 
-        Enumeration nodeEnumeration = root.breadthFirstEnumeration();
+        Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
         while (nodeEnumeration.hasMoreElements()) {
             GreenTreeNode node = (GreenTreeNode) nodeEnumeration
                     .nextElement();
@@ -262,30 +261,26 @@ public class FileTree extends JTree implements Controllerable {
         }
         return null;
     }
-
     public void rename(GreenTreeNode node, String name) {
         node.setUserObject(name);
 
         repaint();
         syncWithModel();
     }
-
     public void expandNode(GreenTreeNode node) {
         node.setIsExpanded(true);
+        System.out.println(node+"/"+node.isExpanded());
         syncWithModel();
     }
-
     public void collapseNode(GreenTreeNode node) {
         node.setIsExpanded(false);
         syncWithModel();
     }
-
     public void sortNode(GreenTreeNode node) {
         node.sortAlphabetic();
         ((DefaultTreeModel) this.getModel()).reload();
         syncWithModel();
     }
-
     public void makeDefaultNodes(int numNode){
 
         this.root.getNode().setName("root$");
@@ -294,21 +289,27 @@ public class FileTree extends JTree implements Controllerable {
             this.root.add(node);
         }
         syncWithModel();
-
     }
     public void redrawTree(){
-        //must changed!
         if(ModelManager.sharedModelManager().getCurrentTitanicModel() != null) {
             this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
                     .getGroupNode().getTreeNode();
-            this.setModel(new DefaultTreeModel(root));
         }
         else{
             this.root = null;
-            this.setModel(new DefaultTreeModel(root));
         }
+        /*
+        Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
+        while(nodeEnumeration.hasMoreElements()){
+            GreenTreeNode node = (GreenTreeNode) nodeEnumeration.nextElement();
+            System.out.println(node +"/"+node.isExpanded());
+            if(node.isExpanded()) {
+                System.out.println("checked"+node);
+            }
+        }
+        */
+        this.setModel(new DefaultTreeModel(root));
 
-        ((DefaultTreeModel) this.getModel()).reload();
     }
 
     protected void syncWithModel() {
@@ -317,7 +318,6 @@ public class FileTree extends JTree implements Controllerable {
 
     @Override
     public void setAction(String title, ActionListener action) {
-
     }
 
 }
