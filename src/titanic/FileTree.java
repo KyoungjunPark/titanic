@@ -277,8 +277,10 @@ public class FileTree extends JTree implements Controllerable {
     }
     public void sortNode(GreenTreeNode node) {
         node.sortAlphabetic();
-        ((DefaultTreeModel) this.getModel()).reload();
         syncWithModel();
+
+        this.setSelectionPath(new TreePath(node.getPath()));
+        EventManager.callEvent("FileTree-redraw");
     }
     public void makeDefaultNodes(int numNode){
 
@@ -302,6 +304,7 @@ public class FileTree extends JTree implements Controllerable {
 
         Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
         while(nodeEnumeration.hasMoreElements()){
+
             GreenTreeNode node = (GreenTreeNode) nodeEnumeration.nextElement();
             if(node.isExpanded()) {
                 this.expandPath(new TreePath(node.getPath()));

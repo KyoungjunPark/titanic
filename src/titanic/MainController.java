@@ -76,6 +76,20 @@ public class MainController {
 				EventManager.callEvent("Refresh-TabName");
             }
         });
+		EventManager.addEvent(new Event("CLSXStatus"){
+			public void action(){
+				menuBarController.changeDSMStatus();
+				mainToolbarController.changeDSMStatus();
+				EventManager.callEvent("expandAllButtonEnable");
+				EventManager.callEvent("collapseAllButtonEnable");
+				EventManager.callEvent("groupButtonDisable");
+				EventManager.callEvent("ungroupButtonDisable");
+				EventManager.callEvent("moveUpButtonDisable");
+				EventManager.callEvent("moveDownButtonDisable");
+				EventManager.callEvent("deleteButtonDisable");
+
+			}
+		});
 
 		EventManager.addEvent(new Event("Redraw-Table"){
 			public void action(){
@@ -106,9 +120,14 @@ public class MainController {
         }));
 		EventManager.addEvent((new Event("after-open-Edit"){
 			public void action(){
+				EventManager.callEvent("EditStatus");
+				centerPanelController.getContentsPanelController().addRightPanel();
+			}
+		}));
+		EventManager.addEvent((new Event("EditStatus"){
+			public void action(){
 				menuBarController.changeEditStatus();
 				mainToolbarController.changeEditStatus();
-				centerPanelController.getContentsPanelController().addRightPanel();
 			}
 		}));
 	}
