@@ -31,6 +31,13 @@ public class ContentsPanelController extends CenterPanelController {
                 if( sourceTabbedPane.getSelectedComponent() != null)
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
                 EventManager.callEvent("FileTree-redraw");
+
+                if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
+                    EventManager.callEvent("EditStatus");
+                }else{
+                    EventManager.callEvent("CLSXStatus");
+                }
+
             }
         });
 

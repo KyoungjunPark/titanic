@@ -201,8 +201,6 @@ public class FileTreeController extends LeftPanelController {
 										treeFile.rename(node, answer);
 									}
 								} else if (e2.getActionCommand() == "Sort") {
-									JOptionPane.showMessageDialog(null,
-											" Sort was pressed");
 									treeFile.sortNode(node);
 								} else if (e2.getActionCommand() == "Duplicate") {
                                     int newID = ModelManager.sharedModelManager().duplicateTitanicModel(ModelManager.sharedModelManager().getCurrentID(), node);

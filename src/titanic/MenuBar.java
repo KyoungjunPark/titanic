@@ -169,7 +169,7 @@ public class MenuBar extends JMenuBar implements Controllerable{
         find.setMnemonic('F');
         showRowLabels.setMnemonic('L');
         //showDependencyStrength.setMnemonic('D');
-        redraw.setAccelerator(KeyStroke.getKeyStroke(0, Event.F5, false));			//F5 ????? ???? ?????
+        redraw.setAccelerator(KeyStroke.getKeyStroke('R', Event.CTRL_MASK, false));			//F5 ????? ???? ?????
         find.setAccelerator(KeyStroke.getKeyStroke('F', Event.CTRL_MASK, false));
         
         mnHelp.add(about);
@@ -187,8 +187,10 @@ public class MenuBar extends JMenuBar implements Controllerable{
 	               ((JMenuItem) item).setEnabled(true);
         	}
         }
+
      propagationCostItem.setEnabled(false);
      find.setEnabled(false);
+        mnFile.setEnabled(true);
 	}
     public void changeEditStatus()
     {
