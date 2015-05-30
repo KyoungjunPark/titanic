@@ -62,8 +62,8 @@ abstract class Model {
             this.node = node;
         else{
             this.metaModel.node = node;
-            this.syncMetaModel();
         }
+        this.syncMetaModel();
     }
     public GroupNode getGroupNode(){return null;}
     public void addNode(String newNodeName){}
@@ -87,13 +87,24 @@ abstract class Model {
         }
     }
     protected void syncMetaModel(){
-        if( metaModel == null) return;
-        for(Node groupNode : this.node.getAllGroupList()){
-            if(groupNode.getName().compareTo(metaModel.node.getName()) == 0){
-                GroupNode temp = (GroupNode)groupNode;
-                temp.setExpanded(metaModel.node.isExpanded());
-                temp.childNodeArray = metaModel.node.childNodeArray;
-                break;
+        if( metaModel == null && storeMetaModel == null) return;
+        if( metaModel != null){
+            for(Node groupNode : this.node.getAllGroupList()){
+                if(groupNode.getName().compareTo(metaModel.node.getName()) == 0){
+                    GroupNode temp = (GroupNode)groupNode;
+                    temp.setExpanded(metaModel.node.isExpanded());
+                    temp.childNodeArray = metaModel.node.childNodeArray;
+                    break;
+                }
+            }
+        }else{
+            for(Node groupNode : this.node.getAllGroupList()){
+                if(groupNode.getName().compareTo(storeMetaModel.node.getName()) == 0){
+                    GroupNode temp = (GroupNode)groupNode;
+                    storeMetaModel.node.setExpanded(temp.isExpanded());
+                    storeMetaModel.node.childNodeArray = node.childNodeArray;
+                    break;
+                }
             }
         }
     }
