@@ -11,7 +11,6 @@ import javax.swing.tree.TreePath;
 import util.GreenTreeNode;
 import model.EventManager;
 import model.ModelManager;
-import util.GroupNode;
 
 
 public class FileTree extends JTree implements Controllerable {
@@ -299,9 +298,16 @@ public class FileTree extends JTree implements Controllerable {
     }
     public void redrawTree(){
         //must changed!
-        this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
-                .getGroupNode().getTreeNode();
-        this.setModel(new DefaultTreeModel(root));
+        if(ModelManager.sharedModelManager().getCurrentTitanicModel() != null) {
+            this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
+                    .getGroupNode().getTreeNode();
+            this.setModel(new DefaultTreeModel(root));
+        }
+        else{
+            this.root = null;
+            this.setModel(new DefaultTreeModel(root));
+        }
+
         ((DefaultTreeModel) this.getModel()).reload();
     }
 

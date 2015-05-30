@@ -154,7 +154,7 @@ public class ModelManager {
 	 * @return {@link TitanicModel}
 	 */
 	public TitanicModel getCurrentTitanicModel(){
-		return this.getTitanicMode(this.getCurrentID());
+		return this.getTitanicModel(this.getCurrentID());
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class ModelManager {
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
 	public int duplicateTitanicModel(int id, GreenTreeNode node){
-		TitanicModel parentModel = this.getTitanicMode(id);
+		TitanicModel parentModel = this.getTitanicModel(id);
 		TitanicModel model = new TitanicModel();
 		try {
 			model.setDsmModel(new DSMModel(parentModel.getDsmModel().toString()));
@@ -195,7 +195,7 @@ public class ModelManager {
      * @param id
      * @return
      */
-    private TitanicModel getTitanicMode(int id){
+    public TitanicModel getTitanicModel(int id){
         for(TitanicModel model : this.titanicModelArray){
             if(model.getID() == id)
                 return model;
@@ -216,7 +216,7 @@ public class ModelManager {
      * @param id 삭제할 id
      */
     public void removeTitanicModel(int id){
-        TitanicModel model = this.getTitanicMode(id);
+        TitanicModel model = this.getTitanicModel(id);
         if(model != null){
             this.titanicModelArray.remove(model);
             model = null;
