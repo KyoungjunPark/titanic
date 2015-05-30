@@ -155,6 +155,9 @@ public class FileTree extends JTree implements Controllerable {
         model.reload(root);
     }
 
+    /**
+     * Tree에 존재하는 모든 항목들을 open 상태로 바꿉니다.
+     * */
     protected void expandAll(int startingIndex, int rowCount) {
         boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 
@@ -175,6 +178,9 @@ public class FileTree extends JTree implements Controllerable {
         }
     }
 
+    /**
+     * Tree에 존재하는 모든 항목들을 close 상태로 바꿉니다.
+     * */
     protected void collapseAll() {
 
         boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
@@ -191,6 +197,10 @@ public class FileTree extends JTree implements Controllerable {
         }
     }
 
+    /**
+     * 선택된 항목들을 모두 삭제합니다.
+     * ModelManager와 data를 sync합니다.
+     * */
     protected void delete() {
 
         ArrayList<GreenTreeNode> nodes = getSelectedNodes();
@@ -202,6 +212,11 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
     }
 
+    /**
+     * input의 이름을 가지는 새로운 Node를 만듭니다.
+     * 선택된 항목들을 Node의 children으로 이동합니다.
+     * Node를 선택된 항목들의 parent에 child로 추가합니다.
+     * */
     protected void groupTree(String groupName) {
         ArrayList<GreenTreeNode> nodes = getSelectedNodes();
         GreenTreeNode newGroup = new GreenTreeNode(groupName);
@@ -222,6 +237,10 @@ public class FileTree extends JTree implements Controllerable {
 
     }
 
+    /**
+     * 선택된 group을 해제합니다.
+     * group에 속한 children들은 그룹의 parent의 children으로 이동합니다. 
+     * */
     protected void unGroupTree() {
         GreenTreeNode node = getSelectedNodes().get(0);
         int index = node.getParent().getIndex(node);
