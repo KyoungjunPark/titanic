@@ -20,6 +20,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+
+import model.ModelManager;
 import model.T3;
 
 public class DependencyTable extends JPanel {
@@ -91,8 +93,8 @@ public class DependencyTable extends JPanel {
 		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
 		rightTable.setShowGrid(false);
+        rightTable.setEnabled(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel());
 		rightTable.setIntercellSpacing(new Dimension(0, 0));
-		rightTable.setEnabled(false);
 		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -256,7 +258,19 @@ public class DependencyTable extends JPanel {
 				return data;
 
 		}
-
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return true;
+        }
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            Boolean value = false;
+            if(rowIndex == --columnIndex) return;
+            if(aValue.toString().compareTo("1") == 0){
+                value = true;
+            }
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowIndex, columnIndex, value);
+        }
 		public String getColumnName(int columnIndex) {
 			if (columnIndex == 0) {
 				return " ";
