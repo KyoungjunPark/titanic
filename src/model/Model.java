@@ -102,7 +102,7 @@ abstract class Model {
                 if(groupNode.getName().compareTo(storeMetaModel.node.getName()) == 0){
                     GroupNode temp = (GroupNode)groupNode;
                     storeMetaModel.node.setExpanded(temp.isExpanded());
-                    storeMetaModel.node.childNodeArray = node.childNodeArray;
+                    storeMetaModel.node.childNodeArray = temp.childNodeArray;
                     break;
                 }
             }
