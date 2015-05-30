@@ -214,10 +214,10 @@ public class FileTreeController extends LeftPanelController {
                                     System.out.println(node);
                                     int newID = ModelManager.sharedModelManager().editTatanicModel(ModelManager.sharedModelManager().getCurrentID(), node);
 								    ModelManager.sharedModelManager().setCurrentID(newID);
-									EventManager.callEvent("after-open-First-DSM");
+									EventManager.callEvent("after-open-Edit");
 									EventManager.callEvent("Redraw-Table");
 									EventManager.callEvent("FileTree-Load");
-								     //must implement!
+
                                 }
 
 							}

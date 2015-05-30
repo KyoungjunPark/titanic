@@ -112,6 +112,14 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 		                ((JButton) component).setEnabled(true);
 		    }
 	    }
+		public void changeEditStatus()
+		{
+            newClusteringButton.setEnabled(false);
+            loadClusteringButton.setEnabled(false);
+            saveClusteringAsButton.setEnabled(false);
+            saveClusteringButton.setEnabled(false);
+
+		}
 		@Override
 		public void setAction(String title, ActionListener action) {
 	        for(Component component : this.getComponents()){

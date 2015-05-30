@@ -190,6 +190,10 @@ public class MenuBar extends JMenuBar implements Controllerable{
      propagationCostItem.setEnabled(false);
      find.setEnabled(false);
 	}
+    public void changeEditStatus()
+    {
+        mnFile.setEnabled(false);
+    }
 	@Override
 	public void setAction(String title, ActionListener action) {
         for(Component component : this.getComponents()){
