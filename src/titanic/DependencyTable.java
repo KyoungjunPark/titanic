@@ -269,7 +269,7 @@ public class DependencyTable extends JPanel {
             if(aValue.toString().compareTo("1") == 0){
                 value = true;
             }
-            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowIndex, columnIndex, value);
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowNames.get(rowIndex), columnIndex, value);
         }
 		public String getColumnName(int columnIndex) {
 			if (columnIndex == 0) {
