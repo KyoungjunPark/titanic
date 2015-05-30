@@ -20,7 +20,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-
 import model.T3;
 
 public class DependencyTable extends JPanel {
@@ -175,7 +174,7 @@ public class DependencyTable extends JPanel {
 			// 노랑 분홍 연두 파랑 주황 
 			//case (0):
 				//return new Color(255, 255, 255);
-			case (3)://연두
+			case (4)://파랑
 				return new Color(63, 146, 210);
 			case (1)://노랑
 				return new Color(255, 202, 0);
@@ -183,9 +182,8 @@ public class DependencyTable extends JPanel {
 				return new Color(246, 111, 137);
 			case (0)://주황
 				return new Color(255,116,0); 
-			case (4)://파랑
+			case (3)://연두
 				return new Color(186, 243, 0);
-			
 			default:
 				return new Color(255, 255, 255);
 			}
