@@ -1,11 +1,17 @@
 package titanic;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JTabbedPane;
+import javax.swing.*;
+import javax.swing.plaf.metal.MetalIconFactory;
+import javax.xml.ws.Service;
 
+import model.EventManager;
 import model.ModelManager;
+import model.SaveException;
 import model.T3;
 
 public class ContentsPanel extends JTabbedPane implements Controllerable {
@@ -14,6 +20,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	private ArrayList<T3> groupInfo;
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
+    private JButton closeButton;
 
 	public ContentsPanel() {
 		contents = new ArrayList<RightPanel>();
@@ -25,14 +32,11 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		this.tabIndex=tabIndex;
 		regetTableData();
 		getGroupInfo();
-		//	contents.get(this.tabIndex).setTableData(newData);
         for(RightPanel panel : contents)
             if(panel.getID() == this.tabIndex)
                 panel.redrawPanel(newData, groupInfo);
 
-		String tabName = new String();
-
-		tabName = ModelManager.sharedModelManager().getCurrentTitanicModel()
+		String tabName = ModelManager.sharedModelManager().getCurrentTitanicModel()
 				.getDsmModel().getFileName();
 
 		repaint();
@@ -47,16 +51,69 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
         return Integer.parseInt(null);
     }
 
-	protected void addRightPanel(RightPanel panel) {
+	protected void addRightPanel(final RightPanel panel) {
+		JPanel tabPanel = new JPanel(new GridBagLayout());
+		tabPanel.setOpaque(false);
 
-		contents.add(panel);
+		String fileName;
 		if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName() == null){
-			this.add(panel, "untitle-"+ModelManager.sharedModelManager().getTitanicModelCount());
+			fileName = "untitle-" + ModelManager.sharedModelManager().getTitanicModelCount();
 		}
 		else {
-			this.add(panel, ModelManager.sharedModelManager()
-					.getCurrentTitanicModel().getDsmModel().getFileName());
+			fileName = ModelManager.sharedModelManager()
+					.getCurrentTitanicModel().getDsmModel().getFileName();
 		}
+
+		JLabel title = new JLabel(fileName);
+
+        ImageIcon icon = new ImageIcon("util/closeTab.png");
+        closeButton  = new JButton(icon);
+        closeButton.setName("closeButton");
+        closeButton.setMargin(new Insets(0, 0, 0, 0));
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
+        closeButton.setBorderPainted(false);
+
+        setAction("closeButton", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit()){
+                    int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    if (selected == 0) { //yes
+                        try {
+                            ModelManager.sharedModelManager().getCurrentTitanicModel().save();
+                        } catch (SaveException e1) {
+                            e1.printStackTrace();
+                        }
+                    } else if (selected == 1) { //no
+                    } else { // cancel
+                        return;
+                    }
+
+                }
+                //tab closure
+                removeTab(panel.getID());
+                ModelManager.sharedModelManager().removeTitanicModel(panel.getID());
+                EventManager.callEvent("FileTree-redraw");
+
+
+
+            }
+        });
+		GridBagConstraints gridBag = new GridBagConstraints();
+		gridBag.gridx = 0;
+		gridBag.gridy = 0;
+		gridBag.weightx = 1;
+
+		tabPanel.add(title,gridBag);
+		gridBag.gridx++;
+		gridBag.weightx = 0;
+		tabPanel.add(closeButton,gridBag);
+
+		this.addTab(fileName, null, panel, fileName);
+        contents.add(panel);
+		this.setTabComponentAt(this.getTabCount()-1, tabPanel);
 	}
 
 	protected void addRightPanel() {
@@ -69,8 +126,10 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	@Override
 	public void setAction(String title, ActionListener action) {
-
-	}
+        if(closeButton.getName().compareTo(title) == 0){
+            closeButton.addActionListener(action);
+        }
+    }
 
 	// 정보 갱신
 	public void regetTableData() {
@@ -107,14 +166,31 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	 refrechTabName은 clsx파일이 있을 경우 해당 이름을 tab으로 설정하고 그 외는 dsm파일의 이름으로 tab이름을 설정합니다.
 	 */
     public void refreshTabName() {
-
-
         int currentIndex = this.getRightPanelIndex(ModelManager.sharedModelManager().getCurrentID());
+        String tabName;
+
         if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() == null) {
-            this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName());
+            tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName();
         }
         else {
-            this.setTitleAt(currentIndex, ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFileName());
+            tabName = ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFileName();
+        }
+        JPanel panel = (JPanel)this.getTabComponentAt(currentIndex);
+
+        for(Component component : panel.getComponents()){
+            if(component instanceof JLabel){
+                ((JLabel)component).setText(tabName);
+                break;
+            }
+        }
+    }
+    private void removeTab(int ID){
+        for(RightPanel panel : contents){
+            if(panel.getID() == ID){
+                this.remove(panel);
+                contents.remove(panel);
+                break;
+            }
         }
     }
 }

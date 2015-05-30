@@ -7,64 +7,67 @@ import javax.swing.event.ChangeListener;
 import model.EventManager;
 import model.ModelManager;
 
-public class ContentsPanelController extends CenterPanelController{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	private ContentsPanel contentsPanel;
-	
-	// RightPanelController 없애면서 없앨 예정
-	private RightPanelController rightPanelController;
-	
-	public ContentsPanelController(){}
-	
-	public ContentsPanelController(ContentsPanel contentsPanel)
-	{
-		this.contentsPanel = contentsPanel;
-		//must changed! test version
-		setControllers();
-		setEvent();
-	}
+public class ContentsPanelController extends CenterPanelController {
 
-	private void setControllers() {
-		//To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
-		
-		//must changed! test version
-		// From 세현 : rightPanelController 안쓴다며..? ㅜㅜ
-		contentsPanel.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-                JTabbedPane sourceTabbedPane = (JTabbedPane)e.getSource();
-			    ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
+    private ContentsPanel contentsPanel;
+
+    // RightPanelController 없애면서 없앨 예정
+    private RightPanelController rightPanelController;
+
+    public ContentsPanelController() {
+    }
+
+    public ContentsPanelController(ContentsPanel contentsPanel) {
+        this.contentsPanel = contentsPanel;
+        //must changed! test version
+        setControllers();
+        setEvent();
+    }
+
+    private void setControllers() {
+        //To. 양세현  / From. 한예림 : 여기 파라미터 없어도 되나요...?
+
+        //must changed! test version
+        // From 세현 : rightPanelController 안쓴다며..? ㅜㅜ
+        contentsPanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JTabbedPane sourceTabbedPane = (JTabbedPane) e.getSource();
+                if( sourceTabbedPane.getSelectedComponent() != null)
+                    ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
                 EventManager.callEvent("FileTree-Load");
             }
-		});
+        });
 
-	}
-	
-	private void setEvent(){
-		
-	}
-	
-	protected void addRightPanel()
-	{
-		int id = ModelManager.sharedModelManager().getCurrentID();
+    }
+
+    private void setEvent() {
+
+    }
+
+    protected void addRightPanel() {
+        int id = ModelManager.sharedModelManager().getCurrentID();
         RightPanel panel = new RightPanel(id);
-		contentsPanel.addRightPanel(panel);
+        contentsPanel.addRightPanel(panel);
         contentsPanel.setSelectedComponent(panel);
-	}
+    }
 
-	protected void redrawPanel() {
-		contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
-	}
-	
+    protected void redrawPanel() {
+        contentsPanel.drawTableAtTab(ModelManager.sharedModelManager().getCurrentID());
+    }
 
-	public void setShowRowLabels(boolean state, int tabIndex) {
-		contentsPanel.setShowRowLabels(state, tabIndex);
-	}
 
-	public void refreshTabName() {
-		contentsPanel.refreshTabName();
-	}
-	/* From 세현 : 주석처리 내가 해놨음!
+    public void setShowRowLabels(boolean state, int tabIndex) {
+        contentsPanel.setShowRowLabels(state, tabIndex);
+    }
+
+    public void refreshTabName() {
+        contentsPanel.refreshTabName();
+    }
+    /* From 세현 : 주석처리 내가 해놨음!
 	protected void redrawPanel() {
 		rightPanelController.redrawPanel();
 	}
