@@ -124,6 +124,8 @@ public class ModelManager {
     public boolean setCurrentID(int id){
         if(this.isExistModel(id)){
             this.currentID = id;
+            TitanicModel model = this.getCurrentTitanicModel();
+            model.adjustMetaMode();
             return true;
         }
         return false;
@@ -193,6 +195,8 @@ public class ModelManager {
         model.setClsxModel(this.getTitanicModel(id).getClsxModel());
         model.setDsmModel(this.getTitanicModel(id).getDsmModel());
         model.setMetaModel(node.toString());
+        model.setEditModel(true);
+        this.addTitanicModel(model);
 		return model.getID();
 	}
     /**

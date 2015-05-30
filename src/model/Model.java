@@ -13,6 +13,7 @@ abstract class Model {
     private String fileName;
     private boolean isEdit = false;
     private MetaModel metaModel = null;
+    private MetaModel storeMetaModel = null;
     protected GroupNode node = null;
     public String getFilePath() {
         return filePath;
@@ -57,7 +58,12 @@ abstract class Model {
         this.filePath = filePath;
     }
     public void setGroupNode(GroupNode node){
-        this.node = node;
+        if(this.metaModel == null)
+            this.node = node;
+        else{
+            this.metaModel.node = node;
+            this.syncMetaModel();
+        }
     }
     public GroupNode getGroupNode(){return null;}
     public void addNode(String newNodeName){}
@@ -74,7 +80,7 @@ abstract class Model {
 
     protected void setMetaModel(String nodeName) {
         for(Node groupNode : this.node.getAllGroupList()){
-            if(groupNode.toString().compareTo(nodeName) == 0){
+            if(groupNode.getName().compareTo(nodeName) == 0){
                 this.metaModel = new MetaModel((GroupNode)groupNode);
                 break;
             }
@@ -83,10 +89,20 @@ abstract class Model {
     protected void syncMetaModel(){
         if( metaModel == null) return;
         for(Node groupNode : this.node.getAllGroupList()){
-            if(groupNode.toString().compareTo(metaModel.node.toString()) == 0){
-                this.metaModel = new MetaModel((GroupNode)groupNode);
+            if(groupNode.getName().compareTo(metaModel.node.getName()) == 0){
+                GroupNode temp = (GroupNode)groupNode;
+                temp.setExpanded(metaModel.node.isExpanded());
+                temp.childNodeArray = metaModel.node.childNodeArray;
                 break;
             }
         }
+    }
+    protected void saveMetaModel(){
+        this.storeMetaModel = this.metaModel;
+        this.metaModel = null;
+    }
+    protected void loadMetaModel(){
+        if(this.metaModel == null)
+            this.metaModel = this.storeMetaModel;
     }
 }
