@@ -171,18 +171,16 @@ public class DependencyTable extends JPanel {
 		} else {
 			switch (depth % 5) {
 
-			// 노랑 분홍 연두 파랑 주황 
-			//case (0):
-				//return new Color(255, 255, 255);
-			case (4)://파랑
-				return new Color(63, 146, 210);
+			// 노랑 분홍 파랑 연두 주황 
+			case (0)://주황
+				return new Color(255,116,0); 
 			case (1)://노랑
 				return new Color(255, 202, 0);
 			case (2)://분홍
 				return new Color(246, 111, 137);
-			case (0)://주황
-				return new Color(255,116,0); 
-			case (3)://연두
+			case (3)://파랑
+				return new Color(63, 146, 210);
+			case (4)://연두
 				return new Color(186, 243, 0);
 			default:
 				return new Color(255, 255, 255);

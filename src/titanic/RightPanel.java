@@ -40,18 +40,6 @@ public class RightPanel extends JPanel implements Controllerable{
 	public int getID(){
 		return this.id;
 	}
-
-	
-	// redraw를 통해 테이블을 갱신할 때 필요한 함수.
-	/* 전혀안씀ㅋㅋ
-	protected void setTableData(ArrayList<ArrayList<String>> newData){
-		tableData=newData;
-	}
-	protected void setGroups(ArrayList<T3> tupleList){
-		
-		this.tupleList=tupleList;
-	}
-	*/
 	
 	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<T3> groupInfo){
 		tableData=newData;
