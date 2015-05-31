@@ -55,7 +55,7 @@ public class MainController {
                 EventManager.callEvent("moveDownButtonDisable");
                 EventManager.callEvent("deleteButtonDisable");
                 EventManager.callEvent("newDSMRowButtonEnable");
-
+                EventManager.callEvent("yassineButtonEnable");
                   
                 centerPanelController.getContentsPanelController().addRightPanel();
                 
@@ -87,6 +87,7 @@ public class MainController {
 				EventManager.callEvent("moveUpButtonDisable");
 				EventManager.callEvent("moveDownButtonDisable");
 				EventManager.callEvent("deleteButtonDisable");
+                EventManager.callEvent("yassineButtonEnable");
 
 			}
 		});
@@ -142,6 +143,7 @@ public class MainController {
 				EventManager.callEvent("moveDownButtonDisable");
 				EventManager.callEvent("deleteButtonDisable");
                 EventManager.callEvent("newDSMRowButtonDisable");
+				EventManager.callEvent("yassineButtonDisable");
 			}
 		}));
 	}

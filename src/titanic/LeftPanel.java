@@ -51,6 +51,7 @@ public class LeftPanel extends JPanel implements Controllerable {
 		private JButton moveDownButton;
 		private JButton deleteButton;
 		private JButton newDSMRowButton;
+		private JButton yassineButton;
 
 		public LeftToolBar() {
 
@@ -112,6 +113,13 @@ public class LeftPanel extends JPanel implements Controllerable {
 			newDSMRowButton.setEnabled(false);
 			add(newDSMRowButton);
 
+			ImageIcon yassineIcon = new ImageIcon("util/yassine.png");
+			yassineButton = new JButton(yassineIcon);
+			yassineButton.setName("Yassine");
+			yassineButton.setToolTipText("Yassine");
+			yassineButton.setEnabled(false);
+			add(yassineButton);
+
 		}
 		protected void expandAllButtonEnable(){
 			this.expandAllButton.setEnabled(true);
@@ -161,7 +169,9 @@ public class LeftPanel extends JPanel implements Controllerable {
 		protected void newDSMRowButtonDisable(){
 			this.newDSMRowButton.setEnabled(false);
 		}
-		
+		protected void yassineButtonEnable(){this.yassineButton.setEnabled(true);}
+		protected void yassineButtonDisable(){this.yassineButton.setEnabled(false);}
+
 		protected void changeDSMStatus() {
 			expandAllButton.setEnabled(true);
 			collapseAllButton.setEnabled(true);
@@ -170,73 +180,8 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveUpButton.setEnabled(false);
 			moveDownButton.setEnabled(false);
 			deleteButton.setEnabled(false);
+			yassineButton.setEnabled(true);
 
-		}
-		protected void changeRootStatus() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(false);
-			ungroupButton.setEnabled(false);
-			moveUpButton.setEnabled(false);
-			moveDownButton.setEnabled(false);
-			deleteButton.setEnabled(false);
-
-		}
-		protected void changeItemStatus() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(false);
-			moveUpButton.setEnabled(true);
-			moveDownButton.setEnabled(true);
-			deleteButton.setEnabled(true);
-
-		}
-		protected void changeItemStatusTop() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(false);
-			moveUpButton.setEnabled(false);
-			moveDownButton.setEnabled(true);
-			deleteButton.setEnabled(true);
-
-		}
-		protected void changeItemStatusBottom() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(false);
-			moveUpButton.setEnabled(true);
-			moveDownButton.setEnabled(false);
-			deleteButton.setEnabled(true);
-		}
-		protected void changeSubRootStatus() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(true);
-			moveUpButton.setEnabled(true);
-			moveDownButton.setEnabled(true);
-			deleteButton.setEnabled(true);
-		}
-		protected void changeSubRootStatusTop() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(true);
-			moveUpButton.setEnabled(false);
-			moveDownButton.setEnabled(true);
-			deleteButton.setEnabled(true);
-		}
-		protected void changeSubRootStatusBottom() {
-			expandAllButton.setEnabled(true);
-			collapseAllButton.setEnabled(true);
-			groupButton.setEnabled(true);
-			ungroupButton.setEnabled(true);
-			moveUpButton.setEnabled(true);
-			moveDownButton.setEnabled(false);
-			deleteButton.setEnabled(true);
 		}
 
 		@Override

@@ -233,6 +233,16 @@ public class LeftPanelController extends CenterPanelController {
 			}
 
 		});
+		EventManager.addEvent(new Event("yassineButtonEnable"){
+			public void action(){
+				yassineButtonEnable();
+			}
+		});
+		EventManager.addEvent(new Event("yassineButtonDisable"){
+			public void action(){
+				yassineButtonDisable();
+			}
+		});
 
 	}
 
@@ -309,10 +319,10 @@ public class LeftPanelController extends CenterPanelController {
 	protected void deleteButtonDisable(){
 		leftToolbarController.deleteButtonDisable();
 	}
-	protected void newDSMRowButtonEnable(){
-		leftToolbarController.newDSMRowButtonEnable();
-	}
+	protected void newDSMRowButtonEnable(){leftToolbarController.newDSMRowButtonEnable();}
 	protected void newDSMRowButtonDisable(){
 		leftToolbarController.newDSMRowButtonDisable();
 	}
+	protected void yassineButtonEnable(){leftToolbarController.yassineButtonEnable();}
+	protected void yassineButtonDisable(){leftToolbarController.yassineButtonDisable();}
 }

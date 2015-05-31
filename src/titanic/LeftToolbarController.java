@@ -92,6 +92,7 @@ public class LeftToolbarController extends LeftPanelController{
 				EventManager.callEvent("FileTree-redraw");
 			}
 		});
+
 		
 		
 	}
@@ -144,5 +145,6 @@ public class LeftToolbarController extends LeftPanelController{
 	protected void newDSMRowButtonDisable(){
 		leftToolbar.newDSMRowButtonDisable();
 	}
-
+    protected void yassineButtonEnable(){leftToolbar.yassineButtonEnable();}
+    protected void yassineButtonDisable(){leftToolbar.yassineButtonDisable();}
 }

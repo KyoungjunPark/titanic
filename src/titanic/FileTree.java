@@ -3,7 +3,7 @@ package titanic;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
@@ -281,10 +281,14 @@ public class FileTree extends JTree implements Controllerable {
         return null;
     }
     public void rename(GreenTreeNode node, String name) {
-        node.setUserObject(name);
+        if(ModelManager.sharedModelManager().getCurrentTitanicModel().rename(node.toString(),name)) {
+            node.setUserObject(name);
 
-        ((DefaultTreeModel) this.getModel()).reload();
-        syncWithModel();
+            ((DefaultTreeModel) this.getModel()).reload();
+            syncWithModel();
+        }else{
+            JOptionPane.showMessageDialog(null,"This name is already exist!", "Error",JOptionPane.ERROR_MESSAGE, null);
+        }
     }
     public void expandNode(GreenTreeNode node) {
         node.setIsExpanded(true);
