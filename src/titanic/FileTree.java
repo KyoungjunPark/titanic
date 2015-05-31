@@ -8,6 +8,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import model.Event;
 import util.GreenTreeNode;
 import model.EventManager;
 import model.ModelManager;
@@ -281,13 +282,18 @@ public class FileTree extends JTree implements Controllerable {
         return null;
     }
     public void rename(GreenTreeNode node, String name) {
-        if(ModelManager.sharedModelManager().getCurrentTitanicModel().rename(node.toString(),name)) {
-            node.setUserObject(name);
 
-            ((DefaultTreeModel) this.getModel()).reload();
+        if(node.getChildCount() == 0){ //item node
+            node.setUserObject(name);
             syncWithModel();
-        }else{
-            JOptionPane.showMessageDialog(null,"This name is already exist!", "Error",JOptionPane.ERROR_MESSAGE, null);
+            EventManager.callEvent("Redraw-Table");
+            EventManager.callEvent("FileTree-redraw");
+
+        }else{//group node
+            node.setUserObject(name);
+            syncWithModel();
+            EventManager.callEvent("Redraw-Table");
+            EventManager.callEvent("FileTree-redraw");
         }
     }
     public void expandNode(GreenTreeNode node) {
