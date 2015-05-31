@@ -284,7 +284,6 @@ public class DependencyTable extends JPanel {
 					.getDsmModel()
 					.editValue(rowNames.get(rowIndex),
 							rowNames.get(columnIndex), value);
-			
 			if (isItem == true) {
 				rows.get(rowIndex).set(columnIndex + 1, (String) aValue);
 				repaint();
