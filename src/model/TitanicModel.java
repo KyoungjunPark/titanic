@@ -231,16 +231,17 @@ public class TitanicModel {
         }
         this.getDsmModel().addNode(newNodeName);
     }
-    public void rename(String originalName, String changedName){
-        this.getDsmModel().rename(originalName, changedName);
+    public boolean rename(String originalName, String changedName){
+        if(!this.getDsmModel().rename(originalName, changedName)) return false;
         if(this.getClsxModel() != null){
             for( Node node : this.getClsxModel().getGroupNode().getAllItemList() ){
                 if(node.getName().compareTo(originalName) == 0){
                     node.setName(changedName);
-                    break;
+                    return true;
                 }
             }
         }
+        return false;
     }
     protected void setMetaModel(String nodeName){
         if(this.getClsxModel() != null)

@@ -218,6 +218,12 @@ public class DSMModel extends Model{
         result += String.join("\r\n", this.elementsNameArray);
         return result;
     }
+
+    /**
+     * 새로운 Row 를 추가합니다.
+     * 추가된 row 는 0으로 초기화 되어 있습니다.
+     * @param newNodeName 추가될 아이템의 이름
+     */
     public void addNode(String newNodeName) {
         this.elementsNameArray.add(newNodeName);
         for(int i = dependencyRelationArray.size() ; i > 0 ; i -= dependencyNumber){
@@ -227,15 +233,41 @@ public class DSMModel extends Model{
             this.dependencyRelationArray.add(0);
         this.dependencyNumber++;
     }
+
+    /**
+     * 해당 이름이 DSM 에 존재하는지 체크 합니다.
+     * @param name 체크에 필요할 이름
+     * @return 존재시 true
+     */
     protected boolean isExistName(String name){
-        return this.elementsNameArray.indexOf(name) == -1 ? false:true;
+        return this.elementsNameArray.indexOf(name) != -1;
     }
-    protected void rename(String originalName, String changedName){
-        if(isExistName(originalName))
+
+    /**
+     * element의 이름을 바꿉니다.
+     * 이름은 unique 하기 때문에 존재하지 않는 이름으로만 바꿀 수 있습니다.
+     * @param originalName
+     * @param changedName
+     */
+    protected boolean rename(String originalName, String changedName){
+        if(isExistName(originalName) && !isExistName(changedName)){
             this.elementsNameArray.set(this.elementsNameArray.indexOf(originalName), changedName);
+            return true;
+        }
+        return false;
     }
-    public boolean editValue(String name, String y, boolean value){
-        int indexX = this.elementsNameArray.indexOf(name);
+
+    /**
+     * DSM 에 value 를 overwrite 합니다.
+     * 각 행에 해당하는 elementName 을 받습니다.
+     * row, column 에 존재하지 않는 elementName 을 받게 되면 처리가 진행되지 않습니다.
+     * @param x row 에 해당하는 name
+     * @param y column 에 해당하는 name
+     * @param value 수정에 사용할 값, true or false
+     * @return 값의 수정여부에 따라 true, false
+     */
+    public boolean editValue(String x, String y, boolean value){
+        int indexX = this.elementsNameArray.indexOf(x);
         int indexY = this.elementsNameArray.indexOf(y);
         if( indexX == -1 || indexY == -1) return false;
         this.dependencyRelationArray.set(( indexX * this.dependencyNumber) + indexY, value?1:0);
