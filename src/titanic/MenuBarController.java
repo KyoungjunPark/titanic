@@ -204,15 +204,19 @@ public class MenuBarController extends MainController {
 
                                             @Override
                                             public boolean accept(File f) {
-                                                // TODO Auto-generated method stub
                                                 return f.getName().endsWith(".clsx") || f.isDirectory();
                                             }
                                         });
                                         int yn = fc.showSaveDialog(null);
                                         if (yn != JFileChooser.APPROVE_OPTION) return;
 
+
                                         openFile = fc.getSelectedFile();
 
+                                        if(!openFile.getName().endsWith(".clsx")){
+                                            String fileDir = openFile.getPath() + ".clsx";
+                                            openFile = new File(fileDir);
+                                        }
                                         ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
 
                                     } else {
@@ -249,7 +253,6 @@ public class MenuBarController extends MainController {
 
                                     @Override
                                     public boolean accept(File f) {
-                                        // TODO Auto-generated method stub
                                         return f.getName().endsWith(".clsx") || f.isDirectory();
                                     }
                                 });
@@ -258,9 +261,12 @@ public class MenuBarController extends MainController {
 
                                 openFile = fc.getSelectedFile();
 
+                                if(!openFile.getName().endsWith(".clsx")){
+                                    String fileDir = openFile.getPath() + ".clsx";
+                                    openFile = new File(fileDir);
+                                }
 
-                                System.out.println("ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel() : " + ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel());
-                                try {
+                                 try {
                                     ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
                                 } catch (SaveException e1) {
                                     e1.printStackTrace();
@@ -294,7 +300,6 @@ public class MenuBarController extends MainController {
 
                                             @Override
                                             public boolean accept(File f) {
-                                                // TODO Auto-generated method stub
                                                 return f.getName().endsWith(".dsm") || f.isDirectory();
                                             }
                                         });
@@ -302,6 +307,11 @@ public class MenuBarController extends MainController {
                                         if (yn != JFileChooser.APPROVE_OPTION) return;
 
                                         openFile = fc.getSelectedFile();
+
+                                        if(!openFile.getName().endsWith(".dsm")){
+                                            String fileDir = openFile.getPath() + ".dsm";
+                                            openFile = new File(fileDir);
+                                        }
 
                                         ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save(openFile.getPath());
 
@@ -334,7 +344,6 @@ public class MenuBarController extends MainController {
 
                                     @Override
                                     public boolean accept(File f) {
-                                        // TODO Auto-generated method stub
                                         return f.getName().endsWith(".dsm") || f.isDirectory();
                                     }
                                 });
@@ -342,6 +351,11 @@ public class MenuBarController extends MainController {
                                 if (yn != JFileChooser.APPROVE_OPTION) return;
 
                                 openFile = fc.getSelectedFile();
+
+                                if(!openFile.getName().endsWith(".dsm")){
+                                    String fileDir = openFile.getPath() + ".dsm";
+                                    openFile = new File(fileDir);
+                                }
 
                                 //setting chaned when dsm file is open
                                 try {

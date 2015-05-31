@@ -144,6 +144,10 @@ public class MainToolbarController extends MainController {
 
                 openFile = fc.getSelectedFile();
 
+                if(!openFile.getName().endsWith(".clsx")){
+                    String fileDir = openFile.getPath() + ".clsx";
+                    openFile = new File(fileDir);
+                }
                 // setting chaned when clsx file is
                 OpenClsxStatus(openFile);
             }
@@ -180,6 +184,11 @@ public class MainToolbarController extends MainController {
                         if(yn != JFileChooser.APPROVE_OPTION) return;
 
                         openFile = fc.getSelectedFile();
+
+                        if(!openFile.getName().endsWith(".clsx")){
+                            String fileDir = openFile.getPath() + ".clsx";
+                            openFile = new File(fileDir);
+                        }
 
                         ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save(openFile.getPath());
 
