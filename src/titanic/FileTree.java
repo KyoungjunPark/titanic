@@ -1,6 +1,7 @@
 package titanic;
 
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import javax.swing.*;
@@ -31,8 +32,6 @@ public class FileTree extends JTree implements Controllerable {
 
 
         this.setSelectionPath(new TreePath(root));
-
-
     }
 
     /*
@@ -42,7 +41,6 @@ public class FileTree extends JTree implements Controllerable {
 
         ArrayList<GreenTreeNode> nodes = getSelectedNodes();
         TreePath[] treePath = new TreePath[nodes.size()];
-
 
         nodes = sortFromIndex(nodes);
 
@@ -61,10 +59,11 @@ public class FileTree extends JTree implements Controllerable {
             model.removeNodeFromParent(node);
             treePath[i] = new TreePath(newNode.getPath());
         }
-
-        this.setSelectionPaths(treePath);
-
         syncWithModel();
+        EventManager.callEvent("FileTree-redraw");
+        for (GreenTreeNode node : nodes) {
+            this.setSelectionPath(new TreePath(findNode(node.toString()).getPath()));
+        }
     }
 
     protected void moveDown() {
@@ -76,6 +75,7 @@ public class FileTree extends JTree implements Controllerable {
 
         for (int i = 0; i < nodes.size(); i++) {
             GreenTreeNode node = nodes.get(i);
+
             DefaultTreeModel model = (DefaultTreeModel) this.getModel();
             GreenTreeNode root = (GreenTreeNode) model
                     .getRoot();
@@ -89,10 +89,11 @@ public class FileTree extends JTree implements Controllerable {
 
             treePath[i] = new TreePath(newNode.getPath());
         }
-
-        this.setSelectionPaths(treePath);
-
         syncWithModel();
+        EventManager.callEvent("FileTree-redraw");
+        for (GreenTreeNode node : nodes) {
+            this.setSelectionPath(new TreePath(findNode(node.toString()).getPath()));
+        }
     }
 
     private GreenTreeNode deepClone(GreenTreeNode source) {
@@ -105,7 +106,6 @@ public class FileTree extends JTree implements Controllerable {
         }
         return newNode;
     }
-
     private ArrayList<GreenTreeNode> sortFromIndex(ArrayList<GreenTreeNode> nodes) {
 
         for (int i = 0; i < nodes.size(); i++) {
@@ -127,7 +127,6 @@ public class FileTree extends JTree implements Controllerable {
         return nodes;
 
     }
-
     private ArrayList<GreenTreeNode> reverseSortFromIndex(ArrayList<GreenTreeNode> nodes) {
 
         for (int i = 0; i < nodes.size(); i++) {
@@ -148,14 +147,12 @@ public class FileTree extends JTree implements Controllerable {
         }
         return nodes;
     }
-
     protected void addItem() {
         DefaultTreeModel model = (DefaultTreeModel) this.getModel();
         GreenTreeNode root = (GreenTreeNode) model.getRoot();
         root.add(new GreenTreeNode("another_child"));
         model.reload(root);
     }
-
     /**
      * Tree에 존재하는 모든 항목들을 open 상태로 바꿉니다.
      * */
@@ -178,7 +175,6 @@ public class FileTree extends JTree implements Controllerable {
             ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
         }
     }
-
     /**
      * Tree에 존재하는 모든 항목들을 close 상태로 바꿉니다.
      * */
@@ -197,7 +193,6 @@ public class FileTree extends JTree implements Controllerable {
             ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().setIsEdit(false);
         }
     }
-
     /**
      * 선택된 항목들을 모두 삭제합니다.
      * ModelManager와 data를 sync합니다.
@@ -212,7 +207,6 @@ public class FileTree extends JTree implements Controllerable {
 
         syncWithModel();
     }
-
     /**
      * input의 이름을 가지는 새로운 Node를 만듭니다.
      * 선택된 항목들을 Node의 children으로 이동합니다.
@@ -237,7 +231,6 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
 
     }
-
     /**
      * 선택된 group을 해제합니다.
      * group에 속한 children들은 그룹의 parent의 children으로 이동합니다. 
@@ -257,9 +250,11 @@ public class FileTree extends JTree implements Controllerable {
         EventManager.callEvent("ungroupButtonDisable");
         syncWithModel();
     }
-
     private ArrayList<GreenTreeNode> getSelectedNodes() {
         TreePath[] paths = this.getSelectionPaths();
+
+        if(paths == null) return null;
+
         ArrayList<GreenTreeNode> nodes = new ArrayList<GreenTreeNode>();
         for (TreePath path : paths) {
             nodes.add((GreenTreeNode) path.getLastPathComponent());
@@ -321,6 +316,8 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
     }
     public void redrawTree(){
+
+
         if(ModelManager.sharedModelManager().getCurrentTitanicModel() != null) {
             this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
                     .getGroupNode().getTreeNode();
