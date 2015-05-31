@@ -234,4 +234,7 @@ public class DSMModel extends Model{
         if(isExistName(originalName))
             this.elementsNameArray.set(this.elementsNameArray.indexOf(originalName), changedName);
     }
+    public void editValue(String name, int y, boolean value){
+        this.dependencyRelationArray.set(( this.elementsNameArray.indexOf(name) * this.dependencyNumber) + y + this.elementsNameArray.indexOf(name), value?1:0);
+    }
 }
