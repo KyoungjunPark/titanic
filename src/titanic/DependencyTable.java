@@ -284,7 +284,7 @@ public class DependencyTable extends JPanel {
             }
             rows.get(rowIndex).set(columnIndex+1, (String) aValue);
             repaint();
-            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowNames.get(rowIndex), columnIndex, value);
+            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowNames.get(rowIndex), rowNames.get(columnIndex), value);
         }
 		public String getColumnName(int columnIndex) {
 			if (columnIndex == 0) {
