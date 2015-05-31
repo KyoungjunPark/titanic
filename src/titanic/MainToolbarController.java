@@ -65,6 +65,7 @@ public class MainToolbarController extends MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EventManager.callEvent("Redraw-Table");
+                EventManager.callEvent("FileTree-redraw");
 
             }
         });

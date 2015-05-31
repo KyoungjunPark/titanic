@@ -322,36 +322,31 @@ public class FileTree extends JTree implements Controllerable {
     }
     public void redrawTree(){
 
-
         if(ModelManager.sharedModelManager().getCurrentTitanicModel() != null) {
             this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
                     .getGroupNode().getTreeNode();
-            this.setModel(new DefaultTreeModel(this.root));
-
         }
         else{
             this.root = null;
             this.setModel(new DefaultTreeModel(this.root));
             return;
         }
+        this.setModel(new DefaultTreeModel(this.root));
 
-        if(this.root.isExpanded()){
-            this.expandNode(this.root);
-        }else{
-            this.collapseAll();
-        }
-
-
-        Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
+        Enumeration nodeEnumeration = root.breadthFirstEnumeration();
         while(nodeEnumeration.hasMoreElements()){
 
             GreenTreeNode node = (GreenTreeNode) nodeEnumeration.nextElement();
             if(node.isExpanded()) {
-                this.expandPath(new TreePath(node.getPath()));
+                System.out.println("expanded!"+node);
+                this.expandRow(this.getRowForPath(new TreePath(node.getPath())));
+            }else{
+                System.out.println("collapsed!"+node);
+                this.collapseRow(this.getRowForPath(new TreePath(node.getPath())));
             }
         }
-
     }
+
 
     protected void syncWithModel() {
         ModelManager.sharedModelManager().getCurrentTitanicModel().syncTreeNode(this.root);

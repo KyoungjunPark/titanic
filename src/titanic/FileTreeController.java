@@ -239,9 +239,9 @@ public class FileTreeController extends LeftPanelController {
 			public void treeExpanded(TreeExpansionEvent event) {
 
                 boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
+
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
 				treeFile.expandNode(node);
-
 				EventManager.callEvent("Redraw-Table");
                 if(checkIsEdit == false){
                     ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().setIsEdit(false);
