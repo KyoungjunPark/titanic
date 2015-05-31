@@ -91,13 +91,14 @@ public class DependencyTable extends JPanel {
 					return null;
 			}
 		};
-		
+
 		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
 		rightTable.setShowGrid(false);
-        rightTable.setEnabled(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel());
+		rightTable.setEnabled(ModelManager.sharedModelManager()
+				.getCurrentTitanicModel().isEditModel());
 		rightTable.setIntercellSpacing(new Dimension(0, 0));
-		tableAttributeInit(rightTable); 
+		tableAttributeInit(rightTable);
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -176,16 +177,16 @@ public class DependencyTable extends JPanel {
 		} else {
 			switch (depth % 5) {
 
-			// 노랑 분홍 파랑 연두 주황 
-			case (0)://주황
-				return new Color(255,116,0); 
-			case (1)://노랑
+			// 노랑 분홍 파랑 연두 주황
+			case (0):// 주황
+				return new Color(255, 116, 0);
+			case (1):// 노랑
 				return new Color(255, 202, 0);
-			case (2)://분홍
+			case (2):// 분홍
 				return new Color(246, 111, 137);
-			case (3)://파랑
+			case (3):// 파랑
 				return new Color(63, 146, 210);
-			case (4)://연두
+			case (4):// 연두
 				return new Color(186, 243, 0);
 			default:
 				return new Color(255, 255, 255);
@@ -261,21 +262,36 @@ public class DependencyTable extends JPanel {
 				return data;
 
 		}
-        @Override
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return true;
-        }
-        @Override
-        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-            Boolean value = false;
-            if(rowIndex == --columnIndex) return;
-            if(aValue.toString().compareTo("0") != 0){
-                value = true;
-            }
-            rows.get(rowIndex).set(columnIndex+1, (String) aValue);
-            repaint();
-            ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowNames.get(rowIndex), rowNames.get(columnIndex), value);
-        }
+
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			return true;
+		}
+
+		@Override
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			Boolean value = false;
+			Boolean isItem;
+			if (rowIndex == --columnIndex)
+				return;
+			if (aValue.toString().compareTo("0") != 0) {
+				value = true;
+			}
+
+			isItem = ModelManager
+					.sharedModelManager()
+					.getCurrentTitanicModel()
+					.getDsmModel()
+					.editValue(rowNames.get(rowIndex),
+							rowNames.get(columnIndex), value);
+			
+			if (isItem == true) {
+				rows.get(rowIndex).set(columnIndex + 1, (String) aValue);
+				repaint();
+			}
+
+		}
+
 		public String getColumnName(int columnIndex) {
 			if (columnIndex == 0) {
 				return " ";
