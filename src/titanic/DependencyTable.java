@@ -91,17 +91,6 @@ public class DependencyTable extends JPanel {
 					return null;
 			}
 		};
-////////////////////////////////////////////////
-		tableModel.addTableModelListener(new TableModelListener(){
-			public void tableChanged(TableModelEvent e){
-				if(rightTable.isEditing()){
-					
-					System.out.println(rightTable.getEditingRow()+", "+rightTable.getEditingColumn());
-				}
-			}
-
-		});
-		
 		
 		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
