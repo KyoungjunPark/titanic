@@ -64,9 +64,6 @@ public class FileTreeController extends LeftPanelController {
 				if (tag.contains("Root")) {
 					// disabled
 					EventManager.callEvent("groupButtonDisable");
-				} else if (tag.contains("Leaf") && tag.contains("Not Leaf")) {
-					// disabled
-					EventManager.callEvent("groupButtonDisable");
 				} else if (!bool) {
 					// if bool is false -> group disabled
 					EventManager.callEvent("groupButtonDisable");
