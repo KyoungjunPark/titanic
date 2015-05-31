@@ -97,7 +97,7 @@ public class DependencyTable extends JPanel {
 		rightTable.setShowGrid(false);
         rightTable.setEnabled(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel());
 		rightTable.setIntercellSpacing(new Dimension(0, 0));
-		tableAttributeInit(rightTable);
+		tableAttributeInit(rightTable); 
 		JScrollPane sp = new JScrollPane(rightTable,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -105,6 +105,7 @@ public class DependencyTable extends JPanel {
 		JTable leftTable = new JTable(tableModel);
 		leftTable.setRowSorter(rightTable.getRowSorter());
 		leftTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		leftTable.setEnabled(false);
 		for (int x = leftTable.getColumnCount() - 1; x > 0; x--)
 			leftTable.removeColumn(leftTable.getColumnModel().getColumn(x));
 
