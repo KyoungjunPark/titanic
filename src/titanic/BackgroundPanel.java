@@ -20,7 +20,6 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 		setTitle("Titanic");
 		setSize(1000,700);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 		
 		//add Toolbar
@@ -39,7 +38,7 @@ public class BackgroundPanel extends JFrame implements Controllerable{
 	}
 	public void setControllers()
 	{
-		@SuppressWarnings("unused")
+        BackgroundPanelController backgroundPanelController = new BackgroundPanelController(this);
 		MainController mainController = new MainController(toolbar, menubar, mainPanel);
 		
 	
