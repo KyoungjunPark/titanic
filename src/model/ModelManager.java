@@ -73,7 +73,9 @@ public class ModelManager {
 	 */
     public int createTitanicModel(int nodeSize){
         TitanicModel model =  new TitanicModel();
-		model.setDsmModel(new DSMModel(nodeSize)); /* New DSM 기능을 위해 추가됨*/
+		DSMModel dsmModel = new DSMModel(nodeSize);
+		model.setDsmModel(dsmModel); /* New DSM 기능을 위해 추가됨*/
+		dsmModel.setIsEdit(true);
         this.addTitanicModel(model);
         return model.getID();
     }
@@ -148,6 +150,15 @@ public class ModelManager {
         this.getCurrentTitanicModel().save();
         EventManager.callEvent("after-save");
     }
+	public void save(String dir) throws SaveException{
+		EventManager.callEvent("before-save");
+		if(dir.endsWith(".clsx")){
+			this.getCurrentTitanicModel().getClsxModel().save(dir);
+		}else{ // ".dsm" case
+			this.getCurrentTitanicModel().getDsmModel().save(dir);
+		}
+		EventManager.callEvent("after-save");
+	}
 
 	/**
 	 * 현제 set 되어있는 {@link TitanicModel} 을 돌려줍니다.

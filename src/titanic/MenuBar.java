@@ -196,6 +196,29 @@ public class MenuBar extends JMenuBar implements Controllerable{
     {
         mnFile.setEnabled(false);
     }
+    public void changeInitialStatus(){
+        mnFile.setEnabled(true);
+        newDSMItem.setEnabled(true);
+        openDSMItem.setEnabled(true);
+        newClusteringItem.setEnabled(false);
+        loadClusteringItem.setEnabled(false);
+        saveClusteringItem.setEnabled(false);
+        saveClusteringAsItem.setEnabled(false);
+        saveDSMItem.setEnabled(false);
+        saveDSMAsItem.setEnabled(false);
+        exitActionItem.setEnabled(true);
+
+        mnMetrics.setEnabled(true);
+        propagationCostItem.setEnabled(false);
+
+        mnView.setEnabled(true);
+        redraw.setEnabled(false);
+        find.setEnabled(false);
+        showRowLabels.setEnabled(true);
+
+        mnHelp.setEnabled(true);
+        about.setEnabled(true);
+    }
 	@Override
 	public void setAction(String title, ActionListener action) {
         for(Component component : this.getComponents()){

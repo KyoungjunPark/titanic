@@ -3,9 +3,11 @@ package titanic;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.metal.MetalIconFactory;
 import javax.xml.ws.Service;
 
@@ -86,7 +88,34 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
                     int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
                     if (selected == 0) { //yes
                         try {
-                            ModelManager.sharedModelManager().getCurrentTitanicModel().save();
+                            if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() != null) {
+                                ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
+                            }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath() != null){
+                                ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+                            }else{
+                                File openFile;
+
+                                JFileChooser fc = new JFileChooser();
+                                fc.setFileFilter(new FileFilter() {
+
+                                    @Override
+                                    public String getDescription() {
+                                        return "DSM or CLSX Files";
+                                    }
+
+                                    @Override
+                                    public boolean accept(File f) {
+                                        // TODO Auto-generated method stub
+                                        return f.getName().endsWith(".clsx") || f.getName().endsWith(".dsm") || f.isDirectory();
+                                    }
+                                });
+                                int yn = fc.showOpenDialog(null);
+                                if (yn != JFileChooser.APPROVE_OPTION)
+                                    return;
+
+                                openFile = fc.getSelectedFile();
+                                ModelManager.sharedModelManager().save(openFile.getPath());
+                            }
                         } catch (SaveException e1) {
                             e1.printStackTrace();
                         }
@@ -97,10 +126,9 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
                 }
                 //tab closure
-                removeTab(panel.getID());
                 ModelManager.sharedModelManager().removeTitanicModel(panel.getID());
+                removeTab(panel.getID());
                 EventManager.callEvent("FileTree-redraw");
-
             }
         });
 		GridBagConstraints gridBag = new GridBagConstraints();

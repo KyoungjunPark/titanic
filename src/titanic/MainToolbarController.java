@@ -241,4 +241,5 @@ public class MainToolbarController extends MainController {
     protected void changeEditStatus(){
         toolbar.changeEditStatus();
     }
+    protected void changeInitialStatus(){toolbar.changeInitialStatus();}
 }

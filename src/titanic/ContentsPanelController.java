@@ -32,7 +32,9 @@ public class ContentsPanelController extends CenterPanelController {
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
                 EventManager.callEvent("FileTree-redraw");
 
-                if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
+                if(ModelManager.sharedModelManager().getTitanicModelCount() == 0){
+                    EventManager.callEvent("InitialStatus");
+                }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()) {
                     EventManager.callEvent("EditStatus");
                 }else{
                     EventManager.callEvent("CLSXStatus");

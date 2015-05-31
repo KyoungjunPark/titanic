@@ -170,6 +170,7 @@ public class LeftPanel extends JPanel implements Controllerable {
 			moveUpButton.setEnabled(false);
 			moveDownButton.setEnabled(false);
 			deleteButton.setEnabled(false);
+
 		}
 		protected void changeRootStatus() {
 			expandAllButton.setEnabled(true);

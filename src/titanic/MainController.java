@@ -130,6 +130,20 @@ public class MainController {
 				mainToolbarController.changeEditStatus();
 			}
 		}));
+		EventManager.addEvent((new Event("InitialStatus"){
+			public void action(){
+				menuBarController.changeInitialStatus();
+				mainToolbarController.changeInitialStatus();
+				EventManager.callEvent("expandAllButtonDisable");
+				EventManager.callEvent("collapseAllButtonDisable");
+				EventManager.callEvent("groupButtonDisable");
+				EventManager.callEvent("ungroupButtonDisable");
+				EventManager.callEvent("moveUpButtonDisable");
+				EventManager.callEvent("moveDownButtonDisable");
+				EventManager.callEvent("deleteButtonDisable");
+                EventManager.callEvent("newDSMRowButtonDisable");
+			}
+		}));
 	}
 	
 

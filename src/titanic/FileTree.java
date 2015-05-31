@@ -314,12 +314,15 @@ public class FileTree extends JTree implements Controllerable {
         if(ModelManager.sharedModelManager().getCurrentTitanicModel() != null) {
             this.root = ModelManager.sharedModelManager().getCurrentTitanicModel()
                     .getGroupNode().getTreeNode();
+            this.setModel(new DefaultTreeModel(this.root));
+
         }
         else{
             this.root = null;
+            this.setModel(new DefaultTreeModel(this.root));
+            return;
         }
 
-        this.setModel(new DefaultTreeModel(this.root));
 
         Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
         while(nodeEnumeration.hasMoreElements()){

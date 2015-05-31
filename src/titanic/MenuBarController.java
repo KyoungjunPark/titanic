@@ -57,7 +57,6 @@ public class MenuBarController extends MainController {
                     int currentID = ModelManager.sharedModelManager().createTitanicModel(Integer.parseInt(input));
                     ModelManager.sharedModelManager().setCurrentID(currentID);
                     EventManager.callEvent("after-open-First-DSM");
-                    //EventManager.callEvent("makeDefaultNodes", input);
                     EventManager.callEvent("FileTree-Load");
                 }
             }
@@ -133,7 +132,7 @@ public class MenuBarController extends MainController {
                                 File openFile;
 
 
-                                String dir = new String();
+                                String dir = "";
 
                                 dir += ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath();
                                 int tmp = dir.lastIndexOf("\\");
@@ -276,7 +275,7 @@ public class MenuBarController extends MainController {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 try {
-                                    if (ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() != null) {
+                                    if (ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath() == null) {
                                         File openFile;
 
                                         String dir = new String();
@@ -477,4 +476,5 @@ public class MenuBarController extends MainController {
         menu.changeEditStatus();
     }
 
+    protected void changeInitialStatus(){menu.changeInitialStatus();}
 }

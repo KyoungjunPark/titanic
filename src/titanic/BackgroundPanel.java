@@ -120,6 +120,15 @@ public class BackgroundPanel extends JFrame implements Controllerable{
             saveClusteringButton.setEnabled(false);
 
 		}
+		public void changeInitialStatus(){
+           opendsmButton.setEnabled(true);
+            redrawButton.setEnabled(false);
+            newClusteringButton.setEnabled(false);
+            loadClusteringButton.setEnabled(false);
+            saveClusteringButton.setEnabled(false);
+            saveClusteringAsButton.setEnabled(false);
+            
+        }
 		@Override
 		public void setAction(String title, ActionListener action) {
 	        for(Component component : this.getComponents()){
