@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
@@ -89,7 +91,18 @@ public class DependencyTable extends JPanel {
 					return null;
 			}
 		};
+////////////////////////////////////////////////
+		tableModel.addTableModelListener(new TableModelListener(){
+			public void tableChanged(TableModelEvent e){
+				if(rightTable.isEditing()){
+					
+					System.out.println(rightTable.getEditingRow()+", "+rightTable.getEditingColumn());
+				}
+			}
 
+		});
+		
+		
 		rightTable.setAutoCreateRowSorter(false);
 		rightTable.removeColumn(rightTable.getColumnModel().getColumn(0));
 		rightTable.setShowGrid(false);
@@ -266,9 +279,11 @@ public class DependencyTable extends JPanel {
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             Boolean value = false;
             if(rowIndex == --columnIndex) return;
-            if(aValue.toString().compareTo("1") == 0){
+            if(aValue.toString().compareTo("0") != 0){
                 value = true;
             }
+            rows.get(rowIndex).set(columnIndex+1, (String) aValue);
+            repaint();
             ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().editValue(rowNames.get(rowIndex), columnIndex, value);
         }
 		public String getColumnName(int columnIndex) {
