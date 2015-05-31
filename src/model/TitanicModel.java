@@ -231,6 +231,14 @@ public class TitanicModel {
         }
         this.getDsmModel().addNode(newNodeName);
     }
+
+    /**
+     * 아이템을 rename 합니다. originameName 을 changedName 으로 바꿉니다.
+     * 성공여부를 결과값으로 돌려줍니다.
+     * @param originalName 바꿀 아이템의 원본 이름
+     * @param changedName 바꿀 이름
+     * @return 성공시 true, 실패시 false 해당 return 값을 확인 후 실제 노드의 이름을 바꿔주세요.
+     */
     public boolean rename(String originalName, String changedName){
         if(!this.getDsmModel().rename(originalName, changedName)) return false;
         if(this.getClsxModel() != null){
