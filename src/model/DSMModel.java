@@ -232,6 +232,7 @@ public class DSMModel extends Model{
         for(int i = 0 ; i <= this.dependencyNumber ; i++)
             this.dependencyRelationArray.add(0);
         this.dependencyNumber++;
+        this.setIsEdit(true);
     }
 
     /**
@@ -252,6 +253,7 @@ public class DSMModel extends Model{
     protected boolean rename(String originalName, String changedName){
         if(isExistName(originalName) && !isExistName(changedName)){
             this.elementsNameArray.set(this.elementsNameArray.indexOf(originalName), changedName);
+            this.setIsEdit(true);
             return true;
         }
         return false;
@@ -271,6 +273,7 @@ public class DSMModel extends Model{
         int indexY = this.elementsNameArray.indexOf(y);
         if( indexX == -1 || indexY == -1) return false;
         this.dependencyRelationArray.set(( indexX * this.dependencyNumber) + indexY, value?1:0);
+        this.setIsEdit(true);
         return true;
     }
 }
