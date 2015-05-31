@@ -235,6 +235,9 @@ public class DSMModel extends Model{
             this.elementsNameArray.set(this.elementsNameArray.indexOf(originalName), changedName);
     }
     public void editValue(String name, String y, boolean value){
-        this.dependencyRelationArray.set(( this.elementsNameArray.indexOf(name) * this.dependencyNumber) + this.elementsNameArray.indexOf(y), value?1:0);
+        int indexX = this.elementsNameArray.indexOf(name);
+        int indexY = this.elementsNameArray.indexOf(y);
+        if( indexX == -1 || indexY == -1) return;
+        this.dependencyRelationArray.set(( indexX * this.dependencyNumber) + indexY, value?1:0);
     }
 }
