@@ -240,7 +240,6 @@ public class FileTreeController extends LeftPanelController {
 
                 boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
-				System.out.println("expanded : " + node);
 				treeFile.expandNode(node);
 
 				EventManager.callEvent("Redraw-Table");
@@ -255,7 +254,6 @@ public class FileTreeController extends LeftPanelController {
 
                 boolean checkIsEdit = ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit();
 				GreenTreeNode node = (GreenTreeNode)event.getPath().getLastPathComponent();
-				System.out.println("collapsed : " + node);
 				treeFile.collapseNode(node);
 				EventManager.callEvent("Redraw-Table");
 

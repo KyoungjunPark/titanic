@@ -335,6 +335,12 @@ public class FileTree extends JTree implements Controllerable {
             return;
         }
 
+        if(this.root.isExpanded()){
+            this.expandNode(this.root);
+        }else{
+            this.collapseAll();
+        }
+
 
         Enumeration nodeEnumeration = this.root.breadthFirstEnumeration();
         while(nodeEnumeration.hasMoreElements()){
