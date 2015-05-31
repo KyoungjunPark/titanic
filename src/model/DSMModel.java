@@ -232,6 +232,7 @@ public class DSMModel extends Model{
         for(int i = 0 ; i <= this.dependencyNumber ; i++)
             this.dependencyRelationArray.add(0);
         this.dependencyNumber++;
+        this.setIsEdit(true);
     }
 
     /**
