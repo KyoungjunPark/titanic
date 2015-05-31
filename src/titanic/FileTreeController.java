@@ -162,7 +162,6 @@ public class FileTreeController extends LeftPanelController {
 
 									while(answer != null && answer.isEmpty()) {
 										answer = JOptionPane.showInputDialog(null, "Empty input is not accepted!\n Enter new group name: ", "Rename", JOptionPane.ERROR_MESSAGE);
-
 									}
 									if(answer != null) {
 										treeFile.rename(node, answer);
