@@ -62,7 +62,7 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
         EventManager.callEvent("FileTree-redraw");
         for (GreenTreeNode node : nodes) {
-            this.setSelectionPath(new TreePath(findNode(node.toString()).getPath()));
+            this.addSelectionPath(new TreePath(findNode(node.toString()).getPath()));
         }
     }
 
@@ -92,7 +92,7 @@ public class FileTree extends JTree implements Controllerable {
         syncWithModel();
         EventManager.callEvent("FileTree-redraw");
         for (GreenTreeNode node : nodes) {
-            this.setSelectionPath(new TreePath(findNode(node.toString()).getPath()));
+            this.addSelectionPath(new TreePath(findNode(node.toString()).getPath()));
         }
     }
 
@@ -213,6 +213,11 @@ public class FileTree extends JTree implements Controllerable {
      * Node를 선택된 항목들의 parent에 child로 추가합니다.
      * */
     protected void groupTree(String groupName) {
+
+        if(findNode(groupName) != null){
+            JOptionPane.showMessageDialog(null, "This name is already exist!", "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            return;
+        }
         ArrayList<GreenTreeNode> nodes = getSelectedNodes();
         GreenTreeNode newGroup = new GreenTreeNode(groupName);
 
