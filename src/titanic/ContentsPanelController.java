@@ -30,14 +30,6 @@ public class ContentsPanelController extends CenterPanelController {
                 JTabbedPane sourceTabbedPane = (JTabbedPane) e.getSource();
                 if( sourceTabbedPane.getSelectedComponent() != null)
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
-
-
-                for(int i = 0 ; i<sourceTabbedPane.getTabCount() ; i++){
-                    if(ModelManager.sharedModelManager().getCurrentID() == ((RightPanel)sourceTabbedPane.getTabComponentAt(i)).getID()) {
-                       System.out.println( ((JButton)((JPanel)sourceTabbedPane.getTabComponentAt(i)).getComponent(1)).getName());
-                    }
-                }
-
                 if(ModelManager.sharedModelManager().getTitanicModelCount() == 0){
                     EventManager.callEvent("InitialStatus");
                 }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()) {
@@ -49,7 +41,6 @@ public class ContentsPanelController extends CenterPanelController {
                     EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("CLSXStatus");
                 }
-
             }
         });
 
