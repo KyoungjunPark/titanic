@@ -1,42 +1,58 @@
 package titanic;
 
 import java.awt.BorderLayout;
-import java.awt.print.Book;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 
-public class RightPanel extends JPanel {
-	private JTabbedPane tabbedPane;
-	private JLabel mainLabel;
-	private JPanel mainPanel;
+import model.T3;
+
+public class RightPanel extends JPanel implements Controllerable{
 	
+	private int id;
+	private DependencyTable table;
+	private ArrayList<ArrayList<String>> tableData;
+	private ArrayList<T3> groupInfo;
+	
+	private boolean setShowRowLabels;	
+	/**
+	 * DSM을 오픈했을 때 그려지는 테이블 하나를 포함하는 패널입니다.
+	 * 테이블에 들어갈 데이터를 DependencyTable의 함수 인자로 넘겨주면 앞에서 넘겨진 데이터의 테이블이 생성됩니다.
+	 * */
 	public RightPanel(){
-		setLayout(new BorderLayout(0,0));
+		setLayout(new BorderLayout(0,0));	
+
+	}
+	public RightPanel(int id){
+		this.id = id;
+	
+	}
+	@Override
+	public void setAction(String title, ActionListener action) {
 		
-		tabbedPane = new JTabbedPane();
-		add(tabbedPane);
+	}
+	public void setID(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getID(){
+		return this.id;
+	}
+	
+	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<T3> groupInfo){
+		tableData=newData;
+		this.groupInfo=groupInfo;
+		table = new DependencyTable(tableData, this.groupInfo, this.setShowRowLabels);
+		this.removeAll();
 		
-		mainLabel = new JLabel("ù��°", SwingConstants.CENTER);
-		mainPanel = new JPanel();
-		mainPanel.add(mainLabel);
-		tabbedPane.addTab("1",mainPanel);
+		this.setLayout(new BorderLayout());
+		this.add(table, BorderLayout.CENTER);
 	}
-
-	public JTabbedPane getTabbedPane() {
-		return tabbedPane;
-	}
-
-	public JLabel getMainLabel() {
-		return mainLabel;
-	}
-
-	public JPanel getMainPanel() {
-		return mainPanel;
+	
+	public void setShowRowLabels(boolean state) {
+		this.setShowRowLabels=state;
 	}
 	
 }
