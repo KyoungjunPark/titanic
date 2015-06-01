@@ -31,7 +31,6 @@ public class ContentsPanelController extends CenterPanelController {
                 if( sourceTabbedPane.getSelectedComponent() != null)
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
 
-
                 if(ModelManager.sharedModelManager().getTitanicModelCount() == 0){
                     EventManager.callEvent("InitialStatus");
                 }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()) {
@@ -43,7 +42,6 @@ public class ContentsPanelController extends CenterPanelController {
                     EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("CLSXStatus");
                 }
-
             }
         });
 
