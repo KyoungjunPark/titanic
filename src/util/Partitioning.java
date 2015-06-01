@@ -21,21 +21,21 @@ public class Partitioning {
     }
     private ArrayList<Integer> moveUpORLeft()
     {
-
+        return null;
     }
     private ArrayList<Integer> moveDownORRight()
     {
-
+        return null;
     }
     private ArrayList<Integer> moveRowToBottom(int row){
-
+        return null;
     }
     private ArrayList<Integer> moveRowToTop(int row){
-
+        return null;
     }
     private ArrayList<Integer> nthSquare()
     {
-
+        return null;
     }
     private void makeGroupNode()
     {

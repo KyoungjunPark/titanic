@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import model.T3;
+import model.GroupData;
 
 public class RightPanel extends JPanel implements Controllerable{
 	
 	private int id;
 	private DependencyTable table;
 	private ArrayList<ArrayList<String>> tableData;
-	private ArrayList<T3> groupInfo;
+	private ArrayList<GroupData> groupInfo;
 	
 	private boolean setShowRowLabels;	
 	/**
@@ -41,7 +41,7 @@ public class RightPanel extends JPanel implements Controllerable{
 		return this.id;
 	}
 	
-	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<T3> groupInfo){
+	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<GroupData> groupInfo){
 		tableData=newData;
 		this.groupInfo=groupInfo;
 		table = new DependencyTable(tableData, this.groupInfo, this.setShowRowLabels);

@@ -8,20 +8,16 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.metal.MetalIconFactory;
-import javax.xml.ws.Service;
-
-import com.sun.javafx.sg.prism.NGShape;
 
 import model.EventManager;
+import model.GroupData;
 import model.ModelManager;
 import model.SaveException;
-import model.T3;
 
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-	private ArrayList<T3> groupInfo;
+	private ArrayList<GroupData> groupInfo;
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
     private JButton closeButton;
@@ -187,7 +183,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 	public void getGroupInfo(){
 		
-		groupInfo = new ArrayList<T3>();
+		groupInfo = new ArrayList<GroupData>();
 
 		try{
 			groupInfo = ModelManager.sharedModelManager()

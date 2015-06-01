@@ -3,11 +3,11 @@ package model;
 /**
  * Created by A on 15. 5. 27..
  */
-public class T3{
+public class GroupData {
     private int depth;
     private int first;
     private int last;
-    public T3(int depth, int first, int last){
+    public GroupData(int depth, int first, int last){
         this.depth = depth;
         this.first = first;
         this.last = last;
