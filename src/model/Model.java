@@ -67,7 +67,7 @@ abstract class Model {
     }
     public GroupNode getGroupNode(){return null;}
     public void addNode(String newNodeName){}
-    protected boolean isEdit(){
+    public boolean isEdit(){
         return this.isEdit;
     }
     public void setIsEdit(boolean isEdit){

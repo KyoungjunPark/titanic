@@ -85,14 +85,19 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit() && !ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEditModel()){
+                    int selected;
 
-                    int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getDsmModel().isEdit()){
+                        selected = JOptionPane.showConfirmDialog(null, "DSM has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    }else{//clsx
+                        selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    }
                     if (selected == 0) { //yes
                         try {
-                            if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() != null) {
-                                ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
-                            }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath() != null){
+                            if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getDsmModel().isEdit()) {
                                 ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+                            }else if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getClsxModel().isEdit()){
+                                ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
                             }else{
                             	
                                 File openFile;

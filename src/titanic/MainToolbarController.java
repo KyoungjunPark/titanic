@@ -73,7 +73,7 @@ public class MainToolbarController extends MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selected;
-                if (ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()) {
+                if (ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().isEdit()) {
                     selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
                     if (selected == 0) { //yes
                         try {
