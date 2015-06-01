@@ -83,8 +83,8 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
         setAction("closeButton", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit() && !ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
+
                     int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
                     if (selected == 0) { //yes
                         try {

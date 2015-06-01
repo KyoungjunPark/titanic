@@ -1,6 +1,6 @@
 package titanic;
 
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -31,6 +31,12 @@ public class ContentsPanelController extends CenterPanelController {
                 if( sourceTabbedPane.getSelectedComponent() != null)
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
 
+
+                for(int i = 0 ; i<sourceTabbedPane.getTabCount() ; i++){
+                    if(ModelManager.sharedModelManager().getCurrentID() == ((RightPanel)sourceTabbedPane.getTabComponentAt(i)).getID()) {
+                       System.out.println( ((JButton)((JPanel)sourceTabbedPane.getTabComponentAt(i)).getComponent(1)).getName());
+                    }
+                }
 
                 if(ModelManager.sharedModelManager().getTitanicModelCount() == 0){
                     EventManager.callEvent("InitialStatus");
