@@ -46,13 +46,13 @@ public class Partitioning {
         	  }
         	  
           }
-        } catch (CreateException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         printTest();
     }
-    private boolean checkRow(){													//Rowê°? ëª¨ë‘ 0?¸ì§? ê²??‚¬?•˜?—¬
-    	boolean changeRow = false;												//ë§? ?œ„ë¡? ë³´ëƒ„
+    private boolean checkRow(){													//Rowï¿½? ëª¨ë‘ 0?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+    	boolean changeRow = false;												//ï¿½? ?ï¿½ï¿½ï¿½? ë³´ëƒ„
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -70,8 +70,8 @@ public class Partitioning {
     	return changeRow;
     }
     
-    private boolean checkColumn(){												//Column?´ ëª¨ë‘ 0?¸ì§? ê²??‚¬?•˜?—¬
-    	boolean changeColumn=false;												//ë§? ?•„?˜ë¡? ë³´ëƒ„
+    private boolean checkColumn(){												//Column?ï¿½ï¿½ ëª¨ë‘ 0?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+    	boolean changeColumn=false;												//ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë³´ëƒ„
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -113,7 +113,7 @@ public class Partitioning {
         //elementsNameArray's move down or right
         Collections.swap(elementsNameArray, row, row + 1);
     }*/ 
-    //?•„?š”?ˆ?„ê¹??
+    //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½??
     private void moveRowToBottomRightmost(int row){
 
     	for(int i = 0 ; i <originDependencyNumber; i++){
@@ -190,7 +190,7 @@ public class Partitioning {
         }
         return result;
     }
-    private void makeGroupNode(){
+//    private void makeGroupNode(){
 
     //must be deleted
     private void printTest() {
