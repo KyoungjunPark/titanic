@@ -32,22 +32,6 @@ public class MenuBarController extends MainController {
         menu.setAction("New DSM", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ModelManager.sharedModelManager().getCurrentTitanicModel() == null) {
-                    //do nothing
-
-                } else if (ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()) {
-                    int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
-                    if (selected == 0) { //yes
-                        try {
-                            ModelManager.sharedModelManager().getCurrentTitanicModel().save();
-                        } catch (SaveException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else if (selected == 1) { //no
-                    } else { // cancel
-                        return;
-                    }
-                }
 
                 String input = JOptionPane.showInputDialog(null, "Enter the New DSM's row number : ", "New DSM", JOptionPane.PLAIN_MESSAGE);
                 while ((input != null) && (input.isEmpty() || !isPositiveInteger(input))) {
@@ -454,9 +438,7 @@ public class MenuBarController extends MainController {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         EventManager.callEvent("Redraw-Table");
-                        // 타이타닉 모델이 하나라도 생성되어 있다면 리드로우 해줌
-                        //if(ModelManager.sharedModelManager().getTitanicModelCount()!=0)
-                        //	EventManager.callEvent("Redraw");
+                        EventManager.callEvent("FileTree-redraw");
                     }
                 }
 

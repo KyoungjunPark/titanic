@@ -338,10 +338,8 @@ public class FileTree extends JTree implements Controllerable {
 
             GreenTreeNode node = (GreenTreeNode) nodeEnumeration.nextElement();
             if(node.isExpanded()) {
-                System.out.println("expanded!"+node);
                 this.expandRow(this.getRowForPath(new TreePath(node.getPath())));
             }else{
-                System.out.println("collapsed!"+node);
                 this.collapseRow(this.getRowForPath(new TreePath(node.getPath())));
             }
         }
