@@ -50,7 +50,7 @@ public class Partitioning {
         	  DFS(reculNthSquare(dependencyRelationArray));
         	  
           }
-        } catch (CreateException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         printTest();
@@ -208,10 +208,6 @@ public class Partitioning {
     	}
     	
     }
-    
-    private void makeGroupNode(){
-    }
-    //must be deleted
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
