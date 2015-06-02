@@ -1,5 +1,7 @@
 package util;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * Created by KimJiSoo on 15. 5. 19..
  */
@@ -18,5 +20,16 @@ public abstract class Node {
     public Node getParentNode(){
         return this.parentNode;
     }
-    abstract public void print();
+
+    /**
+     * 자신을 트리형태로 바꾸어 돌려줍니다.
+     * GroupNode 의 경우에는 하위 컨텐츠까지 트리로 바꾸어줍니다.
+     *
+     * @return {@link DefaultMutableTreeNode} GreenTreeNode 를 돌려줍니다.
+     */
+    abstract public DefaultMutableTreeNode getTreeNode();
+    abstract public String getType();
+    public String toString(){
+        return getType()+" "+getName()+"\r\n";
+    }
 }

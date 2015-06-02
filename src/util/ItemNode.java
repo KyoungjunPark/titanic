@@ -4,9 +4,8 @@ package util;
  * Created by kimjisoo on 5/19/15.
  */
 public class ItemNode extends Node{
-    public ItemNode(){
-
-    }
+    private int index;
+    public ItemNode(){}
     public ItemNode(Node node, String name){
         this.setParentNode(node);
         this.setName(name);
@@ -17,10 +16,13 @@ public class ItemNode extends Node{
     public ItemNode(String name){
         this(null, name);
     }
-    public void print(){
-        System.out.println(this);
+    public GreenTreeNode getTreeNode(){
+        return new GreenTreeNode(this.getName(), this);
+    }
+    public String getType(){
+        return "I";
     }
     public String toString(){
-        return "item "+this.getName();
+        return "<item name=\""+this.getName()+"\" />\r\n";
     }
 }
