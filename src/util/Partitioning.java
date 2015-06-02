@@ -19,22 +19,69 @@ public class Partitioning {
         printTest();
         doPartitioning();
     }
+    
+    
     private void doPartitioning()
     {
 
         try {
-            //do algorithm
+          while(true){
+        	  if(checkRow()==true){
+        		  continue;
+        	  }
+        	  if(checkColumn()==true){
+        		  continue;
+        	  }
+        	  
+          }
         } catch (CreateException e) {
             e.printStackTrace();
         }
         printTest();
     }
+    private boolean checkRow(){
+    	boolean changeRow = false;
+    	int check=0;
+    	for(int i=0; i<dependencyNumber;i++){
+    		for(int j=0; j<dependencyNumber;j++){
+    			if(dependencyRelationArray.get(i*dependencyNumber+j)==0){
+    				check++;
+    			}
+    		}
+    		if(check==dependencyNumber){
+    			changeRow=true;
+    			return changeRow;
+    		}
+    		check=0;
+    	}
+    	return changeRow;
+    }
+    
+    private boolean checkColumn(){
+    	boolean changeColumn=false;
+    	int check=0;
+    	for(int i=0; i<dependencyNumber;i++){
+    		for(int j=0; j<dependencyNumber;j++){
+    			if(dependencyRelationArray.get(j*dependencyNumber+i)==0){
+    				check++;
+    			}
+    		}
+    		if(check==dependencyNumber){
+    			changeColumn=true;
+    			return changeColumn;
+    		}
+    		check=0;
+    	}
+    	return changeColumn;
+    }
+    
     private void moveUpORLeft(int row) throws CreateException {
         if(row == 0) throw new CreateException("Impossible input");
 
         //dependencyRelationArray's move up or left
         for(int i = 0 ; i < dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i , (row-1)*dependencyNumber+i);
+            Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+(row-1));
         }
 
         //elementsNameArray's move up or left
@@ -47,6 +94,7 @@ public class Partitioning {
         //dependencyRelationArray's move down or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (row+1)*dependencyNumber+i);
+            Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+(row+1));
         }
         //elementsNameArray's move down or right
         Collections.swap(elementsNameArray, row, row + 1);
@@ -56,6 +104,7 @@ public class Partitioning {
         //dependencyRelationArray's row to bottom or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (dependencyNumber-1)*dependencyNumber+i);
+            Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+(dependencyNumber-1));
         }
 
         //elementsNameArray's row to bottom or right
@@ -65,6 +114,7 @@ public class Partitioning {
         //dependencyRelationArray's row to top or left
         for(int i = 0 ; i <dependencyNumber ; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, i);
+            Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber);
         }
 
         //elementsNameArray's row to top or left
@@ -89,6 +139,7 @@ public class Partitioning {
 
         this.dependencyRelationArray = result;
     }
+    
     private void makeGroupNode()
     {
 
