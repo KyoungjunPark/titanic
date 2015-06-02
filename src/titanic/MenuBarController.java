@@ -434,7 +434,6 @@ public class MenuBarController extends MainController {
 
         //View Menus
         menu.setAction("Redraw", new ActionListener() {
-
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         EventManager.callEvent("Redraw-Table");
