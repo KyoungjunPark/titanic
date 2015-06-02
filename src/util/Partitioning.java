@@ -88,7 +88,6 @@ public class Partitioning {
         }
 
         this.dependencyRelationArray = result;
-
     }
     private void makeGroupNode()
     {
