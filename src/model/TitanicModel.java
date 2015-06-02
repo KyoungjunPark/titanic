@@ -160,17 +160,17 @@ public class TitanicModel {
     }
 
     /**
-     * Node 의 Group 정보를 T3 형태로 표시합니다.
-     * T3 은 다음을 참조하세요. {@link T3}
+     * Node 의 Group 정보를 GroupData 형태로 표시합니다.
+     * GroupData 은 다음을 참조하세요. {@link GroupData}
      * 현재 Group 의 depth 는 0이라 가정하며 생략합니다.
-     * 이하의 그룹에 대해서는 (depth, 시작 index, 끝 index) 의 T3 정보를 갖는 ArrayList 를 반환합니다.
-     * @return T3 데이터를 갖는 ArrayList 입니다.
+     * 이하의 그룹에 대해서는 (depth, 시작 index, 끝 index) 의 GroupData 정보를 갖는 ArrayList 를 반환합니다.
+     * @return GroupData 데이터를 갖는 ArrayList 입니다.
      */
-    public ArrayList<T3> getGroupData(){
+    public ArrayList<GroupData> getGroupData(){
         ArrayList<Node> itemList = this.getGroupNode().getAllItemList();
         ArrayList<Node> currentGroupList;
         ArrayList<Node> nextGroupList = this.getGroupNode().getGroupList();
-        ArrayList<T3> groupData = new ArrayList<T3>();
+        ArrayList<GroupData> groupData = new ArrayList<GroupData>();
         int depth = 1;
         if(this.getGroupNode().isExpanded() == false)
             return groupData;
@@ -181,7 +181,7 @@ public class TitanicModel {
                 GroupNode temp = (GroupNode)node;
                 if(temp.isExpanded() == true){
                     ArrayList<Node> currentItemList = temp.getAllItemList();
-                    T3 tuple = new T3(depth, currentItemList.get(0).hashCode(), (currentItemList.get(currentItemList.size()-1)).hashCode());
+                    GroupData tuple = new GroupData(depth, currentItemList.get(0).hashCode(), (currentItemList.get(currentItemList.size()-1)).hashCode());
                     if( tuple.getFirst() >= 0 && tuple.getLast() >= 0)
                         groupData.add(tuple);
                     nextGroupList.addAll(temp.getGroupList());
@@ -192,11 +192,11 @@ public class TitanicModel {
                     int firstIndex= itemList.indexOf(firstItem);
                     int lastIndex= itemList.indexOf(lastItem);
                     if(firstIndex == -1 || lastIndex == -1) continue;
-                    T3 tuple = new T3(depth, firstItem.hashCode(), firstItem.hashCode());
+                    GroupData tuple = new GroupData(depth, firstItem.hashCode(), firstItem.hashCode());
                     groupData.add(tuple);
                     while (lastIndex > firstIndex){
                         Node tempNode = itemList.get(lastIndex);
-                        for( T3 t : groupData){
+                        for( GroupData t : groupData){
                             if(t.getLast() == tempNode.hashCode())
                                 t.setLast(itemList.get(lastIndex-1).hashCode());
                         }
@@ -206,7 +206,7 @@ public class TitanicModel {
             }
             depth++;
         }
-        for( T3 t : groupData){
+        for( GroupData t : groupData){
             for(int i = 0 ; i < itemList.size() ; i++){
                 Node node = itemList.get(i);
                 if(t.getFirst() == node.hashCode())

@@ -1,6 +1,6 @@
 package titanic;
 
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -30,18 +30,17 @@ public class ContentsPanelController extends CenterPanelController {
                 JTabbedPane sourceTabbedPane = (JTabbedPane) e.getSource();
                 if( sourceTabbedPane.getSelectedComponent() != null)
                     ModelManager.sharedModelManager().setCurrentID(((RightPanel) sourceTabbedPane.getSelectedComponent()).getID());
-
-                EventManager.callEvent("FileTree-redraw");
-                EventManager.callEvent("Redraw-Table");
-
                 if(ModelManager.sharedModelManager().getTitanicModelCount() == 0){
                     EventManager.callEvent("InitialStatus");
                 }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()) {
+                    EventManager.callEvent("FileTree-redraw");
+                    EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("EditStatus");
                 }else{
+                    EventManager.callEvent("FileTree-redraw");
+                    EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("CLSXStatus");
                 }
-
             }
         });
 

@@ -1,0 +1,270 @@
+[33mcommit 91e4176fc33d362e73512b6c304fea65b710b547[m
+Merge: aa1bab1 5479c2e
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Tue Jun 2 00:15:43 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit aa1bab11d73d473b0f4e900553ef72a532e8d64b[m
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Tue Jun 2 00:14:44 2015 +0900
+
+    opening of YASSINE...
+
+[33mcommit 5479c2e6afdb34abf9f4f14ae87593cd9a68c505[m
+Author: KimJiSoo <A@KimJiSooui-MacBook.local>
+Date:   Mon Jun 1 19:58:43 2015 +0900
+
+    remove some files
+
+[33mcommit ea4d43b007960120e672ebb28517bead5eb2e117[m
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 16:57:07 2015 +0900
+
+    solved issue #13
+
+[33mcommit 4f6d82d9f68d3893ae42cdd8f19a32e92a7b8b2e[m
+Merge: 6dff79d c79b75c
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 16:14:31 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+    
+    Conflicts:
+    	src/titanic/ContentsPanel.java
+    	src/titanic/ContentsPanelController.java
+
+[33mcommit 6dff79dd4c02e580ad981d27943a87c9115a8048[m
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 16:12:16 2015 +0900
+
+    doe
+
+[33mcommit c79b75cb0a98990102bca3979ccfb549cb434a68[m
+Author: wonse <dldnjstp20@naver.com>
+Date:   Mon Jun 1 16:08:15 2015 +0900
+
+    갱준
+
+[33mcommit 282c1c229decfd1651ad9851cb3bab554c515ed2[m
+Author: Park.Kyoung-Jun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 14:23:36 2015 +0900
+
+    modify issue#14
+
+[33mcommit a1d5c26727fde62b46f8c8baae9c0300982da281[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 02:39:22 2015 +0900
+
+    modify real tab sync
+
+[33mcommit 18e82e63dfac1f2661fb9f8a313506a0844bd99c[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Mon Jun 1 01:28:54 2015 +0900
+
+    modify file tree when tab is changed, sync is not matched
+
+[33mcommit 395e2a6cb9f3cb7ec116f84563332d182a42d6b8[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 23:58:01 2015 +0900
+
+    modify bugs..
+
+[33mcommit 4d2d13a51e42fac7de0e6c5bf1259145fc230796[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 23:46:31 2015 +0900
+
+    modify when up & down items, then group will act without collpasing
+
+[33mcommit 17c70a5cfd3eb47ef5d520546bcd0657e81595f2[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 22:41:23 2015 +0900
+
+    modify window's exit button
+
+[33mcommit 89b5dac9bef40cbedcb369ee4ff76308a5aa92ac[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 22:23:17 2015 +0900
+
+    add 확장자 in file explorer
+
+[33mcommit 4d672e11b3a86366e173c59f25982caf95d2fc79[m
+Merge: f784b85 79f2cff
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 22:08:46 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit f784b852e2129359f1c09a5cf65002fe0f8a6237[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 22:08:29 2015 +0900
+
+    modify
+
+[33mcommit 79f2cff5c186f6379d6f8475d8b508436c97e3fd[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 21:49:43 2015 +0900
+
+    set isedit in dsmmodel
+
+[33mcommit 9ab0dedd9c31b2fb57489da915b3e43d21d0d86a[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 21:48:33 2015 +0900
+
+    set isedit in dsmmodel
+
+[33mcommit 9fc3642e88f7c1752fb4fa50cdd0179cd4363b02[m
+Author: Han YeLim <dpfla0376@hanmail.net>
+Date:   Sun May 31 21:30:54 2015 +0900
+
+    add icon changed
+
+[33mcommit b22c88e8eb4104018d9693ea0e30f54ef98b191e[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 20:34:18 2015 +0900
+
+    rename
+
+[33mcommit 1a5fa979ce878069b44192f15bd9b8e8cfff94a0[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 20:18:44 2015 +0900
+
+    rename feature
+
+[33mcommit 494a5544fb7a1f64456ddb77c94b8d6cf1375857[m
+Merge: 1b9e6b4 8e77223
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 19:31:20 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit 1b9e6b42c8177d056b48171c6c3dd95a3c131571[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 19:31:04 2015 +0900
+
+    modify issues...
+
+[33mcommit 8e77223618590b46ebfc4bb1cdba6c00cdab1259[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 18:49:17 2015 +0900
+
+    group edit X
+
+[33mcommit 2d7870e8cd65e125765e6937811bde44fcfe9db7[m
+Merge: 7d878e6 c7f0852
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 18:44:26 2015 +0900
+
+    Merge branch 'master' of http://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit 7d878e6020650a10b1139744f7866d3863f94522[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 18:42:48 2015 +0900
+
+    table edit problem
+
+[33mcommit c7f085271dd4ade6c16cf021ae60be62eca479de[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 18:37:39 2015 +0900
+
+    add rename comment
+
+[33mcommit d5c7683053884c2fa8d50bcaa87a9dd1c68b4161[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 18:34:20 2015 +0900
+
+    rename fix
+
+[33mcommit 45896f6a64c7f36c3fd9c908669826cc4e40a27c[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 18:21:43 2015 +0900
+
+    editValue 의 return type 를 boolean으로 변경
+
+[33mcommit 1c9925bb3f41fc1ed74aff00f06ec5bdaeceb4b6[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 17:59:23 2015 +0900
+
+    그룹 닫힐때 수정 안돼게
+
+[33mcommit dbeb830879597f40e818fb01b110d4d54d37264e[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 14:09:58 2015 +0900
+
+    leftTable Label setEnabled(false)
+
+[33mcommit 92cf2b5c343c03aa6f6111fa8b64d13c1fa0c4ba[m
+Merge: d1630cf 46e57e2
+Author: KimJiSoo <A@KimJiSooui-MacBook.local>
+Date:   Sun May 31 13:59:06 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit d1630cf85acd20e8ea42b35ea780eb9f29b101e9[m
+Author: KimJiSoo <A@KimJiSooui-MacBook.local>
+Date:   Sun May 31 13:58:52 2015 +0900
+
+    edit 데이터가 잘못 들어가는 버그 수정
+
+[33mcommit 46e57e2e2ff0aeb5ea982976f97a7dfa559a6d47[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 13:58:28 2015 +0900
+
+    쓸데없는 코드 지움
+
+[33mcommit 7033712d225d0d60fb2dcedd9b7058a030f415c4[m
+Merge: 0956dbe 5c5b189
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 13:54:09 2015 +0900
+
+    Merge branch 'master' of http://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit 0956dbe2a797ce10bd2bd8ba1ccac926da979441[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 13:53:44 2015 +0900
+
+    테이블 자체에서 변경은 가능, 모델에는 값이 안들어가고있음
+
+[33mcommit 5c5b1894b96d0c7e51d04744b2003c6bd90f57d7[m
+Merge: 6b38e83 8b44fdd
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 13:00:15 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit 6b38e83fe122c1f7497a215dfffaefabc572db47[m
+Author: Park.KyoungJun <pgj525@cau.ac.kr>
+Date:   Sun May 31 12:59:47 2015 +0900
+
+    solved issue #6
+
+[33mcommit 8b44fdd0c62ddfb41d448cc44ff745c4a67050b7[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 03:35:27 2015 +0900
+
+    edit bug fix
+
+[33mcommit f272403d9018194fa542ed75c3ca2fa6acb9e042[m
+Author: sehyeon <sehyun_s@naver.com>
+Date:   Sun May 31 03:32:36 2015 +0900
+
+    edit
+
+[33mcommit 35a2a21c66818520a67694a71e6a6ec94d46757d[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 03:13:07 2015 +0900
+
+    edit bug fixing
+
+[33mcommit 81a1bff2286e4adbe795dc2966918ef450683152[m
+Merge: 8ba0948 a8b9a39
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 03:07:58 2015 +0900
+
+    Merge branch 'master' of https://bitbucket.org/Sinkedtitanic/titanic
+
+[33mcommit 8ba0948abcbde6ce4f4e397155f740cb82c2c30c[m
+Author: Kim, Ji-Soo <jskim@bobcats.kr>
+Date:   Sun May 31 03:07:42 2015 +0900
+
+    edit table

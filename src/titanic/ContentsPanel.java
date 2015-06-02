@@ -8,19 +8,16 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.metal.MetalIconFactory;
-import javax.xml.ws.Service;
 
-import com.sun.javafx.sg.prism.NGShape;
 import model.EventManager;
+import model.GroupData;
 import model.ModelManager;
 import model.SaveException;
-import model.T3;
 
 public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 	private ArrayList<RightPanel> contents;
-	private ArrayList<T3> groupInfo;
+	private ArrayList<GroupData> groupInfo;
 	private ArrayList<ArrayList<String>> newData;
 	private int tabIndex;
     private JButton closeButton;
@@ -83,16 +80,22 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
         setAction("closeButton", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit() && !ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEditModel()){
+                    int selected;
 
-                if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).isEdit() && !ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
-                    int selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getDsmModel().isEdit()){
+                        selected = JOptionPane.showConfirmDialog(null, "DSM has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    }else{//clsx
+                        selected = JOptionPane.showConfirmDialog(null, "Clustering has been modified, Save changes?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION);
+                    }
                     if (selected == 0) { //yes
                         try {
-                            if(ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().getFilePath() != null) {
-                                ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
-                            }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFilePath() != null){
+                            if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getDsmModel().isEdit()) {
                                 ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().save();
+                            }else if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getClsxModel().isEdit()){
+                                ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
                             }else{
+                            	
                                 File openFile;
 
                                 JFileChooser fc = new JFileChooser();
@@ -100,9 +103,8 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
                                     @Override
                                     public String getDescription() {
-                                        return "DSM or CLSX Files";
+                                        return "CLSX File";
                                     }
-
                                     @Override
                                     public boolean accept(File f) {
                                         // TODO Auto-generated method stub
@@ -115,6 +117,11 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
                                 openFile = fc.getSelectedFile();
                                 ModelManager.sharedModelManager().save(openFile.getPath());
+                                
+                                if(!openFile.getName().endsWith(".clsx") && !openFile.getName().endsWith(".dsm")){
+                                    String fileDir = openFile.getPath() + ".clsx";
+                                    openFile = new File(fileDir);
+                                }
                             }
                         } catch (SaveException e1) {
                             e1.printStackTrace();
@@ -176,7 +183,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	}
 	public void getGroupInfo(){
 		
-		groupInfo = new ArrayList<T3>();
+		groupInfo = new ArrayList<GroupData>();
 
 		try{
 			groupInfo = ModelManager.sharedModelManager()
