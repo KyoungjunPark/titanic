@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.EventManager;
+import model.ModelManager;
 import titanic.LeftPanel.LeftToolBar;
 
 
@@ -93,7 +94,12 @@ public class LeftToolbarController extends LeftPanelController{
 			}
 		});
 
-		
+		leftToolbar.setAction("Yassine", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().sortYassine();
+			}
+		});
 		
 	}
 	

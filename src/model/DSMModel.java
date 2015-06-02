@@ -1,10 +1,7 @@
 package model;
 
 import org.w3c.dom.NodeList;
-import util.GroupNode;
-import util.ItemNode;
-import util.JSFiles;
-import util.Node;
+import util.*;
 
 import java.io.*;
 import java.security.acl.Group;
@@ -275,5 +272,11 @@ public class DSMModel extends Model{
         this.dependencyRelationArray.set(( indexX * this.dependencyNumber) + indexY, value?1:0);
         this.setIsEdit(true);
         return true;
+    }
+
+    public CLSXModel sortYassine(){
+        Partitioning partition = new Partitioning(dependencyNumber,dependencyRelationArray,elementsNameArray);
+
+        return null;
     }
 }
