@@ -38,12 +38,16 @@ public class Partitioning {
 
         try {
           while(true){
+        	  if(dependencyNumber<=1){
+        		  break;
+        	  }
         	  if(checkRow()==true){
         		  continue;
         	  }
         	  if(checkColumn()==true){
         		  continue;
         	  }
+        	  DFS(reculNthSquare(dependencyRelationArray));
         	  
           }
         } catch (CreateException e) {
@@ -51,8 +55,8 @@ public class Partitioning {
         }
         printTest();
     }
-    private boolean checkRow(){													//Rowê°? ëª¨ë‘ 0?¸ì§? ê²??‚¬?•˜?—¬
-    	boolean changeRow = false;												//ë§? ?œ„ë¡? ë³´ëƒ„
+    private boolean checkRow(){													//Rowï¿½? ëª¨ë‘ 0?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+    	boolean changeRow = false;												//ï¿½? ?ï¿½ï¿½ï¿½? ë³´ëƒ„
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -70,8 +74,8 @@ public class Partitioning {
     	return changeRow;
     }
     
-    private boolean checkColumn(){												//Column?´ ëª¨ë‘ 0?¸ì§? ê²??‚¬?•˜?—¬
-    	boolean changeColumn=false;												//ë§? ?•„?ž˜ë¡? ë³´ëƒ„
+    private boolean checkColumn(){												//Column?ï¿½ï¿½ ëª¨ë‘ 0?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+    	boolean changeColumn=false;												//ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë³´ëƒ„
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -113,7 +117,7 @@ public class Partitioning {
         //elementsNameArray's move down or right
         Collections.swap(elementsNameArray, row, row + 1);
     }*/ 
-    //?•„?š”?žˆ?„ê¹??
+    //?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½??
     private void moveRowToBottomRightmost(int row){
 
     	for(int i = 0 ; i <originDependencyNumber; i++){
@@ -178,6 +182,7 @@ public class Partitioning {
     }
     private ArrayList<Integer> reculNthSquare(ArrayList<Integer> list){
         ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> diagonal = new ArrayList<>();
         for(int i = 0 ; i < list.size() ; i++){
             for(int j = 0 ; j <  list.size() ; j++){
                 //(i,j)
@@ -188,10 +193,24 @@ public class Partitioning {
                 result.add(pointSum);
             }
         }
-        return result;
+        for(int i = 0 ; i<dependencyNumber ; i++){
+        	diagonal.add(result.get(i*dependencyNumber+i));
+        }
+        return diagonal;
     }
+    
+    private void DFS(ArrayList<Integer> diagonal){
+    	int starting;
+    	for(int i=0; i<diagonal.size();i++){
+    		if(diagonal.get(i)!=0){
+    			starting=diagonal.indexOf(i);
+    		}
+    	}
+    	
+    }
+    
     private void makeGroupNode(){
-
+    }
     //must be deleted
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
