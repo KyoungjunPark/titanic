@@ -168,7 +168,8 @@ public class FileTreeController extends LeftPanelController {
 									}
 								}
 								if(e1.getActionCommand() == "Delete"){
-                                    treeFile.delete();
+									EventManager.callEvent("delete");
+									EventManager.callEvent("Redraw-Table");
                                 }
 							}
 						};
