@@ -8,14 +8,26 @@ import java.util.Collections;
 public class Partitioning {
 
     private int dependencyNumber;
+    private int originDependencyNumber;
     private ArrayList<Integer> dependencyRelationArray;
+    private ArrayList<Integer> originDependencyRelationArray;
     private ArrayList<String> elementsNameArray;
+    private ArrayList<String> originElementsNameArray;
+    
+    private int removeRow;
+    private int removeColumn;
 
-    public Partitioning(int dependencyNumber, ArrayList<Integer> dependencyRelationArray, ArrayList<String> elementsNameArray){
-        this.dependencyNumber = dependencyNumber;
-        this.dependencyRelationArray = dependencyRelationArray;
-        this.elementsNameArray = elementsNameArray;
-
+    public Partitioning(int originDependencyNumber, ArrayList<Integer> originDependencyRelationArray, ArrayList<String> originElementsNameArray){
+        this.originDependencyNumber = originDependencyNumber;
+        this.originDependencyRelationArray = originDependencyRelationArray;
+        this.originElementsNameArray = originElementsNameArray;
+        this.dependencyNumber = originDependencyNumber;
+        this.dependencyRelationArray = originDependencyRelationArray;
+        this.elementsNameArray = originElementsNameArray;
+        
+        this.removeRow=0;
+        this.removeColumn=0;
+        
         printTest();
         doPartitioning();
     }
@@ -76,7 +88,7 @@ public class Partitioning {
     	}
     	return changeColumn;
     }
-    
+    /*
     private void moveUpORLeft(int row) throws CreateException {
         if(row == 0) throw new CreateException("Impossible input");
 
@@ -100,27 +112,61 @@ public class Partitioning {
         }
         //elementsNameArray's move down or right
         Collections.swap(elementsNameArray, row, row + 1);
-    }
+    }*/ 
+    //필요있을까?
     private void moveRowToBottomRightmost(int row){
 
+    	for(int i = 0 ; i <originDependencyNumber; i++){
+            Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-removeColumn)+i);
+            Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), i*(originDependencyNumber-1)-removeColumn);
+        }
+    	Collections.swap(originElementsNameArray, row+removeRow, removeRow);
+   	 
         //dependencyRelationArray's row to bottom or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (dependencyNumber-1)*dependencyNumber+i);
             Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+(dependencyNumber-1));
         }
-
+        
+        for(int i=0 ; i<dependencyNumber ; i++){
+        	dependencyRelationArray.remove(dependencyNumber*dependencyNumber-(i+1));
+        }
+        for(int i=0 ; i<dependencyNumber-1 ; i++){
+        	dependencyRelationArray.remove(i*dependencyNumber+(dependencyNumber-1)-i);
+        }
+        
         //elementsNameArray's row to bottom or right
         Collections.swap(elementsNameArray,row, dependencyNumber-1);
+        elementsNameArray.remove(dependencyNumber-1);
+        dependencyNumber--;
+        removeColumn++;
     }
     private void moveRowToTopLeftmost(int row){
-        //dependencyRelationArray's row to top or left
+        
+    	 for(int i = 0 ; i <originDependencyNumber; i++){
+             Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, (removeRow*originDependencyNumber)+i);
+             Collections.swap(originDependencyRelationArray, (i+removeRow)*originDependencyNumber+(row+removeRow), (i+removeRow)*originDependencyNumber);
+         }
+    	 Collections.swap(originElementsNameArray, row+removeRow, removeRow);
+    	 
+    	//dependencyRelationArray's row to top or left
         for(int i = 0 ; i <dependencyNumber ; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, i);
             Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber);
         }
-
+        
+        for(int i=0 ; i<dependencyNumber ; i++){
+        	dependencyRelationArray.remove(i*dependencyNumber-i);
+        }
+        for(int i=0 ; i<dependencyNumber-1 ; i++){
+        	dependencyRelationArray.remove(0);
+        }
+        
         //elementsNameArray's row to top or left
         Collections.swap(elementsNameArray, row, 0);
+        elementsNameArray.remove(0);
+        dependencyNumber--;
+        removeRow++;
 
     }
     private void nthSquare(int nth) throws CreateException {
