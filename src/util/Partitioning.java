@@ -39,8 +39,8 @@ public class Partitioning {
         }
         printTest();
     }
-    private boolean checkRow(){
-    	boolean changeRow = false;
+    private boolean checkRow(){													//Row가 모두 0인지 검사하여
+    	boolean changeRow = false;												//맨 위로 보냄
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -50,6 +50,7 @@ public class Partitioning {
     		}
     		if(check==dependencyNumber){
     			changeRow=true;
+    			moveRowToTopLeftmost(i);
     			return changeRow;
     		}
     		check=0;
@@ -57,8 +58,8 @@ public class Partitioning {
     	return changeRow;
     }
     
-    private boolean checkColumn(){
-    	boolean changeColumn=false;
+    private boolean checkColumn(){												//Column이 모두 0인지 검사하여
+    	boolean changeColumn=false;												//맨 아래로 보냄
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -68,6 +69,7 @@ public class Partitioning {
     		}
     		if(check==dependencyNumber){
     			changeColumn=true;
+    			moveRowToBottomRightmost(i);
     			return changeColumn;
     		}
     		check=0;
