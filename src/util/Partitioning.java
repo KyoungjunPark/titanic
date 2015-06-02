@@ -71,31 +71,32 @@ public class Partitioning {
         Collections.swap(elementsNameArray, row, 0);
 
     }
-    private void nthSquare(int nth) throws CreateException {
+    private ArrayList<Integer> nthSquare(ArrayList<Integer> list, int nth) throws CreateException {
         if(nth <= 0) throw new CreateException("Impossible input");
-
+        for(int i = 1 ; i < nth ; i++){
+            list = reculNthSquare(list);
+        }
+        return list;
+    }
+    private ArrayList<Integer> reculNthSquare(ArrayList<Integer> list){
         ArrayList<Integer> result = new ArrayList<>();
-
-        for(int i = 0 ; i < dependencyNumber ; i++){
-            for(int j = 0 ; j < dependencyNumber ; j++){
+        for(int i = 0 ; i < list.size() ; i++){
+            for(int j = 0 ; j <  list.size() ; j++){
                 //(i,j)
                 int pointSum = 0;
-                for(int k = 0 ; k < dependencyNumber; k++){
-                  pointSum +=dependencyRelationArray.get(i*dependencyNumber + k)* dependencyRelationArray.get(j +dependencyNumber*k);
+                for(int k = 0 ; k <  list.size(); k++){
+                    pointSum +=list.get(i* list.size() + k)* list.get(j + list.size()*k);
                 }
                 result.add(pointSum);
             }
         }
-
-        this.dependencyRelationArray = result;
+        return result;
     }
-    private void makeGroupNode()
-    {
+    private void makeGroupNode(){
 
     }
     //must be deleted
-    private void printTest()
-    {
+    private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
         for(int i = 0 ; i < dependencyNumber*dependencyNumber ; i++){
