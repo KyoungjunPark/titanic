@@ -203,6 +203,7 @@ public class ModelManager {
 	 * @return 새로 생성된 tiatanic의 id 를 반화합니다.
 	 */
 	public int editTatanicModel(int id, GreenTreeNode node){
+        if(!this.isExistModel(id)) return -1;
         TitanicModel model = new TitanicModel();
         model.setClsxModel(this.getTitanicModel(id).getClsxModel());
         model.setDsmModel(this.getTitanicModel(id).getDsmModel());
