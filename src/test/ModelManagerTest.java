@@ -1,6 +1,7 @@
 package test;
 import model.*;
 import org.junit.Test;
+import util.GreenTreeNode;
 import util.GroupNode;
 import util.Node;
 
@@ -42,6 +43,13 @@ public class ModelManagerTest {
 
         model = modelManager.getCurrentTitanicModel();
         assertEquals(model, modelManager.getTitanicModel(id));
+
+        // 존재하지 않는 file
+        try {
+            id = modelManager.createTitanicModel(new File("test/mosddsadsasadsaka.dsm"));
+            fail(id+"");
+        } catch (CreateException e) {
+        }
     }
     @Test
     public void ModelManagerMethodtest(){
@@ -55,13 +63,19 @@ public class ModelManagerTest {
         try {
             id = modelManager.createTitanicModel(new File("test/moka.dsm"));
             modelManager.setCurrentID(id);
-            modelManager.setClsx(new File("text/moka_ArchDRH.clsx"));
+            modelManager.setClsx(new File("test/moka_ArchDRH.clsx"));
         } catch (CreateException e) {
             fail(e.toString());
         }
         TitanicModel currentTitanicModel = modelManager.getCurrentTitanicModel();
         ArrayList<Node> groupNodeArray = currentTitanicModel.getGroupNode().getAllGroupList();
-        modelManager.duplicateTitanicModel(currentTitanicModel.getID(), groupNodeArray.get(groupNodeArray.size()-1).getTreeNode());
+        id = modelManager.duplicateTitanicModel(currentTitanicModel.getID(), groupNodeArray.get(groupNodeArray.size()-1).getTreeNode());
+        modelManager.setCurrentID(id);
+        // model 생성 및 duplicate
+
+        assertEquals(groupNodeArray.get(groupNodeArray.size()-1).toString(), modelManager.getCurrentTitanicModel().getGroupNode().toString());
+
+        assertTrue(modelManager.duplicateTitanicModel(123123, groupNodeArray.get(groupNodeArray.size()-1).getTreeNode()) == -1);
     }
     @Test
     public void ModelManagerEdittest(){
