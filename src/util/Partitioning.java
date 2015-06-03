@@ -242,8 +242,7 @@ public class Partitioning {
     		for(int edge = dependencyNumber-1; edge>1 ; edge--){
     			
     			pathFinder.add(starting.get(j));
-    			pathFinder=DFS(pathFinder, edge);
-    				if(pathFinder.size()==edge+1){
+    				if(DFS(pathFinder, edge).size()==edge+1){
     					end=true;
     					break;
     				}
@@ -262,30 +261,35 @@ public class Partitioning {
     
     private ArrayList<Integer> DFS(ArrayList<Integer> pathFinder, int edge){
     	ArrayList<Integer> pathfinder = new ArrayList();
+    	ArrayList<Integer> onePlace = new ArrayList();
     	pathfinder=pathFinder;														//remember load
     	boolean reject=false;														//distinguish duplicated node
     	
-    	for(int i=0; i<dependencyNumber; i++){
-			if(dependencyRelationArray.get((dependencyNumber*i)+pathfinder.get(pathfinder.size()-1))==1){
-				if((pathfinder.size()-1)!=edge){
-					for(int test=0; test<pathfinder.size(); test++){
-						if(pathfinder.get(test)==i){
-							reject=true;
-						}
-					}
-				}
-				else if((pathfinder.size()-1)==edge){
-					if(pathfinder.get(0)*dependencyNumber+(pathfinder.get(pathfinder.size()-1))==1){
-						pathfinder.add(pathfinder.get(0));
-						break;
-					}
-				}
-				if(reject==false){
-					DFS(pathfinder, edge);
-				}
+    	if((pathfinder.size()-1)==edge){
+			if((pathfinder.get(pathfinder.size()-1)*dependencyNumber+pathfinder.get(0))==1){
+				pathfinder.add(pathfinder.get(0));
+				return pathfinder;
 			}
 		}
     	
+    	for(int i=0; i<dependencyNumber; i++){																	//onePlace에 노드에서 갈 수 있는 곳 다 저장
+			if(dependencyRelationArray.get((dependencyNumber*i)+pathfinder.get(pathfinder.size()-1))==1){	
+				onePlace.add(i);
+			}
+		}
+    	for(int test_2=0; test_2<onePlace.size();test_2++){
+    		for(int test=0; test<pathfinder.size(); test++){
+				if(pathfinder.get(test)==onePlace.get(test_2)){
+					reject=true;
+				}
+			}
+    		if(reject==false){
+    		pathfinder.add(onePlace.get(test_2));
+    		DFS(pathfinder,edge);
+    		}
+    		reject=false;
+		}
+
     	return pathfinder;
     }
     
