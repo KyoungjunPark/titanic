@@ -30,13 +30,10 @@ public class Partitioning {
         this.dependencyRelationArray = originDependencyRelationArray;
         this.elementsNameArray = originElementsNameArray;
         
-        this.groupList = groupList;
-        
         this.groupNumber=0;
         this.removeRow=0;
         this.removeColumn=0;
         
-        printTest();
         doPartitioning();
     }
     
@@ -61,7 +58,6 @@ public class Partitioning {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        printTest();
     }
     private boolean checkRow(){													//Row�? 모두 0?���? �??��?��?��
     	boolean changeRow = false;												//�? ?���? 보냄
@@ -290,9 +286,8 @@ public class Partitioning {
     		reject=false;
 		}
 
-    	return pathfinder;
+    	return null;
     }
-    
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
@@ -303,4 +298,7 @@ public class Partitioning {
         System.out.println("\nelementsNameArray");
         for(String a : elementsNameArray) System.out.println(a);
     }
+    
+   
+ 
 }
