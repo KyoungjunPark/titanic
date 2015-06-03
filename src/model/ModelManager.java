@@ -181,6 +181,7 @@ public class ModelManager {
 	 */
 	public int duplicateTitanicModel(int id, GreenTreeNode node){
 		TitanicModel parentModel = this.getTitanicModel(id);
+        if( parentModel == null ) return -1;
 		TitanicModel model = new TitanicModel();
 		try {
 			model.setDsmModel(new DSMModel(parentModel.getDsmModel().toString()));
