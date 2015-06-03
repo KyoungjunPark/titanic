@@ -75,10 +75,38 @@ public class ModelManagerTest {
 
         assertEquals(groupNodeArray.get(groupNodeArray.size()-1).toString(), modelManager.getCurrentTitanicModel().getGroupNode().toString());
 
+        // 없는 id 로 duplicate 시도, -1 은 실패를 의미
         assertTrue(modelManager.duplicateTitanicModel(123123, groupNodeArray.get(groupNodeArray.size()-1).getTreeNode()) == -1);
     }
     @Test
     public void ModelManagerEdittest(){
+        int id =  0;
+        try {
+            id = modelManager.createTitanicModel(new File("test/moka.dsm"));
+            modelManager.setCurrentID(id);
+            modelManager.setClsx(new File("test/moka_ArchDRH.clsx"));
+        } catch (CreateException e) {
+            fail(e.toString());
+        }
+        TitanicModel currentTitanicModel = modelManager.getCurrentTitanicModel();
+        ArrayList<Node> groupNodeArray = currentTitanicModel.getGroupNode().getAllGroupList();
+        id = modelManager.editTatanicModel(currentTitanicModel.getID(), groupNodeArray.get(groupNodeArray.size() - 1).getTreeNode());
+        modelManager.setCurrentID(id);
 
+        /*
+        Edit 한 Model 에 이름를 바꾸고 원본에 해당하는  데이터의 이름이 변경되었는지 확인한다.
+         */
+        modelManager.getCurrentTitanicModel().rename(modelManager.getCurrentTitanicModel().getGroupNode().getAllItemList().get(0).getName(), "AAA");
+        modelManager.getCurrentTitanicModel().syncTreeNode(modelManager.getCurrentTitanicModel().getGroupNode().getTreeNode());
+        groupNodeArray = currentTitanicModel.getGroupNode().getAllItemList();
+        boolean find = false;
+        for(Node node : groupNodeArray){
+            if(node.getName().compareTo("AAA") == 0)
+                find = true;
+        }
+        assertTrue(find);
+
+        // 없는 id 로 edit 시도, -1 은 실패를 의미
+        assertTrue(modelManager.editTatanicModel(123123, groupNodeArray.get(groupNodeArray.size() - 1).getTreeNode()) == -1);
     }
 }
