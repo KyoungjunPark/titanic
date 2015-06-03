@@ -1,21 +1,70 @@
 package test;
-import model.ModelManager;
+import model.*;
 import org.junit.Test;
+import util.GroupNode;
+import util.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by kimjisoo on 6/2/15.
  */
 public class ModelManagerTest {
+    ModelManager modelManager = ModelManager.sharedModelManager();
     @Test
     public void ModelManagerCreatetest(){
-        ModelManager modelManager = ModelManager.sharedModelManager();
         assertEquals(modelManager, ModelManager.sharedModelManager()); // 유일 객체 체크
     }
     @Test
     public void ModelManagerCreateTitanicModeltest(){
+        // 받은 id 가 존재하는지 체크
+        int id = modelManager.createTitanicModel(10);
+        assertTrue(modelManager.isExistModel(id));
+
+        // 받은 id 를 set 후 titanicmodel 을 받아와 같은 id 인지 체크
+        modelManager.setCurrentID(id);
+        TitanicModel model = modelManager.getCurrentTitanicModel();
+        assertEquals(model.getID(), id);
+
+        //file 로 부터 titanicmodel 을 생성하여 set 후 이전 model 과 다른 model 인지 비교
+        try {
+            id = modelManager.createTitanicModel(new File("test/moka.dsm"));
+        } catch (CreateException e) {
+            fail(e.toString());
+        }
+        assertTrue(modelManager.isExistModel(id));
+        modelManager.setCurrentID(id);
+        assertTrue(model != modelManager.getCurrentTitanicModel());
+
+        model = modelManager.getCurrentTitanicModel();
+        assertEquals(model, modelManager.getTitanicModel(id));
+    }
+    @Test
+    public void ModelManagerMethodtest(){
+        // 비정상 id set
+        assertFalse(modelManager.isExistModel(21312));
+        assertFalse(modelManager.setCurrentID(23222));
+    }
+    @Test
+     public void ModelManagerDuplicatetest(){
+        int id =  0;
+        try {
+            id = modelManager.createTitanicModel(new File("test/moka.dsm"));
+            modelManager.setCurrentID(id);
+            modelManager.setClsx(new File("text/moka_ArchDRH.clsx"));
+        } catch (CreateException e) {
+            fail(e.toString());
+        }
+        TitanicModel currentTitanicModel = modelManager.getCurrentTitanicModel();
+        ArrayList<Node> groupNodeArray = currentTitanicModel.getGroupNode().getAllGroupList();
+        modelManager.duplicateTitanicModel(currentTitanicModel.getID(), groupNodeArray.get(groupNodeArray.size()-1).getTreeNode());
+    }
+    @Test
+    public void ModelManagerEdittest(){
 
     }
 }
