@@ -9,8 +9,10 @@ public class Partitioning {
 
     private int dependencyNumber;
     private int originDependencyNumber;
+
     private ArrayList<Integer> dependencyRelationArray;
     private ArrayList<Integer> originDependencyRelationArray;
+
     private ArrayList<String> elementsNameArray;
     private ArrayList<String> originElementsNameArray;
     
@@ -21,6 +23,7 @@ public class Partitioning {
         this.originDependencyNumber = originDependencyNumber;
         this.originDependencyRelationArray = originDependencyRelationArray;
         this.originElementsNameArray = originElementsNameArray;
+
         this.dependencyNumber = originDependencyNumber;
         this.dependencyRelationArray = originDependencyRelationArray;
         this.elementsNameArray = originElementsNameArray;
@@ -38,12 +41,16 @@ public class Partitioning {
 
         try {
           while(true){
+        	  if(dependencyNumber<=1){
+        		  break;
+        	  }
         	  if(checkRow()==true){
         		  continue;
         	  }
         	  if(checkColumn()==true){
         		  continue;
         	  }
+        	  DFS(nthSquare(dependencyRelationArray));
         	  
           }
         } catch (Exception e) {
@@ -169,15 +176,16 @@ public class Partitioning {
         removeRow++;
 
     }
-    private ArrayList<Integer> nthSquare(ArrayList<Integer> list, int nth) throws CreateException {
-        if(nth <= 0) throw new CreateException("Impossible input");
-        for(int i = 1 ; i < nth ; i++){
-            list = reculNthSquare(list);
+    private ArrayList<Integer> nthSquare(ArrayList<Integer> list) throws CreateException {
+        if(list.size() <= 0) throw new CreateException("Impossible input");
+        for(int i = 1 ; i < list.size() ; i++){
+            list = recurNthSquare(list);
         }
         return list;
     }
-    private ArrayList<Integer> reculNthSquare(ArrayList<Integer> list){
-        ArrayList<Integer> result = new ArrayList<>();
+    private ArrayList<Integer> recurNthSquare(ArrayList<Integer> list){
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        ArrayList<Integer> diagonal = new ArrayList<Integer>();
         for(int i = 0 ; i < list.size() ; i++){
             for(int j = 0 ; j <  list.size() ; j++){
                 //(i,j)
@@ -188,11 +196,21 @@ public class Partitioning {
                 result.add(pointSum);
             }
         }
-        return result;
+        for(int i = 0 ; i<dependencyNumber ; i++){
+        	diagonal.add(result.get(i*dependencyNumber+i));
+        }
+        return diagonal;
     }
-//    private void makeGroupNode(){
-
-    //must be deleted
+    
+    private void DFS(ArrayList<Integer> diagonal){
+    	int starting;
+    	for(int i=0; i<diagonal.size();i++){
+    		if(diagonal.get(i)!=0){
+    			starting=diagonal.indexOf(i);
+    		}
+    	}
+    	
+    }
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
