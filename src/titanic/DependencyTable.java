@@ -16,15 +16,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import model.GroupData;
 import model.ModelManager;
-import model.T3;
 
 public class DependencyTable extends JPanel {
 
@@ -37,14 +35,14 @@ public class DependencyTable extends JPanel {
 	private ArrayList<String> rowNames;
 	private Hashtable<String, Color> colorInfo;
 
-	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<T3> groupInfo,
+	DependencyTable(ArrayList<ArrayList<String>> rows, ArrayList<GroupData> groupInfo,
 			boolean showRowLabels) throws NullPointerException {
 
 		init(rows, groupInfo, showRowLabels);
 	}
 
 	private void init(ArrayList<ArrayList<String>> rows,
-			ArrayList<T3> groupInfo, boolean showRowLabels) {
+			ArrayList<GroupData> groupInfo, boolean showRowLabels) {
 
 		this.rows = rows;
 		TableModel tableModel = new TableModel(this.rows, showRowLabels);

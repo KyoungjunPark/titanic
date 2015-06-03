@@ -31,7 +31,7 @@ abstract class Model {
             output.write(this.toString());
             output.close();
         } catch ( IOException e ) {
-            throw new CreateException("파일 에러");
+            throw new SaveException("파일 에러");
         }
         this.setIsEdit(false);
     }
@@ -43,7 +43,7 @@ abstract class Model {
             output.write(this.toString());
             output.close();
         } catch ( IOException e ) {
-            throw new CreateException("파일 에러");
+            throw new SaveException("파일 에러");
         }
         this.setFilePath(path);
         this.setIsEdit(false);

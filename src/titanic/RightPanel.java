@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import model.T3;
+import model.GroupData;
 
 public class RightPanel extends JPanel implements Controllerable{
 	
 	private int id;
 	private DependencyTable table;
 	private ArrayList<ArrayList<String>> tableData;
-	private ArrayList<T3> groupInfo;
+	private ArrayList<GroupData> groupInfo;
 	
 	private boolean setShowRowLabels;	
 	/**
 	 * DSM을 오픈했을 때 그려지는 테이블 하나를 포함하는 패널입니다.
-	 * 테이블에 들어갈 데이터를 DependencyTable의 함수 인자로 넘겨주면 앞에서 넘겨진 데이터의 테이블이 생성됩니다.
+	 * 테이블에 들어갈 데이터를 DependencyTable의 함수 인자로 넘겨주면 앞에서 넘겨진 데이터에 대한 테이블이 생성됩니다.
 	 * */
 	public RightPanel(){
 		setLayout(new BorderLayout(0,0));	
@@ -41,7 +41,7 @@ public class RightPanel extends JPanel implements Controllerable{
 		return this.id;
 	}
 	
-	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<T3> groupInfo){
+	protected void redrawPanel(ArrayList<ArrayList<String>> newData, ArrayList<GroupData> groupInfo){
 		tableData=newData;
 		this.groupInfo=groupInfo;
 		table = new DependencyTable(tableData, this.groupInfo, this.setShowRowLabels);
