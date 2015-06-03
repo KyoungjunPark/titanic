@@ -16,9 +16,11 @@ public class Partitioning {
     private ArrayList<String> elementsNameArray;
     private ArrayList<String> originElementsNameArray;
     
+    private ArrayList<String> groupList[];
+    
     private int removeRow;
     private int removeColumn;
-
+    private int groupNumber;
     public Partitioning(int originDependencyNumber, ArrayList<Integer> originDependencyRelationArray, ArrayList<String> originElementsNameArray){
         this.originDependencyNumber = originDependencyNumber;
         this.originDependencyRelationArray = originDependencyRelationArray;
@@ -28,6 +30,9 @@ public class Partitioning {
         this.dependencyRelationArray = originDependencyRelationArray;
         this.elementsNameArray = originElementsNameArray;
         
+        this.groupList = groupList;
+        
+        this.groupNumber=0;
         this.removeRow=0;
         this.removeColumn=0;
         
@@ -50,7 +55,7 @@ public class Partitioning {
         	  if(checkColumn()==true){
         		  continue;
         	  }
-        	  DFS(nthSquare(dependencyRelationArray));
+        	  findLoop(nthSquare(dependencyRelationArray));
         	  
           }
         } catch (Exception e) {
@@ -95,10 +100,16 @@ public class Partitioning {
     	}
     	return changeColumn;
     }
-    /*
+    
     private void moveUpORLeft(int row) throws CreateException {
         if(row == 0) throw new CreateException("Impossible input");
-
+        
+        for(int i = 0 ; i <originDependencyNumber; i++){
+            Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, ((row+removeRow-1)*originDependencyNumber)+i);
+            Collections.swap(originDependencyRelationArray, (i+removeRow)*originDependencyNumber+(row+removeRow), (i+removeRow)*originDependencyNumber+(row+removeRow-1));
+        }
+        Collections.swap(originElementsNameArray, row+removeRow, row+removeRow-1);
+        
         //dependencyRelationArray's move up or left
         for(int i = 0 ; i < dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i , (row-1)*dependencyNumber+i);
@@ -111,7 +122,13 @@ public class Partitioning {
     }
     private void moveDownORRight(int row) throws CreateException {
         if(row == dependencyNumber -1) throw new CreateException("Impossible input");
-
+        
+        for(int i = 0 ; i <originDependencyNumber; i++){
+            Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, (row+removeRow+1)*originDependencyNumber+i);
+            Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), i*originDependencyNumber+(row+removeRow+1));
+        }
+    	Collections.swap(originElementsNameArray, row+removeRow, row+removeRow+1);
+   	 
         //dependencyRelationArray's move down or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (row+1)*dependencyNumber+i);
@@ -119,21 +136,23 @@ public class Partitioning {
         }
         //elementsNameArray's move down or right
         Collections.swap(elementsNameArray, row, row + 1);
-    }*/ 
-    //?��?��?��?���??
+    }
+    
     private void moveRowToBottomRightmost(int row){
 
     	for(int i = 0 ; i <originDependencyNumber; i++){
             Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-removeColumn)+i);
             Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), i*(originDependencyNumber-1)-removeColumn);
         }
-    	Collections.swap(originElementsNameArray, row+removeRow, removeRow);
+    	Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1);
    	 
         //dependencyRelationArray's row to bottom or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (dependencyNumber-1)*dependencyNumber+i);
             Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+(dependencyNumber-1));
         }
+        //elementsNameArray's row to bottom or right
+        Collections.swap(elementsNameArray,row, dependencyNumber-1);
         
         for(int i=0 ; i<dependencyNumber ; i++){
         	dependencyRelationArray.remove(dependencyNumber*dependencyNumber-(i+1));
@@ -142,8 +161,6 @@ public class Partitioning {
         	dependencyRelationArray.remove(i*dependencyNumber+(dependencyNumber-1)-i);
         }
         
-        //elementsNameArray's row to bottom or right
-        Collections.swap(elementsNameArray,row, dependencyNumber-1);
         elementsNameArray.remove(dependencyNumber-1);
         dependencyNumber--;
         removeColumn++;
@@ -161,6 +178,8 @@ public class Partitioning {
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, i);
             Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber);
         }
+      //elementsNameArray's row to top or left
+        Collections.swap(elementsNameArray, row, 0);
         
         for(int i=0 ; i<dependencyNumber ; i++){
         	dependencyRelationArray.remove(i*dependencyNumber-i);
@@ -169,23 +188,25 @@ public class Partitioning {
         	dependencyRelationArray.remove(0);
         }
         
-        //elementsNameArray's row to top or left
-        Collections.swap(elementsNameArray, row, 0);
         elementsNameArray.remove(0);
         dependencyNumber--;
         removeRow++;
 
     }
     private ArrayList<Integer> nthSquare(ArrayList<Integer> list) throws CreateException {
-        if(list.size() <= 0) throw new CreateException("Impossible input");
+    	 ArrayList<Integer> diagonal = new ArrayList<Integer>();
+    	if(list.size() <= 0) throw new CreateException("Impossible input");
         for(int i = 1 ; i < list.size() ; i++){
             list = recurNthSquare(list);
+        } 
+        for(int i = 0 ; i<dependencyNumber ; i++){
+        	diagonal.add(list.get(i*dependencyNumber+i));
         }
-        return list;
+        return diagonal;
     }
     private ArrayList<Integer> recurNthSquare(ArrayList<Integer> list){
         ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayList<Integer> diagonal = new ArrayList<Integer>();
+       
         for(int i = 0 ; i < list.size() ; i++){
             for(int j = 0 ; j <  list.size() ; j++){
                 //(i,j)
@@ -196,21 +217,78 @@ public class Partitioning {
                 result.add(pointSum);
             }
         }
-        for(int i = 0 ; i<dependencyNumber ; i++){
-        	diagonal.add(result.get(i*dependencyNumber+i));
-        }
-        return diagonal;
+        return result;
     }
     
-    private void DFS(ArrayList<Integer> diagonal){
-    	int starting;
+    private void findLoop(ArrayList<Integer> diagonal) throws CreateException{
+    	ArrayList<Integer> starting = new ArrayList();				//save a starting point of DFS
+    	ArrayList<Integer> pathFinder = new ArrayList();			//save path
+    	boolean end=false;
+    	
     	for(int i=0; i<diagonal.size();i++){
-    		if(diagonal.get(i)!=0){
-    			starting=diagonal.indexOf(i);
+    		if(diagonal.get(i)==0){
+    			for(int m=0; m<diagonal.size()-1-i;m++){
+						moveDownORRight(i+m);
+    			}
     		}
     	}
     	
+    	for(int i=0; i<diagonal.size();i++){
+    		if(diagonal.get(i)!=0){
+    			starting.add(i);
+    		}
+    	}
+    	for(int j=0 ; j<starting.size(); j++){
+    		for(int edge = dependencyNumber-1; edge>1 ; edge--){
+    			
+    			pathFinder.add(starting.get(j));
+    			pathFinder=DFS(pathFinder, edge);
+    				if(pathFinder.size()==edge+1){
+    					end=true;
+    					break;
+    				}
+    			pathFinder.clear();
+    		}
+    		if(end==true){
+    			break;
+    		}
+    	}
+    	for(int group=0; group<pathFinder.size()-1 ; group++){
+    		groupList[groupNumber].add(elementsNameArray.get(pathFinder.get(group)));
+    		moveRowToTopLeftmost(pathFinder.get(pathFinder.get(group)));
+    	}
+    	groupNumber++;
     }
+    
+    private ArrayList<Integer> DFS(ArrayList<Integer> pathFinder, int edge){
+    	ArrayList<Integer> pathfinder = new ArrayList();
+    	pathfinder=pathFinder;														//remember load
+    	boolean reject=false;														//distinguish duplicated node
+    	
+    	for(int i=0; i<dependencyNumber; i++){
+			if(dependencyRelationArray.get((dependencyNumber*i)+pathfinder.get(pathfinder.size()-1))==1){
+				if((pathfinder.size()-1)!=edge){
+					for(int test=0; test<pathfinder.size(); test++){
+						if(pathfinder.get(test)==i){
+							reject=true;
+						}
+					}
+				}
+				else if((pathfinder.size()-1)==edge){
+					if(pathfinder.get(0)*dependencyNumber+(pathfinder.get(pathfinder.size()-1))==1){
+						pathfinder.add(pathfinder.get(0));
+						break;
+					}
+				}
+				if(reject==false){
+					DFS(pathfinder, edge);
+				}
+			}
+		}
+    	
+    	return pathfinder;
+    }
+    
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
