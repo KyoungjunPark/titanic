@@ -1,12 +1,9 @@
 package test;
 import model.*;
 import org.junit.Test;
-import util.GreenTreeNode;
-import util.GroupNode;
 import util.Node;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;

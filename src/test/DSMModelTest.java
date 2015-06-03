@@ -45,4 +45,29 @@ public class DSMModelTest {
         String result = "5\r\n0 0 0 0 0\r\n0 0 0 0 0\r\n0 0 0 0 0\r\n0 0 0 0 0\r\n0 0 0 0 0\r\nentity_1\r\nentity_2\r\nentity_3\r\nentity_4\r\nentity_5";
         assertEquals(result, model.toString());
 	}
+    @Test
+    public void DSMModelchangetest(){
+        DSMModel model = null;
+        try {
+            String string = "3\r\n1 2 3\r\n3 4 6\r\n7 8 9\r\nAA\r\nBB\r\nCC";
+            model = new DSMModel(string);
+            assertTrue(string.equals(model.toString()));
+        } catch (CreateException e) {
+            fail("Not yet implemented");
+        }
+        model.changeName("AA", "DD");
+        assertEquals("3\r\n1 2 3\r\n3 4 6\r\n7 8 9\r\nDD\r\nBB\r\nCC", model.toString());
+
+        model.changeName("SDASD", "ASDASD");
+        assertEquals("3\r\n1 2 3\r\n3 4 6\r\n7 8 9\r\nDD\r\nBB\r\nCC", model.toString());
+
+        model.addNode("last");
+        assertEquals("4\r\n1 2 3 0\r\n3 4 6 0\r\n7 8 9 0\r\n0 0 0 0\r\nDD\r\nBB\r\nCC\r\nlast", model.toString());
+
+        model.editValue("DD", "BB", false);
+        assertEquals("4\r\n1 0 3 0\r\n3 4 6 0\r\n7 8 9 0\r\n0 0 0 0\r\nDD\r\nBB\r\nCC\r\nlast", model.toString());
+
+        model.editValue("last", "BB", true);
+        assertEquals("4\r\n1 0 3 0\r\n3 4 6 0\r\n7 8 9 0\r\n0 1 0 0\r\nDD\r\nBB\r\nCC\r\nlast", model.toString());
+    }
 }
