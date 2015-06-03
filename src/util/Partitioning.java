@@ -4,6 +4,7 @@ import model.CreateException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.DoubleSummaryStatistics;
 
 public class Partitioning {
 
@@ -35,9 +36,29 @@ public class Partitioning {
         this.groupNumber=0;
         this.removeRow=0;
         this.removeColumn=0;
-        
+
+        int num =3;
+        this.dependencyNumber = num;
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        array.add(1);
+        array.add(0);
+        array.add(0);
+        array.add(0);
+        array.add(1);
+        array.add(0);
+        array.add(0);
+        array.add(0);
+        array.add(1);
+        this.dependencyRelationArray = array;
         printTest();
-        doPartitioning();
+
+        try {
+            nthSquare(array);
+        } catch (CreateException e) {
+            e.printStackTrace();
+        }
+        printTest();
+      //  doPartitioning();
     }
     
     
@@ -196,9 +217,10 @@ public class Partitioning {
     private ArrayList<Integer> nthSquare(ArrayList<Integer> list) throws CreateException {
     	 ArrayList<Integer> diagonal = new ArrayList<Integer>();
     	if(list.size() <= 0) throw new CreateException("Impossible input");
-        for(int i = 1 ; i < list.size() ; i++){
+
+        for(int i = 1 ; i < dependencyNumber ; i++){
             list = recurNthSquare(list);
-        } 
+        }
         for(int i = 0 ; i<dependencyNumber ; i++){
         	diagonal.add(list.get(i*dependencyNumber+i));
         }
@@ -207,12 +229,12 @@ public class Partitioning {
     private ArrayList<Integer> recurNthSquare(ArrayList<Integer> list){
         ArrayList<Integer> result = new ArrayList<Integer>();
        
-        for(int i = 0 ; i < list.size() ; i++){
-            for(int j = 0 ; j <  list.size() ; j++){
+        for(int i = 0 ; i < dependencyNumber ; i++){
+            for(int j = 0 ; j < dependencyNumber ; j++){
                 //(i,j)
                 int pointSum = 0;
-                for(int k = 0 ; k <  list.size(); k++){
-                    pointSum +=list.get(i* list.size() + k)* list.get(j + list.size()*k);
+                for(int k = 0 ; k <  dependencyNumber; k++){
+                    pointSum +=list.get(i*dependencyNumber + k)* list.get(j + dependencyNumber*k);
                 }
                 result.add(pointSum);
             }
