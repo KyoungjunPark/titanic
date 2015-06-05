@@ -142,8 +142,8 @@ public class DependencyTable extends JPanel {
 
 	private void tableAttributeInit(JTable table) {
 		// JTable Attributes
-		int rowHeight = 30;
-		int fontSize = 15;
+		int rowHeight = 15;
+		int fontSize = 10;
 		JTableHeader header = table.getTableHeader();
 
 		// set rowHeight
@@ -162,7 +162,7 @@ public class DependencyTable extends JPanel {
 
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		for (int i = 0; i < table.getColumnCount(); i++)
-			table.getColumnModel().getColumn(i).setPreferredWidth(25);
+			table.getColumnModel().getColumn(i).setPreferredWidth(15);
 		table.setRowSelectionAllowed(false);
 	}
 
