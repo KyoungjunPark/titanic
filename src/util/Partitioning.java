@@ -64,23 +64,15 @@ public class Partitioning {
         	  if(checkColumn()==true){
         		  continue;
         	  }
-        	  //printTest2();
-        	  //printTest();
+        	 
         	  findLoop(nthSquare(dependencyRelationArray));
-        	  //printTest2();
-        	  printTest();
+        	  
           }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for(int i=0; i<groupList.size();i++){
-        	for(int j=0;j<groupList.get(i).size();j++){
-        		System.out.print(groupList.get(i).get(j)+"//");
-        	}
-        	System.out.println("");
-        }
-        
-        //printTest2();
+        printTest2();
+        quickTriangleAlgorithm();
         
     }
     private boolean checkRow(){													//Row�? 모두 0?���? �??��?��?��
@@ -142,15 +134,15 @@ public class Partitioning {
     }
     private void moveDownORRight(int row) throws CreateException {
         //if(row == dependencyNumber -1) throw new CreateException("Impossible input");
-        
+        //////////////////////////////////////////////////////////////////////////////////////
         for(int i = 0 ; i <originDependencyNumber; i++){
-        Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-preColumn)+i);
+        Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-preColumn-removeColumn)+i);
     	}
         for(int i = 0 ; i <originDependencyNumber; i++){
-        Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-preColumn-1);
+        Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-preColumn-removeColumn-1);
         }
-		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn);
-		
+		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn-removeColumn);
+		//////////////////////////////////////////////////////////////////////////////////////
 		
 		for(int i = 0 ; i <dependencyNumber; i++){
 	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);
@@ -166,15 +158,15 @@ public class Partitioning {
 	
     
     private void moveRowToBottomRightmost(int row){
-    	
+    	////////////////////////////////////////////////////////////////////
     	for(int i = 0 ; i <originDependencyNumber; i++){
             Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-removeColumn)+i);
     	}
         for(int i = 0 ; i <originDependencyNumber; i++){    
             Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-removeColumn-1);
         }
-    	Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1);
-   	 	
+    	Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-removeColumn);
+   	 	////////////////////////////////////////////////////////////////////
         //dependencyRelationArray's row to bottom or right
         for(int i = 0 ; i <dependencyNumber; i++){
             Collections.swap(dependencyRelationArray, row*dependencyNumber+i, (dependencyNumber-1)*dependencyNumber+i);
@@ -242,17 +234,17 @@ public class Partitioning {
             Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), i*originDependencyNumber+(proRow+removeRow));
         }
    	 	Collections.swap(originElementsNameArray, row+removeRow, removeRow+proRow);
-   	 	
+   	 	////////////////////////////////////////////////////////////////////////
    	 	//dependencyRelationArray's row to top or left
         for(int i = 0 ; i <dependencyNumber ; i++){
-            Collections.swap(dependencyRelationArray, row*dependencyNumber+i, proRow+i);					//row
+            Collections.swap(dependencyRelationArray, row*dependencyNumber+i, proRow*dependencyNumber+i);					//row
         }
         for(int i = 0 ; i <dependencyNumber ; i++){
             Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+proRow);	//column
         }
         //elementsNameArray's row to top or left
         Collections.swap(elementsNameArray, row, proRow);
-   	 	
+   	 	////////////////////////////////////////////////////////////////////////
    	 	proRow++;
     }
     private void afterGroupMove(int row){
@@ -303,9 +295,6 @@ public class Partitioning {
     	ArrayList<Integer> pathFinder = new ArrayList<Integer>();			//save path
     	ArrayList<String> group = new ArrayList<String>();
     	boolean end=false;
-    	//////////////////////////////
-    	printTest();
-    	//////////////////////////////
     	for(int i=0; i<diagonal.size();i++){
     		if(diagonal.get(i)==0){
 				moveDownORRight(i);
@@ -318,9 +307,6 @@ public class Partitioning {
     			starting.add(i);
     		}
     	}
-    	//////////////////////////////////////////////
-    	printTest();
-    	//////////////////////////////////////////////
     	
     	for(int edge = dependencyNumber; edge>1 ; edge--){
     		
@@ -339,20 +325,16 @@ public class Partitioning {
     			group.add(elementsNameArray.get(pathFinder.get(gr)));
         	}
     		
-    		for(int i=0; i<group.size();i++){
-        		System.out.print(group.get(i)+"//");
-        		}
-        		System.out.println();
-        		
+
     		for(int i=0; i < group.size(); i++){
     			for(int j=0; j<elementsNameArray.size();j++){
     				if(elementsNameArray.get(j).compareTo(group.get(i)) == 0){
     					groupMoveToTop(j);
+    					
     					break;
     				}
     			}
     		}
-    		
     		for(int i=0; i < group.size(); i++){
     					afterGroupMove(i);
     		}
@@ -420,10 +402,19 @@ public class Partitioning {
     System.out.println("originDependencyRelationArray");
     for(int i = 0 ; i < originDependencyNumber*originDependencyNumber ; i++){
         if(i % originDependencyNumber == 0) System.out.println();
-        System.out.print(originDependencyRelationArray.get(i));
+        System.out.print(originDependencyRelationArray.get(i)+" ");
     }
     System.out.println("\noriginElementsNameArray");
     for(String a : originElementsNameArray) System.out.println(a);
     }
- 
+    private void quickTriangleAlgorithm(){
+    	int groupNode=0;
+    	int rowNumber=0;
+    	for(int i=0;i<groupList.size();i++){
+    	groupNode =groupNode+groupList.get(i).size();
+    	}
+    	rowNumber=originDependencyNumber-groupNode+groupList.size();
+    	
+    	
+    }
 }
