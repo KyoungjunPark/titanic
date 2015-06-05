@@ -18,7 +18,7 @@ public class Partitioning {
     private ArrayList<String> elementsNameArray;
     private ArrayList<String> originElementsNameArray;
     
-    private ArrayList<ArrayList<String>> groupList;
+    public ArrayList<ArrayList<String>> groupList;
     
     private int removeRow;
     private int removeColumn;
@@ -146,7 +146,6 @@ public class Partitioning {
 	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);	//row
 	    }
 	    for(int i = 0 ; i <dependencyNumber; i++){
-	    	System.out.println((i*dependencyNumber+row)+"////"+((i*dependencyNumber)+dependencyNumber-preColumn-1));
 	        Collections.swap(dependencyRelationArray, i*dependencyNumber+row, (i*dependencyNumber)+dependencyNumber-preColumn-1);	//column
 	    }
 		Collections.swap(elementsNameArray, row, dependencyNumber-1-preColumn);
