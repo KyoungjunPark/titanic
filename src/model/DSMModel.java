@@ -275,7 +275,6 @@ public class DSMModel extends Model{
     }
 
     public CLSXModel sortYassine(){
-        //Partitioning partition = new Partitioning(dependencyNumber,dependencyRelationArray,elementsNameArray);
 
         return null;
     }

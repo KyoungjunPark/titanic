@@ -45,8 +45,6 @@ public class Partitioning {
         this.find=false;
         
         this.groupList = new ArrayList<ArrayList<String>>();
-
-        
         doPartitioning();
     }
     
@@ -216,7 +214,7 @@ public class Partitioning {
         Collections.swap(elementsNameArray, row, 0);
         
         for(int i=0 ; i<dependencyNumber ; i++){
-        	dependencyRelationArray.remove(i*dependencyNumber-i);
+        	dependencyRelationArray.remove(i * dependencyNumber-i);
         }
         for(int i=0 ; i<dependencyNumber-1 ; i++){
         	dependencyRelationArray.remove(0);
@@ -241,10 +239,10 @@ public class Partitioning {
    	 	////////////////////////////////////////////////////////////////////////
    	 	//dependencyRelationArray's row to top or left
         for(int i = 0 ; i <dependencyNumber ; i++){
-            Collections.swap(dependencyRelationArray, row*dependencyNumber+i, proRow*dependencyNumber+i);					//row
+            Collections.swap(dependencyRelationArray, row * dependencyNumber + i, proRow * dependencyNumber+i);					//row
         }
         for(int i = 0 ; i <dependencyNumber ; i++){
-            Collections.swap(dependencyRelationArray, i*dependencyNumber+row, i*dependencyNumber+proRow);	//column
+            Collections.swap(dependencyRelationArray, i * dependencyNumber + row, i * dependencyNumber+proRow);	//column
         }
         //elementsNameArray's row to top or left
         Collections.swap(elementsNameArray, row, proRow);
