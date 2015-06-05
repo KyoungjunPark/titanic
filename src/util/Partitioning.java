@@ -136,27 +136,22 @@ public class Partitioning {
         //if(row == dependencyNumber -1) throw new CreateException("Impossible input");
         //////////////////////////////////////////////////////////////////////////////////////
         for(int i = 0 ; i <originDependencyNumber; i++){
-        Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-preColumn-removeColumn)+i);
+        Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-preColumn)+i);
     	}
         for(int i = 0 ; i <originDependencyNumber; i++){
-        Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-preColumn-removeColumn-1);
+        Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-preColumn-1);
         }
-		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn-removeColumn);
+		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn);
 		//////////////////////////////////////////////////////////////////////////////////////
-		
 		for(int i = 0 ; i <dependencyNumber; i++){
 	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);
 	    }
 	    for(int i = 0 ; i <originDependencyNumber; i++){
-	        Collections.swap(dependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-preColumn-1);
+	        Collections.swap(dependencyRelationArray, i*dependencyNumber+(row+removeRow), (i+1)*(dependencyNumber)-preColumn-1);
 	    }
 		Collections.swap(elementsNameArray, row, dependencyNumber-1-preColumn);
-			
-		
 		preColumn++;
     }
-	
-    
     private void moveRowToBottomRightmost(int row){
     	
     	ArrayList<String> group = new ArrayList<String>();
@@ -164,12 +159,12 @@ public class Partitioning {
     	groupList.add(group);
     	////////////////////////////////////////////////////////////////////
     	for(int i = 0 ; i <originDependencyNumber; i++){
-            Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-removeColumn)+i);
+            Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1)+i);
     	}
         for(int i = 0 ; i <originDependencyNumber; i++){    
-            Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-removeColumn-1);
+            Collections.swap(originDependencyRelationArray, i*originDependencyNumber+(row+removeRow), (i+1)*(originDependencyNumber)-1);
         }
-    	Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-removeColumn);
+    	Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1);
    	 	////////////////////////////////////////////////////////////////////
         //dependencyRelationArray's row to bottom or right
         for(int i = 0 ; i <dependencyNumber; i++){
