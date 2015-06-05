@@ -18,7 +18,7 @@ public class Partitioning {
     private ArrayList<String> elementsNameArray;
     private ArrayList<String> originElementsNameArray;
     
-    private ArrayList<ArrayList<String>> groupList;
+    public ArrayList<ArrayList<String>> groupList;
     
     private int removeRow;
     private int removeColumn;
@@ -46,6 +46,7 @@ public class Partitioning {
         
         this.groupList = new ArrayList<ArrayList<String>>();
         doPartitioning();
+		System.out.println(groupList);
     }
     
     
@@ -68,11 +69,11 @@ public class Partitioning {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         quickTriangleAlgorithm();
-        printTest2();
-        
-        
+
     }
+    
     private boolean checkRow(){													
     	boolean changeRow = false;												
     	int check=0;
@@ -142,10 +143,10 @@ public class Partitioning {
 		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn);
 		//////////////////////////////////////////////////////////////////////////////////////
 		for(int i = 0 ; i <dependencyNumber; i++){
-	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);
+	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);	//row
 	    }
-	    for(int i = 0 ; i <originDependencyNumber; i++){
-	        Collections.swap(dependencyRelationArray, i*dependencyNumber+(row+removeRow), (i+1)*(dependencyNumber)-preColumn-1);
+	    for(int i = 0 ; i <dependencyNumber; i++){
+	        Collections.swap(dependencyRelationArray, i*dependencyNumber+row, (i*dependencyNumber)+dependencyNumber-preColumn-1);	//column
 	    }
 		Collections.swap(elementsNameArray, row, dependencyNumber-1-preColumn);
 		preColumn++;
@@ -307,6 +308,24 @@ public class Partitioning {
     		}
     	}
     	
+    	/*if(starting.size()==0){
+    		group.add(elementsNameArray.get(0));
+    		groupList.add(group);
+    		
+    		for(int i=0 ; i<dependencyNumber ; i++){
+            	dependencyRelationArray.remove(i * dependencyNumber-i);
+            }
+            for(int i=0 ; i<dependencyNumber-1 ; i++){
+            	dependencyRelationArray.remove(0);
+            }
+            
+            elementsNameArray.remove(0);
+            dependencyNumber--;
+            removeRow++;
+            
+    		return ;
+    	}*/
+    		
     	for(int edge = dependencyNumber; edge>1 ; edge--){
     		
     		pathFinder.add(starting.get(0));
@@ -419,21 +438,24 @@ public class Partitioning {
     private void quickTriangleAlgorithm(){
     	ArrayList<Integer> pressGroup = new ArrayList<Integer>();			//최종적으로 0과 1이 들어감
     	ArrayList<Integer> nodeNumberInGroup= new ArrayList<Integer>();		//그룹의 노드 개수
-    	ArrayList<Integer> sort = new ArrayList<Integer>();
+    	
     	int[][] zeroOne;													//0과 1 들어가기전에 저장해두는 곳
     	int[] Plus;
+    	String[] PlusName;
     	int groupNumber=groupList.size();									//그룹의 개수
     	int row=0, column=0;
     	
     	zeroOne= new int[groupNumber][groupNumber];
     	Plus = new int[groupNumber];
+    	PlusName = new String[groupNumber];
+    	
     	for(int i=0; i<groupNumber ; i++){
     		for(int j=0; j<groupNumber;j++){
     			zeroOne[i][j]=0;
     		}
     		Plus[i]=0;
+    		PlusName[i]=null;
     	}
-    	
     		for(int i=0;i<originElementsNameArray.size();i++){
     	    	for(int j=0; j<groupNumber; j++){
     	    			if(groupList.get(j).get(0)==originElementsNameArray.get(i)){
@@ -443,6 +465,7 @@ public class Partitioning {
     	    			}
     	    		}
     		}
+    		
     				for(int i=0 ;i<groupList.size();i++){
     						nodeNumberInGroup.add(groupList.get(i).size());
     					}
@@ -474,18 +497,24 @@ public class Partitioning {
     		for(int i=0;i<groupNumber;i++){
     			for(int j=0;j<groupNumber;j++){Plus[i]=Plus[i]+zeroOne[i][j];}
     		}
-    		for(int i=0; i<groupNumber; i++){sort.add(Plus[i]);}
-    		Collections.sort(sort);
-    		
-
-    		for(int i=0; i<sort.size();i++){
-    			for(int j=0; j<groupNumber;j++){
-    				if(sort.get(i)==Plus[j]){
-    					groupList.add(groupList.get(j));
-    					break;
-    				}
-    			}
+    		for(int i=0;i<groupNumber;i++){
+    			PlusName[i]=groupList.get(i).get(0);
     		}
+    		
+    		sort(Plus,PlusName);
+    		printGroup();
+            
+    		for(int i=0; i<groupNumber; i++){
+    				for(int j=0; j<groupNumber; j++){
+    					if(PlusName[i]==groupList.get(j).get(0)){
+    						groupList.add(groupList.get(j));
+    					}
+    				}
+    		}
+    		
+    		System.out.println("");
+    		System.out.println("");
+    		printGroup();
     		for(int i=0; i<groupNumber; i++){
     			groupList.remove(0);
     		}
@@ -496,7 +525,22 @@ public class Partitioning {
    			}
     	}
     }
-    
+    private void sort(int[] Plus, String[] PlusName){
+    	int min;
+    	String temp;
+    	for(int j=0;j<groupNumber;j++){
+    		for(int i=0; i<groupNumber-1; i++){
+    			if(Plus[i]>Plus[i+1]){
+    				min=Plus[i+1];
+    				Plus[i+1]=Plus[i];
+    				Plus[i]=min;
+    				temp=PlusName[i+1];
+    				PlusName[i+1]=PlusName[i];
+    				PlusName[i]=temp;
+    			}
+    		}
+    	}
+    }
     private void moveToTop(int row){
     	
     	

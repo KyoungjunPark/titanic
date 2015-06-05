@@ -275,7 +275,31 @@ public class DSMModel extends Model{
     }
 
     public CLSXModel sortYassine(){
-
+        Partitioning partition = new Partitioning(
+                dependencyNumber,
+                new ArrayList<Integer>(dependencyRelationArray),
+                new ArrayList<String>(elementsNameArray),
+                dependencyNumber,
+                new ArrayList<Integer>(dependencyRelationArray),
+                new ArrayList<String>(elementsNameArray));
+        GroupNode root = new GroupNode("root");
+        for( ArrayList<String> list : partition.groupList){
+            if(list.size() == 1){
+                root.addItem(new ItemNode(list.get(0)));
+            }else{
+                GroupNode group = new GroupNode(list.get(0));
+                root.addItem(group);
+                for( String name : list){
+                    group.addItem(new ItemNode(name));
+                }
+            }
+        }
+        try {
+            System.out.println(root);
+            return new CLSXModel(root.getTreeNode());
+        } catch (CreateException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
