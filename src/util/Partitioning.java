@@ -26,6 +26,7 @@ public class Partitioning {
     private int preColumn;
     private int groupNumber;
     
+    
     private boolean find;
     public Partitioning(int originDependencyNumber, ArrayList<Integer> originDependencyRelationArray, ArrayList<String> originElementsNameArray,
     		int dependencyNumber, ArrayList<Integer> dependencyRelationArray, ArrayList<String> elementsNameArray){
@@ -71,7 +72,7 @@ public class Partitioning {
         }
         
         quickTriangleAlgorithm();
-
+        
     }
     
     private boolean checkRow(){													
@@ -308,7 +309,7 @@ public class Partitioning {
     		}
     	}
     	
-    	/*if(starting.size()==0){
+    	if(starting.size()==0){
     		group.add(elementsNameArray.get(0));
     		groupList.add(group);
     		
@@ -324,7 +325,7 @@ public class Partitioning {
             removeRow++;
             
     		return ;
-    	}*/
+    	}
     		
     	for(int edge = dependencyNumber; edge>1 ; edge--){
     		
@@ -501,9 +502,21 @@ public class Partitioning {
     			PlusName[i]=groupList.get(i).get(0);
     		}
     		
-    		sort(Plus,PlusName);
-    		printGroup();
-            
+    		int min;
+        	String temp;
+        	for(int j=0;j<groupNumber;j++){
+        		for(int i=0; i<groupNumber-1; i++){
+        			if(Plus[i]>Plus[i+1]){
+        				min=Plus[i+1];
+        				Plus[i+1]=Plus[i];
+        				Plus[i]=min;
+        				temp=PlusName[i+1];
+        				PlusName[i+1]=PlusName[i];
+        				PlusName[i]=temp;
+        			}
+        		}
+        	}
+        	
     		for(int i=0; i<groupNumber; i++){
     				for(int j=0; j<groupNumber; j++){
     					if(PlusName[i]==groupList.get(j).get(0)){
@@ -512,9 +525,7 @@ public class Partitioning {
     				}
     		}
     		
-    		System.out.println("");
-    		System.out.println("");
-    		printGroup();
+    		
     		for(int i=0; i<groupNumber; i++){
     			groupList.remove(0);
     		}
@@ -525,22 +536,7 @@ public class Partitioning {
    			}
     	}
     }
-    private void sort(int[] Plus, String[] PlusName){
-    	int min;
-    	String temp;
-    	for(int j=0;j<groupNumber;j++){
-    		for(int i=0; i<groupNumber-1; i++){
-    			if(Plus[i]>Plus[i+1]){
-    				min=Plus[i+1];
-    				Plus[i+1]=Plus[i];
-    				Plus[i]=min;
-    				temp=PlusName[i+1];
-    				PlusName[i+1]=PlusName[i];
-    				PlusName[i]=temp;
-    			}
-    		}
-    	}
-    }
+    
     private void moveToTop(int row){
     	
     	

@@ -280,4 +280,7 @@ public class TitanicModel {
         this.editId = id;
     }
     public int getEditId(){return this.editId;}
+    public void sortYassine(){
+    	this.clsxModel = this.dsmModel.sortYassine();
+    }
 }

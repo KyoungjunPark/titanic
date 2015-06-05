@@ -97,7 +97,9 @@ public class LeftToolbarController extends LeftPanelController{
 		leftToolbar.setAction("Yassine", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().sortYassine();
+				ModelManager.sharedModelManager().getCurrentTitanicModel().sortYassine();
+				EventManager.callEvent("Redraw-Table");
+				EventManager.callEvent("FileTree-redraw");
 			}
 		});
 		
