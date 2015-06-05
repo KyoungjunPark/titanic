@@ -48,6 +48,7 @@ public class Partitioning {
 
         
         doPartitioning();
+		System.out.println(groupList);
     }
     
     
