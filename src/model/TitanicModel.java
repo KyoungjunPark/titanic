@@ -230,6 +230,8 @@ public class TitanicModel {
             this.getClsxModel().getGroupNode().addItem(new ItemNode(newNodeName));
         }
         this.getDsmModel().addNode(newNodeName);
+
+        EventManager.callEvent("yassineButtonDisable");
     }
 
     /**

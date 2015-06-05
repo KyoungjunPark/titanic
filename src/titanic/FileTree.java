@@ -206,6 +206,7 @@ public class FileTree extends JTree implements Controllerable {
         }
 
         syncWithModel();
+        EventManager.callEvent("yassineButtonDisable");
     }
     /**
      * input의 이름을 가지는 새로운 Node를 만듭니다.
@@ -234,6 +235,7 @@ public class FileTree extends JTree implements Controllerable {
         ((DefaultTreeModel) this.getModel()).insertNodeInto(newGroup, parent, index);
         delete();
         syncWithModel();
+        EventManager.callEvent("yassineButtonDisable");
 
     }
     /**
@@ -295,6 +297,8 @@ public class FileTree extends JTree implements Controllerable {
             EventManager.callEvent("Redraw-Table");
             EventManager.callEvent("FileTree-redraw");
         }
+
+        EventManager.callEvent("yassineButtonDisable");
     }
     public void expandNode(GreenTreeNode node) {
         node.setIsExpanded(true);

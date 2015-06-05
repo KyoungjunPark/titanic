@@ -37,11 +37,18 @@ public class ContentsPanelController extends CenterPanelController {
                     EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("EditStatus");
                     EventManager.callEvent("yassineButtonDisable");
+                }else if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEdit()){
+                    EventManager.callEvent("FileTree-redraw");
+                    EventManager.callEvent("Redraw-Table");
+                    EventManager.callEvent("CLSXStatus");
+                    EventManager.callEvent("yassineButtonDisable");
                 }else{
                     EventManager.callEvent("FileTree-redraw");
                     EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("CLSXStatus");
+                    EventManager.callEvent("yassineButtonEnable");
                 }
+
             }
         });
 

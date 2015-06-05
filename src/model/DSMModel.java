@@ -295,7 +295,6 @@ public class DSMModel extends Model{
             }
         }
         try {
-            System.out.println(root.print());
             return new CLSXModel(root.getTreeNode());
         } catch (CreateException e) {
             e.printStackTrace();

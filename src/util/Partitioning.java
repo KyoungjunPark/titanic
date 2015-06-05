@@ -47,7 +47,6 @@ public class Partitioning {
         
         this.groupList = new ArrayList<ArrayList<String>>();
         doPartitioning();
-		System.out.println(groupList);
     }
     
     
@@ -406,6 +405,7 @@ public class Partitioning {
 
     	return pathfinder;
     }
+	/*
     private void printTest() {
         System.out.println("dependencyNumber : " + dependencyNumber);
         System.out.println("dependencyRelationArray");
@@ -432,10 +432,9 @@ public class Partitioning {
 		for(int j=0;j<groupList.get(i).size();j++){
 			System.out.print(groupList.get(i).get(j));
 		}
-		System.out.println("");
 	}
     }
-    
+    */
     private void quickTriangleAlgorithm(){
     	ArrayList<Integer> pressGroup = new ArrayList<Integer>();			//최종적으로 0과 1이 들어감
     	ArrayList<Integer> nodeNumberInGroup= new ArrayList<Integer>();		//그룹의 노드 개수
