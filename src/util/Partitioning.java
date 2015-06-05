@@ -72,6 +72,8 @@ public class Partitioning {
         }
         quickTriangleAlgorithm();
         printTest2();
+        
+        
     }
     private boolean checkRow(){													
     	boolean changeRow = false;												
@@ -497,7 +499,6 @@ public class Partitioning {
     		
     	for(int i=0 ;i<groupList.size();i++){
    			for(int j=0;j<groupList.get(i).size();j++){
-   				//System.out.print(groupList.get(i).get(j)+" ");
    				moveToTop(originElementsNameArray.indexOf(groupList.get(i).get(j)));
    			}
     	}
