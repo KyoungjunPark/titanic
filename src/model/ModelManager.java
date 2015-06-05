@@ -209,6 +209,7 @@ public class ModelManager {
         model.setDsmModel(this.getTitanicModel(id).getDsmModel());
         model.setMetaModel(node.toString());
         model.setEditModel(true);
+		model.setEditId(id);
         this.addTitanicModel(model);
 		return model.getID();
 	}
