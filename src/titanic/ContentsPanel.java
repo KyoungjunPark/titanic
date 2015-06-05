@@ -63,6 +63,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
             fileName = ModelManager.sharedModelManager()
                     .getCurrentTitanicModel().getDsmModel().getFileName();
         }
+
         if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()){
             fileName += "(Edit)";
         }
