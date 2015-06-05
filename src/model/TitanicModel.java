@@ -12,6 +12,7 @@ public class TitanicModel {
 	private DSMModel dsmModel = null;
 	private CLSXModel clsxModel = null;
 	private boolean isEditModel = false;
+    private int editId;
 	public TitanicModel(){
 		this.id = TitanicModel.nextID();
 	}
@@ -28,7 +29,6 @@ public class TitanicModel {
         if(this.clsxModel.getFilePath() != null)
             this.clsxModel.save();
     }
-
 	public void setDsmModel(DSMModel dsmModel){
         /**
          * Titanic의 dsm model 을 set 합니다.
@@ -276,4 +276,8 @@ public class TitanicModel {
             this.getDsmModel().saveMetaModel();
         }
     }
+    protected void setEditId(int id){
+        this.editId = id;
+    }
+    public int getEditId(){return this.editId;}
 }

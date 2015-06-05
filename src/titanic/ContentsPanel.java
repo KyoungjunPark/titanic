@@ -57,7 +57,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
 		String fileName;
 		if(ModelManager.sharedModelManager().getCurrentTitanicModel().getDsmModel().getFileName() == null){
-			fileName = "untitle-" + contents.size();
+			fileName = "untitle-" + ModelManager.sharedModelManager().getCurrentID();
 		}
 		else{
             fileName = ModelManager.sharedModelManager()
@@ -95,7 +95,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
                             }else if(ModelManager.sharedModelManager().getTitanicModel(panel.getID()).getClsxModel().isEdit()){
                                 ModelManager.sharedModelManager().getCurrentTitanicModel().getClsxModel().save();
                             }else{
-                            	
+
                                 File openFile;
 
                                 JFileChooser fc = new JFileChooser();
@@ -117,7 +117,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 
                                 openFile = fc.getSelectedFile();
                                 ModelManager.sharedModelManager().save(openFile.getPath());
-                                
+
                                 if(!openFile.getName().endsWith(".clsx") && !openFile.getName().endsWith(".dsm")){
                                     String fileDir = openFile.getPath() + ".clsx";
                                     openFile = new File(fileDir);
@@ -171,7 +171,7 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 	// 정보 갱신
 	public void regetTableData() {
 	///	this.tabIndex = tabIndex;
-		
+
 		// 요기서 다시 받아옴
 		newData = new ArrayList<ArrayList<String>>();
 		try {
@@ -182,16 +182,16 @@ public class ContentsPanel extends JTabbedPane implements Controllerable {
 		}
 	}
 	public void getGroupInfo(){
-		
+
 		groupInfo = new ArrayList<GroupData>();
 
 		try{
 			groupInfo = ModelManager.sharedModelManager()
 					.getCurrentTitanicModel().getGroupData();
-			
+
 		}catch(NullPointerException e){e.printStackTrace();}
-		
-		
+
+
 	}
 	public void setShowRowLabels(boolean state, int tabIndex) {
             for( RightPanel panel: contents)
