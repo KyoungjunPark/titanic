@@ -18,7 +18,7 @@ public class Partitioning {
     private ArrayList<String> elementsNameArray;
     private ArrayList<String> originElementsNameArray;
     
-    private ArrayList<ArrayList<String>> groupList;
+    public ArrayList<ArrayList<String>> groupList;
     
     private int removeRow;
     private int removeColumn;
