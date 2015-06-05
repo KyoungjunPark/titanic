@@ -211,7 +211,6 @@ public class FileTreeController extends LeftPanelController {
 									EventManager.callEvent("after-open-Edit");
 									EventManager.callEvent("Redraw-Table");
 									EventManager.callEvent("FileTree-Load");
-
                                 }
 
 							}

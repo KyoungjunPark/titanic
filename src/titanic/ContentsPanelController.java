@@ -36,6 +36,7 @@ public class ContentsPanelController extends CenterPanelController {
                     EventManager.callEvent("FileTree-redraw");
                     EventManager.callEvent("Redraw-Table");
                     EventManager.callEvent("EditStatus");
+                    EventManager.callEvent("yassineButtonDisable");
                 }else{
                     EventManager.callEvent("FileTree-redraw");
                     EventManager.callEvent("Redraw-Table");
