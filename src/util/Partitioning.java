@@ -3,6 +3,7 @@ package util;
 import model.CreateException;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.DoubleSummaryStatistics;
 
@@ -64,19 +65,16 @@ public class Partitioning {
         	  if(checkColumn()==true){
         		  continue;
         	  }
-        	 
-        	  findLoop(nthSquare(dependencyRelationArray));
-        	  
+        	  findLoop(nthSquare(dependencyRelationArray));	  
           }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        printTest2();
         quickTriangleAlgorithm();
-        
+        printTest2();
     }
-    private boolean checkRow(){													//Row�? 모두 0?���? �??��?��?��
-    	boolean changeRow = false;												//�? ?���? 보냄
+    private boolean checkRow(){													
+    	boolean changeRow = false;												
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -94,8 +92,8 @@ public class Partitioning {
     	return changeRow;
     }
     
-    private boolean checkColumn(){												//Column?�� 모두 0?���? �??��?��?��
-    	boolean changeColumn=false;												//�? ?��?���? 보냄
+    private boolean checkColumn(){												
+    	boolean changeColumn=false;												
     	int check=0;
     	for(int i=0; i<dependencyNumber;i++){
     		for(int j=0; j<dependencyNumber;j++){
@@ -158,6 +156,10 @@ public class Partitioning {
 	
     
     private void moveRowToBottomRightmost(int row){
+    	
+    	ArrayList<String> group = new ArrayList<String>();
+    	group.add(elementsNameArray.get(row));
+    	groupList.add(group);
     	////////////////////////////////////////////////////////////////////
     	for(int i = 0 ; i <originDependencyNumber; i++){
             Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, originDependencyNumber*(originDependencyNumber-1-removeColumn)+i);
@@ -191,7 +193,9 @@ public class Partitioning {
         
     }
     private void moveRowToTopLeftmost(int row){
-       
+    	ArrayList<String> group = new ArrayList<String>();
+    	group.add(elementsNameArray.get(row));
+    	groupList.add(group);
     	
     	 for(int i = 0 ; i <originDependencyNumber; i++){
              Collections.swap(originDependencyRelationArray, (row+removeRow)*originDependencyNumber+i, (removeRow*originDependencyNumber)+i);//row
@@ -407,14 +411,110 @@ public class Partitioning {
     System.out.println("\noriginElementsNameArray");
     for(String a : originElementsNameArray) System.out.println(a);
     }
+    
+    private void printGroup(){
+    	for(int i=0 ;i<groupList.size();i++){
+		for(int j=0;j<groupList.get(i).size();j++){
+			System.out.print(groupList.get(i).get(j));
+		}
+		System.out.println("");
+	}
+    }
+    
     private void quickTriangleAlgorithm(){
-    	int groupNode=0;
-    	int rowNumber=0;
-    	for(int i=0;i<groupList.size();i++){
-    	groupNode =groupNode+groupList.get(i).size();
+    	ArrayList<Integer> pressGroup = new ArrayList<Integer>();			//최종적으로 0과 1이 들어감
+    	ArrayList<Integer> nodeNumberInGroup= new ArrayList<Integer>();		//그룹의 노드 개수
+    	ArrayList<Integer> sort = new ArrayList<Integer>();
+    	int[][] zeroOne;													//0과 1 들어가기전에 저장해두는 곳
+    	int[] Plus;
+    	int groupNumber=groupList.size();									//그룹의 개수
+    	int row=0, column=0;
+    	
+    	zeroOne= new int[groupNumber][groupNumber];
+    	Plus = new int[groupNumber];
+    	for(int i=0; i<groupNumber ; i++){
+    		for(int j=0; j<groupNumber;j++){
+    			zeroOne[i][j]=0;
+    		}
+    		Plus[i]=0;
     	}
-    	rowNumber=originDependencyNumber-groupNode+groupList.size();
+    	
+    		for(int i=0;i<originElementsNameArray.size();i++){
+    	    	for(int j=0; j<groupNumber; j++){
+    	    			if(groupList.get(j).get(0)==originElementsNameArray.get(i)){
+    	    				groupList.add(groupList.get(j));
+    	    				groupList.remove(j);
+    	    				break;
+    	    			}
+    	    		}
+    		}
+    				for(int i=0 ;i<groupList.size();i++){
+    						nodeNumberInGroup.add(groupList.get(i).size());
+    					}
+    						
+    						for(int a=0; a < groupNumber ; a++){
+    							for(int b=0; b < nodeNumberInGroup.get(a) ; b++){
+    								for(int d=0; d < groupNumber ; d++){
+    									for(int c=0; c < nodeNumberInGroup.get(d) ; c++){
+    										if(originDependencyRelationArray.get(row*originDependencyNumber+column)==1){
+    										
+    										zeroOne[a][d]=1;
+    										}
+    										column++;
+    									}
+    								}
+    								column=0;
+									row++;
+    							}
+    						}
+    								for(int i=0; i<groupNumber;i++){
+    									zeroOne[i][i]=0;
+    								}
+    										for(int i=0; i<groupNumber; i++){
+    											for(int j=0; j<groupNumber; j++){
+    												pressGroup.add(zeroOne[i][j]);
+    											}
+    										}
+    		
+    		for(int i=0;i<groupNumber;i++){
+    			for(int j=0;j<groupNumber;j++){Plus[i]=Plus[i]+zeroOne[i][j];}
+    		}
+    		for(int i=0; i<groupNumber; i++){sort.add(Plus[i]);}
+    		Collections.sort(sort);
+    		
+
+    		for(int i=0; i<sort.size();i++){
+    			for(int j=0; j<groupNumber;j++){
+    				if(sort.get(i)==Plus[j]){
+    					groupList.add(groupList.get(j));
+    					break;
+    				}
+    			}
+    		}
+    		for(int i=0; i<groupNumber; i++){
+    			groupList.remove(0);
+    		}
+    		
+    	for(int i=0 ;i<groupList.size();i++){
+   			for(int j=0;j<groupList.get(i).size();j++){
+   				//System.out.print(groupList.get(i).get(j)+" ");
+   				moveToTop(originElementsNameArray.indexOf(groupList.get(i).get(j)));
+   			}
+    	}
+    }
+    
+    private void moveToTop(int row){
     	
     	
+    	for(int i = 0 ; i <originDependencyNumber; i++){
+    		
+            Collections.swap(originDependencyRelationArray, row*originDependencyNumber+i, (proRow*originDependencyNumber)+i);
+    	}
+    	for(int i = 0 ; i <originDependencyNumber; i++){
+            Collections.swap(originDependencyRelationArray, i*originDependencyNumber+row, i*originDependencyNumber+proRow);
+        }
+   	 	Collections.swap(originElementsNameArray, row, proRow);
+   	 	
+   	 	proRow++;
     }
 }
