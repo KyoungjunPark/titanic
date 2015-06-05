@@ -70,7 +70,7 @@ public class Partitioning {
             e.printStackTrace();
         }
         quickTriangleAlgorithm();
-        printTest2();
+        //printTest2();
         
         
     }
@@ -143,10 +143,11 @@ public class Partitioning {
 		Collections.swap(originElementsNameArray, row+removeRow, removeRow+dependencyNumber-1-preColumn);
 		//////////////////////////////////////////////////////////////////////////////////////
 		for(int i = 0 ; i <dependencyNumber; i++){
-	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);
+	        Collections.swap(dependencyRelationArray, row*dependencyNumber+i, dependencyNumber*(dependencyNumber-1-preColumn)+i);	//row
 	    }
-	    for(int i = 0 ; i <originDependencyNumber; i++){
-	        Collections.swap(dependencyRelationArray, i*dependencyNumber+(row+removeRow), (i+1)*(dependencyNumber)-preColumn-1);
+	    for(int i = 0 ; i <dependencyNumber; i++){
+	    	System.out.println((i*dependencyNumber+row)+"////"+((i*dependencyNumber)+dependencyNumber-preColumn-1));
+	        Collections.swap(dependencyRelationArray, i*dependencyNumber+row, (i*dependencyNumber)+dependencyNumber-preColumn-1);	//column
 	    }
 		Collections.swap(elementsNameArray, row, dependencyNumber-1-preColumn);
 		preColumn++;
@@ -308,6 +309,24 @@ public class Partitioning {
     		}
     	}
     	
+    	if(starting.size()==0){
+    		group.add(elementsNameArray.get(0));
+    		groupList.add(group);
+    		
+    		for(int i=0 ; i<dependencyNumber ; i++){
+            	dependencyRelationArray.remove(i * dependencyNumber-i);
+            }
+            for(int i=0 ; i<dependencyNumber-1 ; i++){
+            	dependencyRelationArray.remove(0);
+            }
+            
+            elementsNameArray.remove(0);
+            dependencyNumber--;
+            removeRow++;
+            
+    		return ;
+    	}
+    		
     	for(int edge = dependencyNumber; edge>1 ; edge--){
     		
     		pathFinder.add(starting.get(0));
