@@ -215,13 +215,8 @@ public class FileTreeController extends LeftPanelController {
 							}
 						};
 
-						PopupMenu popup;
-						if(ModelManager.sharedModelManager().getCurrentTitanicModel().isEditModel()) {
-							popup = new PopupMenu(menuListener, "Rename", "Sort", "Duplicate");
-						}else{
-							popup = new PopupMenu(menuListener, "Rename", "Sort", "Duplicate", "Edit");
+						PopupMenu popup = new PopupMenu(menuListener, "Rename", "Sort", "Duplicate", "Edit");
 
-						}
 
                         popup.show(e.getComponent(), e.getX(), e.getY());
 					}
