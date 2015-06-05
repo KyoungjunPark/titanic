@@ -463,16 +463,6 @@ public class MenuBarController extends MainController {
 
         );
 
-		/* 구현x
-        menu.setAction("Show Dependency Strength", new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Show Dependency Strength is clicked");
-				
-			}
-		});
-	*/
         //Help Menu
         menu.setAction("About...", new ActionListener() {
 
