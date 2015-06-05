@@ -21,7 +21,6 @@ public class XMLParserTest {
         try{
             System.out.println("Test");
             GroupNode groupNode = parser.parseXML(new File("test/moka_ArchDRH.clsx"));
-            System.out.println(groupNode.print());
         }catch (IOException e){
             fail(e+" ");
         }catch (SAXException e){
